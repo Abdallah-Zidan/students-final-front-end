@@ -28,9 +28,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/popper.js/dist/umd/popper.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -123,6 +128,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "test-project"
+    }
+  },
+  "defaultProject": "test-project",
+  "cli": {
+    "analytics": "0aac6168-0aac-4afd-8f28-a80e50106444"
+  }
 }
