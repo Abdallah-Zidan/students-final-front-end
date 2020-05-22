@@ -17,5 +17,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  showStudentForm(event)
+  {
+  }
+  showCompanyForm(event)
+  {
+  }
 }
