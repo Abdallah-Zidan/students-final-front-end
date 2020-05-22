@@ -7,7 +7,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoginComponent } from './auth/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SpinnerComponent } from './auth/spinner/spinner.component';
-import { TestComponent } from './test/test.component';
+
+import { PublicComponentComponent } from './test/public-component/public-component.component';
+import { ProtectedComponent } from './test/protected/protected.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import { TestComponent } from './test/test.component';
     NavBarComponent,
     LoginComponent,
     SpinnerComponent,
-    TestComponent,
+    PublicComponentComponent,
+    ProtectedComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule,HttpClientModule,],
   providers: [],

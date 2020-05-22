@@ -27,7 +27,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Sharing Habitations</a>
                 </li>
-                <button class="btn btn-light my-2 my-sm-0 rounded-button">Login</button>
+                <button class="btn btn-light my-2 my-sm-0 rounded-button" *ngIf="!isAuthenticated">Login</button>
+                <button class="btn btn-light my-2 my-sm-0 rounded-button" (click)="onLogout()" *ngIf="isAuthenticated">Logout</button>
             </ul>
         </div>
     </div>

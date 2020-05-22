@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ElementRef, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -20,7 +20,7 @@ export class LoginComponent {
         (res) => {
           if (res) {
             console.log(res);
-            this.router.navigate(['/test']);
+            this.router.navigate(['/protected']);
             this.isLoading = false;
           }
         },
