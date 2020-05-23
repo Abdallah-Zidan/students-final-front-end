@@ -13,6 +13,7 @@ import { ProtectedComponent } from './test/protected/protected.component';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { from } from 'rxjs';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { from } from 'rxjs';
     SpinnerComponent,
     PublicComponentComponent,
     ProtectedComponent,
+    HomeComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, CarouselModule],
   providers: [],
