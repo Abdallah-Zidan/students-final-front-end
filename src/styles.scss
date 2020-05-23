@@ -1,12 +1,237 @@
 /* You can add global styles to this file, and also import other style files */
-.rounded-button
+
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+body ,* , html
 {
+    margin: 0px;
+    padding: 0px;
+}
+//general classes to be used in all items for example button general shape
+.rounded-button {
     border-radius: 25px;
-    padding: 0px 25px ; 
-    color: #3762F0;
+    padding      : 0px 25px;
+    color        : #3762F0;
 
 }
 
-body,html {
-  height: 100%;
+.blue-button
+{
+    border-radius: 30px;
+    padding      : 0px 20px;
+    color        : #fff;
+    background-color: #3762F0;
+    border: none;
+}
+
+.blue-bg {
+    background-color: #3762F0;
+}
+
+//end of general classes
+
+//navbar styling
+
+
+.logo
+{
+    width: 7vw;
+}
+
+ul li  a{
+    padding: 0px 20px;
+    color  : #3762F0;
+}
+
+ul li a :hover {
+    color: #3762F0;
+}
+
+ul li button  {
+    margin: 7px;
+}
+
+
+// end of navbar styling
+
+//header styling
+header {
+    position: relative;
+    overflow: hidden;
+}
+
+header::after {
+    content: "";
+    display: block;
+    clear  : both;
+}
+
+.text
+{
+    position: absolute;
+    top      : 20%;
+    left     : 12.6%;
+    width: 26%;
+    word-wrap: break-word;
+
+}
+header h1 {
+
+    font-size: 4.44vw;
+}
+
+header h2 {
+    color    : #3762F0;
+    font-size: 3vw;
+    margin-bottom: 10%;
+}
+
+header p 
+{
+    font-size: 1vw;
+    margin-bottom: 20%;    
+}
+
+header button {
+    width: 33%;
+
+}
+.btn-container
+{
+
+    width: 33%;
+  position: relative;
+  word-wrap: normal;
+}
+
+.responsive-width
+{
+    font-size: 2vw;
+}
+
+.button-res
+{
+    position: absolute;
+    top      : 65%;
+    left     : 12.6%;
+    width: 15%;
+}
+//end of header styling
+
+
+//hero banner
+
+.banner
+{
+    position: relative;
+}
+.banner .img-fluid
+{
+    width: 100%;
+    background-size: cover;
+}
+
+.banner-logo
+{
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    width: 15%;
+}
+//end of hero banner
+
+// upcoming events section
+.upcoming-events
+{
+    text-align: center;
+}
+
+.upcoming-events h1
+{
+    margin: 4%;
+    font-weight: bold;
+}
+
+.upcoming-events {position: relative;}
+    //caresoul
+.owl-container
+{
+    position: absolute;
+    top: 30%;
+    left: 7%;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.caresoul-item
+{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 7px 7px 15px black;
+    width: 90%;
+    height: 35vw;
+    padding: 1%;
+    margin: 1%;
+}
+
+.caresoul-item-content{
+    width: 40%;
+    margin: 10px auto;
+    border-radius: 50%;
+    border: 7px solid #3762F0;
+    padding: 25px;
+}
+
+.caresoul-item-text
+{
+    margin: 2.5vw auto;
+    column-count: 3;
+    column-gap: 5px;
+    column-rule: 1px solid #58595B;
+}
+
+.caresoul-item-paragraphs h3 , .caresoul-item-paragraphs p
+{
+    font-size: 1.5vw;
+}
+
+.item-btn
+{
+    padding: 1vw 3vw;
+    width: 70%;
+    margin: 2.5vw auto;
+    background-color: #58595B;
+    color: white;
+    border-radius: 50px 0px;
+    border:none ;
+}
+
+// end of slider
+
+
+//latest news section
+
+.latest-news h1
+{
+    margin: 4%;
+    font-weight: bold;
+}
+
+.latest-news .left
+{
+    width: 50%;
+    float: left;
+}
+
+.latest-news .left img
+{
+    width: 100%;
+}
+
+
+.latest-news .right
+{
+    float: right;
+    width: 50%;
 }
