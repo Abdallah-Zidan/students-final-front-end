@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../auth/user.model';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +25,11 @@ export class StorageService {
   }
   removeItem(key: string) {
     localStorage.removeItem(key);
+  }
+  private AllUniversitesLink = "https://jsonplaceholder.typicode.com/users";
+  constructor(public http: HttpClient) { }
+
+  getAllUniversites() {
+    return this.http.get<any>(this.AllUniversitesLink);
   }
 }
