@@ -47,7 +47,7 @@
         </div>
         <hr class="mb-4">
 
-        <form class="needs-validation" id="student_Form" novalidate>
+        <form  id="student_Form"  [formGroup]="studentForm" (ngSubmit)="addStudent()">
         <div class="row">
           <div class="col-md-6 mb-3">
           
@@ -57,127 +57,138 @@
           </div>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group mb-3">
           <label for="username">Name</label>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">@</span>
+            <input type="text" class="form-control" id="username" placeholder="Name" formControlName="name">
+            <div *ngIf="name.touched && name.invalid">
+              <small *ngIf="name.errors.required" class="text-danger">name is required<br></small>
+              <small *ngIf="name.errors.pattern" class="text-danger">Invalid name<br></small>
+              <small *ngIf="name.errors.minlength" class="text-danger">name must contain 6 characters at least</small>
             </div>
-            <input type="text" class="form-control" id="username" placeholder="Name" required>
-            <div class="invalid-feedback" style="width: 100%;">
-              Your username is required.
-            </div>
-          </div>
         </div>
 
-        <div class="mb-3">
+        <div form-group class="mb-3">
           <label for="email">Email </label>
-          <input type="email" class="form-control" id="email" placeholder="xxxxxxxxxx@xxxx.edu.eg">
-          <div class="invalid-feedback">
-            Please enter a valid email address.
+          <input type="email" class="form-control" id="email" placeholder="xxxxxxxxxx@xxxx.edu.eg" formControlName="email">
+          <div *ngIf="email.touched && email.invalid">
+            <small *ngIf="email.errors.required" class="text-danger">email is required<br></small>
+            <small *ngIf="email.errors.pattern" class="text-danger">Invalid email<br></small>
           </div>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group mb-3">
           <label for="Password">Password</label>
-          <input type="password" class="form-control" id="Password" placeholder="Password">
-          <div class="invalid-feedback">
-            Please enter a valid password.
+          <input type="password" class="form-control" id="Password" placeholder="Password" formControlName="password">
+          <div *ngIf="password.touched && password.invalid">
+            <small *ngIf="password.errors.required" class="text-danger">Password is required<br></small>
+            <small *ngIf="password.errors.minlength" class="text-danger">password must contain 6 characters at least</small>
           </div>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group mb-3">
+          <label for="Password">confirm Password</label>
+          <input type="password" class="form-control" id="rePassword" placeholder="Password" formControlName="repassword">
+          <div *ngIf="repassword.touched && repassword.invalid">
+            <small *ngIf="repassword.errors.required" class="text-danger">Repeat Password is required<br></small>
+          </div>
+          <div *ngIf="repassword.valid && repassword.value != password.value" class="text-danger">
+            <small>The passwords entered do not match</small> 
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
           <div >
-            <label for="country">University</label>
-            <select class="custom-select d-block w-100" id="country" required>
+            <label for="University">University</label>
+            <select class="custom-select d-block w-100" id="university" formControlName="university" >
               <option placeholder="">Choose...</option>
-              <option>United States</option>
+              <option *ngFor="let university of universityList ">{{university.name}}</option>
             </select>
-            <div class="invalid-feedback">
-              Please select a valid country.
+            <div *ngIf="university.touched && university.invalid">
+              <small *ngIf="university.errors.required" class="text-danger">university is required<br></small>
             </div>
           </div>
-          <div class="mb-3">
+
+          <div class="form-group mb-3">
             <label for="state">Faculty</label>
-            <select class="custom-select d-block w-100" id="state" required>
+            <select class="custom-select d-block w-100" id="state" formControlName="faculty">
               <option placeholder="">Choose...</option>
               <option>California</option>
             </select>
-            <div class="invalid-feedback">
-              Please provide a valid state.
+            <div *ngIf="faculty.touched && faculty.invalid">
+              <small *ngIf="faculty.errors.required" class="text-danger">faculty is required<br></small>
             </div>
           </div>
-          <div class="mb-3">
+
+          <div class="form-group mb-3">
             <label for="state">Department</label>
-            <select class="custom-select d-block w-100" id="state" required>
+            <select class="custom-select d-block w-100" id="state" formControlName="department">
               <option placeholder="">Choose...</option>
               <option>California</option>
             </select>
-            <div class="invalid-feedback">
-              Please provide a valid state.
+            <div *ngIf="department.touched && department.invalid">
+              <small *ngIf="department.errors.required" class="text-danger">department is required<br></small>
             </div>
           </div>
         </div>
 
-        <div class="mb-3">
-          <div >
+        <div class="form-group mb-3">
             <label for="year">level</label>
-            <select class="custom-select d-block w-100" id="year" required>
+            <select class="custom-select d-block w-100" id="year" formControlName="level">
               <option placeholder="">Choose...</option>
               <option>First</option>
               <option>Second</option>
               <option>Third</option>
               <option>Forth</option>
             </select>
-            <div class="invalid-feedback">
-              Please select a valid country.
+            <div *ngIf="level.touched && level.invalid">
+              <small *ngIf="level.errors.required" class="text-danger">level is required<br></small>
             </div>
-          </div>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group mb-3">
           <label for="tel-input">Telephone</label>
-            <input class="form-control" type="tel" placeholder="01*********" id="tel">
-            <div class="invalid-feedback">
-              Please enter valid Telephone.
+            <input class="form-control" type="tel" placeholder="01*********" id="tel" formControlName="phone">
+            <div *ngIf="phone.touched && phone.invalid">
+              <small *ngIf="phone.errors.required" class="text-danger">Phone is required<br></small>
+              <small *ngIf="phone.errors.pattern" class="text-danger">Invalid Phone<br></small>
+              <small *ngIf="phone.errors.minlength" class="text-danger">Phone must contain a minimum of 11 characters</small>
+              <small *ngIf="phone.errors.maxlength" class="text-danger">Phone must contain a maximum of 11 characters</small>
             </div>
         </div>
         
 
-        <div class="mb-3">
+        <div class="form-group mb-3">
           <label for="address">Address</label>
-          <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-          <div class="invalid-feedback">
-            Please enter your address.
+          <input type="text" class="form-control" id="address" placeholder="1234 Main St" formControlName="address">
+          <div *ngIf="address.touched && address.invalid">
+            <small *ngIf="address.errors.required" class="text-danger">address is required<br></small>
           </div>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group mb-3">
           <label for="date">BirthDate</label>
-            <input class="form-control" type="date" placeholder="1990-08-19" id="birthdate">
-            <div class="invalid-feedback">
-              Please enter valid birthdate.
+            <input class="form-control" type="date" placeholder="1990-08-19" id="birthdate" formControlName="birthdate" (change)="date($event)" >
+            <div *ngIf="birthdate.touched && birthdate.invalid">
+              <small *ngIf="birthdate.errors.required" class="text-danger">birthdate is required<br></small>
+            </div>
+            <div>
+              <small class="text-danger">{{bodValidation}}</small>
             </div>
         </div>
 
-        <div class="mb-3">
+        <div class="form-group mb-3">
           <label for="avatar">Profile Image</label>
-          <input type="file" class="form-control-file" id="avatar">
-          <div class="invalid-feedback">
-            Please enter your image.
+          <input type="file" class="form-control-file" id="avatar" (change)="onFileChange($event)">
+          <div>
+            <small  class="text-danger">{{imageValidation}}</small>
           </div>
         </div>
 
         <hr class="mb-4">
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="same-address">
-          <label class="custom-control-label" for="same-address">Accept rules</label>
-        </div>
-        <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit" >Create Account</button>
+        <input type="submit" value="Create Account" [disabled]="studentForm.invalid || repassword.value != password.value || flag == 0 " class="btn btn-primary btn-block" >
       </form>
 <!-- =================================================================================================================== -->
-      <form class="needs-validation"  id="company_Form" novalidate>
+      <!-- <form class="needs-validation"  id="company_Form" novalidate>
         <div class="row">
           <div class="col-md-6 mb-3">
           
@@ -264,7 +275,7 @@
         </div>
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit">Create Account</button>
-      </form>
+      </form> -->
     </div>
 
   </div>
