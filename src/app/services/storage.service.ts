@@ -7,6 +7,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class StorageService {
+  private AllUniversitesLink = "https://jsonplaceholder.typicode.com/users";
+  private AllFacultiesLink = "https://jsonplaceholder.typicode.com/users";
+  private AllDepartmentsLink = "https://jsonplaceholder.typicode.com/users";
+
+  constructor(public http: HttpClient) {}
+
   saveItem(key: string, item: any) {
     localStorage.setItem(key, JSON.stringify(item));
   }
@@ -26,10 +32,15 @@ export class StorageService {
   removeItem(key: string) {
     localStorage.removeItem(key);
   }
-  private AllUniversitesLink = "https://jsonplaceholder.typicode.com/users";
-  constructor(public http: HttpClient) { }
+
 
   getAllUniversites() {
     return this.http.get<any>(this.AllUniversitesLink);
+  }
+  getAllFaculties(){
+    return this.http.get<any>(this.AllFacultiesLink);
+  }
+  getAllDepartments(){
+    return this.http.get<any>(this.AllDepartmentsLink);
   }
 }
