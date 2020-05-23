@@ -13,8 +13,8 @@ logged in or not
 */
 
 const authEndPoints = {
-  login:
-    'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDbW98sr91eQL1D8sZFUxSdPXZdF2lHzns',
+  csrf: 'http://localhost:8000/sanctum/csrf-cookie',
+  login: 'http://localhost:8000/api/v1/login',
   register: '',
 };
 
@@ -34,13 +34,23 @@ export class AuthService {
       .post(authEndPoints.login, {
         email: email,
         password: password,
-        returnSecureToken: true,
+        device_name: 'test',
       })
       .pipe(
         tap((res: any) => {
-          const user = new User(res.email, res.localId, res.idToken);
-          this.user.next(user);
-          this.storageService.saveItem('user', user);
+          const { user, token } = res.data;
+          const currentUser = new User(
+            user.id,
+            user.name,
+            user.email,
+            user.type,
+            user.address,
+            user.mobile,
+            user.avatar,
+            token
+          );
+          this.user.next(currentUser);
+          this.storageService.saveItem('user', currentUser);
         })
       );
   }

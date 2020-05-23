@@ -1,12 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-.rounded-button
-{
-    border-radius: 25px;
-    padding: 0px 25px ; 
-    color: #3762F0;
-
-}
-
-body,html {
-  height: 100%;
-}
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

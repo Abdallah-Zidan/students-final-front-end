@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg  blue-bg">
 
     <div class="container">
-        <a class="navbar-brand" href="#"> <img src="../../assets/logo-white.png" width="45px"></a>
+        <a class="navbar-brand" href="#"> <img src="../../assets/images/logo-white.png" width="45px"></a>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">STUDENT'S <span class="sr-only">(current)</span></a>
+                <a class="nav-link" routerLink="/">STUDENT'S <span class="sr-only">(current)</span></a>
             </li>
         </ul>
 
@@ -27,7 +27,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Sharing Habitations</a>
                 </li>
-                <button class="btn btn-light my-2 my-sm-0 rounded-button" *ngIf="!isAuthenticated">Login</button>
+                <button class="btn btn-light my-2 my-sm-0 rounded-button" *ngIf="!isAuthenticated" routerLink="/login">Login</button>
                 <button class="btn btn-light my-2 my-sm-0 rounded-button" (click)="onLogout()" *ngIf="isAuthenticated">Logout</button>
             </ul>
         </div>
