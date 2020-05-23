@@ -15,6 +15,9 @@ import { AuthInterceptorService } from './auth/services/auth-interceptor.service
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { from } from 'rxjs';
 import { HomeComponent } from './home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     HttpClientModule,
     CarouselModule,
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [
     {

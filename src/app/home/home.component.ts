@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
     },
     nav: true
   };
+  public isMenuCollapsed = true;
   constructor(private authService: AuthService) { }
   title = 'test-project';
   isAuthenticated = false;

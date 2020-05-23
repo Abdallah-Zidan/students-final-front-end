@@ -1,18 +1,17 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container m-auto">
-    <a class="navbar-brand" href="#"> <img class="logo" src="../../assets/images/logo-dark.png"></a>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">STUDENT'S <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+    <a class="navbar-brand" [routerLink]="'.'"><img class="logo" src="../../assets/images/logo-dark.png"></a>
+  
+    <h1 class="navbar-brand text-primary">STUDENT'S</h1>
+    <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+      &#9776;
     </button>
   
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="  navbar-nav ml-auto">
+
+    <!-- Step 2: Add the ngbCollapse directive to the element below. -->
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+     <ul class="  navbar-nav ml-auto">
             <li class=" nav-item">
                 <a class=" nav-link" href="#">Home</a>
             </li>
@@ -25,14 +24,16 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Sharing Habitations</a>
             </li>
-            
+            <li class="nav-item">
+                
+            </li>
                 <button class="btn  blue-button" *ngIf="!isAuthenticated">Login</button>
             
             <!-- <button class="btn btn-light my-2 my-sm-0 rounded-button" (click)="onLogout()" *ngIf="isAuthenticated">Logout</button> -->
         </ul>
     </div>
-</div>
   </nav>
+  
 
 
 
