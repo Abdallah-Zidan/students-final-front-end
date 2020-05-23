@@ -53,7 +53,7 @@
         <input class="form-control" type="tel" placeholder="‎+20********" id="fax" formControlName="fax">
         <div *ngIf="fax.touched && fax.invalid">
           <small *ngIf="fax.errors.required" class="text-danger">fax is required<br></small>
-          <small *ngIf="fax.errors.pattern" class="text-danger">Invalid fax</small>
+          <small *ngIf="fax.errors.pattern" class="text-danger">Invalid fax make sure you enter 8 digits after Egypt code +20</small>
         </div>
     </div>
     
