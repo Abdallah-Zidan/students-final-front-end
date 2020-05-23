@@ -11,6 +11,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { SpinnerComponent } from './auth/spinner/spinner.component';
 import { PublicComponentComponent } from './test/public-component/public-component.component';
 import { ProtectedComponent } from './test/protected/protected.component';
+import { StudentComponent } from './register/student/student.component';
+import { CompanyComponent } from './register/company/company.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { ProtectedComponent } from './test/protected/protected.component';
     SpinnerComponent,
     PublicComponentComponent,
     ProtectedComponent,
+    StudentComponent,
+    CompanyComponent,
   ],
   imports: [
     BrowserModule,
