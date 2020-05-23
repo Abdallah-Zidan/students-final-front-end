@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../../services/storage.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RegisterComponent } from '../register.component';
+
 
 @Component({
   selector: 'app-student',
@@ -15,7 +18,7 @@ export class StudentComponent implements OnInit {
   bodValidation;
   flag;
   studentForm: FormGroup
-  constructor(private storageService:StorageService,private fb: FormBuilder) {
+  constructor(private storageService:StorageService,private fb: FormBuilder,private router:Router,private register:RegisterComponent) {
 
     let studentformControls = {
       name : new FormControl('',[
@@ -148,8 +151,19 @@ export class StudentComponent implements OnInit {
           return false;
         }
   }
-  addStudent(){
-    console.log(this.studentForm.value);
-  }
 
+  addStudent() {
+    let user = this.studentForm.value;
+    console.log(user)
+    this.register.finish=true;
+    
+    // this.storageService.addUser(user).subscribe(
+    //   res=>{
+    //         
+    //        },
+    //   err=>{
+    //     console.log(err);
+    //   }
+    // )
+  }
 }

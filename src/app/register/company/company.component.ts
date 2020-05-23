@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../../services/storage.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { RegisterComponent } from '../register.component';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class CompanyComponent implements OnInit {
   companyForm: FormGroup
   imageValidation;
   flag;
-  constructor(private storageService:StorageService,private fb: FormBuilder) { 
+  constructor(private storageService:StorageService,private fb: FormBuilder,private register:RegisterComponent) { 
     let companyformControls = {
       name : new FormControl('',[
         Validators.required,
@@ -87,7 +88,18 @@ export class CompanyComponent implements OnInit {
   }
 
   addCompany(){
-    console.log(this.companyForm.value);
-  }
+      let user = this.companyForm.value;
+      console.log(user)
+      this.register.finish=true;
 
+      
+      // this.storageService.addUser(user).subscribe(
+      //   res=>{
+      //         
+      //        },
+      //   err=>{
+      //     console.log(err);
+      //   }
+      // )
+    }
 }
