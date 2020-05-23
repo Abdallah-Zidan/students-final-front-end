@@ -1,4 +1,43 @@
-<app-nav-bar></app-nav-bar>
+<nav class="navbar navbar-expand-lg ">
+    <div class="container">
+        <a class="navbar-brand" href="#"> <img class="logo" src="../../assets/images/logo-dark.png"></a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">STUDENT'S <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="  navbar-nav ml-auto">
+                <li class=" nav-item">
+                    <a class=" nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sharing Tools</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Donations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sharing Habitations</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn  blue-button" *ngIf="!isAuthenticated">Login</button>
+                </li>
+                <!-- <button class="btn btn-light my-2 my-sm-0 rounded-button" (click)="onLogout()" *ngIf="isAuthenticated">Logout</button> -->
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
 <header>
     <img class="img-fluid image" src="../assets/images/herobanner.png">
     <div class="text">
@@ -25,8 +64,190 @@
 
 <section class="upcoming-events">
     <h1>Upcoming Events</h1>
-    <svg id="OBJECTS" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1242.81 633.87"><defs><style>.cls-1{fill:#3762f0;}</style></defs><path class="cls-1" d="M1242.8,50.82c0-1.66-.11-3.32-.16-5v-15h0c0-2.38,0-4.75,0-7.13l-8.79.11h0c-1.09-1.31-2.59-1-4-1a4.81,4.81,0,0,0-6,0h0c-2.67-.39-5.52.84-8-.94-1.43,0-2.93.25-4-1-2-.18-3.08-1.49-4.11-2.95-3.32-1.45-6.52-3.91-10.32-3.06-7.38,1.67-15.18.62-22.34,3.68a35,35,0,0,1-7.67,2.19c-2.77.49-6,1-7.94-1.53s-4-2.27-6.61-1.89c-4.42.65-9,1.61-13.27-.26a27.2,27.2,0,0,0-10.66-2.2,72.56,72.56,0,0,0-25.38,4,20,20,0,0,1-9.83.48c-5.35-.81-10.72-2.05-15.63,2.16a9.87,9.87,0,0,1-7,2.06c-11.84-1.76-23.43.06-35.18.72-8.72.48-17,1.33-25.26,3.74-5.1,1.49-10.2,3.54-15.62,2.44-4.73-1-9.18-.33-13.79.68-7.26,1.6-14.28,1.37-21.2-2.42-5.18-2.84-10.42-5.9-16.5-6.86a189.22,189.22,0,0,0-47.25-1.24,9.43,9.43,0,0,1-5.24-1.28c-4.42-2.26-8.63-3.36-13.23.35-3.21,2.58-7.48,3.48-11.65,4.12-5.26.81-10.47,1.89-15.73,2.63-13.13,1.87-24.42,9.59-37.54,11.58-6.37,1-13,4.37-19,2.2-7.85-2.8-15.47-.53-23.13-1.38a6.61,6.61,0,0,0-4.64,1.56c-3.52,2.64-7.57,3.36-11.8,3.27-3.38-.07-6.81.14-9.79,1.55-15.92,7.58-33.12,6.88-49.94,7.13-13.07.2-26.2-.85-39.32-.71-2.78,0-5.39-.26-7.3-2.46-3-3.46-6.95-5-11.35-5.68-6.71-1.11-13.36-3-20.1-3.37-7.1-.4-14.32-2-21.16-1.49-9,.69-18.1,2.68-27.22,2.46-4.75-.12-10.26,1.81-14.23-2.29A6.56,6.56,0,0,0,548,36.76c-9.31.38-18.62.82-27.93,1C503.84,38,487.7,34.36,471.39,36c-5.6.56-11.38-.06-16.75,2a59.51,59.51,0,0,1-18.05,3.54c-6.73.43-13.31.22-19.38-4.38-3.89-2.94-9.36-5-14.35-4.34-8.95,1.1-17.93.74-26.87,1.56-11.73,1.08-22.63-.77-29.35-12.18A3.36,3.36,0,0,0,343,20.31c-2.46.34-5,.39-7.44.72C315,23.76,295,21.78,276,13.26a17.89,17.89,0,0,0-16.57.29c-8.22,4.06-16.74,4.92-25.59,1.82A49.13,49.13,0,0,0,223.63,13c-4.45-.56-7.65-2.06-9.58-6.58-2.71-6.34-7.49-7.81-13.89-5.31-4.88,1.91-9.23,5.52-15,4.66-6.87-1-12.77,1.49-18.16,5.44a19.08,19.08,0,0,1-11.69,3.64c-10.66,0-21.38.61-32-.34-6.73-.6-12.77.69-19.06,2.2-8.89,2.13-17.88,3.91-27.06,4-6.27.05-11.7-3.55-11.94-8.47-.26-5.08-2.7-4.43-6.19-4-5.87.71-11.74,3-17.72.74-4.54-1.67-9.2-1.49-13.81-.76C18.7,9.65,9.89,11.31,1.05,12.87c-.29,0-.58,0-.88,0-.05,1.49-.16,3-.16,4.48q0,297.9,0,595.79c0,1.49.1,3,.16,4.48a8.26,8.26,0,0,0,1-.08c4.37-.43,8.62.53,12.88,1.2,12.27,1.91,25,1.26,36.73,6.07,4.83,2,9.34,1.12,14.1.36,4.48-.71,8.42-2.89,12.84-3.86,9.78-2.15,19.48-1.31,29.27-.83,5.66.27,11.29-.19,16.41,3,2.15,1.35,4.79,1.46,7.3,1.26,7.73-.61,15.55-.38,23.13-2.54,3.71-1.06,7.89-1.88,11.26-.12,3.65,1.9,7,1.45,10.61,1,2.17-.27,4.31-.67,6.42,0,7.82,2.62,15.78,1.64,23.73,1s15.88-3.58,24.16-1.64a10.6,10.6,0,0,0,7.33-.62,20.66,20.66,0,0,1,14.1-2.11c11.94,2.91,23.79-.28,35.46-.88,14.11-.72,28.29-3.21,42.52-4.12,4.63-.29,9.47-1,13.85.78,14.55,6,29.78,6.27,45.15,6.22,8.75,0,17.61-1.4,26.24,1.59a6.4,6.4,0,0,0,5.34-.46c4.14-2.45,8.79-2.78,13.41-3.39,10.85-1.44,21.7-2.41,32.38-5.46a129.5,129.5,0,0,1,29.49-4.5c4.34-.2,8.39,1.5,12.82,1.34,7.67-.26,15.12-2.28,22.56-2.76,13.16-.85,25.69-5.47,39-5.07,22.4.67,44.79-2.57,67.14,3.85,15.06,4.32,31.27,4.06,47,3.32,9.48-.45,19-.48,28.42-.85,3.62-.14,5.93,2.75,9.84,2.59a463.39,463.39,0,0,1,47.44,0c12.8.8,25.53,1.12,38.28-1.1,11.24-2,22.41-3.78,33.79,1,4.06,1.72,9.06,3.26,14,2.53,10.43-1.54,20.94-.89,31.41-.91,5.35,0,11.06.72,14.88,4.64,3.49,3.57,7.21,3.68,11.34,3.2,19.78-2.33,39.17-.3,58.28,5a15.07,15.07,0,0,0,8.27.33c6.9-1.79,13.81-4,21.09-3.09,5.76.74,11.44,2,17.27,2.38a8.88,8.88,0,0,1,7.17,3.92,8.54,8.54,0,0,0,9.71,3.56c7.89-2.27,15.9-3.07,24-3.54a17.53,17.53,0,0,0,6.66-2c7.34-3.7,15-3.51,22.9-2.85a172.69,172.69,0,0,0,30.76-.55c10.41-1,20.68-3.48,31.22-3.08,4.46.17,8.75.85,10.34,6a1.82,1.82,0,0,0,2.24,1.42c8.75-1.06,17.54.13,26.22-.1,15.73-.42,31.44-2.67,47.09-4.68,3.66-.47,5.17.48,6.21,3.48.06-1,.18-2,.18-3Q1242.81,337.75,1242.8,50.82Z"/></svg>
+    <div class="svg">
+        <svg id="OBJECTS" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1242.81 633.87">
+            <defs>
+                <style>
+                    .cls-1 {
+                        fill: #3762f0;
+                    }
+                </style>
+            </defs>
+            <path class="cls-1"
+                d="M1242.8,50.82c0-1.66-.11-3.32-.16-5v-15h0c0-2.38,0-4.75,0-7.13l-8.79.11h0c-1.09-1.31-2.59-1-4-1a4.81,4.81,0,0,0-6,0h0c-2.67-.39-5.52.84-8-.94-1.43,0-2.93.25-4-1-2-.18-3.08-1.49-4.11-2.95-3.32-1.45-6.52-3.91-10.32-3.06-7.38,1.67-15.18.62-22.34,3.68a35,35,0,0,1-7.67,2.19c-2.77.49-6,1-7.94-1.53s-4-2.27-6.61-1.89c-4.42.65-9,1.61-13.27-.26a27.2,27.2,0,0,0-10.66-2.2,72.56,72.56,0,0,0-25.38,4,20,20,0,0,1-9.83.48c-5.35-.81-10.72-2.05-15.63,2.16a9.87,9.87,0,0,1-7,2.06c-11.84-1.76-23.43.06-35.18.72-8.72.48-17,1.33-25.26,3.74-5.1,1.49-10.2,3.54-15.62,2.44-4.73-1-9.18-.33-13.79.68-7.26,1.6-14.28,1.37-21.2-2.42-5.18-2.84-10.42-5.9-16.5-6.86a189.22,189.22,0,0,0-47.25-1.24,9.43,9.43,0,0,1-5.24-1.28c-4.42-2.26-8.63-3.36-13.23.35-3.21,2.58-7.48,3.48-11.65,4.12-5.26.81-10.47,1.89-15.73,2.63-13.13,1.87-24.42,9.59-37.54,11.58-6.37,1-13,4.37-19,2.2-7.85-2.8-15.47-.53-23.13-1.38a6.61,6.61,0,0,0-4.64,1.56c-3.52,2.64-7.57,3.36-11.8,3.27-3.38-.07-6.81.14-9.79,1.55-15.92,7.58-33.12,6.88-49.94,7.13-13.07.2-26.2-.85-39.32-.71-2.78,0-5.39-.26-7.3-2.46-3-3.46-6.95-5-11.35-5.68-6.71-1.11-13.36-3-20.1-3.37-7.1-.4-14.32-2-21.16-1.49-9,.69-18.1,2.68-27.22,2.46-4.75-.12-10.26,1.81-14.23-2.29A6.56,6.56,0,0,0,548,36.76c-9.31.38-18.62.82-27.93,1C503.84,38,487.7,34.36,471.39,36c-5.6.56-11.38-.06-16.75,2a59.51,59.51,0,0,1-18.05,3.54c-6.73.43-13.31.22-19.38-4.38-3.89-2.94-9.36-5-14.35-4.34-8.95,1.1-17.93.74-26.87,1.56-11.73,1.08-22.63-.77-29.35-12.18A3.36,3.36,0,0,0,343,20.31c-2.46.34-5,.39-7.44.72C315,23.76,295,21.78,276,13.26a17.89,17.89,0,0,0-16.57.29c-8.22,4.06-16.74,4.92-25.59,1.82A49.13,49.13,0,0,0,223.63,13c-4.45-.56-7.65-2.06-9.58-6.58-2.71-6.34-7.49-7.81-13.89-5.31-4.88,1.91-9.23,5.52-15,4.66-6.87-1-12.77,1.49-18.16,5.44a19.08,19.08,0,0,1-11.69,3.64c-10.66,0-21.38.61-32-.34-6.73-.6-12.77.69-19.06,2.2-8.89,2.13-17.88,3.91-27.06,4-6.27.05-11.7-3.55-11.94-8.47-.26-5.08-2.7-4.43-6.19-4-5.87.71-11.74,3-17.72.74-4.54-1.67-9.2-1.49-13.81-.76C18.7,9.65,9.89,11.31,1.05,12.87c-.29,0-.58,0-.88,0-.05,1.49-.16,3-.16,4.48q0,297.9,0,595.79c0,1.49.1,3,.16,4.48a8.26,8.26,0,0,0,1-.08c4.37-.43,8.62.53,12.88,1.2,12.27,1.91,25,1.26,36.73,6.07,4.83,2,9.34,1.12,14.1.36,4.48-.71,8.42-2.89,12.84-3.86,9.78-2.15,19.48-1.31,29.27-.83,5.66.27,11.29-.19,16.41,3,2.15,1.35,4.79,1.46,7.3,1.26,7.73-.61,15.55-.38,23.13-2.54,3.71-1.06,7.89-1.88,11.26-.12,3.65,1.9,7,1.45,10.61,1,2.17-.27,4.31-.67,6.42,0,7.82,2.62,15.78,1.64,23.73,1s15.88-3.58,24.16-1.64a10.6,10.6,0,0,0,7.33-.62,20.66,20.66,0,0,1,14.1-2.11c11.94,2.91,23.79-.28,35.46-.88,14.11-.72,28.29-3.21,42.52-4.12,4.63-.29,9.47-1,13.85.78,14.55,6,29.78,6.27,45.15,6.22,8.75,0,17.61-1.4,26.24,1.59a6.4,6.4,0,0,0,5.34-.46c4.14-2.45,8.79-2.78,13.41-3.39,10.85-1.44,21.7-2.41,32.38-5.46a129.5,129.5,0,0,1,29.49-4.5c4.34-.2,8.39,1.5,12.82,1.34,7.67-.26,15.12-2.28,22.56-2.76,13.16-.85,25.69-5.47,39-5.07,22.4.67,44.79-2.57,67.14,3.85,15.06,4.32,31.27,4.06,47,3.32,9.48-.45,19-.48,28.42-.85,3.62-.14,5.93,2.75,9.84,2.59a463.39,463.39,0,0,1,47.44,0c12.8.8,25.53,1.12,38.28-1.1,11.24-2,22.41-3.78,33.79,1,4.06,1.72,9.06,3.26,14,2.53,10.43-1.54,20.94-.89,31.41-.91,5.35,0,11.06.72,14.88,4.64,3.49,3.57,7.21,3.68,11.34,3.2,19.78-2.33,39.17-.3,58.28,5a15.07,15.07,0,0,0,8.27.33c6.9-1.79,13.81-4,21.09-3.09,5.76.74,11.44,2,17.27,2.38a8.88,8.88,0,0,1,7.17,3.92,8.54,8.54,0,0,0,9.71,3.56c7.89-2.27,15.9-3.07,24-3.54a17.53,17.53,0,0,0,6.66-2c7.34-3.7,15-3.51,22.9-2.85a172.69,172.69,0,0,0,30.76-.55c10.41-1,20.68-3.48,31.22-3.08,4.46.17,8.75.85,10.34,6a1.82,1.82,0,0,0,2.24,1.42c8.75-1.06,17.54.13,26.22-.1,15.73-.42,31.44-2.67,47.09-4.68,3.66-.47,5.17.48,6.21,3.48.06-1,.18-2,.18-3Q1242.81,337.75,1242.8,50.82Z" />
+        </svg>
 
+    </div>
+
+    <div class="owl-container">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide>
+                <div class="caresoul-item">
+                    <div class="caresoul-item-content">
+                        <img src="../assets/images/company.png" alt="">
+                    </div>
+
+                    <div class="caresoul-item-text">
+                        <div class="caresoul-item-paragraphs">
+                            <h3 class="text-primary">Monday</h3>
+                            <p>25 May. 2020
+                                9 A.M</p>
+                        </div>
+
+                        <div class="caresoul-item-paragraphs">
+                            <h3 class="text-primary">Alexandria</h3>
+                            <p>Egypt</p>
+                        </div>
+                        <div class="caresoul-item-paragraphs">
+                            <h3 class="text-primary">Intership</h3>
+                            <p>2 Month</p>
+                        </div>
+                    </div>
+                    <button class="item-btn"> Learn More</button>
+                </div>
+            </ng-template>
+
+            <ng-template carouselSlide>
+                <div class="caresoul-item">
+                    <div class="caresoul-item-content">
+                        <img src="../assets/images/company.png" alt="">
+                    </div>
+
+                    <div class="caresoul-item-text">
+                        <div class="caresoul-item-paragraphs">
+                            <h3 class="text-primary">Monday</h3>
+                            <p>25 May. 2020
+                                9 A.M</p>
+                        </div>
+
+                        <div class="caresoul-item-paragraphs">
+                            <h3 class="text-primary">Alexandria</h3>
+                            <p>Egypt</p>
+                        </div>
+                        <div class="caresoul-item-paragraphs">
+                            <h3 class="text-primary">Intership</h3>
+                            <p>2 Month</p>
+                        </div>
+                    </div>
+                    <button class="item-btn"> Learn More</button>
+                </div>
+            </ng-template>
+
+            <ng-template carouselSlide>
+                <div class="caresoul-item">
+
+                    <div class="caresoul-item-content">
+                        <img src="../assets/images/company.png" alt="">
+                    </div>
+
+                    <div class="caresoul-item-text">
+                        <div class="caresoul-item-paragraphs">
+                            <h3 class="text-primary">Monday</h3>
+                            <p>25 May. 2020
+                                9 A.M</p>
+                        </div>
+
+                        <div class="caresoul-item-paragraphs">
+                            <h3 class="text-primary">Alexandria</h3>
+                            <p>Egypt</p>
+                        </div>
+                        <div class="caresoul-item-paragraphs">
+                            <h3 class="text-primary">Intership</h3>
+                            <p>2 Month</p>
+                        </div>
+                    </div>
+                    <button class="item-btn"> Learn More</button>
+                </div>
+            </ng-template>
+        </owl-carousel-o>
+    </div>
 </section>
 
-<router-outlet></router-outlet>
+
+<section class="latest-news text-center">
+
+    <h1>Latest News</h1>
+
+    <div class="left">
+        <img class="img-fluid" src="../assets/images/students.png">
+        <div class="container">
+            <h3 class="text-left text-primary">Latest News Title</h3>
+            <p class="text-left">Lorem Ipsum is simply dummy text of the
+                p r i n t i n g a n d t y p e s e t t i n g i n d u s t r y. L o r e m
+                Ipsum has been the industry's standard
+                dummy text ever since the 1500s, when an
+                unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+                It has survived not only five centuries, but
+                also the leap into electronic typesetting,
+                remaining essentially unchanged. It was
+                popularised in the 1960s
+            </p>
+        </div>
+
+    </div>
+
+    <div class="right">
+
+        <div class="container">
+            <h3 class="text-left text-primary">Latest News Title</h3>
+            <p class="text-left">Lorem Ipsum is simply dummy text of the
+                p r i n t i n g a n d t y p e s e t t i n g i n d u s t r y. L o r e m
+                Ipsum has been the industry's standard
+                dummy text ever since the 1500s, when an
+                unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+                It has survived not only five centuries, but
+                also the leap into electronic typesetting,
+                remaining essentially unchanged. It was
+                popularised in the 1960s
+            </p>
+        </div>
+
+        <div class="container">
+            <h3 class="text-left text-primary">Latest News Title</h3>
+            <p class="text-left">Lorem Ipsum is simply dummy text of the
+                p r i n t i n g a n d t y p e s e t t i n g i n d u s t r y. L o r e m
+                Ipsum has been the industry's standard
+                dummy text ever since the 1500s, when an
+                unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+                It has survived not only five centuries, but
+                also the leap into electronic typesetting,
+                remaining essentially unchanged. It was
+                popularised in the 1960s
+            </p>
+        </div>
+
+        <div class="container">
+            <h3 class="text-left text-primary">Latest News Title</h3>
+            <p class="text-left">Lorem Ipsum is simply dummy text of the
+                p r i n t i n g a n d t y p e s e t t i n g i n d u s t r y. L o r e m
+                Ipsum has been the industry's standard
+                dummy text ever since the 1500s, when an
+                unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+                It has survived not only five centuries, but
+                also the leap into electronic typesetting,
+                remaining essentially unchanged. It was
+                popularised in the 1960s
+            </p>
+        </div>
+    </div>
+</section>
+
+
+
+<svg id="OBJECTS" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1925.89 932.51">
+    <defs>
+        <style>
+            .cls-1 {
+                fill: #58595b;
+                stroke: #707070;
+            }
+        </style>
+    </defs>
+    <path id="Path_309" data-name="Path 309" class="cls-1" d="M.5,932H1925.39V.59L.5,327.11Z" />
+</svg>
+
+<!-- <router-outlet></router-outlet> -->

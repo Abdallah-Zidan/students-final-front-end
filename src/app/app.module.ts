@@ -11,6 +11,9 @@ import { SpinnerComponent } from './auth/spinner/spinner.component';
 import { PublicComponentComponent } from './test/public-component/public-component.component';
 import { ProtectedComponent } from './test/protected/protected.component';
 
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { from } from 'rxjs';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +23,7 @@ import { ProtectedComponent } from './test/protected/protected.component';
     PublicComponentComponent,
     ProtectedComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule,HttpClientModule,],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, CarouselModule],
   providers: [],
   bootstrap: [AppComponent],
 })
