@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, OnDestroy } from '@angular/core';
+import { Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -19,14 +19,14 @@ export class LoginComponent {
       this.authService.login(form.value.email, form.value.password).subscribe(
         (res) => {
           if (res) {
-            console.log(res);
+            // console.log(res);
             this.router.navigate(['/protected']);
             this.isLoading = false;
           }
         },
         (error) => {
           console.log(error);
-          this.error = error.error.error.message;
+          this.error = error.error.message;
           this.isLoading = false;
           setTimeout(() => {
             this.error = '';

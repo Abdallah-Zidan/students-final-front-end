@@ -16,7 +16,16 @@ export class StorageService {
   getUser(key: string) {
     const user = this.getItem(key);
     if (user) {
-      return new User(user.email, user.id, user._token);
+      return new User(
+        user.id,
+        user.name,
+        user.email,
+        user.type,
+        user.address,
+        user.mobile,
+        user.avatar,
+        user._token
+      );
     } else {
       return null;
     }
