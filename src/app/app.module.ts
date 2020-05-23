@@ -37,12 +37,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FontAwesomeModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     CarouselModule,
     BrowserAnimationsModule,
     NgbModule
   ],
+  
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
