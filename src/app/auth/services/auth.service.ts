@@ -15,7 +15,7 @@ logged in or not
 const authEndPoints = {
   csrf: 'http://localhost:8000/sanctum/csrf-cookie',
   login: 'http://localhost:8000/api/v1/login',
-  register: '',
+  register: 'http://localhost:8000/api/v1/register',
 };
 
 @Injectable({
