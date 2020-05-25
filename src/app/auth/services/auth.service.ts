@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../user.model';
@@ -69,4 +69,25 @@ export class AuthService {
     this.storageService.removeItem('user');
     this.router.navigate(['/login']);
   }
+
+  register(user,type) {
+    console.log(user,type);
+    return this.http
+    .post(authEndPoints.register, {
+      name :user.name,
+      password :user.password,
+      email:user.email,
+      address :user.address,
+      mobile :user.phone,
+      // avatar : user.avatar,
+      birthdate:user.birthdate,
+      year:user.level,
+      fax:user.fax,
+      website:user.website,
+      description:user.description,
+      type: type,
+      device_name: 'test',
+      })
+}
+  
 }
