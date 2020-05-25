@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+<<<<<<< HEAD
+=======
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+>>>>>>> 49387a653688b0c2ec4d561550b9b8ac0c288ae2
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../user.model';
@@ -74,4 +78,25 @@ export class AuthService {
       }
     );
   }
+
+  register(user,type) {
+    console.log(user,type);
+    return this.httpService.requestRegister(
+      {
+      name :user.name,
+      password :user.password,
+      email:user.email,
+      address :user.address,
+      mobile :user.phone,
+      // avatar : user.avatar,
+      birthdate:user.birthdate,
+      year:user.level,
+      fax:user.fax,
+      website:user.website,
+      description:user.description,
+      type: type,
+      device_name: 'test',
+      })
+}
+  
 }

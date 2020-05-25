@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from '../../services/storage.service';
+import { StorageService } from '../../../services/storage.service';
+import { AuthService } from '../../services/auth.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterComponent } from '../register.component';
@@ -14,11 +15,12 @@ export class StudentComponent implements OnInit {
   universityList = [];
   departmentList =[];
   facultyList=[];
+  errorList=[];
   imageValidation;
   bodValidation;
   flag;
   studentForm: FormGroup
-  constructor(private storageService:StorageService,private fb: FormBuilder,private router:Router,private register:RegisterComponent) {
+  constructor(private authService: AuthService,private storageService:StorageService,private fb: FormBuilder,private router:Router,private register:RegisterComponent) {
 
     let studentformControls = {
       name : new FormControl('',[
@@ -54,7 +56,7 @@ export class StudentComponent implements OnInit {
         Validators.required,
         Validators.pattern("[0-9]+"),
         Validators.minLength(11),
-        Validators.maxLength(11)
+        Validators.maxLength(15)
       ]),
       email: new FormControl('',[
         Validators.required,
@@ -62,12 +64,14 @@ export class StudentComponent implements OnInit {
       ]),
       password: new FormControl('',[
         Validators.required,
-        Validators.minLength(6)
+        Validators.minLength(8),
+        Validators.maxLength(30),
+        Validators.pattern("(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}")
       ]),
       repassword: new FormControl('',[
         Validators.required,
       ]),
-      avatar: new FormControl(''),
+      // avatar: new FormControl(''),
     }
 
     this.studentForm = this.fb.group(studentformControls);
@@ -112,7 +116,7 @@ export class StudentComponent implements OnInit {
   get department() { return this.studentForm.get('department') }
   get level() { return this.studentForm.get('level') }
   get address() { return this.studentForm.get('address') }
-  get avatar() { return this.studentForm.get('avatar') }
+  // get avatar() { return this.studentForm.get('avatar') }
 
 
   onFileChange(event) {
@@ -154,16 +158,20 @@ export class StudentComponent implements OnInit {
 
   addStudent() {
     let user = this.studentForm.value;
-    console.log(user)
-    this.register.finish=true;
+    let type = 0;
+    this.errorList=[]
+    // console.log(user)
     
-    // this.storageService.addUser(user).subscribe(
-    //   res=>{
-    //         
-    //        },
-    //   err=>{
-    //     console.log(err);
-    //   }
-    // )
+    this.authService.register(user,type).subscribe(
+      res=>{
+        this.register.finish=true;
+           },
+      err=>{
+        this.errorList.push(err.error.errors.email);
+        this.errorList.push(err.error.errors.mobile);
+        // console.log(this.errorList)
+        // console.log(err);
+      }
+    )
   }
 }

@@ -5,7 +5,7 @@ const endPoints = {
   csrf: 'http://localhost:8000/sanctum/csrf-cookie',
   login: 'http://localhost:8000/api/v1/login',
   logout: 'http://localhost:8000/api/v1/logout',
-  register: '',
+  register: 'http://localhost:8000/api/v1/register',
   studentDepartmentGroup: '',
   studentFacultyGroup: '',
   professorDepartments: '',
@@ -21,28 +21,25 @@ export class HttpService {
     */
   constructor(private http: HttpClient) {}
 
-  get(url: string) {
-    return this.http.get(url);
-  }
-
-  post(url: string, body: any) {
-    return this.http.post(url, body);
-  }
-
   requestLogin(loginData: {
     email: string;
     password: string;
     device_name: string;
   }) {
-    return this.post(endPoints.login, loginData);
+    return this.http.post(endPoints.login, loginData);
+  }
+
+  requestRegister(registerData){
+    return this.http
+    .post(endPoints.register, registerData)
   }
 
   requestLogout(deviceName: string) {
-    return this.post(endPoints.logout, deviceName);
+    return this.http.post(endPoints.logout, deviceName);
   }
 
   requestCSRF() {
-    this.get(endPoints.csrf).subscribe((res) => {
+    this.http.get(endPoints.csrf).subscribe((res) => {
       console.log(res);
     });
   }

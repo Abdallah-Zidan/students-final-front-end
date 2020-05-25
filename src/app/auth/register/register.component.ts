@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faUserFriends,faMoneyBill,faHouseUser,faExchangeAlt,faChalkboardTeacher} from '@fortawesome/free-solid-svg-icons';
-import { StorageService } from '../services/storage.service';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
@@ -17,15 +16,9 @@ export class RegisterComponent implements OnInit {
   Student=true;
   public finish = false;
   
-  constructor(private storageService:StorageService,private router:Router) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    const user = this.storageService.getUser('user');
-    if (user) {
-      if (user.token) {
-      this.router.navigate(['']);
-    } 
-  }}
+  ngOnInit(): void {}
 
   showStudentForm()
   {
