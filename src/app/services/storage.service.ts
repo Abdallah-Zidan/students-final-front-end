@@ -10,7 +10,6 @@ export class StorageService {
   private AllUniversitesLink = "https://jsonplaceholder.typicode.com/users";
   private AllFacultiesLink = "https://jsonplaceholder.typicode.com/users";
   private AllDepartmentsLink = "https://jsonplaceholder.typicode.com/users";
-  private addUserUrl = "https://backend-people-crud-app.herokuapp.com/users/add";
 
   constructor(public http: HttpClient) {}
 
@@ -54,7 +53,5 @@ export class StorageService {
     return this.http.get<any>(this.AllDepartmentsLink);
   }
 
-  addUser(user) {
-    return this.http.post<any>(this.addUserUrl, user);
-  }
+  
 }
