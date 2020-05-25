@@ -7,6 +7,7 @@ export class User {
     private address: string = '',
     private mobile: string = '',
     private avatar: string | null,
+    private verified: boolean,
     private _token: string
   ) {}
 
@@ -33,5 +34,8 @@ export class User {
 
   get getEmail(): string {
     return this.email;
+  }
+  get isVerified(): boolean {
+    return this.verified;
   }
 }

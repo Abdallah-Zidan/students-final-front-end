@@ -23,6 +23,7 @@ import { from } from 'rxjs';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GroupComponent } from './education/group/group.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     StudentComponent,
     CompanyComponent,
     HomeComponent,
+    GroupComponent,
   ],
   imports: [
     BrowserModule,
