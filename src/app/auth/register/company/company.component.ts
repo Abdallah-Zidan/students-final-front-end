@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../../../services/storage.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { RegisterComponent } from '../register.component';
+import { AuthService } from '../../services/auth.service';
+
 
 
 @Component({
@@ -13,7 +15,14 @@ export class CompanyComponent implements OnInit {
   companyForm: FormGroup
   imageValidation;
   flag;
-  constructor(private storageService:StorageService,private fb: FormBuilder,private register:RegisterComponent) { 
+  errorList=[];
+
+  constructor(
+    private authService: AuthService,
+    private storageService:StorageService,
+    private fb: FormBuilder,
+    private register:RegisterComponent)
+  { 
     let companyformControls = {
       name : new FormControl('',[
         Validators.required,
@@ -25,7 +34,7 @@ export class CompanyComponent implements OnInit {
         Validators.required,
         Validators.pattern("[0-9]+"),
         Validators.minLength(11),
-        Validators.maxLength(11)
+        Validators.maxLength(15)
       ]),
       email: new FormControl('',[
         Validators.required,
@@ -33,23 +42,33 @@ export class CompanyComponent implements OnInit {
       ]),
       password: new FormControl('',[
         Validators.required,
-        Validators.minLength(6)
+        Validators.minLength(8),
+        Validators.maxLength(30),
+        Validators.pattern("(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}")
       ]),
       repassword: new FormControl('',[
         Validators.required,
       ]),
       website: new FormControl('',[
         Validators.required,
-        Validators.pattern("(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?\\.([a-z.]{2,6})[/\\w .-]*/?")
+        Validators.pattern("(https+://)+([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?\\.([a-z.]{2,6})[/\\w .-]*/?")
       ]),
       fax: new FormControl('',[
         Validators.required,
-        Validators.pattern("[+]{1}20[0-9]{8}")
+        Validators.pattern("[+]{1}20[0-9]{8,11}"),
+        Validators.maxLength(15),
+
       ]),
-      avatar: new FormControl(''),
+      // avatar: new FormControl(''),
       address : new FormControl('',[
         Validators.required,
       ]),
+      description: new FormControl('',[
+        Validators.required,
+        Validators.maxLength(250),
+
+      ]),
+    
     }
     this.companyForm = this.fb.group(companyformControls);
   }
@@ -63,9 +82,11 @@ export class CompanyComponent implements OnInit {
   get password() { return this.companyForm.get('password') }
   get repassword() { return this.companyForm.get('repassword') }
   get address() { return this.companyForm.get('address') }
-  get avatar() { return this.companyForm.get('avatar') }
+  // get avatar() { return this.companyForm.get('avatar') }
   get fax() { return this.companyForm.get('fax') }
   get website() { return this.companyForm.get('website') }
+  get description() { return this.companyForm.get('description') }
+
 
   onFileChange(event) {
     if (event.target.files.length > 0 )
@@ -88,18 +109,23 @@ export class CompanyComponent implements OnInit {
   }
 
   addCompany(){
-      let user = this.companyForm.value;
-      console.log(user)
-      this.register.finish=true;
 
-      
-      // this.storageService.addUser(user).subscribe(
-      //   res=>{
-      //         
-      //        },
-      //   err=>{
-      //     console.log(err);
-      //   }
-      // )
+    let user = this.companyForm.value;
+    let type = 1;
+    this.errorList=[]
+    // console.log(user)
+    
+    this.authService.register(user,type).subscribe(
+      res=>{
+        this.register.finish=true;
+           },
+      err=>{
+        this.errorList.push(err.error.errors.email);
+        this.errorList.push(err.error.errors.mobile);
+        this.errorList.push(err.error.errors.fax);
+        this.errorList.push(err.error.errors.website);
+        console.log(err);
+      }
+    )
     }
 }
