@@ -6,9 +6,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class StorageService {
-  private AllUniversitesLink = "https://jsonplaceholder.typicode.com/users";
-  private AllFacultiesLink = "https://jsonplaceholder.typicode.com/users";
-  private AllDepartmentsLink = "https://jsonplaceholder.typicode.com/users";
+  private AllUniversitesLink = 'https://jsonplaceholder.typicode.com/users';
+  private AllFacultiesLink = 'https://jsonplaceholder.typicode.com/users';
+  private AllDepartmentsLink = 'https://jsonplaceholder.typicode.com/users';
 
   constructor(public http: HttpClient) {}
 
@@ -51,6 +51,4 @@ export class StorageService {
   getAllDepartments() {
     return this.http.get<any>(this.AllDepartmentsLink);
   }
-
-  
 }

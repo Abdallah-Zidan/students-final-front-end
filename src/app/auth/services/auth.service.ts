@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
-=======
 import { HttpClient, HttpHeaders } from '@angular/common/http';
->>>>>>> 49387a653688b0c2ec4d561550b9b8ac0c288ae2
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../user.model';
@@ -16,6 +13,12 @@ and contains a user subject to subscribe to any time for checking user status
 logged in or not
 */
 
+const authEndPoints = {
+  csrf: 'http://localhost:8000/sanctum/csrf-cookie',
+  login: 'http://localhost:8000/api/v1/login',
+  register: 'http://localhost:8000/api/v1/register',
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,7 +27,8 @@ export class AuthService {
   constructor(
     private httpService: HttpService,
     private router: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private http: HttpClient
   ) {}
 
   login(email: string, password: string) {
@@ -81,8 +85,8 @@ export class AuthService {
 
   register(user,type) {
     console.log(user,type);
-    return this.httpService.requestRegister(
-      {
+    return this.http
+    .post(authEndPoints.register, {
       name :user.name,
       password :user.password,
       email:user.email,

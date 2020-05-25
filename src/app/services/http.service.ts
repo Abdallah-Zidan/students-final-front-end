@@ -29,11 +29,6 @@ export class HttpService {
     return this.http.post(endPoints.login, loginData);
   }
 
-  requestRegister(registerData){
-    return this.http
-    .post(endPoints.register, registerData)
-  }
-
   requestLogout(deviceName: string) {
     return this.http.post(endPoints.logout, deviceName);
   }
