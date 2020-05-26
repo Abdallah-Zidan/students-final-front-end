@@ -2,15 +2,13 @@ import { Injectable } from '@angular/core';
 import { User } from '../auth/user.model';
 import { HttpClient } from '@angular/common/http';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
-  private AllUniversitesLink = "https://jsonplaceholder.typicode.com/users";
-  private AllFacultiesLink = "https://jsonplaceholder.typicode.com/users";
-  private AllDepartmentsLink = "https://jsonplaceholder.typicode.com/users";
-  private addUserUrl = "https://backend-people-crud-app.herokuapp.com/users/add";
+  private AllUniversitesLink = 'https://jsonplaceholder.typicode.com/users';
+  private AllFacultiesLink = 'https://jsonplaceholder.typicode.com/users';
+  private AllDepartmentsLink = 'https://jsonplaceholder.typicode.com/users';
 
   constructor(public http: HttpClient) {}
 
@@ -33,6 +31,7 @@ export class StorageService {
         user.address,
         user.mobile,
         user.avatar,
+        user.verified,
         user._token
       );
     } else {
@@ -43,18 +42,13 @@ export class StorageService {
     localStorage.removeItem(key);
   }
 
-
   getAllUniversites() {
     return this.http.get<any>(this.AllUniversitesLink);
   }
-  getAllFaculties(){
+  getAllFaculties() {
     return this.http.get<any>(this.AllFacultiesLink);
   }
-  getAllDepartments(){
+  getAllDepartments() {
     return this.http.get<any>(this.AllDepartmentsLink);
-  }
-
-  addUser(user) {
-    return this.http.post<any>(this.addUserUrl, user);
   }
 }

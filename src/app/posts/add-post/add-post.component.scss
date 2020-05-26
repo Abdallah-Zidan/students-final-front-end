@@ -1,0 +1,32 @@
+.post {
+    width     : 80%;
+    padding   : 1em 3em;
+    box-shadow: 5px 5px 3px grey;
+    margin    : .5em auto;
+    background-color: lightgrey;
+}
+
+img {
+    width        : 10%;
+    border-radius: 50%;
+    min-width    : 50px;
+}
+
+input {
+    width        : 90%;
+    border-radius: 2em;
+    padding      : 0.3em 0.2em;
+    margin-top   : 0.5em;
+    max-height: 50px;
+    float: left;
+}
+
+i{
+    width: 10%;
+    float: right;
+    color: #3762F0;
+}
+h3{
+    padding: 15px;
+    font-size: 2vw;
+}

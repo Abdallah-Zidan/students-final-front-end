@@ -1,1 +1,27 @@
-<p>main-post works!</p>
+
+<app-add-post></app-add-post>
+<div class="post" *ngFor="let post of posts">
+    <div class="row">
+        <img src="{{post.image}}" alt="">
+        <h4>{{post.name}}</h4>
+        <div class="left">
+            <a href="" class="mybtn btn-success">Contact</a>
+            <a href="" class="mybtn btn-danger ml-2">Report</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <p>{{post.text}}</p>
+    </div>
+
+    <div class="row">
+        <a href=""> Show Comments</a>
+    </div>
+    
+    <div class="row">
+        <input #commentId (input) = "onCommenting($event)" type="text" placeholder="add comment">
+        <i [hidden] = "isEmpty" class="fa fa-arrow-circle-right fa-3x ml-auto"></i>
+    </div>
+
+</div>
+

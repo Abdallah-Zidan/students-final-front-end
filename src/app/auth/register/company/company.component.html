@@ -1,5 +1,7 @@
 <form  id="company_Form"  [formGroup]="companyForm" (ngSubmit)="addCompany()">
-
+    <div class="form-group mb-3" *ngIf="errorList" >
+      <small class="text-danger" *ngFor="let error of errorList">{{error}}<br></small>
+    </div>
     <div class="form-group mb-3">
       <label for="username">Name</label>
         <input type="text" class="form-control" id="username" placeholder="Name" formControlName="name">
@@ -24,7 +26,10 @@
       <input type="password" class="form-control" id="Password" placeholder="Password" formControlName="password">
       <div *ngIf="password.touched && password.invalid">
         <small *ngIf="password.errors.required" class="text-danger">Password is required<br></small>
-        <small *ngIf="password.errors.minlength" class="text-danger">password must contain 6 characters at least</small>
+        <small *ngIf="password.errors.minlength" class="text-danger">password must contain 8 characters at least</small>
+        <small *ngIf="password.errors.maxlength" class="text-danger">password can contain 30 characters maximum<br></small>
+        <small *ngIf="password.errors.pattern" class="text-danger">password must contain  at least one uppercase letter and one lowercase letter<br></small>
+        <small *ngIf="password.errors.pattern" class="text-danger">password must contain  at least one number and one special character</small>
       </div>
     </div>
 
@@ -54,6 +59,7 @@
         <div *ngIf="fax.touched && fax.invalid">
           <small *ngIf="fax.errors.required" class="text-danger">fax is required<br></small>
           <small *ngIf="fax.errors.pattern" class="text-danger">Invalid fax make sure you enter 8 digits after Egypt code +20</small>
+          <small *ngIf="password.errors.maxlength" class="text-danger">fax can contain 15 characters maximum<br></small>
         </div>
     </div>
     
@@ -64,7 +70,7 @@
           <small *ngIf="phone.errors.required" class="text-danger">Phone is required<br></small>
           <small *ngIf="phone.errors.pattern" class="text-danger">Invalid Phone<br></small>
           <small *ngIf="phone.errors.minlength" class="text-danger">Phone must contain a minimum of 11 characters</small>
-          <small *ngIf="phone.errors.maxlength" class="text-danger">Phone must contain a maximum of 11 characters</small>
+          <small *ngIf="phone.errors.maxlength" class="text-danger">Phone must contain a maximum of 15 characters</small>
         </div>
     </div>
     
@@ -77,14 +83,22 @@
       </div>
     </div>
 
-    <div class="form-group mb-3">
+    <!-- <div class="form-group mb-3">
       <label for="avatar">Profile Image</label>
       <input type="file" class="form-control-file" id="avatar" (change)="onFileChange($event)">
       <div>
         <small  class="text-danger">{{imageValidation}}</small>
       </div>
-    </div>
+    </div> -->
 
+    <div class="form-group mb-3">
+      <label for="description">Description</label>
+        <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+        <div *ngIf="description.touched && name.invalid">
+          <small *ngIf="name.errors.required" class="text-danger">name is required<br></small>
+          <small *ngIf="name.errors.maxlength" class="text-danger">Description can contain 250 characters maximum</small>
+        </div>
+    </div>
     <hr class="mb-4">
     <input type="submit" value="Create Account" [disabled]="companyForm.invalid || repassword.value != password.value || flag == 0 " class="btn btn-primary btn-block" >
   </form> 

@@ -1,18 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+  HttpClientXsrfModule,
+} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule , ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { SpinnerComponent } from './auth/spinner/spinner.component';
 import { PublicComponentComponent } from './test/public-component/public-component.component';
 import { ProtectedComponent } from './test/protected/protected.component';
-import { StudentComponent } from './register/student/student.component';
-import { CompanyComponent } from './register/company/company.component';
+import { StudentComponent } from './auth/register/student/student.component';
+import { CompanyComponent } from './auth/register/company/company.component';
 import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { from } from 'rxjs';
@@ -22,8 +26,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostsComponent } from './posts/posts.component';
 import { LeftSidebarComponent } from './posts/left-sidebar/left-sidebar.component';
 import { MainPostComponent } from './posts/main-post/main-post.component';
-import { RightSidebarComponent } from './posts/right-sidebar/right-sidebar.component';
 
+import { GroupComponent } from './education/group/group.component';
+import { AddPostComponent } from './posts/add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +45,8 @@ import { RightSidebarComponent } from './posts/right-sidebar/right-sidebar.compo
     PostsComponent,
     LeftSidebarComponent,
     MainPostComponent,
-    RightSidebarComponent,
+    GroupComponent,
+    AddPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,9 +59,13 @@ import { RightSidebarComponent } from './posts/right-sidebar/right-sidebar.compo
     HttpClientModule,
     CarouselModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'XSRF-TOKEN',
+      headerName: 'X-CSRF-TOKEN',
+    }),
   ],
-  
+
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -65,4 +75,4 @@ import { RightSidebarComponent } from './posts/right-sidebar/right-sidebar.compo
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
