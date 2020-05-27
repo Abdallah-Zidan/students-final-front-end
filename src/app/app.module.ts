@@ -1,12 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+  HttpClientXsrfModule,
+} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule , ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { SpinnerComponent } from './auth/spinner/spinner.component';
 import { PublicComponentComponent } from './test/public-component/public-component.component';
@@ -19,7 +23,12 @@ import { from } from 'rxjs';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PostsComponent } from './posts/posts.component';
+import { LeftSidebarComponent } from './posts/left-sidebar/left-sidebar.component';
+import { MainPostComponent } from './posts/main-post/main-post.component';
 
+import { GroupComponent } from './education/group/group.component';
+import { AddPostComponent } from './posts/add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +42,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     StudentComponent,
     CompanyComponent,
     HomeComponent,
+    PostsComponent,
+    LeftSidebarComponent,
+    MainPostComponent,
+    GroupComponent,
+    AddPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,9 +59,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     CarouselModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'XSRF-TOKEN',
+      headerName: 'X-CSRF-TOKEN',
+    }),
   ],
-  
+
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -57,4 +75,4 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

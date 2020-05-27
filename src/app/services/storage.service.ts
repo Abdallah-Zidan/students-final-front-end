@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { User } from '../auth/user.model';
 import { HttpClient } from '@angular/common/http';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -31,6 +30,7 @@ export class StorageService {
         user.address,
         user.mobile,
         user.avatar,
+        user.verified,
         user._token
       );
     } else {
@@ -40,7 +40,6 @@ export class StorageService {
   removeItem(key: string) {
     localStorage.removeItem(key);
   }
-
 
   getAllUniversites() {
     return this.http.get<any>(this.AllUniversitesLink);

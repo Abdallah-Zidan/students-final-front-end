@@ -1,0 +1,57 @@
+body {
+    font-size: 62.5%;
+
+}
+
+:host {
+    width: 100%;
+}
+
+.post {
+    width     : 100%;
+    padding   : 1em 3em;
+    box-shadow: 7px 7px 5px grey;
+    margin    : 1.5em 0;
+}
+
+img {
+    width        : 10%;
+    border-radius: 50%;
+    min-width    : 50px;
+}
+
+h4 {
+    font-size: 2.5vw;
+    margin   : auto 7px;
+}
+
+input {
+    width        : 90%;
+    border-radius: 2em;
+    padding      : 0.3em 0.2em;
+    margin-top   : 0.5em;
+    max-height: 50px;
+    float: left;
+}
+
+.mybtn{
+    text-align: center;
+    padding: 0.5em 1em;
+    width: 12%;
+    height: 7%;
+    font-size: 1vw;
+    text-decoration: none;
+    max-height: 40px;
+}
+
+i{
+    width: 10%;
+    float: right;
+}
+
+
+.left
+{
+    float: right;
+    margin-left: auto;
+}
