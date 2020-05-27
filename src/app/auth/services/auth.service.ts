@@ -70,8 +70,7 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  register(user,type) {
-    console.log(user,type);
+  register(user) {
     return this.http
     .post(authEndPoints.register, {
       name :user.name,
@@ -79,15 +78,33 @@ export class AuthService {
       email:user.email,
       address :user.address,
       mobile :user.phone,
-      // avatar : user.avatar,
+      gender : user.gender,
       birthdate:user.birthdate,
       year:user.level,
       fax:user.fax,
       website:user.website,
       description:user.description,
-      type: type,
+      type:user.type,
+      blocked:user.blocked,
       device_name: 'test',
-      })
+      }) 
+      .pipe(
+        tap((res: any) => {
+          const { user, token } = res.data;
+          const currentUser = new User(
+            user.id,
+            user.name,
+            user.email,
+            user.type,
+            user.address,
+            user.mobile,
+            user.avatar,
+            token
+          );
+          this.user.next(currentUser);
+          this.storageService.saveItem('user', currentUser);
+        })
+      );
 }
   
 }
