@@ -26,9 +26,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostsComponent } from './posts/posts.component';
 import { LeftSidebarComponent } from './posts/left-sidebar/left-sidebar.component';
 import { MainPostComponent } from './posts/main-post/main-post.component';
-
 import { GroupComponent } from './education/group/group.component';
 import { AddPostComponent } from './posts/add-post/add-post.component';
+import { SidebarModule } from 'ng-sidebar';
+import { LayoutModule } from '@angular/cdk/layout';
+import { NavComponent } from './nav/nav.component';
+import { NestedTreeComponent } from './nested-tree/nested-tree.component';
+import { MatTreeModule } from '@angular/material/tree';
+
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +58,8 @@ import { AddPostComponent } from './posts/add-post/add-post.component';
     MainPostComponent,
     GroupComponent,
     AddPostComponent,
+    NavComponent,
+    NestedTreeComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +77,14 @@ import { AddPostComponent } from './posts/add-post/add-post.component';
       cookieName: 'XSRF-TOKEN',
       headerName: 'X-CSRF-TOKEN',
     }),
+    SidebarModule.forRoot(),
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatTreeModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
   ],
 
   providers: [
