@@ -40,6 +40,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
+import {MatMenuModule} from '@angular/material/menu';
+import {MatInputModule} from '@angular/material/input';
+import { CommentComponent } from './posts/comment/comment.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { SingleCommentComponent } from './posts/comment/single-comment/single-comment.component';
+
+import {MatBadgeModule} from '@angular/material/badge';
+import { SearchBarComponent } from './posts/search-bar/search-bar.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -59,7 +70,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     GroupComponent,
     AddPostComponent,
     NavComponent,
-    NestedTreeComponent
+    NestedTreeComponent,
+    CommentComponent,
+    SingleCommentComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
@@ -85,6 +99,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatMenuModule,
+    MatInputModule,
+    MatExpansionModule,
+    MatBadgeModule
   ],
 
   providers: [

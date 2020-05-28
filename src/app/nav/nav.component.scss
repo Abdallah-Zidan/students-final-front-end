@@ -1,7 +1,19 @@
 body{
   margin: 0;
 }
+body,html,*{
+  outline: none !important;
+}
 
+h3{
+  display: inline-block;
+  padding-left: 1vw;
+  }
+
+  i{
+    padding: 0;
+    margin: 0;
+  }
 .sidenav {
   width: 200px;
 }
@@ -14,4 +26,34 @@ body{
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.spacer{
+  flex: 1 1 auto;
+}
+
+
+.avatar{
+  width: 45px;
+  border-radius:50% ;
+}
+
+.sections{
+  border: none;
+}
+
+.slogan{
+  padding: 15px;
+}
+.sidebar-avatar{
+  width: 100px;
+  display: block;
+  margin: 0 auto;
+  margin-left: -1px;
+}
+
+.sidebar-info
+{
+padding: 0;
+margin: 0;
 }

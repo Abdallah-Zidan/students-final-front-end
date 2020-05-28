@@ -1,17 +1,13 @@
 import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
 import { Component } from '@angular/core';
 import { MatTreeNestedDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map, shareReplay } from 'rxjs/operators';
 
 interface Node {
   name: string;
   children?: Node[];
-}
-
-interface ExampleFlatNode {
-  expandable: boolean;
-  name: string;
-  level: number;
 }
 
 @Component({
@@ -26,7 +22,13 @@ export class NestedTreeComponent {
   nestedDataSource: MatTreeNestedDataSource<Node>;
   dataChange: BehaviorSubject<Node[]> = new BehaviorSubject<Node[]>([]);
 
-  constructor() {
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+
+  constructor(private breakpointObserver: BreakpointObserver) {
     this.nestedDataSource = new MatTreeNestedDataSource<Node>();
     this.nestedTreeControl = new NestedTreeControl<Node>(node => node.children);
     this.dataChange.subscribe(data => this.nestedDataSource.data = data);

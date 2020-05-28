@@ -1,38 +1,35 @@
+body,
+html {
+    box-sizing: border-box;
+}
+
 .post {
     width           : 80%;
-    padding         : 1em 3em;
+    padding         : 1vw 3vw;
     box-shadow      : 5px 5px 3px grey;
     margin          : .5em auto;
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(246, 240, 240);
+    display         : flex;
 }
 
 img {
+    float: left;
     width        : 10%;
+    height       : 10%;
     border-radius: 50%;
+    margin       : 1%;
     min-width    : 50px;
 }
 
-input {
-    width        : 90%;
-    border-radius: 2em;
-    padding      : 0.3em 0.2em;
-    margin-top   : 0.5em;
-    max-height   : 50px;
-    float        : left;
+
+
+
+
+button {
+    outline: none;
 }
 
-i {
-    width: 10%;
-    float: right;
-    color: #3762F0;
-}
-
-h3 {
-    padding  : 15px;
-    font-size: 2vw;
-}
-
-h2 {
-    font-size: 2.5vw;
-    color: grey;
+.example-full-width {
+    width : 80%;
+    height: 7%;
 }

@@ -1,8 +1,22 @@
-body {
-    font-size: 62.5%;
-
+body,
+html,
+* {
+    outline: none !important;
 }
 
+p{
+    padding: 1vw;
+    padding-top: 1.7vw ;
+}
+
+body {
+    font-size: 62.5%;
+}
+
+.example-full-width {
+    width: 100%;
+  }
+  
 :host {
     width: 100%;
 }
@@ -14,8 +28,22 @@ body {
     margin    : 1.5em 0;
 }
 
+.report{
+    font-size: 40px;
+    color: red;
+    cursor: pointer;
+    margin: 15px;
+}
+
+.contact
+{
+    font-size: 40px;
+    color: green;
+    cursor: pointer; 
+    margin: 15px;
+}
 img {
-    width        : 10%;
+    width        : 7%;
     border-radius: 50%;
     min-width    : 50px;
 }
@@ -30,28 +58,27 @@ input {
     border-radius: 2em;
     padding      : 0.3em 0.2em;
     margin-top   : 0.5em;
-    max-height: 50px;
-    float: left;
+    max-height   : 50px;
+    float        : left;
 }
 
-.mybtn{
-    text-align: center;
-    padding: 0.5em 1em;
-    width: 12%;
-    height: 7%;
-    font-size: 1vw;
+.mybtn {
+    text-align     : center;
+    padding        : 0.5em 1em;
+    width          : 12%;
+    height         : 7%;
+    font-size      : 1vw;
     text-decoration: none;
-    max-height: 40px;
+    max-height     : 40px;
 }
 
-i{
+i {
     width: 10%;
     float: right;
 }
 
 
-.left
-{
-    float: right;
+.left {
+    float      : right;
     margin-left: auto;
 }
