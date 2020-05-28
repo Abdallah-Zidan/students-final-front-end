@@ -9,7 +9,9 @@ import { PublicComponentComponent } from './test/public-component/public-compone
 import { ProtectedComponent } from './test/protected/protected.component';
 import { HomeComponent } from './home/home.component';
 import { EmailVerificationComponent } from './auth/register/email-verification/email-verification.component';
-
+import { ProfileComponent } from './profile/profile.component';
+import { UpdateComponent } from './profile/update/update.component';
+import { SettingsComponent } from './profile/settings/settings.component';
 
 const routes: Routes = [
   {
@@ -37,6 +39,24 @@ const routes: Routes = [
     path: 'email/verify',
     component: EmailVerificationComponent,
     canActivate: [RedirectGuard],
+  },
+
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    // canActivate: [RedirectGuard],
+  },
+
+  {
+    path: 'profile/update',
+    component: UpdateComponent,
+    // canActivate: [RedirectGuard],
+  },
+
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    // canActivate: [RedirectGuard],
   }
 ];
 
