@@ -112,6 +112,7 @@ export class AuthService {
             user.address,
             user.mobile,
             user.avatar,
+            user.verified,
             token
           );
           this.user.next(currentUser);
