@@ -14,18 +14,21 @@ export class RegisterComponent implements OnInit {
   faExchangeAlt = faExchangeAlt;
   faChalkboardTeacher = faChalkboardTeacher;
   Student=true;
-  public finish = false;
-  
+  stActive="active";
+  comActive  
   constructor() {}
 
   ngOnInit(): void {}
 
   showStudentForm()
-  {
+  { this.stActive="active"
+    this.comActive=""
     this.Student=true
   }
   showCompanyForm()
   {
+    this.stActive=""
+    this.comActive="active"
     this.Student=false
   }
 
