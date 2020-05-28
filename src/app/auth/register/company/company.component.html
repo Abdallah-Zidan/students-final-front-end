@@ -1,7 +1,7 @@
 <form  id="company_Form"  [formGroup]="companyForm" (ngSubmit)="addCompany()">
 
-  <div class="form-group mb-3" *ngIf="errorList" >
-    <p class="alert alert-danger text-center " *ngFor="let error of errorList">{{error}}<br></p>
+  <div class="form-group mb-3 alert alert-danger  text-center " *ngIf="errorList.length>0" >
+    <p *ngFor="let error of errorList">{{error}}<br></p>
   </div>
 
     <div class="form-group mb-3">
@@ -84,7 +84,16 @@
         <small *ngIf="address.errors.required" class="text-danger">address is required<br></small>
       </div>
     </div>
-
+    <div class="form-group mb-3">
+      <label for="gender">Gender</label>
+      <br>
+      <input type="radio" class="form-control-gender" id="gender" formControlName="gender" name = "gender" value = "1">Female  
+      <input type="radio" class="form-control-gender" id="gender" formControlName="gender" name = "gender" value = "0">Male
+      <div *ngIf="gender.touched && gender.invalid">
+        <small *ngIf="gender.errors.required" class="text-danger">Gender is required<br></small>
+      </div>
+    </div>
+    
     <div class="form-group mb-3">
       <label for="description">Description</label>
         <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
