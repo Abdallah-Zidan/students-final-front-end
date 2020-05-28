@@ -30,7 +30,6 @@ import { GroupComponent } from './education/group/group.component';
 import { AddPostComponent } from './posts/add-post/add-post.component';
 import { EmailVerificationComponent } from './auth/register/email-verification/email-verification.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ShowComponent } from './profile/show/show.component';
 import { UpdateComponent } from './profile/update/update.component';
 import { SidebarModule } from 'ng-sidebar';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -52,6 +51,7 @@ import { SingleCommentComponent } from './posts/comment/single-comment/single-co
 
 import {MatBadgeModule} from '@angular/material/badge';
 import { SearchBarComponent } from './posts/search-bar/search-bar.component';
+import { SettingsComponent } from './profile/settings/settings.component';
 
 
 
@@ -75,13 +75,13 @@ import { SearchBarComponent } from './posts/search-bar/search-bar.component';
     AddPostComponent,
     EmailVerificationComponent,
     ProfileComponent,
-    ShowComponent,
     UpdateComponent,
     NavComponent,
     NestedTreeComponent,
     CommentComponent,
     SingleCommentComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
