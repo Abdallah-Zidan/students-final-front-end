@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~9.1.7",
+    "@angular/animations": "~9.1.9",
     "@angular/common": "~9.1.7",
     "@angular/compiler": "~9.1.7",
     "@angular/core": "~9.1.7",
@@ -29,11 +29,14 @@
     "bootstrap": "^4.5.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
+    "ng-sidebar": "^9.2.1",
     "ngx-owl-carousel-o": "^3.0.1",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "@angular/cdk": "^9.2.4",
+    "@angular/material": "^9.2.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.901.7",

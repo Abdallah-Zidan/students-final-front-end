@@ -1,0 +1,126 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>
+      <div class="side-slogan"></div>
+      Student's
+    </mat-toolbar>
+    <hr>
+
+    <!-- Side Bar -->
+    <div class="sidebar-info" [hidden]=" !(isHandset$ | async)">
+      <img class="sidebar-avatar" src="../../assets/images/avatar-exemple.jpg">
+      <h6>Prof.Abdallah Zidan</h6>
+    </div>
+
+    <div class="sidebar-info" [hidden]=" !(isHandset$ | async)">
+      <div class="side-item">
+        <mat-icon>account_circle</mat-icon>
+        <span> My Profile </span>
+      </div>
+
+      <div class="side-item">
+        <mat-icon>settings</mat-icon>
+        <span> Settings </span>
+      </div>
+
+      <div class="side-item">
+        <mat-icon>power_settings_new</mat-icon>
+        <span> Logout </span>
+      </div>
+
+    </div>
+
+
+    <mat-nav-list>
+      <app-nested-tree></app-nested-tree>
+    </mat-nav-list>
+  </mat-sidenav>
+  <!-- End Side Bar -->
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <img src="../../assets/images/logo-white.png">
+      <h2 class="slogan">Student's</h2>
+      <span class="spacer"> </span>
+
+      <!-- Nav Bar -->
+      <!-- Home -->
+      <div [hidden]="isHandset$ | async">
+        <button mat-button [matMenuTriggerFor]="">
+          <h3>Home</h3>
+        </button>
+      </div>
+      <!-- End Of Home -->
+
+      <!-- Website Sections Part -->
+      <button mat-button [matMenuTriggerFor]="sectionMenu">
+        <h3>Sections</h3>
+        <span class="material-icons">
+          keyboard_arrow_down
+        </span>
+      </button>
+
+
+      <mat-menu #sectionMenu="matMenu">
+        <button class="sections" mat-sectionMenu-item>
+
+          <button mat-menu-item>
+            <mat-icon>build</mat-icon>
+            <span>Sharing Tools </span>
+          </button>
+
+          <button mat-menu-item>
+            <mat-icon>monetization_on</mat-icon>
+            <span> Donations </span>
+          </button>
+
+          <button mat-menu-item>
+            <mat-icon>house</mat-icon>
+            <span> Sharing Habitations </span>
+          </button>
+
+        </button>
+      </mat-menu>
+      <!-- End Website Sections Part -->
+
+      <!-- User Section Start -->
+      <div [hidden]="isHandset$ | async">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <img class="avatar" src="../../assets/images/avatar-exemple.jpg">
+          <h3>Prof.Abdallah Zidan</h3>
+          <span class="material-icons">
+            keyboard_arrow_down
+          </span>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>account_circle</mat-icon>
+            <span> My Profile </span>
+          </button>
+
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span> Settings </span>
+          </button>
+
+          <button mat-menu-item>
+            <mat-icon>power_settings_new</mat-icon>
+            <span> Logout </span>
+          </button>
+        </mat-menu>
+      </div>
+      <!-- User Section End -->
+
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <ng-content>
+
+    </ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
