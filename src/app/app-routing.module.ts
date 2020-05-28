@@ -8,6 +8,8 @@ import { RedirectGuard } from './auth/services/redirect.guard';
 import { PublicComponentComponent } from './test/public-component/public-component.component';
 import { ProtectedComponent } from './test/protected/protected.component';
 import { HomeComponent } from './home/home.component';
+import { EmailVerificationComponent } from './auth/register/email-verification/email-verification.component';
+
 
 const routes: Routes = [
   {
@@ -28,6 +30,12 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate: [RedirectGuard],
+  },
+
+  {
+    path: 'email/verify',
+    component: EmailVerificationComponent,
     canActivate: [RedirectGuard],
   }
 ];
