@@ -3,6 +3,7 @@ import { StorageService } from '../../../services/storage.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { RegisterComponent } from '../register.component';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -21,7 +22,9 @@ export class CompanyComponent implements OnInit {
     private authService: AuthService,
     private storageService:StorageService,
     private fb: FormBuilder,
-    private register:RegisterComponent)
+    private register:RegisterComponent,
+    private router:Router,
+    )
   { 
     let companyformControls = {
       name : new FormControl('',[
@@ -67,6 +70,9 @@ export class CompanyComponent implements OnInit {
         Validators.maxLength(250),
 
       ]),
+      gender : new FormControl('',[
+        Validators.required
+      ]),
       type : new FormControl(''),
       blocked : new FormControl('')
     }
@@ -84,7 +90,9 @@ export class CompanyComponent implements OnInit {
   get address() { return this.companyForm.get('address') }
   get fax() { return this.companyForm.get('fax') }
   get website() { return this.companyForm.get('website') }
+  get gender() { return this.companyForm.get('gender') }
   get description() { return this.companyForm.get('description') }
+
 
 
   
@@ -95,8 +103,8 @@ export class CompanyComponent implements OnInit {
     
     this.authService.register(user).subscribe(
       res=>{
-        this.register.finish=true;
-           },
+        this.router.navigate(['/email/verify']);
+      },
         err=>{
           err.error.errors.email?this.errorList.push(err.error.errors.email):null
           err.error.errors.mobile?this.errorList.push(err.error.errors.mobile):null

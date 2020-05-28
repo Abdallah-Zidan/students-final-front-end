@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from '../../../services/storage.service';
+import { HttpService } from '../../../services/http.service';
 import { AuthService } from '../../services/auth.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,12 +16,16 @@ export class StudentComponent implements OnInit {
   departmentList =[];
   facultyList=[];
   errorList=[];
-  imageValidation;
   bodValidation;
   flag;
   studentForm: FormGroup
-  constructor(private authService: AuthService,private storageService:StorageService,private fb: FormBuilder,private router:Router,private register:RegisterComponent) {
-
+  constructor(
+    private authService: AuthService,
+    private httpService:HttpService,
+    private fb: FormBuilder,
+    private router:Router,
+    private register:RegisterComponent) 
+    {
     let studentformControls = {
       name : new FormControl('',[
         Validators.required,
@@ -85,7 +89,7 @@ export class StudentComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.storageService.getAllUniversites().subscribe(
+    this.httpService.getUniversites().subscribe(
       result =>{
         this.universityList = result.data.universities;
       },
@@ -168,12 +172,13 @@ export class StudentComponent implements OnInit {
     
     this.authService.register(user).subscribe(
       res=>{
-              this.register.finish=true;
+            this.router.navigate(['./email/verify']);
            },
 
       err=>{
               if(err.error.errors)
               {
+              window.scroll(0,0);
               err.error.errors.email?this.errorList.push(err.error.errors.email):null
               err.error.errors.mobile?this.errorList.push(err.error.errors.mobile):null     
               }  
