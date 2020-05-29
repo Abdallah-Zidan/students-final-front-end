@@ -6,6 +6,7 @@ import { User } from '../user.model';
 import { Router } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
 import { HttpService } from 'src/app/services/http.service';
+import { GroupsService } from 'src/app/services/groups.service';
 
 /*
 this service will handle all login , logout , register operations for the whole app
@@ -28,7 +29,8 @@ export class AuthService {
     private httpService: HttpService,
     private router: Router,
     private storageService: StorageService,
-    private http: HttpClient
+    private http: HttpClient,
+    private groupsService: GroupsService
   ) {}
 
   login(email: string, password: string) {
@@ -50,10 +52,15 @@ export class AuthService {
             user.mobile,
             user.avatar,
             user.verified,
-            token
+            token.access_token
           );
-          this.user.next(currentUser);
-          this.storageService.saveItem('user', currentUser);
+          if (currentUser.isVerified) {
+            this.user.next(currentUser);
+            this.storageService.saveItem('user', currentUser);
+            this.groupsService.getGroups();
+          } else {
+            this.router.navigate(['/']);
+          }
         })
       );
   }
@@ -63,6 +70,7 @@ export class AuthService {
     if (user) {
       if (user.token) {
         this.user.next(user);
+        this.groupsService.getGroups();
       }
     }
   }
@@ -74,6 +82,7 @@ export class AuthService {
           console.log(res);
           this.user.next(null);
           this.storageService.removeItem('user');
+          this.storageService.removeItem('groups');
           this.router.navigate(['/login']);
         }
       },
@@ -83,24 +92,22 @@ export class AuthService {
     );
   }
 
-  register(user,type) {
-    console.log(user,type);
-    return this.http
-    .post(authEndPoints.register, {
-      name :user.name,
-      password :user.password,
-      email:user.email,
-      address :user.address,
-      mobile :user.phone,
+  register(user, type) {
+    console.log(user, type);
+    return this.http.post(authEndPoints.register, {
+      name: user.name,
+      password: user.password,
+      email: user.email,
+      address: user.address,
+      mobile: user.phone,
       // avatar : user.avatar,
-      birthdate:user.birthdate,
-      year:user.level,
-      fax:user.fax,
-      website:user.website,
-      description:user.description,
+      birthdate: user.birthdate,
+      year: user.level,
+      fax: user.fax,
+      website: user.website,
+      description: user.description,
       type: type,
       device_name: 'test',
-      })
-}
-  
+    });
+  }
 }

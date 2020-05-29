@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../auth/user.model';
 import { HttpClient } from '@angular/common/http';
+import { Group } from '../shared/models/group.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,14 @@ export class StorageService {
 
   getItem(key: string) {
     const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : false;
+    return item ? JSON.parse(item) : null;
   }
+
+  removeItem(key: string) {
+    localStorage.removeItem(key);
+  }
+
+  //#region get authenticated user from local storage
   getUser(key: string) {
     const user = this.getItem(key);
     if (user) {
@@ -38,9 +45,28 @@ export class StorageService {
       return null;
     }
   }
-  removeItem(key: string) {
-    localStorage.removeItem(key);
+  //#endregion
+
+  //#region getting groups from local storage
+  getGroups(key: string, index: number) {
+    const groupsArray: Group[] = [];
+    const groups = this.getItem(key);
+    if (groups && groups[index]) {
+      groups[index].forEach((group) => {
+        groupsArray.push(new Group(group.id, group.name, group.scope));
+      });
+    }
+    return groupsArray;
   }
+  getDepartmentGroups(key: string) {
+    return this.getGroups(key, 0);
+  }
+  getFacultyGroups(key: string) {
+    return this.getGroups(key, 1);
+  }
+  //#endregion
+
+
 
   getAllUniversites() {
     return this.http.get<any>(this.AllUniversitesLink);

@@ -10,10 +10,7 @@
         Currently I am {{panelOpenState ? 'open' : 'closed'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    
-<app-single-comment></app-single-comment>
-<app-single-comment></app-single-comment>
-<app-single-comment></app-single-comment>
-
+   
+<app-single-comment *ngFor="let comment of comments" [comment]="comment"></app-single-comment>
   </mat-expansion-panel>
 </mat-accordion>
