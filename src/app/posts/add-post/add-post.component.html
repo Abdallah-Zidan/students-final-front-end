@@ -1,11 +1,15 @@
-<!-- <div class="post" *ngFor="let post of posts"> -->
+
+
 <div class="post">
   <img src="{{user.personalData.avatar}}" alt="">
   <mat-form-field class="example-full-width">
     <mat-label>add your post</mat-label>
     <textarea (input)="onCommenting($event)" matInput placeholder="Ex. It makes me feel..."></textarea>
   </mat-form-field>
-
+  <label class="btn btn-primary my-auto">
+    Add File <input type="file" hidden>
+</label>
   <button mat-button [hidden]="isEmpty" color="primary" (click)="onAddPost()">Post</button>
 </div>
-<!-- </div> -->
+
+

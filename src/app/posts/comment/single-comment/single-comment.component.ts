@@ -10,5 +10,12 @@ export class SingleCommentComponent implements OnInit {
   @Input() comment: PostComment;
   constructor() {}
 
+<<<<<<< HEAD
+  constructor() { }
+  ngOnInit(): void {
+  }
+
+=======
   ngOnInit(): void {}
+>>>>>>> efaefc3ac5cbdf0c8942c99bcd9c3e433cb07d08
 }

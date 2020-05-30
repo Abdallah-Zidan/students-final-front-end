@@ -1,16 +1,22 @@
 <mat-accordion>
-<mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Show Comments
       </mat-panel-title>
       <mat-panel-description>
-         
+
         Currently I am {{panelOpenState ? 'open' : 'closed'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
+<<<<<<< HEAD
+
+    <app-single-comment></app-single-comment>
+    <app-single-comment></app-single-comment>
+    <app-single-comment></app-single-comment>
+=======
    
 <app-single-comment *ngFor="let comment of comments" [comment]="comment"></app-single-comment>
+>>>>>>> efaefc3ac5cbdf0c8942c99bcd9c3e433cb07d08
   </mat-expansion-panel>
 </mat-accordion>

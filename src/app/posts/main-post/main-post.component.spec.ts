@@ -6,11 +6,16 @@ describe('MainPostComponent', () => {
   let component: MainPostComponent;
   let fixture: ComponentFixture<MainPostComponent>;
 
+  isEmpty = true;
+
+
+
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainPostComponent ]
+      declarations: [MainPostComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +27,6 @@ describe('MainPostComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
 });

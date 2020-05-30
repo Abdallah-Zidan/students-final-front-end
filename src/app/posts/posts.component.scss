@@ -1,10 +1,13 @@
 :host{
     box-sizing: border-box;
+    background-color: #f00;
 }
+
 
 .wrapper{
     display: flex;
     word-wrap: break-word;
+    background-color: #eee;
 }
 
 h3{
