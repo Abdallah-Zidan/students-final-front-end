@@ -1,14 +1,14 @@
 <app-search-bar></app-search-bar>
 <app-add-post [group]="group"></app-add-post>
 <div class="post" *ngFor="let post of posts">
-<<<<<<< HEAD
+
     <div class="row h-100 px-3 pt-3">
         <div class="col-1 p-0 m-3">
-            <img class="w-100" src="{{post.image}}" alt="">
+            <img src="{{post.creator.avatar}}" alt="">
         </div>
 
         <div class="col-9 my-auto  pl-3">
-            <h5 class="text-primary mt-auto  w-75">{{post.name}}</h5>
+            <h5 class="text-primary mt-auto  w-75">{{post.creator.name}}</h5>
             <div class="row pl-3">
                 <span class=" text-secondary material-icons">
                     schedule
@@ -32,14 +32,8 @@
                     <span>Delete Post</span>
                 </button>
             </mat-menu>
-=======
-    <div class="row">
-        <img src="{{post.creator.avatar}}" alt="">
-        <h4>{{post.creator.name}}</h4>
-        <div class="left">
-            <mat-icon  class="contact" >message</mat-icon>
-            <mat-icon  matBadgeColor="accent" class="report" matBadge="15">report</mat-icon>
->>>>>>> efaefc3ac5cbdf0c8942c99bcd9c3e433cb07d08
+
+   
         </div>
     </div>
 
@@ -68,8 +62,8 @@
     </div>
 
     <div class="row">
-<<<<<<< HEAD
-        <p class="lead px-5">{{post.text}}</p>
+
+<p>{{post.body}}</p>
     </div>
 
     <div class="row h-100">
@@ -84,18 +78,10 @@
                 send
               </span>
         </div>
-=======
-        <p>{{post.body}}</p>
+        <app-comment [comments]="post.comments"></app-comment>
+
+       
     </div>
 
-    <div>
-        <mat-form-field class="example-full-width">
-            <mat-label>Leave a comment</mat-label>
-            <textarea matInput (input)="onCommenting($event)"  placeholder="Ex. It makes me feel..."></textarea>
-            <button mat-button [hidden]="isEmpty" color="primary" (click)="onAddComment(post.id)">add</button>
-        </mat-form-field>
-        <app-comment [comments]="post.comments"></app-comment>
->>>>>>> efaefc3ac5cbdf0c8942c99bcd9c3e433cb07d08
-    </div>
-    <app-comment></app-comment>
+   
 </div>
