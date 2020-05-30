@@ -13,8 +13,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { SpinnerComponent } from './auth/spinner/spinner.component';
-import { PublicComponentComponent } from './test/public-component/public-component.component';
-import { ProtectedComponent } from './test/protected/protected.component';
 import { StudentComponent } from './auth/register/student/student.component';
 import { CompanyComponent } from './auth/register/company/company.component';
 import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
@@ -26,7 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostsComponent } from './posts/posts.component';
 import { LeftSidebarComponent } from './posts/left-sidebar/left-sidebar.component';
 import { MainPostComponent } from './posts/main-post/main-post.component';
-import { GroupComponent } from './education/group/group.component';
+import { GroupComponent } from './education/groups/group.component';
 import { AddPostComponent } from './posts/add-post/add-post.component';
 import { SidebarModule } from 'ng-sidebar';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -60,8 +58,6 @@ import { ReplyComponent } from './posts/comment/reply/reply.component';
     RegisterComponent,
     LoginComponent,
     SpinnerComponent,
-    PublicComponentComponent,
-    ProtectedComponent,
     StudentComponent,
     CompanyComponent,
     HomeComponent,
