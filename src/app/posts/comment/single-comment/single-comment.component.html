@@ -2,5 +2,9 @@
     <img src="{{comment.creator.avatar}}" width="50px">
     <h5>{{comment.creator.name}}</h5>
     <p>{{comment.body}}</p>
+    <div *ngFor="let reply of comment.replies">
+       <p>{{reply.body}}</p>
+       <p>{{reply.creator.name}}</p>
+    </div>
     <hr/>
 </div>

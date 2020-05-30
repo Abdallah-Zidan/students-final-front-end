@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { replacePostsUrl, replaceCommentsUrl } from './url.helper';
 
 const endPoints = {
   csrf: 'http://localhost:8000/sanctum/csrf-cookie',
@@ -7,7 +8,11 @@ const endPoints = {
   logout: 'http://localhost:8000/api/v1/logout',
   register: 'http://localhost:8000/api/v1/register',
   groups: 'http://localhost:8000/api/v1/user/departments',
-  posts: 'http://localhost:8000/api/v1/posts',
+  departmentPosts:
+    'http://localhost:8000/api/v1/departments/{department_faculty}/posts',
+  facultyPosts: 'http://localhost:8000/api/v1/faculties/{faculty}/posts',
+  postComments:
+    'http://localhost:8000/api/v1/departments/{department_faculty}/posts/{post}/comments',
 };
 
 @Injectable({
@@ -40,11 +45,25 @@ export class HttpService {
     return this.http.get(endPoints.groups);
   }
   requestPosts(scope, scopeId, page) {
-    return this.http.get(endPoints.posts, {
-      params: new HttpParams()
-        .append('scope', scope)
-        .append('scope_id', scopeId)
-        .append('page', page),
+    return this.http.get(replacePostsUrl(endPoints, scope, scopeId));
+  }
+  requestAddPost(postBody, postFiles, scope, scopeId) {
+    return this.http.post(replacePostsUrl(endPoints, scope, scopeId), {
+      body: postBody,
+      files: postFiles,
     });
+  }
+  requestAddComment(
+    commentBody: string,
+    scope: string,
+    scopeId: string,
+    postId: string
+  ) {
+    return this.http.post(
+      replaceCommentsUrl(endPoints, scope, scopeId, postId),
+      {
+        body: commentBody,
+      }
+    );
   }
 }

@@ -1,5 +1,5 @@
 <app-search-bar></app-search-bar>
-<app-add-post></app-add-post>
+<app-add-post [group]="group"></app-add-post>
 <div class="post" *ngFor="let post of posts">
     <div class="row">
         <img src="{{post.creator.avatar}}" alt="">
@@ -17,7 +17,8 @@
     <div>
         <mat-form-field class="example-full-width">
             <mat-label>Leave a comment</mat-label>
-            <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+            <textarea matInput (input)="onCommenting($event)"  placeholder="Ex. It makes me feel..."></textarea>
+            <button mat-button [hidden]="isEmpty" color="primary" (click)="onAddComment(post.id)">add</button>
         </mat-form-field>
         <app-comment [comments]="post.comments"></app-comment>
     </div>

@@ -2,6 +2,7 @@ import { PostComment } from '../models/comment.model';
 import { CommentReply } from '../models/reply.model';
 import { ElementCreator } from '../models/creator.model';
 import { Attachment } from '../models/attachment.model';
+import { Post } from '../models/post.model';
 
 /**
  * helper functions
@@ -45,4 +46,12 @@ const getCreator = (element) => {
   return new ElementCreator(creator.id, creator.name, creator.avatar);
 };
 
-export { getComments, getAttachments, getReplies, getCreator };
+const findPostInArray = (id, posts: Post[]) => {
+  let place = -1;
+  const postElement: Post = posts.find((post, index) => {
+    place = index;
+    return +post.id === +id;
+  });
+  return { post: postElement, index: place };
+};
+export { getComments, getAttachments, getReplies, getCreator, findPostInArray };

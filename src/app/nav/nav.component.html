@@ -51,7 +51,7 @@
       <!-- Nav Bar -->
       <!-- Home -->
       <div [hidden]="isHandset$ | async">
-        <button mat-button [matMenuTriggerFor]="">
+        <button mat-button >
           <h3>Home</h3>
         </button>
       </div>
@@ -94,8 +94,8 @@
       <!-- User Section Start -->
       <div [hidden]="isHandset$ | async">
         <button mat-button [matMenuTriggerFor]="menu">
-          <img class="avatar" src="../../assets/images/avatar-exemple.jpg">
-          <h3>Prof.Abdallah Zidan</h3>
+          <img class="avatar" src="{{user.personalData.avatar}}">
+          <h3>{{user.personalData.name}}</h3>
           <span class="material-icons">
             keyboard_arrow_down
           </span>
@@ -112,7 +112,7 @@
             <span> Settings </span>
           </button>
 
-          <button mat-menu-item>
+          <button mat-menu-item (click)="onLogout()">
             <mat-icon>power_settings_new</mat-icon>
             <span> Logout </span>
           </button>
