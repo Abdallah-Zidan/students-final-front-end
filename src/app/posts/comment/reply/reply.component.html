@@ -1,0 +1,56 @@
+<mat-accordion>
+  <mat-expansion-panel class="cont" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span class="text-primary material-icons">
+          reply
+        </span>
+        Reply
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="row h-100">
+      <div class="col-9  my-auto">
+        <mat-form-field class="example-full-width px-5">
+          <mat-label>Leave a Reply</mat-label>
+          <textarea (input)="onCommenting($event)" rows="3" matInput placeholder="Ex. It makes me feel..."></textarea>
+        </mat-form-field>
+      </div>
+      <div class="col-2 curs my-auto">
+        <span class="text-primary material-icons" [hidden]="isEmpty">
+          send
+        </span>
+      </div>
+    </div>
+
+
+    <div class="row h-100">
+      <img d-inline-block src="../../../../assets/images/avatar-exemple.jpg" width="50px">
+      <h5 class=" d-inline-block pt-3">Ali Gomaa</h5>
+      
+      <div class="ml-auto">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+            <button mat-menu-item>
+                <mat-icon>create</mat-icon>
+                <span>Edit Reply</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>delete_sweep</mat-icon>
+                <span>Delete Reply</span>
+            </button>
+        </mat-menu>
+    </div>
+
+    </div>
+    <div class="row h-100">
+      <p class="mx-5 lead">Helloo Replies</p>
+    </div>
+
+
+  </mat-expansion-panel>
+  <hr />
+
+</mat-accordion>

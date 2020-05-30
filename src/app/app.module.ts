@@ -48,6 +48,7 @@ import { SingleCommentComponent } from './posts/comment/single-comment/single-co
 
 import {MatBadgeModule} from '@angular/material/badge';
 import { SearchBarComponent } from './posts/search-bar/search-bar.component';
+import { ReplyComponent } from './posts/comment/reply/reply.component';
 
 
 
@@ -73,7 +74,8 @@ import { SearchBarComponent } from './posts/search-bar/search-bar.component';
     NestedTreeComponent,
     CommentComponent,
     SingleCommentComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ReplyComponent
   ],
   imports: [
     BrowserModule,

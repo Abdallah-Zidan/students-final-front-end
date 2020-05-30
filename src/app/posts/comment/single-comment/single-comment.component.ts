@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class SingleCommentComponent implements OnInit {
 
   constructor() { }
-
   ngOnInit(): void {
   }
 
