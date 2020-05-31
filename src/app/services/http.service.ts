@@ -8,8 +8,10 @@ const endPoints = {
   login: 'http://localhost:8000/api/v1/login',
   logout: 'http://localhost:8000/api/v1/logout',
   register: 'http://localhost:8000/api/v1/register',
-  universites: 'http://localhost:8000/api/v1/universities',
+  universites: 'http://localhost:8000/api/v1/university',
   verificationResend: 'http://localhost:8000/api/v1/email/resend',
+  userData:'http://localhost:8000/api/v1/user/profile',
+  userDepartment:'http://localhost:8000/api/v1/user/department',
   studentDepartmentGroup: '',
   studentFacultyGroup: '',
   professorDepartments: '',
@@ -53,5 +55,22 @@ export class HttpService {
     let headers_object = new HttpHeaders().set("Authorization", "Bearer " + user._token.access_token);
     return this.http.get<any>(endPoints.verificationResend,{headers:headers_object, observe: 'response' });
   }
- 
+
+  getUser(user)
+  {
+    let headers_object = new HttpHeaders().set("Authorization", "Bearer " + user._token.access_token);
+    return this.http.get<any>(endPoints.userData,{headers:headers_object});
+  }
+
+  getuserDepartment(user)
+  {
+    let headers_object = new HttpHeaders().set("Authorization", "Bearer " + user._token.access_token);
+    return this.http.get<any>(endPoints.userDepartment,{headers:headers_object});
+  }
+
+  updateProfile(user,storageData)
+  {
+    let headers_object = new HttpHeaders().set("Authorization", "Bearer " + storageData._token.access_token);
+    return this.http.post<any>(endPoints.userData,user,{headers:headers_object});
+  }
 }
