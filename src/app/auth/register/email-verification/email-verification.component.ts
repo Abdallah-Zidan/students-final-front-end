@@ -9,7 +9,7 @@ import { HttpService } from '../../../services/http.service';
   styleUrls: ['./email-verification.component.scss']
 })
 export class EmailVerificationComponent implements OnInit {
-
+response;
   constructor(private storagService:StorageService,private httpService:HttpService) { }
 
   ngOnInit(): void {
@@ -17,10 +17,17 @@ export class EmailVerificationComponent implements OnInit {
 
   resendVerification()
   {
-    let x= this.storagService.getItem('user')
-    this.httpService.verifyEmail(x).subscribe(
+    let user= this.storagService.getItem('user')
+    this.httpService.verifyEmail(user).subscribe(
       result =>{
-        console.log(result.status)
+        if(result.status==200)
+        {this.response="Already verified"}
+        else if(result.status==204)
+        {this.response="A new message has been sent to your email"}
+        setTimeout(() => {
+          this.response = null;
+        }, 4000);
+
       },
       error =>{
         console.log(error);
