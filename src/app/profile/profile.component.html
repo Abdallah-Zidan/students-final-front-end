@@ -2,7 +2,7 @@
             <div class="row">
                
                 <div class="register-right container justify-content-md-center">
-                  <div class="row col-md-6 col-mb-3" style="margin-left:  50%;">
+                  <div class="row col-md-6 col-mb-3" style="margin-left:  40%;">
                     <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">page1</a>
@@ -50,6 +50,8 @@
                                         <h5>{{ data.address}}</h5>
                                     </div>
                                     </div>
+                                    <input type="submit" value="Edit"  class="btnRegister" name="btnAddMore" routerLink="update" >
+                                  
                                 </div>
                                 <div class="col-md-3 img-fluid image" style="  margin-top: 10%; ">
                                   <img  src="../../../assets/images/profile.jpg" alt="">
@@ -117,16 +119,14 @@
                                   </div>
                                 
                                   
-                                  <div class="form-group">
-                                    <label for="description">Description</label> 
-                                    <div class="col-md-6">
-                                        {{ data.profile.description}}
-                                    </div>
-                                  </div>
-                                  <div class="form-group">
-                                  <button type="submit" class="btn btn-primary" name="btnAddMore" routerLink="update">Edit Profile</button>
-                                </div></div></div>
-
+                                     <div class="form-group">
+                                        <label for="description">Description</label> 
+                                        <div class="col-md-6">
+                                            {{ data.profile.description}}
+                                        </div>
+                                     </div>
+                                  </div></div>
+                                
                                       
                                       <div class="col-md-3 img-fluid image" style="  margin-top: 10%; ">
                                         <img  src="../../../assets/images/profile.jpg" alt="">
