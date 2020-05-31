@@ -66,22 +66,10 @@
 <p>{{post.body}}</p>
     </div>
 
-    <div class="row h-100">
-        <div class="col-10 my-auto">
-            <mat-form-field class="example-full-width px-5">
-                <mat-label>Leave a comment</mat-label>
-                <textarea (input)="onCommenting($event)" rows="3" matInput placeholder="Ex. It makes me feel..."></textarea>
-            </mat-form-field>
-        </div>
-        <div class="col-2 my-auto">
-            <span class="text-primary material-icons" [hidden] = "isEmpty">
-                send
-              </span>
-        </div>
+
         <app-comment [comments]="post.comments"></app-comment>
 
        
-    </div>
 
    
 </div>
