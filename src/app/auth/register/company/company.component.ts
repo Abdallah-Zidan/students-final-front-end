@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 })
 export class CompanyComponent implements OnInit {
   companyForm: FormGroup
-  imageValidation;
   flag;
   errorList=[];
 
@@ -70,11 +69,8 @@ export class CompanyComponent implements OnInit {
         Validators.maxLength(250),
 
       ]),
-      gender : new FormControl('',[
-        Validators.required
-      ]),
+      gender : new FormControl(''),
       type : new FormControl(''),
-      blocked : new FormControl('')
     }
     this.companyForm = this.fb.group(companyformControls);
   }
@@ -90,14 +86,13 @@ export class CompanyComponent implements OnInit {
   get address() { return this.companyForm.get('address') }
   get fax() { return this.companyForm.get('fax') }
   get website() { return this.companyForm.get('website') }
-  get gender() { return this.companyForm.get('gender') }
   get description() { return this.companyForm.get('description') }
 
 
 
   
   addCompany(){
-    this.companyForm.patchValue({type: '1',blocked:'0'});
+    this.companyForm.patchValue({type: '1',gender:'1'});
     let user = this.companyForm.value;
     this.errorList=[]
     
@@ -106,6 +101,7 @@ export class CompanyComponent implements OnInit {
         this.router.navigate(['/email/verify']);
       },
         err=>{
+          window.scroll(0,0);
           err.error.errors.email?this.errorList.push(err.error.errors.email):null
           err.error.errors.mobile?this.errorList.push(err.error.errors.mobile):null
           err.error.errors.fax?this.errorList.push(err.error.errors.fax):null

@@ -5,7 +5,7 @@
   </div>
 
     <div class="form-group mb-3">
-      <label for="username">Name</label>
+      <label for="username">Company Name</label>
         <input type="text" class="form-control" id="username" placeholder="Name" formControlName="name">
         <div *ngIf="name.touched && name.invalid">
           <small *ngIf="name.errors.required" class="text-danger">name is required<br></small>
@@ -52,6 +52,7 @@
         <div *ngIf="website.touched && website.invalid">
           <small *ngIf="website.errors.required" class="text-danger">website is required<br></small>
           <small *ngIf="website.errors.pattern" class="text-danger">Invalid website<br></small>
+          
         </div>
     </div>
     
@@ -61,7 +62,7 @@
         <div *ngIf="fax.touched && fax.invalid">
           <small *ngIf="fax.errors.required" class="text-danger">fax is required<br></small>
           <small *ngIf="fax.errors.pattern" class="text-danger">Invalid fax make sure you enter 8 digits after Egypt code +20</small>
-          <small *ngIf="password.errors.maxlength" class="text-danger">fax can contain 15 characters maximum<br></small>
+          <small *ngIf="fax.errors.maxlength" class="text-danger">fax can contain 15 characters maximum<br></small>
         </div>
     </div>
     
@@ -84,22 +85,13 @@
         <small *ngIf="address.errors.required" class="text-danger">address is required<br></small>
       </div>
     </div>
-    <div class="form-group mb-3">
-      <label for="gender">Gender</label>
-      <br>
-      <input type="radio" class="form-control-gender" id="gender" formControlName="gender" name = "gender" value = "1">Female  
-      <input type="radio" class="form-control-gender" id="gender" formControlName="gender" name = "gender" value = "0">Male
-      <div *ngIf="gender.touched && gender.invalid">
-        <small *ngIf="gender.errors.required" class="text-danger">Gender is required<br></small>
-      </div>
-    </div>
     
     <div class="form-group mb-3">
       <label for="description">Description</label>
         <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
         <div *ngIf="description.touched && name.invalid">
-          <small *ngIf="name.errors.required" class="text-danger">name is required<br></small>
-          <small *ngIf="name.errors.maxlength" class="text-danger">Description can contain 250 characters maximum</small>
+          <small *ngIf="description.errors.required" class="text-danger">Description is required<br></small>
+          <small *ngIf="description.errors.maxlength" class="text-danger">Description can contain 250 characters maximum</small>
         </div>
     </div>
     <hr class="mb-4">

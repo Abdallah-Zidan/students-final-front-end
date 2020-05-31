@@ -80,7 +80,6 @@ export class StudentComponent implements OnInit {
       gender : new FormControl('',[
         Validators.required]),
       type : new FormControl(''),
-      blocked : new FormControl('')
 
     }
     
@@ -117,7 +116,7 @@ export class StudentComponent implements OnInit {
   date(e) {
     let birthDate = new Date(e.target.value).getFullYear()
     let today = new Date().getFullYear()
-    if((today - birthDate) >18 && (today - birthDate) < 40)
+    if((today - birthDate) >18 && (today - birthDate) < 60)
         {
           this.bodValidation = "";
           this.flag=1;
@@ -172,7 +171,7 @@ export class StudentComponent implements OnInit {
     
     this.authService.register(user).subscribe(
       res=>{
-            this.router.navigate(['./email/verify']);
+            this.router.navigate(['/email/verify']);
            },
 
       err=>{
