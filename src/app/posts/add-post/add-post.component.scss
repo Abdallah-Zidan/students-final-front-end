@@ -7,8 +7,8 @@ html {
     width           : 80%;
     padding         : 1vw 3vw;
     box-shadow      : 5px 5px 3px grey;
-    margin          : .5em auto;
-    background-color: rgb(246, 240, 240);
+    background-color: white;
+    margin          : 2em auto;
     display         : flex;
 }
 
@@ -21,7 +21,10 @@ img {
     min-width    : 50px;
 }
 
-
+.block{
+    display: block;
+    width: 100%;
+}
 
 
 
@@ -30,6 +33,6 @@ button {
 }
 
 .example-full-width {
-    width : 80%;
+    width : 70%;
     height: 7%;
 }

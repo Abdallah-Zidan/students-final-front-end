@@ -1,6 +1,30 @@
 <div class="container">
-    <img src="../../../assets/images/avatar-exemple.jpg" width="50px">
-    <h5>Ali Gomaa</h5>
-    <p>I'm visible because I am open</p>
-    <hr/>
+  <div class="row">
+    <div class="col-10">
+      <img src="{{comment.creator.avatar}}" width="50px">
+      <h5>{{comment.creator.name}}</h5>
+      <p>{{comment.body}}</p>
+    </div>
+
+    <div class="ml-auto col-1">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item>
+          <mat-icon>create</mat-icon>
+          <span>Edit Comment</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>delete_sweep</mat-icon>
+          <span>Delete Comment</span>
+        </button>
+      </mat-menu>
+    </div>
+
+
+
+    <hr />
+  </div>
+  <app-reply></app-reply>
 </div>

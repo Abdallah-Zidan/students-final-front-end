@@ -2,8 +2,12 @@ body,
 html,
 * {
     outline: none !important;
+    box-sizing: border-box;
 }
-
+span
+{
+    cursor: pointer;
+}
 p{
     padding: 1vw;
     padding-top: 1.7vw ;
@@ -22,10 +26,13 @@ body {
 }
 
 .post {
-    width     : 98%;
+    width     : 80%;
     padding   : 1em 3em;
-    box-shadow: 7px 7px 5px grey;
-    margin    : 1.5em 0;
+    background-color: #fff;
+    margin    : 0 auto;
+    margin-bottom: 3vw;
+    border-radius: 12px;
+    box-shadow: 1px 1px 2px grey;
 }
 
 .report{
@@ -43,14 +50,13 @@ body {
     margin: 15px;
 }
 img {
-    width        : 7%;
+
     border-radius: 50%;
     min-width    : 50px;
 }
 
 h4 {
     font-size: 2.5vw;
-    margin   : auto 7px;
 }
 
 input {

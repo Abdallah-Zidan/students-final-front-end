@@ -1,44 +1,34 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Post } from 'src/app/education/models/post.model';
+import { Group } from 'src/app/shared/models/group.model';
+import { PostsService } from 'src/app/education/services/posts.service';
 
 @Component({
   selector: 'app-main-post',
   templateUrl: './main-post.component.html',
-  styleUrls: ['./main-post.component.scss']
+  styleUrls: ['./main-post.component.scss'],
 })
-export class MainPostComponent implements OnInit {
-
-  posts: Array<{ image: string, name: string, text: string }> = [
-    {
-      image: '../../../assets/images/avatar-exemple.jpg',
-      name: 'Ali Gomaa',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dolorem iusto dolor assumenda, adipisci suscipit.Officiis provident at perferendis perspiciatis quidem quaerat natus doloremque quisquam rem, autem sunt rerum voluptatem.Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dolorem iusto dolor assumenda, adipisci suscipit.Officiis provident at perferendis perspiciatis quidem quaerat natus doloremque quisquam rem, autem sunt rerum voluptatem.',
-    },
-    {
-      image: '../../../assets/images/avatar-exemple.jpg',
-      name: 'Ali Gomaa',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dolorem iusto dolor assumenda, adipisci suscipit.Officiis provident at perferendis perspiciatis quidem quaerat natus doloremque quisquam rem, autem sunt rerum voluptatem.Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dolorem iusto dolor assumenda, adipisci suscipit.Officiis provident at perferendis perspiciatis quidem quaerat natus doloremque quisquam rem, autem sunt rerum voluptatem.',
-    },
-    {
-      image: '../../../assets/images/avatar-exemple.jpg',
-      name: 'Ali Gomaa',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dolorem iusto dolor assumenda, adipisci suscipit.Officiis provident at perferendis perspiciatis quidem quaerat natus doloremque quisquam rem, autem sunt rerum voluptatem.Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse dolorem iusto dolor assumenda, adipisci suscipit.Officiis provident at perferendis perspiciatis quidem quaerat natus doloremque quisquam rem, autem sunt rerum voluptatem.',
-    },
-  ];
-
+export class MainPostComponent {
+  @Input() posts: Post[];
+  @Input() group: Group;
+  comment = '';
+  constructor(private postsService: PostsService) {}
   isEmpty = true;
 
-  onCommenting($event){
-    if($event.target.value){
+  onCommenting($event) {
+    if ($event.target.value) {
       this.isEmpty = false;
-    }
-    else{
+    } else {
       this.isEmpty = true;
     }
+    this.comment = $event.target.value;
   }
-
-
-  constructor() { }
-  ngOnInit(): void {
+  onAddComment(postId) {
+    this.postsService.addComment(
+      this.comment,
+      this.group.scope,
+      this.group.id,
+      postId
+    );
   }
-
 }
