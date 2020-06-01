@@ -13,7 +13,7 @@ const endPoints = {
   login: 'http://localhost:8000/api/v1/login',
   logout: 'http://localhost:8000/api/v1/logout',
   register: 'http://localhost:8000/api/v1/register',
-  universites: 'http://localhost:8000/api/v1/university',
+  universites: 'http://localhost:8000/api/v1/universities',
   verificationResend: 'http://localhost:8000/api/v1/email/resend',
   userData: 'http://localhost:8000/api/v1/user/profile',
   userDepartment: 'http://localhost:8000/api/v1/user/department',

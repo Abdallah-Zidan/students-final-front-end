@@ -54,21 +54,21 @@ export class UpdateComponent implements OnInit {
       avatar: new FormControl(''),
     }
     let studentFormControls={
-      university : new FormControl('',[
-        Validators.required,
-      ]),
+      // university : new FormControl('',[
+      //   Validators.required,
+      // ]),
 
-      faculty : new FormControl('',[
-        Validators.required,
-      ]),
+      // faculty : new FormControl('',[
+      //   Validators.required,
+      // ]),
 
-      department : new FormControl('',[
-        Validators.required,
-      ]),
+      // department : new FormControl('',[
+      //   Validators.required,
+      // ]),
 
-      level : new FormControl('',[
-        Validators.required,
-      ]),
+      // level : new FormControl('',[
+      //   Validators.required,
+      // ]),
 
       
 
@@ -129,7 +129,7 @@ export class UpdateComponent implements OnInit {
 
           this.studentForm.patchValue({
           birthdate:this.data.profile.birthdate,
-          level:this.data.profile.year,
+          // level:this.data.profile.year,
           });
 
           this.companyForm.patchValue({
@@ -143,22 +143,22 @@ export class UpdateComponent implements OnInit {
       }
     )
 
-    if(this.storageData.type=="Student")
-    {
-      let studyData
-      this.httpService.getuserDepartment(this.storageData).subscribe(
-        result=>{
-         studyData=result.data.department_faculties
-         console.log(studyData)
-          this.userForm.patchValue({
-            university:studyData[0].faculty.university.id,
-            faculty:studyData[0].faculty.id,
-            department:studyData[0].department.id,
-          });
-        },
-        error=>{console.log(error)}
-      )
-    }
+    // if(this.storageData.type=="Student")
+    // {
+    //   let studyData
+    //   this.httpService.getuserDepartment(this.storageData).subscribe(
+    //     result=>{
+    //      studyData=result.data.department_faculties
+    //      console.log(studyData)
+    //       this.userForm.patchValue({
+    //         university:studyData[0].faculty.university.id,
+    //         faculty:studyData[0].faculty.id,
+    //         department:studyData[0].department.id,
+    //       });
+    //     },
+    //     error=>{console.log(error)}
+    //   )
+    // }
 
     
     
@@ -171,10 +171,10 @@ export class UpdateComponent implements OnInit {
   get avatar() { return this.userForm.get('avatar') }
 
   get birthdate() { return this.studentForm.get('birthdate') }
-  get university() { return this.studentForm.get('university') }
-  get faculty() { return this.studentForm.get('faculty') }
-  get department() { return this.studentForm.get('department') }
-  get level() { return this.studentForm.get('level') }
+  // get university() { return this.studentForm.get('university') }
+  // get faculty() { return this.studentForm.get('faculty') }
+  // get department() { return this.studentForm.get('department') }
+  // get level() { return this.studentForm.get('level') }
 
   get fax() { return this.companyForm.get('fax') }
   get website() { return this.companyForm.get('website') }
@@ -190,7 +190,6 @@ export class UpdateComponent implements OnInit {
        this.imageValidation="";
        this.flag=1;
        this.userForm.patchValue({avatar: file});
-      //  this.updateProfile()
        return true
       }
         this.flag=0;
@@ -219,39 +218,40 @@ export class UpdateComponent implements OnInit {
         }
   }
 
-  changeFacultyList(e)
-  {  if(this.universityList.length>0 &&this.university.value>=0)
-   { this.facultyList=[]
-    this.departmentList=[]
-    this.studentForm.patchValue({faculty: null,department: null});
-    let id=this.university.value
-    console.log(id)
-    let index
-    for(let i=0;i<this.universityList.length;i++)
-    {if(this.universityList[i].id==id)
-        {index=i;
-          break;
-        }
-    }
-    this.facultyList=this.universityList[index].faculties
-   }
-  }
+  // changeFacultyList(e)
+  // {
+  //     if(this.universityList.length>0 &&this.university.value>=0)
+  //  { this.facultyList=[]
+  //   this.departmentList=[]
+  //   this.studentForm.patchValue({faculty: null,department: null});
+  //   let id=this.university.value
+  //   console.log(id)
+  //   let index
+  //   for(let i=0;i<this.universityList.length;i++)
+  //   {if(this.universityList[i].id==id)
+  //       {index=i;
+  //         break;
+  //       }
+  //   }
+  //   this.facultyList=this.universityList[index].faculties
+  //  }
+  // }
 
-  changeDepartmentList(e)
-  {
-    if(this.facultyList.length>0)
-    {this.departmentList=[]
-    this.studentForm.patchValue({department: null});
-    let id=this.faculty.value
-    let index
-    for(let i=0;i<this.facultyList.length;i++)
-    {if(this.facultyList[i].id==id)
-        {index=i;
-          break;
-        }
-    }
-    this.departmentList=this.facultyList[index].departments}
-  }
+  // changeDepartmentList(e)
+  // {
+  //   if(this.facultyList.length>0)
+  //   {this.departmentList=[]
+  //   this.studentForm.patchValue({department: null});
+  //   let id=this.faculty.value
+  //   let index
+  //   for(let i=0;i<this.facultyList.length;i++)
+  //   {if(this.facultyList[i].id==id)
+  //       {index=i;
+  //         break;
+  //       }
+  //   }
+  //   this.departmentList=this.facultyList[index].departments}
+  // }
 
   updateProfile()
   {
@@ -265,10 +265,10 @@ export class UpdateComponent implements OnInit {
     
     if(this.storageData.type=="Student")
     {
-    user.append('university', this.studentForm.get('university').value);
-    user.append('faculty', this.studentForm.get('faculty').value);
-    user.append('department', this.studentForm.get('department').value);
-    user.append('year', this.studentForm.get('level').value);
+    // user.append('university', this.studentForm.get('university').value);
+    // user.append('faculty', this.studentForm.get('faculty').value);
+    // user.append('department', this.studentForm.get('department').value);
+    // user.append('year', this.studentForm.get('level').value);
     user.append('birthdate', this.studentForm.get('birthdate').value);
     }
 

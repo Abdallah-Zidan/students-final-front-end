@@ -21,7 +21,6 @@ export class ProfileComponent implements OnInit {
       result =>{
         console.log(result)
         this.data=result.data;
-        console.log(this.data.profile.year)
       },
       error =>{
         console.log(error);}
@@ -32,6 +31,7 @@ export class ProfileComponent implements OnInit {
         this.httpService.getuserDepartment(user).subscribe(
           result=>{
            this.studyData=result.data.department_faculties
+           console.log(this.studyData)
           },
           error=>{console.log(error)}
         )}

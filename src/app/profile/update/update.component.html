@@ -69,7 +69,7 @@
                                   <div class="row register-form ">
                                           <div class="col-md-6 mb-3">
                                     <form  id="student_Form"  [formGroup]="studentForm" (ngSubmit)="updateProfile()" *ngIf="storageData&&storageData.type=='Student'">
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label for="University">University</label>
                                                 <select class="custom-select d-block w-100" id="university" formControlName="university" [ngModel]="university" (ngModelChange)="changeFacultyList($event)" >
                                                   <option value={{university.id}}  *ngFor="let university of universityList " >{{university.name}}</option>
@@ -112,7 +112,7 @@
                                                 <div *ngIf="level.touched && level.invalid">
                                                   <small *ngIf="level.errors.required" class="text-danger">level is required<br></small>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         
                                     
                                         <div class="form-group">
@@ -174,4 +174,4 @@
                                 </div>
                           
                                 </div>
-                            
+                                <!-- TeachingStaff -->

@@ -16,6 +16,7 @@ export class StudentComponent implements OnInit {
   departmentList =[];
   facultyList=[];
   errorList=[];
+  departments=[];
   bodValidation;
   flag;
   studentForm: FormGroup
@@ -55,9 +56,10 @@ export class StudentComponent implements OnInit {
         Validators.required,
       ]),
 
-      department : new FormControl('',[
+      department1 : new FormControl('',[
         Validators.required,
       ]),
+      department2 : new FormControl(''),
 
       level : new FormControl('',[
         Validators.required,
@@ -80,6 +82,7 @@ export class StudentComponent implements OnInit {
       gender : new FormControl('',[
         Validators.required]),
       type : new FormControl(''),
+      departments : new FormControl(''),
 
     }
     
@@ -107,7 +110,8 @@ export class StudentComponent implements OnInit {
   get birthdate() { return this.studentForm.get('birthdate') }
   get university() { return this.studentForm.get('university') }
   get faculty() { return this.studentForm.get('faculty') }
-  get department() { return this.studentForm.get('department') }
+  get department1() { return this.studentForm.get('department1') }
+  get department2() { return this.studentForm.get('department2') }
   get level() { return this.studentForm.get('level') }
   get address() { return this.studentForm.get('address') }
   get gender() { return this.studentForm.get('gender') }
@@ -134,7 +138,7 @@ export class StudentComponent implements OnInit {
   { 
     this.facultyList=[]
     this.departmentList=[]
-    this.studentForm.patchValue({faculty: null,department: null});
+    this.studentForm.patchValue({faculty: null,department1: null,department2: null});
     let id=e.target.value
     let index
     for(let i=0;i<this.universityList.length;i++)
@@ -149,7 +153,7 @@ export class StudentComponent implements OnInit {
   changeDepartmentList(e)
   {
     this.departmentList=[]
-    this.studentForm.patchValue({department: null});
+    this.studentForm.patchValue({department1: null,department2: null});
     let id=e.target.value
     let index
     for(let i=0;i<this.facultyList.length;i++)
@@ -161,13 +165,22 @@ export class StudentComponent implements OnInit {
     this.departmentList=this.facultyList[index].departments
   }
 
+  addDepartment1(e)
+  {
+    this.departments[0]=e.target.value
+  }
+  addDepartment2(e)
+  {
+    this.departments[1]=e.target.value
+  }
+
   addStudent() {
-    this.studentForm.patchValue({blocked: 0});
+    this.studentForm.patchValue({departments: this.departments});
     this.studentForm.patchValue({type: 0});
 
     let user = this.studentForm.value;
     this.errorList=[]
-    
+    console.log(user)
     
     this.authService.register(user).subscribe(
       res=>{

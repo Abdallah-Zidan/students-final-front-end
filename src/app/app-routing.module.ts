@@ -12,6 +12,7 @@ import { UpdateComponent } from './profile/update/update.component';
 import { SettingsComponent } from './profile/settings/settings.component';
 import { GroupComponent } from './education/groups/group.component';
 import { EventsComponent } from './events/events.component';
+import { SingleEventComponent } from './events/single-event/single-event.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,11 @@ const routes: Routes = [
   {
     path: 'events',
     component: EventsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'events/:id',
+    component: SingleEventComponent,
     canActivate: [AuthGuard]
   }
 ];

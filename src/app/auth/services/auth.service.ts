@@ -103,6 +103,8 @@ export class AuthService {
       gender : user.gender,
       birthdate:user.birthdate,
       year:user.level,
+      departments:user.departments,
+      faculty:user.faculty,
       fax:user.fax,
       website:user.website,
       description:user.description,
@@ -124,7 +126,7 @@ export class AuthService {
             user.verified,
             token
           );
-          this.user.next(currentUser);
+          // this.user.next(currentUser);
           this.storageService.saveItem('user', currentUser);
         })
       );
