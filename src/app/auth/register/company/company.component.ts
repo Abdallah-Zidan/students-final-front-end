@@ -3,6 +3,7 @@ import { StorageService } from '../../../services/storage.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { RegisterComponent } from '../register.component';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -13,7 +14,6 @@ import { AuthService } from '../../services/auth.service';
 })
 export class CompanyComponent implements OnInit {
   companyForm: FormGroup
-  imageValidation;
   flag;
   errorList=[];
 
@@ -21,7 +21,9 @@ export class CompanyComponent implements OnInit {
     private authService: AuthService,
     private storageService:StorageService,
     private fb: FormBuilder,
-    private register:RegisterComponent)
+    private register:RegisterComponent,
+    private router:Router,
+    )
   { 
     let companyformControls = {
       name : new FormControl('',[
@@ -59,7 +61,6 @@ export class CompanyComponent implements OnInit {
         Validators.maxLength(15),
 
       ]),
-      // avatar: new FormControl(''),
       address : new FormControl('',[
         Validators.required,
       ]),
@@ -68,7 +69,8 @@ export class CompanyComponent implements OnInit {
         Validators.maxLength(250),
 
       ]),
-    
+      gender : new FormControl(''),
+      type : new FormControl(''),
     }
     this.companyForm = this.fb.group(companyformControls);
   }
@@ -82,50 +84,29 @@ export class CompanyComponent implements OnInit {
   get password() { return this.companyForm.get('password') }
   get repassword() { return this.companyForm.get('repassword') }
   get address() { return this.companyForm.get('address') }
-  // get avatar() { return this.companyForm.get('avatar') }
   get fax() { return this.companyForm.get('fax') }
   get website() { return this.companyForm.get('website') }
   get description() { return this.companyForm.get('description') }
 
 
-  onFileChange(event) {
-    if (event.target.files.length > 0 )
-    {
-      const file = event.target.files[0];
-      if(file.type.match(/image\/*/) != null)
-      {
-       this.imageValidation="";
-       this.flag=1;
-       this.companyForm.patchValue({avatar: file});
-       return true
-      }
-        this.flag=0;
-        this.imageValidation="invalid file , please select Image"
-        return false;
-    }
-    else{
-      this.flag=1;
-      this.imageValidation="";}
-  }
 
+  
   addCompany(){
-
+    this.companyForm.patchValue({type: '1',gender:'1'});
     let user = this.companyForm.value;
-    let type = 1;
     this.errorList=[]
-    // console.log(user)
     
-    this.authService.register(user,type).subscribe(
+    this.authService.register(user).subscribe(
       res=>{
-        this.register.finish=true;
-           },
-      err=>{
-        this.errorList.push(err.error.errors.email);
-        this.errorList.push(err.error.errors.mobile);
-        this.errorList.push(err.error.errors.fax);
-        this.errorList.push(err.error.errors.website);
-        console.log(err);
-      }
+        this.router.navigate(['/email/verify']);
+      },
+        err=>{
+          window.scroll(0,0);
+          err.error.errors.email?this.errorList.push(err.error.errors.email):null
+          err.error.errors.mobile?this.errorList.push(err.error.errors.mobile):null
+          err.error.errors.fax?this.errorList.push(err.error.errors.fax):null
+          err.error.errors.website?this.errorList.push(err.error.errors.website):null
+        }
     )
     }
 }

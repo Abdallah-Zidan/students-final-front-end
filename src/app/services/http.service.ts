@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient,HttpHeaders,HttpResponse , HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { replacePostsUrl } from './url.helper';
 
 const endPoints = {
@@ -7,6 +8,14 @@ const endPoints = {
   login: 'http://localhost:8000/api/v1/login',
   logout: 'http://localhost:8000/api/v1/logout',
   register: 'http://localhost:8000/api/v1/register',
+  universites: 'http://localhost:8000/api/v1/university',
+  verificationResend: 'http://localhost:8000/api/v1/email/resend',
+  userData:'http://localhost:8000/api/v1/user/profile',
+  userDepartment:'http://localhost:8000/api/v1/user/department',
+  studentDepartmentGroup: '',
+  studentFacultyGroup: '',
+  professorDepartments: '',
+  professorFaculties: '',
   groups: 'http://localhost:8000/api/v1/user/departments',
   departmentPosts:
     'http://localhost:8000/api/v1/departments/{department_faculty}/posts',
@@ -42,6 +51,34 @@ export class HttpService {
     this.http.get(endPoints.csrf).subscribe((res) => {
       console.log(res);
     });
+  }
+
+  getUniversites() {
+    return this.http.get<any>(endPoints.universites);
+  }
+
+  verifyEmail(user):Observable<HttpResponse<any>> 
+  {
+    let headers_object = new HttpHeaders().set("Authorization", "Bearer " + user._token.access_token);
+    return this.http.get<any>(endPoints.verificationResend,{headers:headers_object, observe: 'response' });
+  }
+
+  getUser(user)
+  {
+    let headers_object = new HttpHeaders().set("Authorization", "Bearer " + user._token.access_token);
+    return this.http.get<any>(endPoints.userData,{headers:headers_object});
+  }
+
+  getuserDepartment(user)
+  {
+    let headers_object = new HttpHeaders().set("Authorization", "Bearer " + user._token.access_token);
+    return this.http.get<any>(endPoints.userDepartment,{headers:headers_object});
+  }
+
+  updateProfile(user,storageData)
+  {
+    let headers_object = new HttpHeaders().set("Authorization", "Bearer " + storageData._token.access_token);
+    return this.http.post<any>(endPoints.userData,user,{headers:headers_object});
   }
   requestGroups() {
     return this.http.get(endPoints.groups);

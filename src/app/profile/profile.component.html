@@ -1,0 +1,140 @@
+        <div class=" register">
+            <div class="row">
+               
+                <div class="register-right container justify-content-md-center">
+                  <div class="row col-md-6 col-mb-3" style="margin-left:  40%;">
+                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">page1</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">page2</a>
+                        </li>
+                    </ul>
+                  </div>
+                    <div class="tab-content " id="myTabContent">
+                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row register-form ">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <div class="profile-img">
+                                            <img class="img-fluid"src="{{data.avatar}}" alt=""/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                          <label for="username">Name</label>
+                                            <div class="col-md-6">
+                                                <h5>{{ data.name}}</h5>
+                                            </div>             
+                                     </div>
+
+                                     <div class="form-group">
+                                        <label for="tel-input">Email</label>
+                                          <div class="col-md-6">
+                                              <h5>{{ data.email}}</h5>
+                                          </div>
+                                      </div>
+
+                                     <div class="form-group">
+                                      <label for="tel-input">Phone</label>
+                                        <div class="col-md-6">
+                                            <h5>{{ data.mobile}}</h5>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                    <div class="form-group">
+                                      <label for="address">Address</label>
+                                      <div class="col-md-6">
+                                        <h5>{{ data.address}}</h5>
+                                    </div>
+                                    </div>
+                                    <input type="submit" value="Edit"  class="btnRegister" name="btnAddMore" routerLink="update" >
+                                  
+                                </div>
+                                <div class="col-md-3 img-fluid image" style="  margin-top: 10%; ">
+                                  <img  src="../../../assets/images/profile.jpg" alt="">
+                                 </div>
+                            </div></div>
+
+                            <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row register-form ">
+                                    <div class="col-md-6 mb-3">
+                            <div *ngIf="data&&data.type=='Student'">
+                                        <div class="form-group">
+                                            <label for="University">University</label>
+                                            <div class="col-md-6" *ngIf="studyData!=null">
+                                                <p>{{ studyData[0].faculty.university.id}}</p>
+                                            </div>
+                                            
+                                        </div>
+                                         <div class="form-group">
+                                            <label for="faculty">Faculty</label>
+                                            <div class="col-md-6" *ngIf="studyData!=null">
+                                                <h5>{{ studyData[0].faculty.id}}</h5>
+                                            </div>
+                                           
+                                          </div>
+                                     
+                                          <div class="form-group">
+                                            <label for="department">Department</label>
+                                            <div class="col-md-6" *ngIf="studyData!=null">
+                                                <h5>{{ studyData[0].department.id}}</h5>
+                                            </div>
+                                          </div>
+                                    
+                                        <div class="form-group">
+                                            <label for="year">level</label>
+                                            <div class="col-md-6">
+                                                <h5>{{ data.profile.year}}</h5>
+                                            </div>
+                                            
+                                        </div>
+                                    
+                                    <div class="form-group">
+                                      <label for="date">BirthDate</label>
+                                      <div class="col-md-6">
+                                        <h5>{{ data.profile.birthdate}}</h5>
+                                    </div>   
+                                    </div>
+                                </div>
+                              
+                                
+                                
+                                  <div *ngIf="data&&data.type=='Company'">
+                                   
+                                  <div class="form-group ">
+                                    <label for="tel-input">Website</label>
+                                    <div class="col-md-6">
+                                        <h5>{{ data.profile.website}}</h5>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="form-group">
+                                    <label for="tel-input">Fax</label>
+                                    <div class="col-md-6">
+                                        <h5>{{ data.profile.fax}}</h5>
+                                    </div>
+                                  </div>
+                                
+                                  
+                                     <div class="form-group">
+                                        <label for="description">Description</label> 
+                                        <div class="col-md-6">
+                                            {{ data.profile.description}}
+                                        </div>
+                                     </div>
+                                  </div></div>
+                                
+                                      
+                                      <div class="col-md-3 img-fluid image" style="  margin-top: 10%; ">
+                                        <img  src="../../../assets/images/profile.jpg" alt="">
+                                       </div></div>
+                                    </div>
+                                </div>
+                                </div>   
+                            </div>
+                        </div>
+                        
+        

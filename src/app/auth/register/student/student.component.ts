@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from '../../../services/storage.service';
+import { HttpService } from '../../../services/http.service';
 import { AuthService } from '../../services/auth.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,17 +16,35 @@ export class StudentComponent implements OnInit {
   departmentList =[];
   facultyList=[];
   errorList=[];
-  imageValidation;
   bodValidation;
   flag;
   studentForm: FormGroup
-  constructor(private authService: AuthService,private storageService:StorageService,private fb: FormBuilder,private router:Router,private register:RegisterComponent) {
-
+  constructor(
+    private authService: AuthService,
+    private httpService:HttpService,
+    private fb: FormBuilder,
+    private router:Router,
+    private register:RegisterComponent) 
+    {
     let studentformControls = {
       name : new FormControl('',[
         Validators.required,
         Validators.pattern("[a-z .'-]+"),
         Validators.minLength(6)
+      ]),
+
+      email: new FormControl('',[
+        Validators.required,
+        Validators.pattern("[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.edu.eg")
+      ]),
+      password: new FormControl('',[
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(30),
+        Validators.pattern("(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}")
+      ]),
+      repassword: new FormControl('',[
+        Validators.required,
       ]),
 
       university : new FormControl('',[
@@ -58,51 +76,27 @@ export class StudentComponent implements OnInit {
         Validators.minLength(11),
         Validators.maxLength(15)
       ]),
-      email: new FormControl('',[
-        Validators.required,
-        Validators.pattern("[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.edu.eg")
-      ]),
-      password: new FormControl('',[
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(30),
-        Validators.pattern("(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}")
-      ]),
-      repassword: new FormControl('',[
-        Validators.required,
-      ]),
-      // avatar: new FormControl(''),
-    }
 
+      gender : new FormControl('',[
+        Validators.required]),
+      type : new FormControl(''),
+
+    }
+    
     this.studentForm = this.fb.group(studentformControls);
 
    }
 
   ngOnInit(): void {
-    this.storageService.getAllUniversites().subscribe(
+    this.httpService.getUniversites().subscribe(
       result =>{
-        this.universityList = result;
+        this.universityList = result.data.universities;
       },
       error =>{
         console.log(error);
       }
     )
-    this.storageService.getAllFaculties().subscribe(
-      result =>{
-        this.facultyList = result;
-      },
-      error =>{
-        console.log(error);
-      }
-    )
-    this.storageService.getAllDepartments().subscribe(
-      result =>{
-        this.departmentList = result;
-      },
-      error =>{
-        console.log(error);
-      }
-    )
+    
   }
 
   get name() { return this.studentForm.get('name') }
@@ -116,33 +110,13 @@ export class StudentComponent implements OnInit {
   get department() { return this.studentForm.get('department') }
   get level() { return this.studentForm.get('level') }
   get address() { return this.studentForm.get('address') }
-  // get avatar() { return this.studentForm.get('avatar') }
+  get gender() { return this.studentForm.get('gender') }
 
-
-  onFileChange(event) {
-    if (event.target.files.length > 0 )
-    {
-      const file = event.target.files[0];
-      if(file.type.match(/image\/*/) != null)
-      {
-       this.imageValidation="";
-       this.flag=1;
-       this.studentForm.patchValue({avatar: file});
-       return true
-      }
-        this.flag=0;
-        this.imageValidation="invalid file , please select Image"
-        return false;
-    }
-    else{
-      this.flag=1;
-      this.imageValidation="";}
-  }
 
   date(e) {
     let birthDate = new Date(e.target.value).getFullYear()
     let today = new Date().getFullYear()
-    if((today - birthDate) >18 && (today - birthDate) < 40)
+    if((today - birthDate) >18 && (today - birthDate) < 60)
         {
           this.bodValidation = "";
           this.flag=1;
@@ -156,22 +130,59 @@ export class StudentComponent implements OnInit {
         }
   }
 
+  changeFacultyList(e)
+  { 
+    this.facultyList=[]
+    this.departmentList=[]
+    this.studentForm.patchValue({faculty: null,department: null});
+    let id=e.target.value
+    let index
+    for(let i=0;i<this.universityList.length;i++)
+    {if(this.universityList[i].id==id)
+        {index=i;
+          break;
+        }
+    }
+    this.facultyList=this.universityList[index].faculties
+  }
+
+  changeDepartmentList(e)
+  {
+    this.departmentList=[]
+    this.studentForm.patchValue({department: null});
+    let id=e.target.value
+    let index
+    for(let i=0;i<this.facultyList.length;i++)
+    {if(this.facultyList[i].id==id)
+        {index=i;
+          break;
+        }
+    }
+    this.departmentList=this.facultyList[index].departments
+  }
+
   addStudent() {
+    this.studentForm.patchValue({blocked: 0});
+    this.studentForm.patchValue({type: 0});
+
     let user = this.studentForm.value;
-    let type = 0;
     this.errorList=[]
-    // console.log(user)
     
-    this.authService.register(user,type).subscribe(
+    
+    this.authService.register(user).subscribe(
       res=>{
-        this.register.finish=true;
+            this.router.navigate(['/email/verify']);
            },
+
       err=>{
-        this.errorList.push(err.error.errors.email);
-        this.errorList.push(err.error.errors.mobile);
-        // console.log(this.errorList)
-        // console.log(err);
-      }
+              if(err.error.errors)
+              {
+              window.scroll(0,0);
+              err.error.errors.email?this.errorList.push(err.error.errors.email):null
+              err.error.errors.mobile?this.errorList.push(err.error.errors.mobile):null     
+              }  
+              console.log(err) 
+           }
     )
   }
 }

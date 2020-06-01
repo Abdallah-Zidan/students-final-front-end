@@ -1,8 +1,9 @@
 <form  id="student_Form"  [formGroup]="studentForm" (ngSubmit)="addStudent()">
 
-    <div class="form-group mb-3" *ngIf="errorList" >
-      <small class="text-danger" *ngFor="let error of errorList">{{error}}<br></small>
+    <div class="form-group mb-3 alert alert-danger  text-center " *ngIf="errorList.length>0" >
+      <p *ngFor="let error of errorList">{{error}}<br></p>
     </div>
+
     <div class="form-group mb-3">
       <label for="username">Name</label>
         <input type="text" class="form-control" id="username" placeholder="Name" formControlName="name">
@@ -46,26 +47,24 @@
     </div>
 
     <div class="form-group mb-3">
-      <div >
         <label for="University">University</label>
-        <select class="custom-select d-block w-100" id="university" formControlName="university" >
-          <option value={{university.id}}  *ngFor="let university of universityList ">{{university.name}}</option>
+        <select class="custom-select d-block w-100" id="university" formControlName="university" (change)="changeFacultyList($event)" >
+          <option value={{university.id}}  *ngFor="let university of universityList " >{{university.name}}</option>
         </select>
         <div *ngIf="university.touched && university.invalid">
           <small *ngIf="university.errors.required" class="text-danger">university is required<br></small>
         </div>
-      </div>
-
-      <div class="form-group mb-3">
+    </div>
+     <div class="form-group mb-3">
         <label for="faculty">Faculty</label>
-        <select class="custom-select d-block w-100" id="faculty" formControlName="faculty" >
-          <option value={{faculty.id}} *ngFor="let faculty of facultyList ">{{faculty.name}}</option>
+        <select class="custom-select d-block w-100" id="faculty" formControlName="faculty" (change)="changeDepartmentList($event)" >
+          <option  value={{faculty.id}}  *ngFor="let faculty of facultyList ">{{faculty.name}}</option>
         </select>
         <div *ngIf="faculty.touched && faculty.invalid">
           <small *ngIf="faculty.errors.required" class="text-danger">faculty is required<br></small>
         </div>
       </div>
-
+ 
       <div class="form-group mb-3">
         <label for="department">Department</label>
         <select class="custom-select d-block w-100" id="department" formControlName="department" >
@@ -75,7 +74,6 @@
           <small *ngIf="department.errors.required" class="text-danger">department is required<br></small>
         </div>
       </div>
-    </div>
 
     <div class="form-group mb-3">
         <label for="year">level</label>
@@ -124,14 +122,17 @@
         </div>
     </div>
 
-    <!-- <div class="form-group mb-3">
-      <label for="avatar">Profile Image</label>
-      <input type="file" class="form-control-file" id="avatar" (change)="onFileChange($event)">
-      <div>
-        <small  class="text-danger">{{imageValidation}}</small>
+    <div class="form-group mb-3">
+      <label for="gender">Gender</label>
+      <br>
+      <input type="radio" class="form-control-gender" id="gender" formControlName="gender" name = "gender" value = "1">Female  
+      <input type="radio" class="form-control-gender" id="gender" formControlName="gender" name = "gender" value = "0">Male
+      <div *ngIf="gender.touched && gender.invalid">
+        <small *ngIf="gender.errors.required" class="text-danger">Gender is required<br></small>
       </div>
-    </div> -->
+    </div>
+  
 
     <hr class="mb-4">
-    <input type="submit" value="Create Account" [disabled]="studentForm.invalid || repassword.value != password.value || flag == 0 " class="btn btn-primary btn-block" >
+    <input type="submit" value="Create Account" [disabled]="studentForm.invalid || repassword.value != password.value || flag == 0 " class="btn btn-primary " >
   </form>

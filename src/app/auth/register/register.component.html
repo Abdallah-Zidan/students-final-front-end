@@ -2,57 +2,63 @@
   <div class="row justify-content-md-center">
     
   
- <div *ngIf="finish==true">
+ <!-- <div *ngIf="finish==true">
   <img  src="../../assets/imgs/confirm_email.png" alt="">
- </div>
+ </div> -->
 
 
-<div *ngIf="finish==false">
-  <div class = "mb-4 vertical"></div> 
-    <div class="py-5 col-md-6 order-md-1">
+<div>
+        <div class="py-5 col-md-6 order-md-1">
       <img  src="../../../assets/images/logo-dark.png" alt="" width="72" height="72">
       <div class="top-left"><h4>STUDENT'S</h4></div>
       <div class="top-left"><h5>CONNECTING US</h5></div>
     </div>
-    
-    <div class="row">
+    <div class="row vertical-divider" style="margin-top: 30px">
+
       <div class="col-md-6 order-md-2 mb-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <span> Welcome to the Easiest and the Best Way to communicate students from all Colleges in Egypt</span>
         </div>
             <div class=" mb-3">
-              <h6 ><fa-icon [icon]="faUserFriends"  style="color:#3762F0"></fa-icon>
+              <h6 >
+                <i class="fa fa-users" aria-hidden="true"> </i>
+
                 Communicate with your Colleagues</h6>
             </div>
 
             <div  class=" mb-3">
-              <h6 ><fa-icon [icon]="faExchangeAlt" style="color:#3762F0"></fa-icon>
+              <h6 ><i class="fa fa-exchange"> </i>
+
                 Exchange Instrumnts and Tools</h6>
             </div>
           
             <div class=" mb-3">
-              <h6 ><fa-icon [icon]="faMoneyBill"  style="color:#3762F0"></fa-icon>
+              <h6 ><i class="fa fa-money"> </i>
                 Donations and Funds</h6>
             </div>
 
             <div class=" mb-3">
-              <h6 ><fa-icon [icon]="faHouseUser"  style="color:#3762F0"></fa-icon>
+              <h6 ><i class="fa fa-home"> </i>
                     Find Housing and Transportation with colleagues</h6>
             </div>
 
             <div class=" mb-3">
-              <h6 ><fa-icon [icon]="faChalkboardTeacher"  style="color:#3762F0"></fa-icon>  
+              <h6 ><i class="fa fa-calendar"> </i>
                   Find interships,Events,Trainings,...etc</h6>
+            </div>
+
+            <div class="dif-font mb-3">
+              and more....
             </div>
       </div>
       
       <div class="col-md-6 order-md-1">
           <div class="row">
             <div class="col-md-6">
-              <button class="btn btn-link" id="student-form-link" (click)="showStudentForm()">Student</button>
+              <button class="btn btn-link {{stActive}}" id="student-form-link" (click)="showStudentForm()">Student</button>
             </div>
             <div class="col-md-6" >
-              <button id="company-form-link" class="btn btn-link" (click)="showCompanyForm()">Company</button>
+              <button class="btn btn-link  {{comActive}}" id="company-form-link" (click)="showCompanyForm()">Company</button>
             </div> 
           </div>
           <hr class="mb-4">
@@ -66,6 +72,5 @@
     </div>
 
 </div>
-
 </div>
 </div>

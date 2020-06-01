@@ -92,22 +92,40 @@ export class AuthService {
     );
   }
 
-  register(user, type) {
-    console.log(user, type);
-    return this.http.post(authEndPoints.register, {
-      name: user.name,
-      password: user.password,
-      email: user.email,
-      address: user.address,
-      mobile: user.phone,
-      // avatar : user.avatar,
-      birthdate: user.birthdate,
-      year: user.level,
-      fax: user.fax,
-      website: user.website,
-      description: user.description,
-      type: type,
-      device_name: 'test',
-    });
-  }
-}
+  register(user) {
+    return this.http
+    .post(authEndPoints.register, {
+      name :user.name,
+      password :user.password,
+      email:user.email,
+      address :user.address,
+      mobile :user.phone,
+      gender : user.gender,
+      birthdate:user.birthdate,
+      year:user.level,
+      fax:user.fax,
+      website:user.website,
+      description:user.description,
+      type:user.type,
+      blocked:user.blocked,
+      device_name: navigator.platform,
+      }) 
+      .pipe(
+        tap((res: any) => {
+          const { user, token } = res.data;
+          const currentUser = new User(
+            user.id,
+            user.name,
+            user.email,
+            user.type,
+            user.address,
+            user.mobile,
+            user.avatar,
+            user.verified,
+            token
+          );
+          this.user.next(currentUser);
+          this.storageService.saveItem('user', currentUser);
+        })
+      );
+}}

@@ -7,9 +7,6 @@ import { Group } from '../shared/models/group.model';
   providedIn: 'root',
 })
 export class StorageService {
-  private AllUniversitesLink = 'https://jsonplaceholder.typicode.com/users';
-  private AllFacultiesLink = 'https://jsonplaceholder.typicode.com/users';
-  private AllDepartmentsLink = 'https://jsonplaceholder.typicode.com/users';
 
   constructor(public http: HttpClient) {}
 
@@ -61,20 +58,10 @@ export class StorageService {
   getDepartmentGroups(key: string) {
     return this.getGroups(key, 0);
   }
+  
   getFacultyGroups(key: string) {
     return this.getGroups(key, 1);
   }
   //#endregion
 
-
-
-  getAllUniversites() {
-    return this.http.get<any>(this.AllUniversitesLink);
-  }
-  getAllFaculties() {
-    return this.http.get<any>(this.AllFacultiesLink);
-  }
-  getAllDepartments() {
-    return this.http.get<any>(this.AllDepartmentsLink);
-  }
 }

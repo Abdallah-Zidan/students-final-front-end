@@ -6,7 +6,12 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './auth/services/auth.guard';
 import { RedirectGuard } from './auth/services/redirect.guard';
 import { HomeComponent } from './home/home.component';
+import { EmailVerificationComponent } from './auth/register/email-verification/email-verification.component';
+import { ProfileComponent } from './profile/profile.component';
+import { UpdateComponent } from './profile/update/update.component';
+import { SettingsComponent } from './profile/settings/settings.component';
 import { GroupComponent } from './education/groups/group.component';
+import { EventsComponent } from './events/events.component';
 
 const routes: Routes = [
   {
@@ -24,6 +29,27 @@ const routes: Routes = [
     component: RegisterComponent,
     canActivate: [RedirectGuard],
   },
+
+  {
+    path: 'email/verify',
+    component: EmailVerificationComponent,
+    canActivate: [RedirectGuard],
+  },
+
+  {
+    path: 'profile',
+    component: ProfileComponent,
+  },
+
+  {
+    path: 'profile/update',
+    component: UpdateComponent,
+  },
+
+  {
+    path: 'settings',
+    component: SettingsComponent,
+  },
   {
     path: 'groups/:id',
     component: GroupComponent,
@@ -33,6 +59,11 @@ const routes: Routes = [
     path: 'groups',
     component: GroupComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'events',
+    component: EventsComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -40,4 +71,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

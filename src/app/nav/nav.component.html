@@ -51,7 +51,7 @@
       <!-- Nav Bar -->
       <!-- Home -->
       <div [hidden]="isHandset$ | async">
-        <button mat-button >
+        <button mat-button>
           <h3>Home</h3>
         </button>
       </div>
@@ -68,6 +68,7 @@
 
       <mat-menu #sectionMenu="matMenu">
         <button class="sections" mat-sectionMenu-item>
+
           <button mat-menu-item routerLink="/groups">
             <mat-icon>group</mat-icon>
             <span>Groups</span>
@@ -87,6 +88,11 @@
             <span> Sharing Habitations </span>
           </button>
 
+          <button mat-menu-item routerLink="/events">
+            <mat-icon>today</mat-icon>
+            <span>Events</span>
+          </button>
+
         </button>
       </mat-menu>
       <!-- End Website Sections Part -->
@@ -102,12 +108,12 @@
         </button>
 
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item routerLink="/profile">
             <mat-icon>account_circle</mat-icon>
             <span> My Profile </span>
           </button>
 
-          <button mat-menu-item>
+          <button mat-menu-item routerLink="/settings">
             <mat-icon>settings</mat-icon>
             <span> Settings </span>
           </button>
