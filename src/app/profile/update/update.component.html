@@ -1,106 +1,61 @@
-<div class=" register">
-                <div class="row">
-                   
-                    <div class="register-right container justify-content-md-center">
-                      <div class="row col-md-6 col-mb-3" style="margin-left:  40%;">
-                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">page1</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">page2</a>
-                            </li>
-                        </ul>
-                      </div>
-                        <div class="tab-content " id="myTabContent">
-                          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="row register-form ">
-                                    <div class="col-md-6 mb-3">
-                                      <form  id="user_Form"  [formGroup]="userForm">
-                                        <div class="form-group">
-                                          <div class="profile-img" *ngIf="data&&data.avatar!=null">
-                                            <img id="image"class="img-fluid"src="{{data.avatar}}" alt=""/>
-                                         </div>
-                                         <div class="file btn btn-lg btn-primary">
-                                                Change Photo
-                                                <input  type="file" class="form-control-file" id="avatar" (change)="onFileChange($event)">
-                                            </div>
-                                          <div>
-                                            <small  class="text-danger" *ngIf="imageValidation!='0'">{{imageValidation}}</small>
-                                          </div>
-                                        </div>
-                                        
+<app-nav>
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-sm-4 col-lg-3">
+        <div class="widget">
+          <div class="user-photo">
+              <img src="../../../assets/images/avatar-exemple.jpg" class="w-100" alt="User Photo">
+          </div>
+          <div class="file bg-secondary text-light text-center">
+            <h4 class="p-2">Change Image</h4>
+            <input class="myinput" type="file" name="file"/>
+          </div>
+        </div>
+      </div>
 
-    <!--  <div class="col-sm-8 col-lg-9">
-         <div class="content">
+      <div class="col-sm-8 col-lg-9">
+        <div class="content">
           <div class="page-title">
             <h1 class="text-primary">Edit Profile</h1>
-          </div>/.page-title -->
+          </div><!-- /.page-title -->
 
-                                <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                  <div class="row register-form ">
-                                          <div class="col-md-6 mb-3">
-                                    <form  id="student_Form"  [formGroup]="studentForm" (ngSubmit)="updateProfile()" *ngIf="storageData&&storageData.type=='Student'">
-                                           
-                                        
-                                    
-                                        <div class="form-group">
-                                          <label for="date">BirthDate</label>
-                                            <input class="form-control" type="date"  id="birthdate" formControlName="birthdate" (change)="date($event)" >
-                                            <div *ngIf="birthdate.touched && birthdate.invalid">
-                                              <small *ngIf="birthdate.errors.required" class="text-danger">birthdate is required<br></small>
-                                            </div>
-                                            <div>
-                                              <small class="text-danger">{{bodValidation}}</small>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                          <input type="submit" value="save" [disabled]="userForm.invalid  || studentForm.invalid  || flag == 0 " class="btnRegister" >
-                                        </div>
-                                      </form>
-                                    
-                                    
-                                      <form  id="company_Form"  [formGroup]="companyForm" (ngSubmit)="updateProfile()" *ngIf="storageData&&storageData.type=='Company'">
-                                      <div class="form-group ">
-                                        <label for="tel-input">Website</label>
-                                          <input class="form-control" type="url" placeholder="https://www.xxxx.com" id="url" formControlName="website">
-                                          <div *ngIf="website.touched && website.invalid">
-                                            <small *ngIf="website.errors.required" class="text-danger">website is required<br></small>
-                                            <small *ngIf="website.errors.pattern" class="text-danger">Invalid website<br></small>
-                                          </div>
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                        <label for="tel-input">Fax</label>
-                                          <input class="form-control" type="tel" placeholder="‎+20********" id="fax" formControlName="fax">
-                                          <div *ngIf="fax.touched && fax.invalid">
-                                            <small *ngIf="fax.errors.required" class="text-danger">fax is required<br></small>
-                                            <small *ngIf="fax.errors.pattern" class="text-danger">Invalid fax make sure you enter 8 digits after Egypt code +20</small>
-                                            <small *ngIf="fax.errors.maxlength" class="text-danger">fax can contain 15 characters maximum<br></small>
-                                          </div>
-                                      </div>
-                                    
-                                      
-                                      <div class="form-group">
-                                        <label for="description">Description</label>
-                                          <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
-                                          <div *ngIf="description.touched && name.invalid">
-                                            <small *ngIf="description.errors.required" class="text-danger">Description is required<br></small>
-                                            <small *ngIf="description.errors.maxlength" class="text-danger">Description can contain 250 characters maximum</small>
-                                          </div>
-                                      </div>
-                                    
-                                        <input type="submit" value="Save" [disabled]="userForm.invalid || companyForm.invalid || flag == 0 " class="btnRegister" >
-                                    
-                                        </form>
-                                          </div>
-                                          <div class="col-md-3 mb-3 img-fluid image" style="  margin-top:10%;" >
-                                            <img  src="../../../assets/images/updateprofile.png" alt="">
-                                           </div>
-                                        </div></div>
-                                    </div>
-                                   
-                                </div>
-                          
-                                </div>
-                                <!-- TeachingStaff -->
+          <div class="background-white p20 mb30">
+            <h3 class="page-title">
+              Contact Information
+
+              <a href="#" class="btn btn-primary btn-xs pull-right">Save</a>
+            </h3>
+
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <label>Name</label>
+                <input type="text" class="form-control" value="John">
+              </div>
+
+  
+              <div class="form-group col-sm-12">
+                <label>E-mail</label>
+                <input type="text" class="form-control" value="sample@example.com">
+              </div><!-- /.form-group -->
+
+              <div class="form-group col-sm-12">
+                <label>Phone</label>
+                <input type="text" class="form-control" value="123-456-789">
+              </div><!-- /.form-group -->
+
+              <div class="form-group col-sm-12">
+                <label>Address</label>
+                <input type="text" class="form-control" value="sidi beshr">
+              </div><!-- /.form-group -->
+            </div><!-- /.row -->
+          </div>
+
+
+  
+
+       
+
+        </div><!-- /.content -->
+      </div><!-- /.col-* -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
