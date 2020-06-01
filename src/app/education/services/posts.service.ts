@@ -107,6 +107,27 @@ export class PostsService {
         this.posts.next(this.postsArr);
       });
   }
+  updateComment(body, scope, scopeId, postId, commentId) {
+    return this.httpService.requestEditComment(
+      body,
+      scope,
+      scopeId,
+      postId,
+      commentId
+    );
+  }
+  deleteComment(scope, scopeId, postId, commentId) {
+    const { element, index } = findInArray(postId, this.postsArr);
+    const commentIndex = findInArray(commentId, element.comments);
+    this.httpService
+      .requestDeleteComment(scope, scopeId, postId, commentId)
+      .subscribe((res) => {
+        console.log(res);
+        element.comments.splice(commentIndex, 1);
+        this.postsArr[index] = element;
+        this.posts.next(this.postsArr);
+      });
+  }
   addReply(body, scope, scopeId, postId, commentId) {
     const { element, index } = findInArray(postId, this.postsArr);
     const commentIndex = findInArray(commentId, element.comments).index;
@@ -122,6 +143,29 @@ export class PostsService {
         );
         const newReply = new CommentReply(resReply.id, body, creator);
         element.comments[commentIndex].replies.push(newReply);
+        this.postsArr[index] = element;
+        this.posts.next(this.postsArr);
+      });
+  }
+  updateReply(body, scope, scopeId, postId, commentId, replyId) {
+    return this.httpService.requestEditReply(
+      body,
+      scope,
+      scopeId,
+      postId,
+      commentId,
+      replyId
+    );
+  }
+  deleteReply(scope, scopeId, postId, commentId, replyId) {
+    const { element, index } = findInArray(postId, this.postsArr);
+    const commentData = findInArray(commentId, element.comments);
+    const replyIndex = findInArray(replyId, commentData.element.replies);
+    this.httpService
+      .requestDeleteReply(scope, scopeId, postId, commentId, replyId)
+      .subscribe((res) => {
+        console.log(res);
+        element.comments[commentData.index].replies.splice(replyIndex, 1);
         this.postsArr[index] = element;
         this.posts.next(this.postsArr);
       });

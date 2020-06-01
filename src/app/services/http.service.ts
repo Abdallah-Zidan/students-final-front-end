@@ -25,14 +25,6 @@ const endPoints = {
   departmentPosts:
     'http://localhost:8000/api/v1/departments/{department_faculty}/posts',
   facultyPosts: 'http://localhost:8000/api/v1/faculties/{faculty}/posts',
-  postComments:
-    'http://localhost:8000/api/v1/departments/{department_faculty}/posts/{post}/comments',
-  commentReplies:
-    'http://localhost:8000/api/v1/departments/{department_faculty}/posts/{post}/comments/{comment}/replies',
-  updateDepartmentPost:
-    'http://localhost:8000/api/v1/departments/{department_faculty}/posts/{post}',
-  updateFacultyPost:
-    'http://localhost:8000/api/v1/faculties/{faculty}/posts/{post}',
 };
 
 @Injectable({
@@ -142,6 +134,21 @@ export class HttpService {
       }
     );
   }
+  requestEditComment(commentBody, scope, scopeId, postId, commentId) {
+    return this.http.put(
+      replacePostsUrl(endPoints, scope, scopeId) +
+        `/${postId}/comments/${commentId}`,
+      {
+        body: commentBody,
+      }
+    );
+  }
+  requestDeleteComment(scope, scopeId, postId, commentId) {
+    return this.http.delete(
+      replacePostsUrl(endPoints, scope, scopeId) +
+        `/${postId}/comments/${commentId}`
+    );
+  }
   requestAddReply(replyBody, scope, scopeId, postId, commentId) {
     return this.http.post(
       replacePostsUrl(endPoints, scope, scopeId) +
@@ -149,6 +156,19 @@ export class HttpService {
       {
         body: replyBody,
       }
+    );
+  }
+  requestEditReply(replyBody, scope, scopeId, postId, commentId, replyId) {
+    return this.http.put(
+      replacePostsUrl(endPoints, scope, scopeId) +
+        `/${postId}/comments/${commentId}/replies/${replyId}`,
+      { body: replyBody }
+    );
+  }
+  requestDeleteReply(scope, scopeId, postId, commentId, replyId) {
+    return this.http.delete(
+      replacePostsUrl(endPoints, scope, scopeId) +
+        `/${postId}/comments/${commentId}/replies/${replyId}`
     );
   }
 }

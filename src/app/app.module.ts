@@ -54,6 +54,7 @@ import { ReplyComponent } from './posts/comment/reply/reply.component';
 import { EventsComponent } from './events/events.component';
 import { MatCardModule } from '@angular/material/card';
 import { SingleEventComponent } from './events/single-event/single-event.component';
+import { SingleReplyComponent } from './posts/comment/reply/single-reply/single-reply.component';
 
 
 
@@ -84,7 +85,8 @@ import { SingleEventComponent } from './events/single-event/single-event.compone
     SettingsComponent,
     ReplyComponent,
     EventsComponent,
-    SingleEventComponent
+    SingleEventComponent,
+    SingleReplyComponent
   ],
   imports: [
     BrowserModule,
