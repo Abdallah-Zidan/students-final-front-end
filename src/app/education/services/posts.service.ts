@@ -76,13 +76,24 @@ export class PostsService {
         this.posts.next(this.postsArr);
       });
   }
+  updatePost(body, scope, scopeId, postId) {
+    return this.httpService.requestUpdatePost(body, scope, scopeId, postId);
+  }
+  deletePost(scope, scopeId, postId) {
+    this.httpService
+      .requestDeletePost(scope, scopeId, postId)
+      .subscribe((res) => {
+        console.log(res);
+        const { index } = findInArray(postId, this.postsArr);
+        this.postsArr.splice(index, 1);
+        this.posts.next(this.postsArr);
+      });
+  }
   addComment(body, scope, scopeId, postId) {
     const { element, index } = findInArray(postId, this.postsArr);
     this.httpService
       .requestAddComment(body, scope, scopeId, postId)
       .subscribe((res: any) => {
-        console.log(res);
-        
         const resComment = res.data.comment;
         const currUser = this.storage.getUser('user');
         const creator = new ElementCreator(
@@ -102,7 +113,6 @@ export class PostsService {
     this.httpService
       .requestAddReply(body, scope, scopeId, postId, commentId)
       .subscribe((res: any) => {
-        console.log(res);
         const resReply = res.data.reply;
         const currUser = this.storage.getUser('user');
         const creator = new ElementCreator(
