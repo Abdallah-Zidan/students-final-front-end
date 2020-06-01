@@ -7,7 +7,7 @@
             <img class="w-50" src="{{post.creator.avatar}}" alt="">
         </div>
 
-        <div class="col-9 my-auto  pl-3">
+        <div class="col-9 my-auto pl-3">
             <h5 class="text-primary mt-auto  w-75">{{post.creator.name}}</h5>
             <div class="row pl-3">
                 <span class=" text-secondary material-icons">
@@ -18,7 +18,6 @@
         </div>
 
         <div class="col-1 ml-auto my-auto">
-
             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
@@ -32,8 +31,6 @@
                     <span>Delete Post</span>
                 </button>
             </mat-menu>
-
-   
         </div>
     </div>
 
@@ -41,35 +38,30 @@
     <div class="row h-100 px-5">
         <div class="col-8 my-auto">
 
-                <div class="row ">
-                    <span class="material-icons text-primary mr-2">
-                        school
-                    </span>
-                    <span class="text-secondary mr-3">Faculty Of Commerce</span>
+            <div class="row ">
+                <span class="material-icons text-primary mr-2">
+                    school
+                </span>
+                <span class="text-secondary mr-3">Faculty Of Commerce</span>
 
-                    <span class="material-icons text-primary mr-2">
-                        account_balance
-                    </span>
-                    <span class="text-secondary"> Alex. Univeristy</span>
-            
+                <span class="material-icons text-primary mr-2">
+                    account_balance
+                </span>
+                <span class="text-secondary"> Alex. Univeristy</span>
+
             </div>
         </div>
 
         <div class="col-4  my-auto ml-auto">
             <mat-icon class="report float-right">report</mat-icon>
             <mat-icon class="contact float-right">message</mat-icon>
-        </div>  
+        </div>
     </div>
 
     <div class="row">
-
-<p>{{post.body}}</p>
+        <p>{{post.body}}</p>
     </div>
 
+    <app-comment [comments]="post.comments"></app-comment>
 
-        <app-comment [comments]="post.comments"></app-comment>
-
-       
-
-   
 </div>
