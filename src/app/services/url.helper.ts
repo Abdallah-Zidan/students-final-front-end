@@ -6,15 +6,4 @@ const replacePostsUrl = (endPoints: any, scope: string, scopeId: string) => {
   return url.replace(placeHolder, scopeId);
 };
 
-const replaceCommentsUrl = (
-  endPoints: any,
-  scope: string,
-  scopeId: string,
-  postId: string
-) => {
-  const url: string =
-    replacePostsUrl(endPoints, scope, scopeId) + `/${postId}/comments`;
-
-  return url;
-};
-export { replacePostsUrl, replaceCommentsUrl };
+export { replacePostsUrl };

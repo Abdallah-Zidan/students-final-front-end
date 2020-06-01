@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders,HttpResponse , HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { replacePostsUrl, replaceCommentsUrl } from './url.helper';
+import { replacePostsUrl } from './url.helper';
 
 const endPoints = {
   csrf: 'http://localhost:8000/sanctum/csrf-cookie',
@@ -10,8 +15,8 @@ const endPoints = {
   register: 'http://localhost:8000/api/v1/register',
   universites: 'http://localhost:8000/api/v1/universities',
   verificationResend: 'http://localhost:8000/api/v1/email/resend',
-  userData:'http://localhost:8000/api/v1/user/profile',
-  userDepartment:'http://localhost:8000/api/v1/user/departments',
+  userData: 'http://localhost:8000/api/v1/user/profile',
+  userDepartment: 'http://localhost:8000/api/v1/user/department',
   studentDepartmentGroup: '',
   studentFacultyGroup: '',
   professorDepartments: '',
@@ -20,8 +25,6 @@ const endPoints = {
   departmentPosts:
     'http://localhost:8000/api/v1/departments/{department_faculty}/posts',
   facultyPosts: 'http://localhost:8000/api/v1/faculties/{faculty}/posts',
-  postComments:
-    'http://localhost:8000/api/v1/departments/{department_faculty}/posts/{post}/comments',
 };
 
 @Injectable({
@@ -55,28 +58,43 @@ export class HttpService {
     return this.http.get<any>(endPoints.universites);
   }
 
-  verifyEmail(user):Observable<HttpResponse<any>> 
-  {
-    let headers_object = new HttpHeaders().set("Authorization", "Bearer " + user._token.access_token);
-    return this.http.get<any>(endPoints.verificationResend,{headers:headers_object, observe: 'response' });
+  verifyEmail(user): Observable<HttpResponse<any>> {
+    let headers_object = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + user._token.access_token
+    );
+    return this.http.get<any>(endPoints.verificationResend, {
+      headers: headers_object,
+      observe: 'response',
+    });
   }
 
-  getUser(user)
-  {
-    let headers_object = new HttpHeaders().set("Authorization", "Bearer " + user._token.access_token);
-    return this.http.get<any>(endPoints.userData,{headers:headers_object});
+  getUser(user) {
+    let headers_object = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + user._token.access_token
+    );
+    return this.http.get<any>(endPoints.userData, { headers: headers_object });
   }
 
-  getuserDepartment(user)
-  {
-    let headers_object = new HttpHeaders().set("Authorization", "Bearer " + user._token.access_token);
-    return this.http.get<any>(endPoints.userDepartment,{headers:headers_object});
+  getuserDepartment(user) {
+    let headers_object = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + user._token.access_token
+    );
+    return this.http.get<any>(endPoints.userDepartment, {
+      headers: headers_object,
+    });
   }
 
-  updateProfile(user,storageData)
-  {
-    let headers_object = new HttpHeaders().set("Authorization", "Bearer " + storageData._token.access_token);
-    return this.http.post<any>(endPoints.userData,user,{headers:headers_object});
+  updateProfile(user, storageData) {
+    let headers_object = new HttpHeaders().set(
+      'Authorization',
+      'Bearer ' + storageData._token.access_token
+    );
+    return this.http.post<any>(endPoints.userData, user, {
+      headers: headers_object,
+    });
   }
   requestGroups() {
     return this.http.get(endPoints.groups);
@@ -90,6 +108,19 @@ export class HttpService {
       files: postFiles,
     });
   }
+  requestUpdatePost(postBody, scope, scopeId, postId) {
+    return this.http.put(
+      replacePostsUrl(endPoints, scope, scopeId) + `/${postId}`,
+      {
+        body: postBody,
+      }
+    );
+  }
+  requestDeletePost(scope, scopeId, postId) {
+    return this.http.delete(
+      replacePostsUrl(endPoints, scope, scopeId) + `/${postId}`
+    );
+  }
   requestAddComment(
     commentBody: string,
     scope: string,
@@ -97,10 +128,47 @@ export class HttpService {
     postId: string
   ) {
     return this.http.post(
-      replaceCommentsUrl(endPoints, scope, scopeId, postId),
+      replacePostsUrl(endPoints, scope, scopeId) + `/${postId}/comments`,
       {
         body: commentBody,
       }
+    );
+  }
+  requestEditComment(commentBody, scope, scopeId, postId, commentId) {
+    return this.http.put(
+      replacePostsUrl(endPoints, scope, scopeId) +
+        `/${postId}/comments/${commentId}`,
+      {
+        body: commentBody,
+      }
+    );
+  }
+  requestDeleteComment(scope, scopeId, postId, commentId) {
+    return this.http.delete(
+      replacePostsUrl(endPoints, scope, scopeId) +
+        `/${postId}/comments/${commentId}`
+    );
+  }
+  requestAddReply(replyBody, scope, scopeId, postId, commentId) {
+    return this.http.post(
+      replacePostsUrl(endPoints, scope, scopeId) +
+        `/${postId}/comments/${commentId}/replies`,
+      {
+        body: replyBody,
+      }
+    );
+  }
+  requestEditReply(replyBody, scope, scopeId, postId, commentId, replyId) {
+    return this.http.put(
+      replacePostsUrl(endPoints, scope, scopeId) +
+        `/${postId}/comments/${commentId}/replies/${replyId}`,
+      { body: replyBody }
+    );
+  }
+  requestDeleteReply(scope, scopeId, postId, commentId, replyId) {
+    return this.http.delete(
+      replacePostsUrl(endPoints, scope, scopeId) +
+        `/${postId}/comments/${commentId}/replies/${replyId}`
     );
   }
 }

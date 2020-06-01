@@ -3,7 +3,15 @@
     <div class="col-10">
       <img src="{{comment.creator.avatar}}" width="50px">
       <h5>{{comment.creator.name}}</h5>
-      <p>{{comment.body}}</p>
+      <div class="row">
+        <textarea [hidden]="!editing" [(ngModel)]="commentBody"></textarea>
+        <div class="col-2 my-auto" [hidden]="!editing" (click)="onUpdateComment()" style="cursor: pointer;">
+          <span class="text-primary material-icons" (click)="onUpdateComment()">
+            send
+          </span>
+        </div>
+        <p [hidden]="editing">{{comment.body}}</p>
+      </div>
     </div>
 
     <div class="ml-auto col-1">
@@ -13,11 +21,11 @@
       <mat-menu #menu="matMenu" xPosition="before">
         <button mat-menu-item>
           <mat-icon>create</mat-icon>
-          <span>Edit Comment</span>
+          <span (click)="onEditComment()">Edit Comment</span>
         </button>
         <button mat-menu-item>
           <mat-icon>delete_sweep</mat-icon>
-          <span>Delete Comment</span>
+          <span (click)="onDeleteComment()">Delete Comment</span>
         </button>
       </mat-menu>
     </div>
@@ -26,5 +34,5 @@
 
     <hr />
   </div>
-  <app-reply></app-reply>
+  <app-reply [replies]="comment.replies" [postId]="postId" [group]="group" [commentId]="comment.id"></app-reply>
 </div>
