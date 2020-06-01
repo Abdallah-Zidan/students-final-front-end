@@ -7,11 +7,12 @@ import {
   getComments,
   getCreator,
   getAttachments,
-  findPostInArray,
+  findInArray,
 } from './posts.helper';
 import { StorageService } from 'src/app/services/storage.service';
-import { ElementCreator } from '../models/creator.model';
-import { PostComment } from '../models/comment.model';
+import { ElementCreator } from '../../shared/models/creator.model';
+import { PostComment } from '../../shared/models/comment.model';
+import { CommentReply } from '../../shared/models/reply.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -30,6 +31,7 @@ export class PostsService {
     this.httpService.requestPosts(scope, scopeId, page).subscribe(
       (res: any) => {
         const resPosts = res.data.posts;
+        this.postsArr = [];
         resPosts.forEach((post) => {
           this.postsArr.push(
             new Post(
@@ -43,6 +45,7 @@ export class PostsService {
           );
         });
         this.posts.next(this.postsArr);
+        console.log(this.postsArr);
       },
       (error) => {
         console.log(error);
@@ -74,26 +77,42 @@ export class PostsService {
       });
   }
   addComment(body, scope, scopeId, postId) {
-    const { post, index } = findPostInArray(postId, this.postsArr);
-    console.log(post);
-
+    const { element, index } = findInArray(postId, this.postsArr);
     this.httpService
       .requestAddComment(body, scope, scopeId, postId)
       .subscribe((res: any) => {
+        console.log(res);
+        
         const resComment = res.data.comment;
         const currUser = this.storage.getUser('user');
-        const newComment = new PostComment(
-          resComment.id,
-          body,
-          new ElementCreator(
-            currUser.id,
-            currUser.personalData.name,
-            currUser.personalData.avatar
-          ),
-          []
+        const creator = new ElementCreator(
+          currUser.id,
+          currUser.personalData.name,
+          currUser.personalData.avatar
         );
-        post.comments.push(newComment);
-        this.postsArr[index] = post;
+        const newComment = new PostComment(resComment.id, body, creator, []);
+        element.comments.push(newComment);
+        this.postsArr[index] = element;
+        this.posts.next(this.postsArr);
+      });
+  }
+  addReply(body, scope, scopeId, postId, commentId) {
+    const { element, index } = findInArray(postId, this.postsArr);
+    const commentIndex = findInArray(commentId, element.comments).index;
+    this.httpService
+      .requestAddReply(body, scope, scopeId, postId, commentId)
+      .subscribe((res: any) => {
+        console.log(res);
+        const resReply = res.data.reply;
+        const currUser = this.storage.getUser('user');
+        const creator = new ElementCreator(
+          currUser.id,
+          currUser.personalData.name,
+          currUser.personalData.avatar
+        );
+        const newReply = new CommentReply(resReply.id, body, creator);
+        element.comments[commentIndex].replies.push(newReply);
+        this.postsArr[index] = element;
         this.posts.next(this.postsArr);
       });
   }

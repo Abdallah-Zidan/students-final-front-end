@@ -1,7 +1,7 @@
-import { PostComment } from '../models/comment.model';
-import { CommentReply } from '../models/reply.model';
-import { ElementCreator } from '../models/creator.model';
-import { Attachment } from '../models/attachment.model';
+import { PostComment } from '../../shared/models/comment.model';
+import { CommentReply } from '../../shared/models/reply.model';
+import { ElementCreator } from '../../shared/models/creator.model';
+import { Attachment } from '../../shared/models/attachment.model';
 import { Post } from '../models/post.model';
 
 /**
@@ -46,12 +46,12 @@ const getCreator = (element) => {
   return new ElementCreator(creator.id, creator.name, creator.avatar);
 };
 
-const findPostInArray = (id, posts: Post[]) => {
+const findInArray = (id, elements: any[]) => {
   let place = -1;
-  const postElement: Post = posts.find((post, index) => {
+  const retElement: any = elements.find((post, index) => {
     place = index;
     return +post.id === +id;
   });
-  return { post: postElement, index: place };
+  return { element: retElement, index: place };
 };
-export { getComments, getAttachments, getReplies, getCreator, findPostInArray };
+export { getComments, getAttachments, getReplies, getCreator, findInArray };

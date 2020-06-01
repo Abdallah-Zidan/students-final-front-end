@@ -1,6 +1,6 @@
-import { Attachment } from './attachment.model';
-import { ElementCreator } from './creator.model';
-import { PostComment } from './comment.model';
+import { Attachment } from '../../shared/models/attachment.model';
+import { ElementCreator } from '../../shared/models/creator.model';
+import { PostComment } from '../../shared/models/comment.model';
 
 export class Post {
   constructor(

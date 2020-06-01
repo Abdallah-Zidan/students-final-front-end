@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, OnChanges } from '@angular/core';
 import { Post } from 'src/app/education/models/post.model';
 import { Group } from 'src/app/shared/models/group.model';
 import { PostsService } from 'src/app/education/services/posts.service';
@@ -14,7 +14,6 @@ export class MainPostComponent {
   comment = '';
   constructor(private postsService: PostsService) {}
   isEmpty = true;
-
   onCommenting($event) {
     if ($event.target.value) {
       this.isEmpty = false;

@@ -2,86 +2,86 @@
 <app-add-post [group]="group"></app-add-post>
 <div class="post" *ngFor="let post of posts">
 
-    <div class="row h-100 px-3 pt-3">
-        <div class="col-1 p-0 m-3">
-            <img class="w-50" src="{{post.creator.avatar}}" alt="">
-        </div>
-
-        <div class="col-9 my-auto  pl-3">
-            <h5 class="text-primary mt-auto  w-75">{{post.creator.name}}</h5>
-            <div class="row pl-3">
-                <span class=" text-secondary material-icons">
-                    schedule
-                </span>
-                <span class=" text-secondary">3 min. ago</span>
-            </div>
-        </div>
-
-        <div class="col-1 ml-auto my-auto">
-
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item>
-                    <mat-icon>create</mat-icon>
-                    <span>Edit Post</span>
-                </button>
-                <button mat-menu-item>
-                    <mat-icon>delete_sweep</mat-icon>
-                    <span>Delete Post</span>
-                </button>
-            </mat-menu>
-
-   
-        </div>
+  <div class="row h-100 px-3 pt-3">
+    <div class="col-1 p-0 m-3">
+      <img class="w-50" src="{{post.creator.avatar}}" alt="">
     </div>
 
-
-    <div class="row h-100 px-5">
-        <div class="col-8 my-auto">
-
-                <div class="row ">
-                    <span class="material-icons text-primary mr-2">
-                        school
-                    </span>
-                    <span class="text-secondary mr-3">Faculty Of Commerce</span>
-
-                    <span class="material-icons text-primary mr-2">
-                        account_balance
-                    </span>
-                    <span class="text-secondary"> Alex. Univeristy</span>
-            
-            </div>
-        </div>
-
-        <div class="col-4  my-auto ml-auto">
-            <mat-icon class="report float-right">report</mat-icon>
-            <mat-icon class="contact float-right">message</mat-icon>
-        </div>  
+    <div class="col-9 my-auto  pl-3">
+      <h5 class="text-primary mt-auto  w-75">{{post.creator.name}}</h5>
+      <div class="row pl-3">
+        <span class=" text-secondary material-icons">
+          schedule
+        </span>
+        <span class=" text-secondary">3 min. ago</span>
+      </div>
     </div>
 
-    <div class="row">
+    <div class="col-1 ml-auto my-auto">
 
-<p>{{post.body}}</p>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item>
+          <mat-icon>create</mat-icon>
+          <span>Edit Post</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>delete_sweep</mat-icon>
+          <span>Delete Post</span>
+        </button>
+      </mat-menu>
+
+
+    </div>
+  </div>
+
+
+  <div class="row h-100 px-5">
+    <div class="col-8 my-auto">
+
+      <div class="row ">
+        <span class="material-icons text-primary mr-2">
+          school
+        </span>
+        <span class="text-secondary mr-3">Faculty Of Commerce</span>
+
+        <span class="material-icons text-primary mr-2">
+          account_balance
+        </span>
+        <span class="text-secondary"> Alex. Univeristy</span>
+
+      </div>
     </div>
 
-    <div class="row h-100">
-        <div class="col-10 my-auto">
-            <mat-form-field class="example-full-width px-5">
-                <mat-label>Leave a comment</mat-label>
-                <textarea (input)="onCommenting($event)" rows="3" matInput placeholder="Ex. It makes me feel..."></textarea>
-            </mat-form-field>
-        </div>
-        <div class="col-2 my-auto">
-            <span class="text-primary material-icons" [hidden] = "isEmpty">
-                send
-              </span>
-        </div>
-        <app-comment [comments]="post.comments"></app-comment>
-
-       
+    <div class="col-4  my-auto ml-auto">
+      <mat-icon class="report float-right">report</mat-icon>
+      <mat-icon class="contact float-right">message</mat-icon>
     </div>
+  </div>
 
-   
+  <div class="row">
+
+    <p>{{post.body}}</p>
+  </div>
+
+  <div class="row h-100">
+    <div class="col-10 my-auto">
+      <mat-form-field class="example-full-width px-5">
+        <mat-label>Leave a comment</mat-label>
+        <textarea (input)="onCommenting($event)" rows="3" matInput placeholder="Ex. It makes me feel..."></textarea>
+      </mat-form-field>
+    </div>
+    <div class="col-2 my-auto">
+      <span class="text-primary material-icons" [hidden]="isEmpty" (click)="onAddComment(post.id)">
+        send
+      </span>
+    </div>
+    <app-comment [comments]="post.comments" [group]="group" [postId]="post.id"></app-comment>
+
+
+  </div>
+
+
 </div>

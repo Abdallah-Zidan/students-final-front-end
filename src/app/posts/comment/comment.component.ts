@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PostComment } from 'src/app/education/models/comment.model';
+import { PostComment } from 'src/app/shared/models/comment.model';
+import { Group } from 'src/app/shared/models/group.model';
 
 @Component({
   selector: 'app-comment',
@@ -9,6 +10,8 @@ import { PostComment } from 'src/app/education/models/comment.model';
 export class CommentComponent implements OnInit {
   panelOpenState = false;
   @Input() comments: PostComment[];
+  @Input() group: Group;
+  @Input() postId;
   constructor() {}
 
   ngOnInit(): void {}

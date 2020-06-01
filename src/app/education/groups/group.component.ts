@@ -27,7 +27,7 @@ export class GroupComponent implements OnInit, OnDestroy {
     if (this.departmentGroups.length < 0) {
       this.groupsService.getGroups();
     }
-    this.subscription = this.postsService.posts.subscribe((posts) => {
+    this.subscription = this.postsService.posts.subscribe((posts) => { 
       this.posts = posts;
     });
     this.activatedRoute.params.subscribe((map) => {

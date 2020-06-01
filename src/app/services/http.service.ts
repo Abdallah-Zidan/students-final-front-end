@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { replacePostsUrl, replaceCommentsUrl } from './url.helper';
+import { replacePostsUrl } from './url.helper';
 
 const endPoints = {
   csrf: 'http://localhost:8000/sanctum/csrf-cookie',
@@ -13,6 +13,8 @@ const endPoints = {
   facultyPosts: 'http://localhost:8000/api/v1/faculties/{faculty}/posts',
   postComments:
     'http://localhost:8000/api/v1/departments/{department_faculty}/posts/{post}/comments',
+  commentReplies:
+    'http://localhost:8000/api/v1/departments/{department_faculty}/posts/{post}/comments/{comment}/replies',
 };
 
 @Injectable({
@@ -60,9 +62,18 @@ export class HttpService {
     postId: string
   ) {
     return this.http.post(
-      replaceCommentsUrl(endPoints, scope, scopeId, postId),
+      replacePostsUrl(endPoints, scope, scopeId) + `/${postId}/comments`,
       {
         body: commentBody,
+      }
+    );
+  }
+  requestAddReply(replyBody, scope, scopeId, postId, commentId) {
+    return this.http.post(
+      replacePostsUrl(endPoints, scope, scopeId) +
+        `/${postId}/comments/${commentId}/replies`,
+      {
+        body: replyBody,
       }
     );
   }
