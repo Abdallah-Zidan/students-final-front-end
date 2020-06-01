@@ -7,7 +7,6 @@ import { Group } from '../shared/models/group.model';
   providedIn: 'root',
 })
 export class StorageService {
-  
 
   constructor(public http: HttpClient) {}
 

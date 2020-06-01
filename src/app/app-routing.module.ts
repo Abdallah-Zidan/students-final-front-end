@@ -11,6 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UpdateComponent } from './profile/update/update.component';
 import { SettingsComponent } from './profile/settings/settings.component';
 import { GroupComponent } from './education/groups/group.component';
+import { EventsComponent } from './events/events.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,11 @@ const routes: Routes = [
     path: 'groups',
     component: GroupComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'events',
+    component: EventsComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -65,4 +71,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
