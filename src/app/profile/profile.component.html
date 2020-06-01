@@ -65,22 +65,29 @@
                                         <div class="form-group">
                                             <label for="University">University</label>
                                             <div class="col-md-6" *ngIf="studyData!=null">
-                                                <p>{{ studyData[0].faculty.university.id}}</p>
+                                                <h5>{{ studyData[0].faculty.university.name}}</h5>
                                             </div>
                                             
                                         </div>
                                          <div class="form-group">
                                             <label for="faculty">Faculty</label>
                                             <div class="col-md-6" *ngIf="studyData!=null">
-                                                <h5>{{ studyData[0].faculty.id}}</h5>
+                                                <h5>{{ studyData[0].faculty.name}}</h5>
                                             </div>
                                            
                                           </div>
                                      
                                           <div class="form-group">
-                                            <label for="department">Department</label>
+                                            <label for="department">Major Department</label>
                                             <div class="col-md-6" *ngIf="studyData!=null">
-                                                <h5>{{ studyData[0].department.id}}</h5>
+                                                <h5>{{ studyData[0].department.name}}</h5>
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group" *ngIf="studyData!=null &&studyData.length>1">
+                                            <label for="department">Minor Department</label>
+                                            <div class="col-md-6">
+                                                <h5>{{ studyData[1].department.name}}</h5>
                                             </div>
                                           </div>
                                     

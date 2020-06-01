@@ -66,13 +66,20 @@
       </div>
  
       <div class="form-group mb-3">
-        <label for="department">Department</label>
-        <select class="custom-select d-block w-100" id="department" formControlName="department" >
+        <label for="department">Major Department</label>
+        <select class="custom-select d-block w-100" id="department" formControlName="department1"  (change)="addDepartment1($event)">
           <option value={{department.id}} *ngFor="let department of departmentList ">{{department.name}}</option>
         </select>
-        <div *ngIf="department.touched && department.invalid">
-          <small *ngIf="department.errors.required" class="text-danger">department is required<br></small>
+        <div *ngIf="department1.touched && department1.invalid">
+          <small *ngIf="department1.errors.required" class="text-danger">major department is required<br></small>
         </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="department">Department 2 (optional)</label>
+        <select class="custom-select d-block w-100" id="department" formControlName="department2" (change)="addDepartment2($event)" >
+          <option value={{department.id}} *ngFor="let department of departmentList ">{{department.name}}</option>
+        </select>
       </div>
 
     <div class="form-group mb-3">
