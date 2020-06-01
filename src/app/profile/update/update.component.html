@@ -18,8 +18,8 @@
                                     <div class="col-md-6 mb-3">
                                       <form  id="user_Form"  [formGroup]="userForm">
                                         <div class="form-group">
-                                          <div class="profile-img">
-                                            <img class="img-fluid"src="{{data.avatar}}" alt=""/>
+                                          <div class="profile-img" *ngIf="data&&data.avatar!=null">
+                                            <img id="image"class="img-fluid"src="{{data.avatar}}" alt=""/>
                                          </div>
                                          <div class="file btn btn-lg btn-primary">
                                                 Change Photo
@@ -29,6 +29,7 @@
                                             <small  class="text-danger" *ngIf="imageValidation!='0'">{{imageValidation}}</small>
                                           </div>
                                         </div>
+                                        
 
                                         <div class="form-group">
                                               <label for="username">Name</label>
@@ -69,50 +70,7 @@
                                   <div class="row register-form ">
                                           <div class="col-md-6 mb-3">
                                     <form  id="student_Form"  [formGroup]="studentForm" (ngSubmit)="updateProfile()" *ngIf="storageData&&storageData.type=='Student'">
-                                            <!-- <div class="form-group">
-                                                <label for="University">University</label>
-                                                <select class="custom-select d-block w-100" id="university" formControlName="university" [ngModel]="university" (ngModelChange)="changeFacultyList($event)" >
-                                                  <option value={{university.id}}  *ngFor="let university of universityList " >{{university.name}}</option>
-                                                </select>
-                                                <div *ngIf="university.touched && university.invalid">
-                                                  <small *ngIf="university.errors.required" class="text-danger">university is required<br></small>
-                                                </div>
-                                            </div>
-                                             <div class="form-group">
-                                                <label for="faculty">Faculty</label>
-                                                <select class="custom-select d-block w-100" id="faculty" formControlName="faculty"  [ngModel]="faculty" (ngModelChange)="changeDepartmentList($event)" >
-                                                  <option  value={{faculty.id}}  *ngFor="let faculty of facultyList ">{{faculty.name}}</option>
-                                                </select>
-                                                <div *ngIf="faculty.touched && faculty.invalid">
-                                                  <small *ngIf="faculty.errors.required" class="text-danger">faculty is required<br></small>
-                                                </div>
-                                              </div>
-                                         
-                                              <div class="form-group">
-                                                <label for="department">Department</label>
-                                                <select class="custom-select d-block w-100" id="department" formControlName="department" >
-                                                  <option value={{department.id}} *ngFor="let department of departmentList ">{{department.name}}</option>
-                                                </select>
-                                                <div *ngIf="department.touched && department.invalid">
-                                                  <small *ngIf="department.errors.required" class="text-danger">department is required<br></small>
-                                                </div>
-                                              </div>
-                                        
-                                            <div class="form-group">
-                                                <label for="year">level</label>
-                                                <select class="custom-select d-block w-100" id="year" formControlName="level">
-                                                  <option value="1">preparatory</option>
-                                                  <option value="2">First</option>
-                                                  <option value="3">Second</option>
-                                                  <option value="4">Third</option>
-                                                  <option value="5">Forth</option>
-                                                  <option value="6">Fifth</option>
-                                                  <option value="7">Sixth</option>
-                                                </select>
-                                                <div *ngIf="level.touched && level.invalid">
-                                                  <small *ngIf="level.errors.required" class="text-danger">level is required<br></small>
-                                                </div>
-                                            </div> -->
+                                           
                                         
                                     
                                         <div class="form-group">
