@@ -9,7 +9,7 @@
         <input type="text" class="form-control" id="username" placeholder="Name" formControlName="name">
         <div *ngIf="name.touched && name.invalid">
           <small *ngIf="name.errors.required" class="text-danger">name is required<br></small>
-          <small *ngIf="name.errors.pattern" class="text-danger">Invalid name<br></small>
+          <small *ngIf="name.errors.pattern" class="text-danger">name contains only letters and spaces<br></small>
           <small *ngIf="name.errors.minlength" class="text-danger">name must contain 6 characters at least</small>
         </div>
     </div>
@@ -61,7 +61,7 @@
         <input class="form-control" type="tel" placeholder="‎+20********" id="fax" formControlName="fax">
         <div *ngIf="fax.touched && fax.invalid">
           <small *ngIf="fax.errors.required" class="text-danger">fax is required<br></small>
-          <small *ngIf="fax.errors.pattern" class="text-danger">Invalid fax make sure you enter 8 digits after Egypt code +20</small>
+          <small *ngIf="fax.errors.pattern" class="text-danger">Invalid fax make sure you enter 9 digits at least after +</small>
           <small *ngIf="fax.errors.maxlength" class="text-danger">fax can contain 15 characters maximum<br></small>
         </div>
     </div>
