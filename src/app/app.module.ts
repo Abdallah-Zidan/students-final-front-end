@@ -55,6 +55,7 @@ import { EventsComponent } from './events/events.component';
 import { MatCardModule } from '@angular/material/card';
 import { SingleEventComponent } from './events/single-event/single-event.component';
 import { SingleReplyComponent } from './posts/comment/reply/single-reply/single-reply.component';
+import { AnnouncementsComponent } from './education/announcements/announcements.component';
 
 
 
@@ -86,7 +87,8 @@ import { SingleReplyComponent } from './posts/comment/reply/single-reply/single-
     ReplyComponent,
     EventsComponent,
     SingleEventComponent,
-    SingleReplyComponent
+    SingleReplyComponent,
+    AnnouncementsComponent
   ],
   imports: [
     BrowserModule,

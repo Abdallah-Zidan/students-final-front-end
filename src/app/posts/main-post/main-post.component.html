@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="col-1 ml-auto my-auto">
+    <div class="col-1 ml-auto my-auto" *ngIf="(post.creator.id == user.id)">
 
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>more_vert</mat-icon>
