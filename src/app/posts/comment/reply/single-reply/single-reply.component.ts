@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CommentReply } from 'src/app/shared/models/reply.model';
 import { PostsService } from 'src/app/education/services/posts.service';
 import { Group } from 'src/app/shared/models/group.model';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-single-reply',
@@ -13,12 +14,17 @@ export class SingleReplyComponent implements OnInit {
   @Input() group: Group;
   @Input() postId;
   @Input() commentId;
+  user;
   replyBody;
   editing = false;
-  constructor(private postsService: PostsService) {}
+  constructor(
+    private postsService: PostsService,
+    private storageService: StorageService
+  ) {}
 
   ngOnInit(): void {
     this.replyBody = this.reply.body;
+    this.user = this.storageService.getUser('user');
   }
   onEditReply() {
     this.editing = true;

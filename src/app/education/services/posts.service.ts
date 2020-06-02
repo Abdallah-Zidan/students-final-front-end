@@ -45,7 +45,6 @@ export class PostsService {
           );
         });
         this.posts.next(this.postsArr);
-        console.log(this.postsArr);
       },
       (error) => {
         console.log(error);
@@ -57,6 +56,8 @@ export class PostsService {
     this.httpService
       .requestAddPost(body, files, scope, scopeId)
       .subscribe((res: any) => {
+        console.log(res);
+        
         const resPost = res.data.post;
         const currUser = this.storage.getUser('user');
 

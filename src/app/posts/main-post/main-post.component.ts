@@ -9,6 +9,8 @@ import {
 import { Post } from 'src/app/education/models/post.model';
 import { Group } from 'src/app/shared/models/group.model';
 import { PostsService } from 'src/app/education/services/posts.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { User } from 'src/app/auth/user.model';
 
 @Component({
   selector: 'app-main-post',
@@ -18,13 +20,18 @@ import { PostsService } from 'src/app/education/services/posts.service';
 export class MainPostComponent implements OnInit {
   @Input() group: Group;
   @Input() post: Post;
+  user: User;
   comment = '';
   postBody;
-  constructor(private postsService: PostsService) {}
+  constructor(
+    private postsService: PostsService,
+    private storage: StorageService
+  ) {}
   isEmpty = true;
   editing = false;
   ngOnInit() {
     this.postBody = this.post.body;
+    this.user = this.storage.getUser('user');
   }
   onCommenting($event) {
     if ($event.target.value) {

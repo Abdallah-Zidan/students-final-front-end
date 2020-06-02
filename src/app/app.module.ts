@@ -55,9 +55,16 @@ import { EventsComponent } from './events/events.component';
 import { MatCardModule } from '@angular/material/card';
 import { SingleEventComponent } from './events/single-event/single-event.component';
 import { SingleReplyComponent } from './posts/comment/reply/single-reply/single-reply.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
-
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [
@@ -86,7 +93,8 @@ import { SingleReplyComponent } from './posts/comment/reply/single-reply/single-
     ReplyComponent,
     EventsComponent,
     SingleEventComponent,
-    SingleReplyComponent
+    SingleReplyComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,7 +124,9 @@ import { SingleReplyComponent } from './posts/comment/reply/single-reply/single-
     MatInputModule,
     MatExpansionModule,
     MatBadgeModule,
-    MatCardModule 
+    MatCardModule,
+    PerfectScrollbarModule,
+    BsDropdownModule.forRoot(),
   ],
 
   providers: [

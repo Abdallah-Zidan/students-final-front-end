@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PostComment } from 'src/app/shared/models/comment.model';
 import { Group } from 'src/app/shared/models/group.model';
 import { PostsService } from 'src/app/education/services/posts.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-single-comment',
@@ -12,12 +13,17 @@ export class SingleCommentComponent implements OnInit {
   @Input() comment: PostComment;
   @Input() postId;
   @Input() group: Group;
+  user;
   editing = false;
   commentBody;
-  constructor(private postsService: PostsService) {}
+  constructor(
+    private postsService: PostsService,
+    private storage: StorageService
+  ) {}
 
   ngOnInit(): void {
     this.commentBody = this.comment.body;
+    this.user = this.storage.getUser('user');
   }
   onEditComment() {
     this.editing = true;

@@ -88,10 +88,12 @@ export class HttpService {
     return this.http.get(replacePostsUrl(endPoints, scope, scopeId));
   }
   requestAddPost(postBody, postFiles, scope, scopeId) {
-    return this.http.post(replacePostsUrl(endPoints, scope, scopeId), {
-      body: postBody,
-      files: postFiles,
-    });
+    const formData = new FormData();
+    formData.append('body', postBody);
+    formData.append('files', postFiles);
+    console.log(formData.getAll('files'));
+
+    return this.http.post(replacePostsUrl(endPoints, scope, scopeId), formData);
   }
   requestUpdatePost(postBody, scope, scopeId, postId) {
     return this.http.put(
