@@ -57,7 +57,24 @@
       <mat-icon class="contact float-right">message</mat-icon>
     </div>
   </div>
-
+  <div class="row" *ngIf="post.files.length > 0">
+    <div *ngFor="let file of post.files">
+      <div *ngIf="file.mime.startsWith('image')">
+        <img src="{{file.url}}" alt="image">
+      </div>
+      <div *ngIf="file.mime.startsWith('video')">
+        <video width="320" height="240" controls>
+          <source src="{{file.url}}" type="{{file.mime}}">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+   
+        <div *ngIf="!(file.mime.startsWith('image') || file.mime.startsWith('video'))">
+          <a href="{{file.url}}" target="_self">File</a>
+        </div>
+    
+    </div>
+  </div>
   <div class="row">
     <textarea [hidden]="!editing" [(ngModel)]="postBody"></textarea>
     <div class="col-2 my-auto" [hidden]="!editing">

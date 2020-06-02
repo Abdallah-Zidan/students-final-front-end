@@ -57,6 +57,8 @@ export class PostsService {
     this.httpService
       .requestAddPost(body, files, scope, scopeId)
       .subscribe((res: any) => {
+        console.log(res);
+        
         const resPost = res.data.post;
         const currUser = this.storage.getUser('user');
 

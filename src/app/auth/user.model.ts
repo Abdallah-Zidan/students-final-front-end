@@ -9,7 +9,7 @@ export class User {
     private avatar: string | null,
     private verified: boolean,
     private _token: string
-  ) {}
+  ) { }
 
   get token(): string {
     return this._token;

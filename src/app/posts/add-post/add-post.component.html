@@ -7,7 +7,7 @@
     <textarea (input)="onCommenting($event)" matInput placeholder="Ex. It makes me feel..."></textarea>
   </mat-form-field>
   <label class="btn btn-primary my-auto">
-    Add File <input type="file" hidden>
+    Add File <input type="file" multiple hidden (change)="onFilesSelected($event)">
 </label>
   <button mat-button [hidden]="isEmpty" color="primary" (click)="onAddPost()">Post</button>
 </div>
