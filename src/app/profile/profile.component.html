@@ -1,198 +1,115 @@
-<!-- <div class=" register">
-            <div class="row">
-               
-                <div class="register-right container justify-content-md-center">
-                  <div class="row col-md-6 col-mb-3" style="margin-left:  40%;">
-                    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">page1</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">page2</a>
-                        </li>
-                    </ul>
-                  </div>
-                    <div class="tab-content " id="myTabContent">
-                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row register-form ">
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group">
-                                        <div class="profile-img" *ngIf="data&&data.avatar!=null">
-                                            <img class="img-fluid"src="{{data.avatar}}" alt=""/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                          <label for="username">Name</label>
-                                            <div class="col-md-6">
-                                                <h5>{{ data.name}}</h5>
-                                            </div>             
-                                     </div>
-
-                                     <div class="form-group">
-                                        <label for="tel-input">Email</label>
-                                          <div class="col-md-6">
-                                              <h5>{{ data.email}}</h5>
-                                          </div>
-                                      </div>
-
-                                     <div class="form-group">
-                                      <label for="tel-input">Phone</label>
-                                        <div class="col-md-6">
-                                            <h5>{{ data.mobile}}</h5>
-                                        </div>
-                                    </div>
-                                    
-                                
-                                    <div class="form-group">
-                                      <label for="address">Address</label>
-                                      <div class="col-md-6">
-                                        <h5>{{ data.address}}</h5>
-                                    </div>
-                                    </div>
-                                    <input type="submit" value="Edit"  class="btnRegister" name="btnAddMore" routerLink="update" >
-                                  
-                                </div>
-                                <div class="col-md-3 img-fluid image" style="  margin-top: 10%; ">
-                                  <img  src="../../../assets/images/profile.jpg" alt="">
-                                 </div>
-                            </div></div>
-
-                            <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row register-form ">
-                                    <div class="col-md-6 mb-3">
-                            <div *ngIf="data&&data.type=='Student'">
-                                        <div class="form-group">
-                                            <label for="University">University</label>
-                                            <div class="col-md-6" *ngIf="studyData!=null">
-                                                <h5>{{ studyData[0].faculty.university.name}}</h5>
-                                            </div>
-                                            
-                                        </div>
-                                         <div class="form-group">
-                                            <label for="faculty">Faculty</label>
-                                            <div class="col-md-6" *ngIf="studyData!=null">
-                                                <h5>{{ studyData[0].faculty.name}}</h5>
-                                            </div>
-                                           
-                                          </div>
-                                     
-                                          <div class="form-group">
-                                            <label for="department">Major Department</label>
-                                            <div class="col-md-6" *ngIf="studyData!=null">
-                                                <h5>{{ studyData[0].department.name}}</h5>
-                                            </div>
-                                          </div>
-
-                                          <div class="form-group" *ngIf="studyData!=null &&studyData.length>1">
-                                            <label for="department">Minor Department</label>
-                                            <div class="col-md-6">
-                                                <h5>{{ studyData[1].department.name}}</h5>
-                                            </div>
-                                          </div>
-                                    
-                                        <div class="form-group">
-                                            <label for="year">level</label>
-                                            <div class="col-md-6">
-                                                <h5>{{ data.profile.year}}</h5>
-                                            </div>
-                                            
-                                        </div>
-                                    
-                                    <div class="form-group">
-                                      <label for="date">BirthDate</label>
-                                      <div class="col-md-6">
-                                        <h5>{{ data.profile.birthdate}}</h5>
-                                    </div>   
-                                    </div>
-                                </div>
-                              
-                                
-                                
-                                  <div *ngIf="data&&data.type=='Company'">
-                                   
-                                  <div class="form-group ">
-                                    <label for="tel-input">Website</label>
-                                    <div class="col-md-6">
-                                        <h5>{{ data.profile.website}}</h5>
-                                    </div>
-                                  </div>
-                                  
-                                  <div class="form-group">
-                                    <label for="tel-input">Fax</label>
-                                    <div class="col-md-6">
-                                        <h5>{{ data.profile.fax}}</h5>
-                                    </div>
-                                  </div>
-                                
-                                  
-                                     <div class="form-group">
-                                        <label for="description">Description</label> 
-                                        <div class="col-md-6">
-                                            {{ data.profile.description}}
-                                        </div>
-                                     </div>
-                                  </div></div>
-                                
-                                      
-                                      <div class="col-md-3 img-fluid image" style="  margin-top: 10%; ">
-                                        <img  src="../../../assets/images/profile.jpg" alt="">
-                                       </div></div>
-                                    </div>
-                                </div>
-                                </div>   
-                            </div>
-                        </div>
-                        
-         -->
-
-
 <app-nav>
     <div class="wrapper">
 
-        <div class="profile-card js-profile-card">
-            <div class="profile-card__img">
-                <img src="../../assets/images/avatar-exemple.jpg" alt="profile card">
+        <div class="profile-card js-profile-card"  *ngIf="data">
+            <div class="profile-card__img" *ngIf="data.avatar!=null">
+                <img src="{{data.avatar}}" alt="profile card">
             </div>
 
             <div class="profile-card__cnt">
-                <div class="profile-card__name">Muhammed Gaber</div>
-                <div class="profile-card__txt">Student</div>
-                <div class="profile-card__txt">
-                    <span class="material-icons text-secondary">
-                        school
-                    </span>
-                    Faculty of Commerce </div>
-                <div class="profile-card__txt">
-                    <span class="material-icons text-secondary">
-                        account_balance
-                    </span>
-                    <strong> Alexandria Univeristy </strong></div>
-   
-
-                <div class="profile-card-inf my-3">
-                    <div class="profile-card-inf__item">
-                        <div class="profile-card-inf__title">13</div>
-                        <div class="profile-card-inf__txt">Post</div>
-                    </div>
-
-                    <div class="profile-card-inf__item">
-                        <div class="profile-card-inf__title">65</div>
-                        <div class="profile-card-inf__txt">Connections</div>
-                    </div>
-
-                    <div class="profile-card-inf__item">
-                        <div class="profile-card-inf__title">2</div>
-                        <div class="profile-card-inf__txt">Groups</div>
-                    </div>
+                <div class="profile-card__name">{{ data.name}}</div>
+                <div class="profile-card__txt">{{ data.type}}</div>
+                <div *ngIf="data.type=='Student'&&studyData!=null">
+                    <hr>
+                    <div class="profile-card__txt">
+                        <span class="material-icons text-secondary">
+                            account_balance
+                        </span>
+                        {{ studyData[0].faculty.university.name}} University</div>
 
 
+                     <div class="profile-card__txt">
+                        <span class="material-icons text-secondary">
+                            school
+                        </span>
+                        {{ studyData[0].faculty.name}} Faculty</div>
+                
+                        <div class="profile-card__txt">
+                            <span class="material-icons text-secondary">
+                                assignment_ind
+                            </span>
+                            {{ studyData[0].department.name}} Department</div>
+                        
+                        <div class="profile-card__txt" *ngIf="studyData.length>1">
+                            <span class="material-icons text-secondary">
+                                assignment_ind
+                            </span>
+                            {{ studyData[1].department.name}} Department </div>
+                        
+                        <div class="profile-card-inf__txt">
+                            
+                            Year : {{  data.profile.year}} </div>
+                               
                 </div>
 
+                <hr>    
+                    <div class="profile-card__txt">
+                        <span class="material-icons text-secondary">
+                            email
+                        </span>
+                        {{data.email}} </div>
+                    
+                    <div class="profile-card__txt">
+                        <span class="material-icons text-secondary">
+                            phone
+                        </span>
+                        {{data.mobile}} </div>
+                    
+                    <div class="profile-card__txt">
+                        <span class="material-icons text-secondary">
+                            location_on
+                        </span>
+                        {{data.address}} </div>
+                <hr>
 
+                <div *ngIf="data.type=='Student'">
+                    <div class="profile-card-inf__txt">
+                        <span class="material-icons text-secondary">
+                            cake
+                        </span>
+                        BirthDate : {{  data.profile.birthdate}}</div>
+                </div>
+
+                <div *ngIf="data.type=='Company'">
+                    <span class="profile-card__name">
+                        Fax : 
+                    </span>
+                    <div class="profile-card__txt">
+                        {{ data.profile.fax}}</div>
+                
+                    <span class="profile-card__name">
+                        Website : 
+                    </span>
+                    <div class="profile-card__txt">
+                        {{ data.profile.website}}</div>
+
+
+                    <span class="profile-card__name">
+                                Description : 
+                    </span>    
+                    <div class="profile-card__txt" >
+                    {{ data.profile.description}} </div>
+                </div>
+
+                <div *ngIf="data.type=='TeachingStaff'">
+                    <div class="profile-card__txt">
+                        <span class="material-icons text-secondary">
+                            receipt_long
+                        </span>
+                        Certificates : {{ data.profile.scientific_certificates}}</div>
+                
+                        <div class="profile-card__txt">
+                            <span class="material-icons text-secondary">
+                                cake
+                            </span>
+                            BirthDate : {{  data.profile.birthdate}}</div>
+                        
+                </div>
+
+                
 
                 <div class="profile-card-ctr">
-                    <button class="profile-card__button button--blue js-message-btn">Edit Profile</button>
+                    <button class="profile-card__button button--blue js-message-btn" routerLink="update">Edit Profile</button>
                 </div>
             </div>
 
