@@ -1,54 +1,32 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    [mode]="(isHandset$ | async) ? 'over' : 'push'" [opened]="(isHandset$ | async) === true">
     <mat-toolbar>
-      <div class="side-slogan"></div>
-      Student's
+
     </mat-toolbar>
-    <hr>
 
     <!-- Side Bar -->
-    <div class="sidebar-info" [hidden]=" !(isHandset$ | async)">
-      <img class="sidebar-avatar" src="../../assets/images/avatar-exemple.jpg">
-      <h6>Prof.Abdallah Zidan</h6>
-    </div>
-
-    <div class="sidebar-info" [hidden]=" !(isHandset$ | async)">
-      <div class="side-item">
-        <mat-icon>account_circle</mat-icon>
-        <span> My Profile </span>
-      </div>
-
-      <div class="side-item">
-        <mat-icon>settings</mat-icon>
-        <span> Settings </span>
-      </div>
-
-      <div class="side-item">
-        <mat-icon>power_settings_new</mat-icon>
-        <span> Logout </span>
-      </div>
-
-    </div>
-
 
     <mat-nav-list>
-      <app-nested-tree></app-nested-tree>
+      <div class="row w-75">
+        <div class="col-12">
+
+          <app-sidebar></app-sidebar>
+        </div>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <!-- End Side Bar -->
 
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <img src="../../assets/images/logo-white.png">
       <h2 class="slogan">Student's</h2>
       <span class="spacer"> </span>
 
-      <!-- Nav Bar -->
       <!-- Home -->
       <div [hidden]="isHandset$ | async">
         <button mat-button>
