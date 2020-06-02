@@ -1,19 +1,14 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'push'" [opened]="(isHandset$ | async) === true">
+  <mat-sidenav style="width: 260px;" #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === true">
     <mat-toolbar>
 
     </mat-toolbar>
 
     <!-- Side Bar -->
 
-    <mat-nav-list>
-      <div class="row w-75">
-        <div class="col-12">
-
+    <mat-nav-list class="sidelist">
           <app-sidebar></app-sidebar>
-        </div>
-      </div>
     </mat-nav-list>
   </mat-sidenav>
   <!-- End Side Bar -->
