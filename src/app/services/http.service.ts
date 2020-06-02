@@ -16,7 +16,7 @@ const endPoints = {
   universites: 'http://localhost:8000/api/v1/universities',
   verificationResend: 'http://localhost:8000/api/v1/email/resend',
   userData: 'http://localhost:8000/api/v1/user/profile',
-  userDepartment: 'http://localhost:8000/api/v1/user/department',
+  userDepartment: 'http://localhost:8000/api/v1/user/departments',
   studentDepartmentGroup: '',
   studentFacultyGroup: '',
   professorDepartments: '',
@@ -69,33 +69,18 @@ export class HttpService {
     });
   }
 
-  getUser(user) {
-    let headers_object = new HttpHeaders().set(
-      'Authorization',
-      'Bearer ' + user._token.access_token
-    );
-    return this.http.get<any>(endPoints.userData, { headers: headers_object });
+  getUser() {
+    return this.http.get<any>(endPoints.userData);
   }
 
-  getuserDepartment(user) {
-    let headers_object = new HttpHeaders().set(
-      'Authorization',
-      'Bearer ' + user._token.access_token
-    );
-    return this.http.get<any>(endPoints.userDepartment, {
-      headers: headers_object,
-    });
+  getuserDepartment() {
+    return this.http.get<any>(endPoints.userDepartment);
   }
 
-  updateProfile(user, storageData) {
-    let headers_object = new HttpHeaders().set(
-      'Authorization',
-      'Bearer ' + storageData._token.access_token
-    );
-    return this.http.post<any>(endPoints.userData, user, {
-      headers: headers_object,
-    });
+  updateProfile(user) {
+    return this.http.post<any>(endPoints.userData, user)
   }
+
   requestGroups() {
     return this.http.get(endPoints.groups);
   }
