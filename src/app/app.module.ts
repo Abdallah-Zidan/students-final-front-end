@@ -60,7 +60,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { AnnouncementsComponent } from './education/announcements/announcements.component';
+import {MatVideoModule} from 'mat-video';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -95,6 +96,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SingleEventComponent,
     SingleReplyComponent,
     SidebarComponent,
+    AnnouncementsComponent
   ],
   imports: [
     BrowserModule,
@@ -127,6 +129,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatCardModule,
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
+    MatVideoModule
   ],
 
   providers: [

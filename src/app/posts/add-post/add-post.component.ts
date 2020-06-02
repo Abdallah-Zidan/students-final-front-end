@@ -42,15 +42,13 @@ export class AddPostComponent implements OnInit {
     //   fd.append('file', file, file.name);
     // });
     // console.log(fd.getAll('file'));
-    const postFiles = [];
-    for (let i = 0; i < this.selectedFiles.length; i++) {
-      postFiles.push(this.selectedFiles[i]);
-    }
-    console.log(postFiles);
+  
+   
+
 
     this.postsService.addPost(
       this.body,
-      postFiles,
+      this.selectedFiles,
       this.group.scope,
       this.group.id
     );

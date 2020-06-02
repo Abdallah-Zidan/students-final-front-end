@@ -57,22 +57,27 @@
       <mat-icon class="contact float-right">message</mat-icon>
     </div>
   </div>
-  <div class="row" *ngIf="post.files.length > 0">
+  <div class="row" style="text-align: center;" *ngIf="post.files.length > 0">
     <div *ngFor="let file of post.files">
       <div *ngIf="file.mime.startsWith('image')">
         <img src="{{file.url}}" alt="image">
       </div>
       <div *ngIf="file.mime.startsWith('video')">
-        <video width="320" height="240" controls>
-          <source src="{{file.url}}" type="{{file.mime}}">
-          Your browser does not support the video tag.
-        </video>
+        <mat-video src="{{file.url}}" title="video" [preload]="true" [fullscreen]="true" [download]="true"
+          color="accent" spinner="spin">
+        </mat-video>
       </div>
-   
-        <div *ngIf="!(file.mime.startsWith('image') || file.mime.startsWith('video'))">
-          <a href="{{file.url}}" target="_self">File</a>
-        </div>
-    
+      <div *ngIf="file.mime.startsWith('audio')">
+        <audio controls>
+          <source src="{{file.url}}" type="{{file.mime}}">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+
+      <div *ngIf="!(file.mime.startsWith('image') || file.mime.startsWith('video') || file.mime.startsWith('audio'))">
+        <a href="{{file.url}}" target="_self">File</a>
+      </div>
+
     </div>
   </div>
   <div class="row">

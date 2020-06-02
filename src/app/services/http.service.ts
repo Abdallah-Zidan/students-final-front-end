@@ -105,7 +105,10 @@ export class HttpService {
   requestAddPost(postBody, postFiles, scope, scopeId) {
     const formData = new FormData();
     formData.append('body', postBody);
-    formData.append('files', postFiles);
+    for (let i = 0; i < postFiles.length; i++) {
+      formData.append('files[]', postFiles[i]);
+    }
+
     console.log(formData.getAll('files'));
 
     return this.http.post(replacePostsUrl(endPoints, scope, scopeId), formData);
