@@ -22,7 +22,6 @@ import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostsComponent } from './posts/posts.component';
-import { LeftSidebarComponent } from './posts/left-sidebar/left-sidebar.component';
 import { MainPostComponent } from './posts/main-post/main-post.component';
 import { GroupComponent } from './education/groups/group.component';
 import { AddPostComponent } from './posts/add-post/add-post.component';
@@ -77,7 +76,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CompanyComponent,
     HomeComponent,
     PostsComponent,
-    LeftSidebarComponent,
     MainPostComponent,
     GroupComponent,
     AddPostComponent,

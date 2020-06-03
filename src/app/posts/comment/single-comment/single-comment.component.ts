@@ -13,17 +13,27 @@ export class SingleCommentComponent implements OnInit {
   @Input() comment: PostComment;
   @Input() postId;
   @Input() group: Group;
+  isEmpty = true;
   user;
   editing = false;
   commentBody;
   constructor(
     private postsService: PostsService,
     private storage: StorageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.commentBody = this.comment.body;
     this.user = this.storage.getUser('user');
+  }
+
+  onCommenting($event) {
+    if ($event.target.value) {
+      this.isEmpty = false;
+    } else {
+      this.isEmpty = true;
+    }
+    this.comment = $event.target.value;
   }
   onEditComment() {
     this.editing = true;

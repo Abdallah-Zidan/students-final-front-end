@@ -1,39 +1,56 @@
 <div class="container">
   <div class="row">
-    <div class="col-10">
-      <img src="{{comment.creator.avatar}}" width="50px">
-      <h5 class="text-primary">{{comment.creator.name}}</h5>
-      
-      <div class="row">
-        <textarea [hidden]="!editing" [(ngModel)]="commentBody"></textarea>
-        <div class="col-2 my-auto" [hidden]="!editing" (click)="onUpdateComment()" style="cursor: pointer;">
-          <span class="text-primary material-icons" (click)="onUpdateComment()">
-            send
+    <div class="col-2 my-auto text-center">
+      <img class="w-100 ava" src="../../../assets/images/avatar-exemple.jpg" alt="">
+    </div>
+    <div class="col-8  my-auto">
+      <div class="col-12 px-0">
+        <h5 class=" my-auto px-0 text-primary">{{comment.creator.name}}</h5>
+      </div>
+
+      <div class="col-12">
+        <div class="row h-100">
+          <span class="my-auto text-secondary material-icons">
+            schedule
           </span>
+          <span class="my-auto text-secondary">3 min. ago</span>
         </div>
-        <p [hidden]="editing">{{comment.body}}</p>
       </div>
     </div>
 
-    <div class="ml-auto col-1" *ngIf="(user.id == comment.creator.id)">
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item>
-          <mat-icon>create</mat-icon>
-          <span (click)="onEditComment()">Edit Comment</span>
+    <div class="col-2 my-auto" *ngIf="(user.id == comment.creator.id)">
+      <div class="col-4 ml-auto">
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
         </button>
-        <button mat-menu-item>
-          <mat-icon>delete_sweep</mat-icon>
-          <span (click)="onDeleteComment()">Delete Comment</span>
-        </button>
-      </mat-menu>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item>
+            <mat-icon>create</mat-icon>
+            <span (click)="onEditComment()">Edit Comment</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>delete_sweep</mat-icon>
+            <span (click)="onDeleteComment()">Delete Comment</span>
+          </button>
+        </mat-menu>
+      </div>
     </div>
-
-
-
-    <hr />
   </div>
+
+  <div class="row h-100 my-3 mx-5">
+    <div class="col-8">
+      <mat-label class="text-primary" [hidden]="!editing">Edit Your Post</mat-label>
+      <textarea class="mx-5" matInput [hidden]="!editing" [(ngModel)]="commentBody"></textarea>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-2 my-auto" [hidden]="!editing">
+      <span class="text-primary curs material-icons" (click)="onUpdateComment()">
+        send
+      </span>
+    </div>
+    <p [hidden]="editing">{{comment.body}}</p>
+  </div>
+
   <app-reply [replies]="comment.replies" [postId]="postId" [group]="group" [commentId]="comment.id"></app-reply>
 </div>
