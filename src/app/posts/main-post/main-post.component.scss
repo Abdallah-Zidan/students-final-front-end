@@ -2,11 +2,17 @@ body,
 html,
 * {
     outline: none !important;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
 span
 {
     cursor: pointer;
+}
+.ava{
+    padding: 3px;
+    border: 1px solid blue;
+    border-radius: 50%;
+    min-width    : 50px;
 }
 p{
     padding: 1vw;
@@ -48,11 +54,6 @@ body {
     color: green;
     cursor: pointer; 
     margin: 15px;
-}
-img {
-
-    border-radius: 50%;
-    min-width    : 50px;
 }
 
 h4 {

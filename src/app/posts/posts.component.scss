@@ -1,13 +1,11 @@
 :host{
     box-sizing: border-box;
-    background-color: #f00;
+    box-shadow: -5px -5px 7px grey;
 }
 
+.post{
 
-.wrapper{
-    display: flex;
-    word-wrap: break-word;
-    background-color: #eee;
+    background-color: white;
 }
 
 h3{
