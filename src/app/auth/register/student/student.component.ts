@@ -30,7 +30,7 @@ export class StudentComponent implements OnInit {
     let studentformControls = {
       name : new FormControl('',[
         Validators.required,
-        Validators.pattern("[a-z .'-]+"),
+        Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(6)
       ]),
 
@@ -74,7 +74,7 @@ export class StudentComponent implements OnInit {
 
       phone: new FormControl('',[
         Validators.required,
-        Validators.pattern("[0-9]+"),
+        Validators.pattern("[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,8}"),
         Validators.minLength(11),
         Validators.maxLength(15)
       ]),
@@ -180,7 +180,6 @@ export class StudentComponent implements OnInit {
 
     let user = this.studentForm.value;
     this.errorList=[]
-    console.log(user)
     
     this.authService.register(user).subscribe(
       res=>{

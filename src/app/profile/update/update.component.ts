@@ -4,7 +4,7 @@ import { AuthService } from '../../auth/services/auth.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
-
+import { User } from '../../auth/user.model';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class UpdateComponent implements OnInit {
   flag;
   data;
   storageData;
-  userForm: FormGroup;companyForm: FormGroup;studentForm: FormGroup;
+  userForm: FormGroup;companyForm: FormGroup;studentForm: FormGroup; TeachingStaffForm: FormGroup;
   imageValidation="0";
   constructor(
     private authService: AuthService,
@@ -36,7 +36,7 @@ export class UpdateComponent implements OnInit {
     let userFormControls = {
       name : new FormControl('',[
         Validators.required,
-        Validators.pattern("[a-z .'-]+"),
+        Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(6)
       ]),
 
@@ -46,7 +46,7 @@ export class UpdateComponent implements OnInit {
 
       phone: new FormControl('',[
         Validators.required,
-        Validators.pattern("[0-9]+"),
+        Validators.pattern("[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,8}"),
         Validators.minLength(11),
         Validators.maxLength(15)
       ]),
@@ -54,37 +54,21 @@ export class UpdateComponent implements OnInit {
       avatar: new FormControl(''),
     }
     let studentFormControls={
-      // university : new FormControl('',[
-      //   Validators.required,
-      // ]),
-
-      // faculty : new FormControl('',[
-      //   Validators.required,
-      // ]),
-
-      // department : new FormControl('',[
-      //   Validators.required,
-      // ]),
-
-      // level : new FormControl('',[
-      //   Validators.required,
-      // ]),
-
       
-
       birthdate : new FormControl('',[
         Validators.required]),
 
       }
+      
 
       let companyFormControls={
       website: new FormControl('',[
         Validators.required,
-        Validators.pattern("(https+://)+([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?\\.([a-z.]{2,6})[/\\w .-]*/?")
+        Validators.pattern("((http|https)+://)+([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?\\.([a-z.]{2,6})[/\\w .-]*/?")
       ]),
 
       fax: new FormControl('',[
-        Validators.pattern("[+]{1}20[0-9]{8,11}"),
+        Validators.pattern("[+]{1}[0-9]{10,14}"),
         Validators.maxLength(15),
         Validators.required,
 
@@ -94,12 +78,24 @@ export class UpdateComponent implements OnInit {
         Validators.maxLength(250),
 
       ]),
-     
+
+    }
+
+    let TeachingStaffFormControls={
+      birthdate : new FormControl(''),
+
+      scientific_certificates : new FormControl('',[
+        // Validators.required,
+        Validators.pattern("[A-Za-z0-9 .'-]+"),
+        Validators.minLength(10)
+      ]),
+
     }
   
     this.userForm = this.fb.group(userFormControls);
     this.companyForm = this.fb.group(companyFormControls);
     this.studentForm = this.fb.group(studentFormControls);
+    this.TeachingStaffForm=this.fb.group(TeachingStaffFormControls);
 
 
    }
@@ -116,7 +112,7 @@ export class UpdateComponent implements OnInit {
     this.storageData= this.storagService.getItem('user')
     if(this.storageData)
      {
-    this.httpService.getUser(this.storageData).subscribe(
+    this.httpService.getUser().subscribe(
       result =>{
         this.data=result.data;
 
@@ -127,40 +123,36 @@ export class UpdateComponent implements OnInit {
           avatar:this.data.avatar,
           type:this.data.type,});
 
+          if(this.data.type=="Student")
+          {
           this.studentForm.patchValue({
           birthdate:this.data.profile.birthdate,
-          // level:this.data.profile.year,
-          });
+           });
+          }
 
+          
+          if(this.data.type=="Company")
+          {
           this.companyForm.patchValue({
           fax:this.data.profile.fax,
           website:this.data.profile.website,
           description:this.data.profile.description,
-        });
+          });
+         }
+
+         if(this.data.type=="TeachingStaff")
+         {
+         this.TeachingStaffForm.patchValue({
+         birthdate:this.data.profile.birthdate,
+         scientific_certificates:this.data.profile.scientific_certificates
+          });
+         }
       },
       error =>{
         console.log(error);
       }
     )
 
-    // if(this.storageData.type=="Student")
-    // {
-    //   let studyData
-    //   this.httpService.getuserDepartment(this.storageData).subscribe(
-    //     result=>{
-    //      studyData=result.data.department_faculties
-    //      console.log(studyData)
-    //       this.userForm.patchValue({
-    //         university:studyData[0].faculty.university.id,
-    //         faculty:studyData[0].faculty.id,
-    //         department:studyData[0].department.id,
-    //       });
-    //     },
-    //     error=>{console.log(error)}
-    //   )
-    // }
-
-    
     
   }}
   
@@ -171,22 +163,22 @@ export class UpdateComponent implements OnInit {
   get avatar() { return this.userForm.get('avatar') }
 
   get birthdate() { return this.studentForm.get('birthdate') }
-  // get university() { return this.studentForm.get('university') }
-  // get faculty() { return this.studentForm.get('faculty') }
-  // get department() { return this.studentForm.get('department') }
-  // get level() { return this.studentForm.get('level') }
 
   get fax() { return this.companyForm.get('fax') }
   get website() { return this.companyForm.get('website') }
   get description() { return this.companyForm.get('description') }
 
+  get staff_birthdate() { return this.TeachingStaffForm.get('birthdate') }
+  get scientific_certificates() { return this.TeachingStaffForm.get('scientific_certificates') }
+
+
   onFileChange(event) {
-    console.log(event.target.value)
     if (event.target.files.length > 0 )
     {
       const file = event.target.files[0];
       if(file.type.match(/image\/*/) != null)
       {
+       document.getElementById('image').setAttribute('src',window.URL.createObjectURL(file))
        this.imageValidation="";
        this.flag=1;
        this.userForm.patchValue({avatar: file});
@@ -218,40 +210,6 @@ export class UpdateComponent implements OnInit {
         }
   }
 
-  // changeFacultyList(e)
-  // {
-  //     if(this.universityList.length>0 &&this.university.value>=0)
-  //  { this.facultyList=[]
-  //   this.departmentList=[]
-  //   this.studentForm.patchValue({faculty: null,department: null});
-  //   let id=this.university.value
-  //   console.log(id)
-  //   let index
-  //   for(let i=0;i<this.universityList.length;i++)
-  //   {if(this.universityList[i].id==id)
-  //       {index=i;
-  //         break;
-  //       }
-  //   }
-  //   this.facultyList=this.universityList[index].faculties
-  //  }
-  // }
-
-  // changeDepartmentList(e)
-  // {
-  //   if(this.facultyList.length>0)
-  //   {this.departmentList=[]
-  //   this.studentForm.patchValue({department: null});
-  //   let id=this.faculty.value
-  //   let index
-  //   for(let i=0;i<this.facultyList.length;i++)
-  //   {if(this.facultyList[i].id==id)
-  //       {index=i;
-  //         break;
-  //       }
-  //   }
-  //   this.departmentList=this.facultyList[index].departments}
-  // }
 
   updateProfile()
   {
@@ -265,10 +223,6 @@ export class UpdateComponent implements OnInit {
     
     if(this.storageData.type=="Student")
     {
-    // user.append('university', this.studentForm.get('university').value);
-    // user.append('faculty', this.studentForm.get('faculty').value);
-    // user.append('department', this.studentForm.get('department').value);
-    // user.append('year', this.studentForm.get('level').value);
     user.append('birthdate', this.studentForm.get('birthdate').value);
     }
 
@@ -278,10 +232,30 @@ export class UpdateComponent implements OnInit {
      user.append('website', this.companyForm.get('website').value);
      user.append('description', this.companyForm.get('description').value);
     }
-    user.append('_method', 'PUT');    
-    
-    this.httpService.updateProfile(user,this.storageData).subscribe(
+
+    // if(this.storageData.type=="TeachingStaff")
+    // {
+    //  user.append('birthdate', this.TeachingStaffForm.get('birthdate').value);
+    //  user.append('scientific_certificates', this.TeachingStaffForm.get('scientific_certificates').value);
+    // }
+    user.append('_method', 'PUT');  
+
+    let token=this.storagService.getItem('user')._token
+    this.httpService.updateProfile(user).subscribe(
       res=>{
+          const currentUser = new User(
+            res.data.id,
+            res.data.name,
+            res.data.email,
+            res.data.type,
+            res.data.address,
+            res.data.mobile,
+            res.data.avatar,
+            res.data.verified,
+            token
+          );
+            this.storagService.removeItem('user')
+            this.storagService.saveItem('user', currentUser);
             this.router.navigate(['/profile']);
            },
 

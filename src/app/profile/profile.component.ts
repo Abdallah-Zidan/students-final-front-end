@@ -3,6 +3,7 @@ import { StorageService } from '../services/storage.service';
 import { HttpService } from '../services/http.service';
 
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -17,24 +18,26 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     let user= this.storagService.getItem('user')
     if(user)
-    {this.httpService.getUser(user).subscribe(
+    {this.httpService.getUser().subscribe(
       result =>{
-        console.log(result)
         this.data=result.data;
       },
       error =>{
         console.log(error);}
      ) }
       if(user.type=="Student")
-      {
-      
-        this.httpService.getuserDepartment(user).subscribe(
+      {      
+        this.httpService.getuserDepartment().subscribe(
           result=>{
            this.studyData=result.data.department_faculties
-           console.log(this.studyData)
           },
           error=>{console.log(error)}
-        )}
+        )
+      
+        if(this.data&&this.data.profile.year==0)
+        {this.data.profile.year="Preparatory"}
+      
+      }
     
   }}
 
