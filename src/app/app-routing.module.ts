@@ -14,6 +14,7 @@ import { GroupComponent } from './education/groups/group.component';
 import { EventsComponent } from './events/events.component';
 import { SingleEventComponent } from './events/single-event/single-event.component';
 import { AnnouncementsComponent } from './education/announcements/announcements.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -83,6 +84,10 @@ const routes: Routes = [
     path: 'announcements/:id',
     component: AnnouncementsComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   }
 ];
 
