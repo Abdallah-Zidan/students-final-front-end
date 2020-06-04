@@ -58,10 +58,10 @@ export class HttpService {
     return this.http.get<any>(endPoints.universites);
   }
 
-  verifyEmail(user): Observable<HttpResponse<any>> {
+  verifyEmail(token): Observable<HttpResponse<any>> {
     let headers_object = new HttpHeaders().set(
       'Authorization',
-      'Bearer ' + user._token.access_token
+      'Bearer ' + token
     );
     return this.http.get<any>(endPoints.verificationResend, {
       headers: headers_object,
