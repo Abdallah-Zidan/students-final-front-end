@@ -52,10 +52,9 @@ export class SettingsComponent implements OnInit {
     this.user= this.storagService.getItem('user')
     if(this.user)
     {
-   this.httpService.getUser(this.user).subscribe(
+   this.httpService.getUser().subscribe(
      result =>{
        this.data=result.data;
-       console.log(result)
      },
      error =>{
        console.log(error);
@@ -67,7 +66,7 @@ export class SettingsComponent implements OnInit {
     user.append('_method', 'PUT');    
     
     
-    this.httpService.updateProfile(user,this.user).subscribe(
+    this.httpService.updateProfile(user).subscribe(
       res=>{
            this.success="Password changed successfully,You must login again to continue"
            setTimeout(() => {

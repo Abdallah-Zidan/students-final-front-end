@@ -5,6 +5,11 @@ body,html,*{
   outline: none !important;
 }
 
+.ava{
+  padding: 1%;
+  border: 2px solid blue;
+}
+
 h3{
   display: inline-block;
   padding-left: 1vw;
@@ -31,6 +36,7 @@ h3{
 .spacer{
   flex: 1 1 auto;
 }
+
 
 
 .avatar{

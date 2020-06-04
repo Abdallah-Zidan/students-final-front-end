@@ -41,11 +41,13 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
   },
 
   {
     path: 'profile/update',
     component: UpdateComponent,
+    canActivate: [AuthGuard],
   },
 
   {

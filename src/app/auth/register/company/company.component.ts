@@ -28,13 +28,13 @@ export class CompanyComponent implements OnInit {
     let companyformControls = {
       name : new FormControl('',[
         Validators.required,
-        Validators.pattern("[a-z .'-]+"),
+        Validators.pattern("[A-Za-z .'-]+"),
         Validators.minLength(6)
       ]),
 
       phone: new FormControl('',[
         Validators.required,
-        Validators.pattern("[0-9]+"),
+        Validators.pattern("[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}"),
         Validators.minLength(11),
         Validators.maxLength(15)
       ]),
@@ -53,11 +53,11 @@ export class CompanyComponent implements OnInit {
       ]),
       website: new FormControl('',[
         Validators.required,
-        Validators.pattern("(https+://)+([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?\\.([a-z.]{2,6})[/\\w .-]*/?")
+        Validators.pattern("((http|https)+://)+([\\da-z0-9.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?\\.([a-z.]{2,6})[/\\w .-]*/?")
       ]),
       fax: new FormControl('',[
         Validators.required,
-        Validators.pattern("[+]{1}20[0-9]{8,11}"),
+        Validators.pattern("[+]{1}[0-9]{10,14}"),
         Validators.maxLength(15),
 
       ]),
@@ -92,7 +92,7 @@ export class CompanyComponent implements OnInit {
 
   
   addCompany(){
-    this.companyForm.patchValue({type: '1',gender:'1'});
+    this.companyForm.patchValue({type: 1,gender:0});
     let user = this.companyForm.value;
     this.errorList=[]
     
@@ -102,10 +102,15 @@ export class CompanyComponent implements OnInit {
       },
         err=>{
           window.scroll(0,0);
-          err.error.errors.email?this.errorList.push(err.error.errors.email):null
-          err.error.errors.mobile?this.errorList.push(err.error.errors.mobile):null
-          err.error.errors.fax?this.errorList.push(err.error.errors.fax):null
-          err.error.errors.website?this.errorList.push(err.error.errors.website):null
+         
+            if(err.error.errors)
+              {
+              err.error.errors.email?this.errorList.push(err.error.errors.email):null
+              err.error.errors.mobile?this.errorList.push(err.error.errors.mobile):null
+              err.error.errors.fax?this.errorList.push(err.error.errors.fax):null
+              err.error.errors.website?this.errorList.push(err.error.errors.website):null
+              }
+          
         }
     )
     }

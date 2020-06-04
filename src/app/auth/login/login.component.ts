@@ -26,7 +26,7 @@ export class LoginComponent {
         },
         (error) => {
           console.log(error);
-          this.error = error.error.message;
+          this.error = error.error.Message;
           this.isLoading = false;
           setTimeout(() => {
             this.error = '';

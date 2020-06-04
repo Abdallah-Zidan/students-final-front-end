@@ -23,7 +23,6 @@ export class ReplyComponent implements OnInit {
     } else {
       this.isEmpty = true;
     }
-    this.body = $event.target.value;
   }
   constructor(private postsService: PostsService) {}
 
@@ -37,5 +36,8 @@ export class ReplyComponent implements OnInit {
       this.postId,
       this.commentId
     );
+    setTimeout(() => {
+      this.body = '';
+    }, 1500);
   }
 }

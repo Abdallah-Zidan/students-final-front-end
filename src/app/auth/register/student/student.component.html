@@ -9,7 +9,7 @@
         <input type="text" class="form-control" id="username" placeholder="Name" formControlName="name">
         <div *ngIf="name.touched && name.invalid">
           <small *ngIf="name.errors.required" class="text-danger">name is required<br></small>
-          <small *ngIf="name.errors.pattern" class="text-danger">Invalid name<br></small>
+          <small *ngIf="name.errors.pattern" class="text-danger">name contains only letters and spaces<br></small>
           <small *ngIf="name.errors.minlength" class="text-danger">name must contain 6 characters at least</small>
         </div>
     </div>

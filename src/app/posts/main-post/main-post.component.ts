@@ -11,7 +11,7 @@ import { Group } from 'src/app/shared/models/group.model';
 import { PostsService } from 'src/app/education/services/posts.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { User } from 'src/app/auth/user.model';
-
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-main-post',
   templateUrl: './main-post.component.html',
@@ -25,7 +25,8 @@ export class MainPostComponent implements OnInit {
   postBody;
   constructor(
     private postsService: PostsService,
-    private storage: StorageService
+    private storage: StorageService,
+    public deleteDialog: MatDialog
   ) {}
   isEmpty = true;
   editing = false;
@@ -39,7 +40,6 @@ export class MainPostComponent implements OnInit {
     } else {
       this.isEmpty = true;
     }
-    this.comment = $event.target.value;
   }
   onAddComment(postId) {
     this.postsService.addComment(
@@ -48,6 +48,9 @@ export class MainPostComponent implements OnInit {
       this.group.id,
       postId
     );
+    setTimeout(() => {
+      this.comment = '';
+    }, 1500);
   }
 
   onEditPost() {
@@ -63,6 +66,20 @@ export class MainPostComponent implements OnInit {
       });
   }
   onDeletePost() {
-    this.postsService.deletePost(this.group.scope, this.group.id, this.post.id);
+    const dialogRef = this.deleteDialog.open(DeleteDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.postsService.deletePost(
+          this.group.scope,
+          this.group.id,
+          this.post.id
+        );
+      }
+    });
   }
 }
+@Component({
+  selector: 'delete-dialog',
+  templateUrl: './delete-dialog.html',
+})
+export class DeleteDialogComponent {}

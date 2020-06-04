@@ -3,13 +3,16 @@
     <div class="row">
       <div class="col-sm-4 col-lg-3">
         <div class="widget">
-          <div class="user-photo">
-              <img src="../../../assets/images/avatar-exemple.jpg" class="w-100" alt="User Photo">
+          <div class="user-photo" *ngIf="data&&data.avatar!=null">
+              <img id="image"  src="{{data.avatar}}" class="w-100" alt="User Photo">
           </div>
           <div class="file bg-secondary text-light text-center">
             <h4 class="p-2">Change Image</h4>
-            <input class="myinput" type="file" name="file"/>
+            <input class="myinput" type="file" name="file" (change)="onFileChange($event)"/>
           </div>
+        </div>
+        <div>
+          <small  class="text-danger" *ngIf="imageValidation!='0'">{{imageValidation}}</small>
         </div>
       </div>
 
@@ -22,31 +25,131 @@
           <div class="background-white p20 mb30">
             <h3 class="page-title">
               Contact Information
-
-              <a href="#" class="btn btn-primary btn-xs pull-right">Save</a>
+              <!-- <a href="#" class="btn btn-primary btn-xs pull-right">Save</a> -->
             </h3>
 
+
             <div class="row">
-              <div class="form-group col-sm-12">
-                <label>Name</label>
-                <input type="text" class="form-control" value="John">
-              </div>
+              <form  id="user_Form" class="col-sm-12" [formGroup]="userForm"  >    
 
-  
-              <div class="form-group col-sm-12">
-                <label>E-mail</label>
-                <input type="text" class="form-control" value="sample@example.com">
-              </div><!-- /.form-group -->
+                <div class="form-group" >
+                  <label>Name</label>
+                  <input type="text" class="form-control" formControlName="name">
+                  <div *ngIf="name.touched && name.invalid">
+                    <small *ngIf="name.errors.required" class="text-danger">name is required<br></small>
+                    <small *ngIf="name.errors.pattern" class="text-danger">name contains only letters and spaces<br></small>
+                    <small *ngIf="name.errors.minlength" class="text-danger">name must contain 6 characters at least</small>
+                  </div>   
+                </div>
 
-              <div class="form-group col-sm-12">
-                <label>Phone</label>
-                <input type="text" class="form-control" value="123-456-789">
-              </div><!-- /.form-group -->
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input type="text" class="form-control" formControlName="phone">
+                  <div *ngIf="phone.touched && phone.invalid">
+                    <small *ngIf="phone.errors.required" class="text-danger">Phone is required<br></small>
+                    <small *ngIf="phone.errors.pattern" class="text-danger">Invalid Phone<br></small>
+                    <small *ngIf="phone.errors.minlength" class="text-danger">Phone must contain a minimum of 11 characters</small>
+                    <small *ngIf="phone.errors.maxlength" class="text-danger">Phone must contain a maximum of 15 characters</small>
+                  </div>
+                </div><!-- /.form-group -->
 
-              <div class="form-group col-sm-12">
-                <label>Address</label>
-                <input type="text" class="form-control" value="sidi beshr">
-              </div><!-- /.form-group -->
+                <div class="form-group">
+                  <label>Address</label>
+                  <input type="text" class="form-control" formControlName="address">
+                  <div *ngIf="address.touched && address.invalid">
+                    <small *ngIf="address.errors.required" class="text-danger">address is required<br></small>
+                  </div>
+                </div><!-- /.form-group -->
+
+              </form>
+
+              <!-- if user student -->
+              <form  id="student_Form" class="col-sm-12" [formGroup]="studentForm" (ngSubmit)="updateProfile()" *ngIf="storageData&&storageData.type=='Student'"  >    
+
+                  <div class="form-group"   >
+                    <label>BirthDate</label>
+                    <input class="form-control" type="date"  id="birthdate" formControlName="birthdate" (change)="date($event)" >
+                    <div *ngIf="birthdate.touched && birthdate.invalid">
+                      <small *ngIf="birthdate.errors.required" class="text-danger">birthdate is required<br></small>
+                    </div>
+                    <div>
+                      <small class="text-danger">{{bodValidation}}</small>
+                    </div> 
+                  </div>
+
+                  <div class="form-group">
+                    <input type="submit" value="Save" [disabled]="userForm.invalid  || studentForm.invalid  || flag == 0 " class="btn btn-primary btn-xs pull-right" >
+                  </div>
+
+              </form>
+
+              <!-- if user company -->
+
+              
+              <form  id="company_Form"  class="col-sm-12" [formGroup]="companyForm" (ngSubmit)="updateProfile()" *ngIf="storageData&&storageData.type=='Company'">
+                <div class="form-group ">
+                  <label for="tel-input">Website</label>
+                    <input class="form-control" type="url"  id="url" formControlName="website">
+                    <div *ngIf="website.touched && website.invalid">
+                      <small *ngIf="website.errors.required" class="text-danger">website is required<br></small>
+                      <small *ngIf="website.errors.pattern" class="text-danger">Invalid website<br></small>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="tel-input">Fax</label>
+                    <input class="form-control" type="tel"  id="fax" formControlName="fax">
+                    <div *ngIf="fax.touched && fax.invalid">
+                      <small *ngIf="fax.errors.required" class="text-danger">fax is required<br></small>
+                      <small *ngIf="fax.errors.pattern" class="text-danger">Invalid fax make sure you enter 9 digits at least after +</small>
+                      <small *ngIf="fax.errors.maxlength" class="text-danger">fax can contain 15 characters maximum<br></small>
+                    </div>
+                </div>
+              
+                
+                <div class="form-group">
+                  <label for="description">Description</label>
+                    <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+                    <div *ngIf="description.touched && name.invalid">
+                      <small *ngIf="description.errors.required" class="text-danger">Description is required<br></small>
+                      <small *ngIf="description.errors.maxlength" class="text-danger">Description can contain 250 characters maximum</small>
+                    </div>
+                </div>
+              
+                  <input type="submit" value="Save" [disabled]="userForm.invalid || companyForm.invalid || flag == 0 " class="btn btn-primary btn-xs pull-right" >
+              
+              </form>
+
+              <!-- if user TeachingStaff -->
+              <form  id="TeachingStaff_Form" class="col-sm-12" [formGroup]="TeachingStaffForm" (ngSubmit)="updateProfile()" *ngIf="storageData&&storageData.type=='TeachingStaff'"  >    
+
+                <div class="form-group"   >
+                  <label>BirthDate</label>
+                  <input class="form-control" type="date"  id="birthdate" formControlName="birthdate" (change)="date($event)" >
+                  <!-- <div *ngIf="birthdate.touched && birthdate.invalid">
+                    <small *ngIf="birthdate.errors.required" class="text-danger">birthdate is required<br></small>
+                  </div> -->
+                  <div>
+                    <small class="text-danger">{{bodValidation}}</small>
+                  </div> 
+                </div>
+
+                <div class="form-group" >
+                  <label>Scientific Certificates</label>
+                  <input type="text" class="form-control" formControlName="scientific_certificates">
+                  <div *ngIf="scientific_certificates.touched && scientific_certificates.invalid">
+                    <!-- <small *ngIf="scientific_certificates.errors.required" class="text-danger">scientific_certificates is required<br></small> -->
+                    <small *ngIf="scientific_certificates.errors.pattern" class="text-danger">scientific_certificates contains only letters and spaces<br></small>
+                    <small *ngIf="scientific_certificates.errors.minlength" class="text-danger">scientific_certificates must contain 10 characters at least</small>
+                  </div>   
+                </div>
+
+                <div class="form-group">
+                  <input type="submit" value="Save" [disabled]="userForm.invalid  || TeachingStaffForm.invalid  || flag == 0 " class="btn btn-primary btn-xs pull-right" >
+                </div>
+
+               </form>
+
             </div><!-- /.row -->
           </div>
 

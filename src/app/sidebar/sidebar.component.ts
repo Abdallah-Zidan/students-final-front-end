@@ -45,10 +45,10 @@ export class SidebarComponent implements OnInit {
       this.groupsService.getGroups();
     }
     this.departmentGroups = this.groupsService.departmentGroups.map((group) => {
-      return { title: group.name, id: group.id ,route:'groups' };
+      return { title: group.name, id: group.id, route: 'groups' };
     });
     this.facultyGroups = this.groupsService.facultyGroups.map((group) => {
-      return { title: group.name, id: group.id,route:'groups' };
+      return { title: group.name, id: group.id, route: 'groups' };
     });
     this.menus = this.getMenuList();
   }
@@ -109,9 +109,13 @@ export class SidebarComponent implements OnInit {
         submenus: [
           {
             title: 'Faculty',
+            route: 'announcements',
+            id: 1,
           },
           {
             title: 'University',
+            route: 'announcements',
+            id: 2,
           },
         ],
       },

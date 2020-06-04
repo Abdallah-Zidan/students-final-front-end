@@ -45,7 +45,6 @@ export class PostsService {
           );
         });
         this.posts.next(this.postsArr);
-        console.log(this.postsArr);
       },
       (error) => {
         console.log(error);
