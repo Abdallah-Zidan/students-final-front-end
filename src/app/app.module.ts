@@ -22,7 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostsComponent } from './posts/posts.component';
-import { LeftSidebarComponent } from './posts/left-sidebar/left-sidebar.component';
+//import { LeftSidebarComponent } from './posts/left-sidebar/left-sidebar.component';
 import {
   MainPostComponent,
   DeleteDialogComponent,
@@ -83,7 +83,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CompanyComponent,
     HomeComponent,
     PostsComponent,
-    LeftSidebarComponent,
     MainPostComponent,
     GroupComponent,
     AddPostComponent,

@@ -2,10 +2,22 @@ body,html,*{
     outline: none !important;
 }
 
-img{
-    display: inline;
+.ava{
+    min-width: 30px;
+    border-radius: 50% ;
     border-radius: 50%;
+    padding: 2px;
+    border: 1px solid blue;
 }
+
+.example-full-width {
+    width: 100%;
+}
+
+.curs{
+    cursor: pointer;
+}
+
 h5{
     display: inline;
     padding: 1vw;

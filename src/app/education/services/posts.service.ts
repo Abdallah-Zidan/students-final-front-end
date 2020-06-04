@@ -27,9 +27,10 @@ export class PostsService {
     private storage: StorageService
   ) {}
 
-  getPosts(scope, scopeId, page) {
-    this.httpService.requestPosts(scope, scopeId, page).subscribe(
+  getPosts(resource, scope, scopeId, page) {
+    this.httpService.requestPosts(resource, scope, scopeId, page).subscribe(
       (res: any) => {
+        console.log(res.data);
         const resPosts = res.data.posts;
         this.postsArr = [];
         resPosts.forEach((post) => {
@@ -40,7 +41,11 @@ export class PostsService {
               getAttachments(post),
               post.reported,
               getCreator(post),
-              getComments(post)
+              getComments(post),
+              post.created_at_human,
+              post.department_faculty && post.department_faculty.department,
+              post.department_faculty && post.department_faculty.faculty,
+              post.type
             )
           );
         });
@@ -56,8 +61,6 @@ export class PostsService {
     this.httpService
       .requestAddPost(body, files, scope, scopeId)
       .subscribe((res: any) => {
-        console.log(res);
-        
         const resPost = res.data.post;
         const currUser = this.storage.getUser('user');
 
@@ -71,7 +74,8 @@ export class PostsService {
             currUser.personalData.name,
             currUser.personalData.avatar
           ),
-          []
+          [],
+          'now',
         );
         this.postsArr.unshift(newPost);
         this.posts.next(this.postsArr);
@@ -90,38 +94,30 @@ export class PostsService {
         this.posts.next(this.postsArr);
       });
   }
-  addComment(body, scope, scopeId, postId) {
+  addComment(body, postId) {
     const { element, index } = findInArray(postId, this.postsArr);
-    this.httpService
-      .requestAddComment(body, scope, scopeId, postId)
-      .subscribe((res: any) => {
-        const resComment = res.data.comment;
-        const currUser = this.storage.getUser('user');
-        const creator = new ElementCreator(
-          currUser.id,
-          currUser.personalData.name,
-          currUser.personalData.avatar
-        );
-        const newComment = new PostComment(resComment.id, body, creator, []);
-        element.comments.push(newComment);
-        this.postsArr[index] = element;
-        this.posts.next(this.postsArr);
-      });
+    this.httpService.requestAddComment(body, postId).subscribe((res: any) => {
+      const resComment = res.data.comment;
+      const currUser = this.storage.getUser('user');
+      const creator = new ElementCreator(
+        currUser.id,
+        currUser.personalData.name,
+        currUser.personalData.avatar
+      );
+      const newComment = new PostComment(resComment.id, body, creator, []);
+      element.comments.push(newComment);
+      this.postsArr[index] = element;
+      this.posts.next(this.postsArr);
+    });
   }
-  updateComment(body, scope, scopeId, postId, commentId) {
-    return this.httpService.requestEditComment(
-      body,
-      scope,
-      scopeId,
-      postId,
-      commentId
-    );
+  updateComment(body, postId, commentId) {
+    return this.httpService.requestEditComment(body, postId, commentId);
   }
-  deleteComment(scope, scopeId, postId, commentId) {
+  deleteComment(postId, commentId) {
     const { element, index } = findInArray(postId, this.postsArr);
     const commentIndex = findInArray(commentId, element.comments);
     this.httpService
-      .requestDeleteComment(scope, scopeId, postId, commentId)
+      .requestDeleteComment(postId, commentId)
       .subscribe((res) => {
         console.log(res);
         element.comments.splice(commentIndex, 1);
@@ -129,46 +125,35 @@ export class PostsService {
         this.posts.next(this.postsArr);
       });
   }
-  addReply(body, scope, scopeId, postId, commentId) {
+  addReply(body, postId, commentId) {
     const { element, index } = findInArray(postId, this.postsArr);
     const commentIndex = findInArray(commentId, element.comments).index;
-    this.httpService
-      .requestAddReply(body, scope, scopeId, postId, commentId)
-      .subscribe((res: any) => {
-        const resReply = res.data.reply;
-        const currUser = this.storage.getUser('user');
-        const creator = new ElementCreator(
-          currUser.id,
-          currUser.personalData.name,
-          currUser.personalData.avatar
-        );
-        const newReply = new CommentReply(resReply.id, body, creator);
-        element.comments[commentIndex].replies.push(newReply);
-        this.postsArr[index] = element;
-        this.posts.next(this.postsArr);
-      });
+    this.httpService.requestAddReply(body, commentId).subscribe((res: any) => {
+      const resReply = res.data.reply;
+      const currUser = this.storage.getUser('user');
+      const creator = new ElementCreator(
+        currUser.id,
+        currUser.personalData.name,
+        currUser.personalData.avatar
+      );
+      const newReply = new CommentReply(resReply.id, body, creator);
+      element.comments[commentIndex].replies.push(newReply);
+      this.postsArr[index] = element;
+      this.posts.next(this.postsArr);
+    });
   }
-  updateReply(body, scope, scopeId, postId, commentId, replyId) {
-    return this.httpService.requestEditReply(
-      body,
-      scope,
-      scopeId,
-      postId,
-      commentId,
-      replyId
-    );
+  updateReply(body, commentId, replyId) {
+    return this.httpService.requestEditReply(body, commentId, replyId);
   }
-  deleteReply(scope, scopeId, postId, commentId, replyId) {
+  deleteReply(postId, commentId, replyId) {
     const { element, index } = findInArray(postId, this.postsArr);
     const commentData = findInArray(commentId, element.comments);
     const replyIndex = findInArray(replyId, commentData.element.replies);
-    this.httpService
-      .requestDeleteReply(scope, scopeId, postId, commentId, replyId)
-      .subscribe((res) => {
-        console.log(res);
-        element.comments[commentData.index].replies.splice(replyIndex, 1);
-        this.postsArr[index] = element;
-        this.posts.next(this.postsArr);
-      });
+    this.httpService.requestDeleteReply(commentId, replyId).subscribe((res) => {
+      console.log(res);
+      element.comments[commentData.index].replies.splice(replyIndex, 1);
+      this.postsArr[index] = element;
+      this.posts.next(this.postsArr);
+    });
   }
 }

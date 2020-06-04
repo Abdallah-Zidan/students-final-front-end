@@ -1,6 +1,6 @@
 <div class="container post">
 
-  <div class="row h-100 mx-5 pt-3">
+  <div class="row h-100 mx-3 pt-3">
     <div class="col-2 my-auto text-center">
       <img class="w-75 ava" src="{{post.creator.avatar}}" alt="">
     </div>
@@ -13,29 +13,35 @@
       </div>
 
       <div class="row h-100 px-3">
-        <span class=" text-secondary material-icons">
+        <span class="my-auto text-secondary material-icons">
           schedule
         </span>
-        <span class=" text-secondary">3 min. ago</span>
+        <span class=" text-secondary">{{post.createdHuman}}</span>
 
       </div>
 
     </div>
 
-    <div class="col-2 my-auto" *ngIf="(post.creator.id == user.id)">
-
-      <div class="col-4">
+    <div class="col-2 my-auto">
+      <div class="col-4 ml-auto">
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-          <button (click)="onEditPost()" mat-menu-item>
-            <mat-icon>create</mat-icon>
-            <span >Edit Post</span>
-          </button>
-          <button (click)="onDeletePost()" mat-menu-item>
+          <div *ngIf="(post.creator.id == user.id)">
+            <button (click)="onEditPost()" mat-menu-item>
+              <mat-icon>create</mat-icon>
+              <span>Edit Post</span>
+            </button>
+            <button (click)="onDeletePost()" mat-menu-item>
+              <mat-icon>delete_sweep</mat-icon>
+              <span>Delete Post</span>
+            </button>
+          </div>
+
+          <button mat-menu-item *ngIf="!post.type">
             <mat-icon>delete_sweep</mat-icon>
-            <span >Delete Post</span>
+            <span>Report Post</span>
           </button>
         </mat-menu>
       </div>
@@ -44,43 +50,60 @@
 
 
 
-  <div class="row h-100 my-auto mx-5">
-    <div class="col-8 my-auto">
-      <div class="row h-100 my-auto">
-
-        <div class="col-lg-6 col-xs-12 col-sm-12 my-auto">
-          <span class="material-icons text-primary mr-2">
-            school
-          </span>
-          <span class="text-secondary mr-3">Faculty Of Commerce</span>
-        </div>
-
-        <div class="col-lg-6 col-xs-12 col-sm-12 my-auto">
-          <span class="material-icons text-primary mr-2">
-            account_balance
-          </span>
-          <span class="text-secondary"> Alex. Univeristy</span>
-        </div>
+  <div class="row h-100  mx-5">
+    <div class="col-lg-4 col-xs-12 col-sm-12 p-3 align-self-center my-auto">
+      <div class="row h-100">
+        <span class="material-icons text-primary mr-2">
+          school
+        </span>
+        <span class="text-secondary my-auto mr-3">{{ group.name}}</span>
       </div>
     </div>
 
-    <div class="col-4 my-auto" *ngIf="(user.id != post.creator.id) && !post.isReported">
-       <mat-icon class="report float-right">report</mat-icon>
+    <div class="col-lg-4 col-xs-12 col-sm-12 my-auto" *ngIf="post.faculty">
+      <div class="row h-100">
+        <span class="material-icons text-primary mr-2">
+          account_balance
+        </span>
+        <span class="text-secondary">{{  post.faculty.name }}</span>
+      </div>
     </div>
   </div>
 
 
+  <div class="row h-100 mx-5">
+    <div class="col-8">
+      <mat-label class="text-primary" [hidden]="!editing">Edit Your Post</mat-label>
+      <textarea class="mx-5" matInput [hidden]="!editing" [(ngModel)]="postBody"></textarea>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-2 my-auto" [hidden]="!editing">
+      <span class="text-primary material-icons" (click)="onUpdatePost()">
+        send
+      </span>
+    </div>
+    <p class="lead py-2" [hidden]="editing">{{post.body}}</p>
+  </div>
+
+
+
   <div class="row h-100  mx-5 my-2" *ngIf="post.files.length > 0">
     <div class="col-12">
-
       <div *ngFor="let file of post.files">
         <div *ngIf="file.mime.startsWith('image')">
-          <img src="{{file.url}}" alt="image">
+          <div class="row h-100">
+            <div class="col-6">
+              <img class="img-fluid my-3" src="{{file.url}}" alt="image">
+            </div>
+            <!-- <div class="col-6">
+              <img class="img-fluid my-3" src="{{file.url}}" alt="image">
+            </div> -->
+          </div>
         </div>
 
         <div *ngIf="file.mime.startsWith('video')">
-          <mat-video src="{{file.url}}"  [preload]="true" [fullscreen]="true" [download]="true"
-            color="accent" spinner="spin">
+          <mat-video src="{{file.url}}" [preload]="true" [fullscreen]="true" [download]="true" color="accent"
+            spinner="spin">
           </mat-video>
         </div>
         <div *ngIf="file.mime.startsWith('audio')">
@@ -97,26 +120,15 @@
     </div>
   </div>
 
-  <div class="row h-100 mx-5">
-    <div class="col-8">
-      <mat-label class="text-primary" [hidden]="!editing">Edit Your Post</mat-label>
-      <textarea class="mx-5" matInput [hidden]="!editing" [(ngModel)]="postBody"></textarea>
-    </div>
-    <div class="col-2"></div>
-    <div class="col-2 my-auto" [hidden]="!editing">
-      <span class="text-primary material-icons" (click)="onUpdatePost()">
-        send
-      </span>
-    </div>
-    <p class="lead" [hidden]="editing">{{post.body}}</p>
-  </div>
+
 
 
   <div class="row h-100">
     <div class="col-10 my-auto">
       <mat-form-field class="example-full-width px-5">
         <mat-label>Leave a comment</mat-label>
-        <textarea [(ngModel)]="comment" (input)="onCommenting($event)" rows="3" matInput placeholder="Ex. It makes me feel..."></textarea>
+        <textarea [(ngModel)]="comment" (input)="onCommenting($event)" rows="3" matInput
+          placeholder="Ex. It makes me feel..."></textarea>
       </mat-form-field>
     </div>
     <div class="col-2 my-auto">
@@ -126,8 +138,7 @@
     </div>
   </div>
 
-  <div class="row mx-5">
-    <app-comment [comments]="post.comments" [group]="group" [postId]="post.id"></app-comment>
-  </div>
 
-  <!-- </div> -->
+
+  <app-comment [comments]="post.comments" [group]="group" [postId]="post.id"></app-comment>
+</div>

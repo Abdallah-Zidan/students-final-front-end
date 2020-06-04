@@ -31,8 +31,6 @@ export class ReplyComponent implements OnInit {
   onAddReply() {
     this.postsService.addReply(
       this.body,
-      this.group.scope,
-      this.group.id,
       this.postId,
       this.commentId
     );
