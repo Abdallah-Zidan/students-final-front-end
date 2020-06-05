@@ -3,25 +3,51 @@ import { Group } from '../models/group.model';
 const getFacultyGroups = (groups: any) => {
   const facIds = [];
   const groupsArr: Group[] = [];
-  groups.map((group) => {
-    if (!facIds.includes(group.faculty.id)) {
-      const id = group.faculty.id;
-      const name = group.faculty.name;
-      const scope = '1';
+  groups.forEach((group) => {
+    if (group.faculty) {
+      if (!facIds.includes(group.faculty.id)) {
+        const id = group.faculty.id;
+        facIds.push(id);
+        const name = group.faculty.name;
+        const scope = '1';
+        groupsArr.push(new Group(id, name, scope));
+      }
+    }
+  });
+  return groupsArr.length > 0 ? groupsArr : null;
+};
+const getDepartmentGroups = (groups: any) => {
+  const groupsArr: Group[] = [];
+
+  groups.forEach((group) => {
+    if (group.department) {
+      const id = group.id;
+      const scope = '0';
+      const name = group.department.name;
       groupsArr.push(new Group(id, name, scope));
     }
   });
-  return groupsArr;
+  return groupsArr.length > 0 ? groupsArr : null;
 };
-const getDepartmentGroups = (groups: any) => {
-  const groupArr: Group[] = [];
+const getUniversityGroups = (groups: any) => {
+  const uniIds = [];
+  const groupsArr: Group[] = [];
+
   groups.forEach((group) => {
-    const id = group.id;
-    const scope = '0';
-    const name = group.department.name;
-    groupArr.push(new Group(id, name, scope));
+    if (group.faculty) {
+      if (group.faculty.university) {
+        if (!uniIds.includes(group.faculty.university.id)) {
+          const id = group.faculty.university.id;
+          uniIds.push(id);
+          const name = group.faculty.university.name;
+          const scope = '2';
+          groupsArr.push(new Group(id, name, scope));
+        }
+      }
+    }
   });
-  return groupArr;
+
+  return groupsArr.length > 0 ? groupsArr : null;
 };
 
-export { getDepartmentGroups, getFacultyGroups };
+export { getDepartmentGroups, getFacultyGroups, getUniversityGroups };

@@ -22,6 +22,7 @@ export class GroupComponent implements OnInit, OnDestroy {
   departmentGroups = this.postsService.departmentGroups;
   posts: Post[] = [];
   currentGroup: Group;
+  resource = 'posts';
   private subscription: Subscription;
   ngOnInit(): void {
     if (this.departmentGroups.length < 0) {
@@ -31,13 +32,15 @@ export class GroupComponent implements OnInit, OnDestroy {
       this.posts = posts;
     });
     this.activatedRoute.params.subscribe((map) => {
-      const key = 'id';
-      const id = map[key];
+      const key1 = 'id';
+      const key2 = 'scope';
+      const id = map[key1];
+      const scope = map[key2];
       const tmp = this.groupsService.departmentGroups[0].id;
-      if (id) {
-        this.currentGroup = this.groupsService.getGroup(id);
+      if (id && scope) {
+        this.currentGroup = this.groupsService.getGroup(id, scope);
       } else {
-        this.router.navigate(['/groups', tmp]);
+        this.router.navigate(['/groups', 0, tmp]);
       }
       if (this.currentGroup) {
         this.getPosts(
@@ -47,12 +50,12 @@ export class GroupComponent implements OnInit, OnDestroy {
           1
         );
       } else {
-        this.router.navigate(['/groups', tmp]);
+        this.router.navigate(['/groups', 0, tmp]);
       }
     });
   }
   getPosts(resource, scope, id, page) {
-    this.postsService.getPosts(resource, scope, id, page);
+    this.postsService.getPosts(resource, scope, id, '', page);
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

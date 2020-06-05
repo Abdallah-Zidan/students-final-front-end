@@ -5,6 +5,7 @@ import { Group } from '../shared/models/group.model';
 import {
   getDepartmentGroups,
   getFacultyGroups,
+  getUniversityGroups,
 } from '../shared/helpers/shared-helper';
 
 @Injectable({
@@ -13,6 +14,7 @@ import {
 export class GroupsService {
   departmentGroups: Group[] = [];
   facultyGroups: Group[] = [];
+  universityGroups: Group[] = [];
 
   constructor(
     private httpService: HttpService,
@@ -29,30 +31,38 @@ export class GroupsService {
     if (this.storageService.getDepartmentGroups('groups').length > 0) {
       this.departmentGroups = this.storageService.getDepartmentGroups('groups');
       this.facultyGroups = this.storageService.getFacultyGroups('groups');
+      this.universityGroups = this.storageService.getUniversityGroups('groups');
     } else {
       this.httpService.requestGroups().subscribe((res: any) => {
-        const groups = res.data.department_faculties;
+        console.log(res);
 
-        (this.facultyGroups = getFacultyGroups(groups)),
-          (this.departmentGroups = getDepartmentGroups(groups));
-
-        this.storageService.saveItem(
-          'groups',
-          new Array(this.departmentGroups, this.facultyGroups)
-        );
+        const groups = res.data && res.data.department_faculties;
+        if (groups) {
+          this.universityGroups = getUniversityGroups(groups);
+          this.facultyGroups = getFacultyGroups(groups);
+          this.departmentGroups = getDepartmentGroups(groups);
+          this.storageService.saveItem(
+            'groups',
+            new Array(
+              this.departmentGroups,
+              this.facultyGroups,
+              this.universityGroups
+            )
+          );
+        }
       });
     }
   }
-  getGroup(id: string) {
+  getGroup(id: string, scope) {
     let group: Group = null;
     const groups: Group[][] = this.storageService.getItem('groups');
-    groups.forEach((element) => {
-      element.forEach((groupElement) => {
-        if (groupElement.id == id) {
-          group = groupElement;
+    if (groups && groups[+scope]) {
+      groups[+scope].forEach((element) => {
+        if (element.id == id) {
+          group = element;
         }
       });
-    });
+    }
     return group;
   }
 }

@@ -39,7 +39,7 @@
             </button>
           </div>
 
-          <button mat-menu-item *ngIf="!post.type">
+          <button mat-menu-item *ngIf="!post.type" (click)="onReportPost()">
             <mat-icon>delete_sweep</mat-icon>
             <span>Report Post</span>
           </button>
@@ -140,5 +140,5 @@
 
 
 
-  <app-comment [comments]="post.comments" [group]="group" [postId]="post.id"></app-comment>
+  <app-comment [comments]="post.comments" [group]="group" [postId]="post.id" [resource]="resource"></app-comment>
 </div>

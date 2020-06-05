@@ -30,8 +30,7 @@ import { Group } from '../shared/models/group.model';
 export class SidebarComponent implements OnInit {
   user: User;
   menus = [];
-  departmentGroups;
-  facultyGroups;
+  
   constructor(
     public sidebarservice: SidebarService,
     private storage: StorageService,
@@ -44,15 +43,25 @@ export class SidebarComponent implements OnInit {
     if (this.groupsService.departmentGroups.length < 1) {
       this.groupsService.getGroups();
     }
-    this.departmentGroups = this.groupsService.departmentGroups.map((group) => {
-      return { title: group.name, id: group.id, route: 'groups' };
-    });
-    this.facultyGroups = this.groupsService.facultyGroups.map((group) => {
-      return { title: group.name, id: group.id, route: 'groups' };
-    });
     this.menus = this.getMenuList();
   }
-
+  getDepartmentgroups(groupRoute) {
+    return this.groupsService.departmentGroups.map((group) => {
+      return { title: group.name, scope: 0, id: group.id, route: groupRoute };
+    });
+  }
+  getFacultygroups(groupRoute) {
+    return this.groupsService.facultyGroups.map((group) => {
+      return { title: group.name, scope: 1, id: group.id, route: groupRoute };
+    });
+  }
+  getUniversitygroups(groupRoute) {
+    console.log(this.groupsService.universityGroups);
+    
+    return this.groupsService.universityGroups.map((group) => {
+      return { title: group.name, scope: 2, id: group.id, route: groupRoute };
+    });
+  }
   onLogout() {
     this.authService.logout();
   }
@@ -88,36 +97,32 @@ export class SidebarComponent implements OnInit {
       },
 
       {
-        title: 'Departments',
+        title: 'Department Groups',
         icon: 'fa fa-users',
         active: false,
         type: 'dropdown',
-        submenus: this.departmentGroups,
+        submenus: this.getDepartmentgroups('groups'),
       },
       {
-        title: 'Faculty',
+        title: 'Faculty Groups',
         icon: 'fa fa-university',
         active: false,
         type: 'dropdown',
-        submenus: this.facultyGroups,
+        submenus: this.getFacultygroups('groups'),
       },
       {
-        title: 'Announcement',
+        title: 'Faculty Announcement',
         icon: 'far fa-gem',
         active: false,
         type: 'dropdown',
-        submenus: [
-          {
-            title: 'Faculty',
-            route: 'announcements',
-            id: 1,
-          },
-          {
-            title: 'University',
-            route: 'announcements',
-            id: 2,
-          },
-        ],
+        submenus: this.getFacultygroups('announcements')
+      },
+      {
+        title: 'University Announcement',
+        icon: 'far fa-gem',
+        active: false,
+        type: 'dropdown',
+        submenus: this.getUniversitygroups('announcements')
       },
       {
         title: 'Events',

@@ -10,6 +10,8 @@ const getResourceUrlGet = (
     .replace('{scope}', scope)
     .replace('{scope_id}', scopeId)
     .replace('{type}', type);
+    console.log(url);
+    
   return url;
 };
 const getResourcesUrl = (

@@ -35,6 +35,7 @@ const endPoints = {
   resources: 'http://localhost:8000/api/v1/{resource}',
   comments: 'http://localhost:8000/api/v1/{resource}/{resource_id}/comments',
   replies: 'http://localhost:8000/api/v1/comments/{comment_id}/replies',
+  report: 'http://localhost:8000/api/v1/posts/report',
 };
 
 @Injectable({
@@ -94,66 +95,56 @@ export class HttpService {
   requestGroups() {
     return this.http.get(endPoints.groups);
   }
-  requestPosts(resource,scope, scopeId, page) {
+  requestPosts(resource, scope, scopeId, type, page) {
     return this.http.get(
-      getResourceUrlGet(endPoints.getResources, resource, scope, scopeId)
+      getResourceUrlGet(endPoints.getResources, resource, scope, scopeId, type)
     );
   }
-  requestAddPost(postBody, postFiles, scope, scopeId) {
-    const formData = new FormData();
-    formData.append('body', postBody);
-    formData.append('group', scope);
-    formData.append('group_id', scopeId);
-    for (const file of postFiles) {
-      formData.append('files[]', file);
-    }
-
-    console.log(formData.getAll('files'));
-
-    return this.http.post(
-      getResourcesUrl(endPoints.resources, 'posts'),
-      formData
-    );
+  requestAddPost(resource, data: FormData) {
+    console.log(resource);
+    console.log(data.get('body'));
+    console.log(getResourcesUrl(endPoints.resources, resource));
+    return this.http.post(getResourcesUrl(endPoints.resources, resource), data);
   }
-  requestUpdatePost(resourceBody, scope, scopeId, resourceId) {
+  requestUpdatePost(resource, data, resourceId) {
     return this.http.put(
-      getResourcesUrl(endPoints.resources, 'posts', resourceId),
-      {
-        body: resourceBody,
-      }
+      getResourcesUrl(endPoints.resources, resource, resourceId),
+      data
     );
   }
-  requestDeletePost(scope, scopeId, resourceId) {
+  requestDeletePost(resource, resourceId) {
     return this.http.delete(
-      getResourcesUrl(endPoints.resources, 'posts', resourceId)
+      getResourcesUrl(endPoints.resources, resource, resourceId)
     );
   }
-  requestAddComment(
-    commentBody: string,
-    resourceId: string
-  ) {
+  requestReportPost(resourceId) {
+    return this.http.post(endPoints.report, {
+      data: resourceId,
+    });
+  }
+  requestAddComment(resource, commentBody: string, resourceId: string) {
     console.log(
-      getCommentsUrl(endPoints.comments, 'posts', resourceId) +
+      getCommentsUrl(endPoints.comments, resource, resourceId) +
         `/${resourceId}/comments`
     );
     return this.http.post(
-      getCommentsUrl(endPoints.comments, 'posts', resourceId),
+      getCommentsUrl(endPoints.comments, resource, resourceId),
       {
         body: commentBody,
       }
     );
   }
-  requestEditComment(commentBody, resourceId, commentId) {
+  requestEditComment(resource, commentBody, resourceId, commentId) {
     return this.http.put(
-      getCommentsUrl(endPoints.comments, 'posts', resourceId, commentId),
+      getCommentsUrl(endPoints.comments, resource, resourceId, commentId),
       {
         body: commentBody,
       }
     );
   }
-  requestDeleteComment( resourceId, commentId) {
+  requestDeleteComment(resource, resourceId, commentId) {
     return this.http.delete(
-      getCommentsUrl(endPoints.comments, 'posts', resourceId, commentId)
+      getCommentsUrl(endPoints.comments, resource, resourceId, commentId)
     );
   }
   requestAddReply(replyBody, commentId) {
@@ -161,12 +152,12 @@ export class HttpService {
       body: replyBody,
     });
   }
-  requestEditReply(replyBody,  commentId, replyId) {
+  requestEditReply(replyBody, commentId, replyId) {
     return this.http.put(getRepliesUrl(endPoints.replies, commentId, replyId), {
       body: replyBody,
     });
   }
-  requestDeleteReply( commentId, replyId) {
+  requestDeleteReply(commentId, replyId) {
     return this.http.delete(
       getRepliesUrl(endPoints.replies, commentId, replyId)
     );

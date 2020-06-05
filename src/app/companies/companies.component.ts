@@ -1,22 +1,22 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PostsService } from '../services/posts.service';
-import { Post } from '../models/post.model';
+
 import { GroupsService } from 'src/app/services/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from 'src/app/shared/models/group.model';
 import { Subscription } from 'rxjs';
+import { Post } from '../education/models/post.model';
+import { PostsService } from '../education/services/posts.service';
 @Component({
-  selector: 'app-announcements',
-  templateUrl: './announcements.component.html',
-  styleUrls: ['./announcements.component.scss'],
+  selector: 'app-companies',
+  templateUrl: './companies.component.html',
+  styleUrls: ['./companies.component.scss'],
 })
-export class AnnouncementsComponent implements OnInit, OnDestroy {
+export class CompaniesComponent implements OnInit, OnDestroy {
   facultyGroups = this.postsService.facultyGroups;
-  // departmentGroups = this.postsService.departmentGroups;
   posts: Post[] = [];
   currentGroup: Group;
   resource = 'events';
-  type = '3';
+  type;
   private subscription: Subscription;
   constructor(
     private postsService: PostsService,
@@ -35,15 +35,17 @@ export class AnnouncementsComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe((map) => {
       const key = 'id';
       const key2 = 'scope';
+      const key3 = 'type';
       const id = map[key];
       const scope = map[key2];
+      this.type = map[key3];
       const tmp = this.groupsService.facultyGroups[0].id;
-      if (id && scope) {
+      if (id && scope && this.type) {
         this.currentGroup = this.groupsService.getGroup(id, scope);
       } else {
-        this.router.navigate(['/announcements', 1, tmp]);
+        this.router.navigate(['/companies', 1, 1, tmp]);
       }
-      if (this.currentGroup) {
+      if (this.currentGroup && ['1', '2', '4'].includes(this.type)) {
         this.getPosts(
           'events',
           (+this.currentGroup.scope - 1).toString(),
@@ -51,7 +53,7 @@ export class AnnouncementsComponent implements OnInit, OnDestroy {
           1
         );
       } else {
-        this.router.navigate(['/announcements', 1, tmp]);
+        this.router.navigate(['/companies', 1, 1, tmp]);
       }
     });
   }

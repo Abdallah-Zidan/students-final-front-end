@@ -67,6 +67,7 @@ import { AnnouncementsComponent } from './education/announcements/announcements.
 import { MatVideoModule } from 'mat-video';
 import { SafePipe } from './shared/helpers/external-url.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CompaniesComponent } from './companies/companies.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -103,6 +104,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AnnouncementsComponent,
     SafePipe,
     DeleteDialogComponent,
+    CompaniesComponent,
   ],
   imports: [
     BrowserModule,

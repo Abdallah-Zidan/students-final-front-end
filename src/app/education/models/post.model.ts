@@ -13,10 +13,15 @@ export class Post {
     public createdHuman: string = '',
     public department: any = '',
     public faculty: any = '',
-    public type: string = ''
+    public type: string = '',
+    public title: string = null
   ) {}
 
   public get isReported(): boolean {
     return this.reported;
+  }
+
+  public setReported(v: boolean) {
+    this.reported = v;
   }
 }

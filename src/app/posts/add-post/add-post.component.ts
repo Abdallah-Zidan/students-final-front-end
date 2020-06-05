@@ -13,6 +13,8 @@ export class AddPostComponent implements OnInit {
   user: User;
   body = '';
   @Input() group: Group;
+  @Input() resource: string;
+  @Input() type: number;
   isEmpty = true;
   selectedFiles: File[] = [];
 
@@ -33,12 +35,18 @@ export class AddPostComponent implements OnInit {
     this.user = this.storage.getUser('user');
   }
   onAddPost() {
-    this.postsService.addPost(
-      this.body,
-      this.selectedFiles,
-      this.group.scope,
-      this.group.id
-    );
+    const formData = new FormData();
+    formData.append('body', this.body);
+    formData.append('group', this.group.scope);
+    formData.append('group_id', this.group.id);
+    for (const file of this.selectedFiles) {
+      formData.append('files[]', file);
+    }
+    if (this.resource != 'posts') {
+      formData.append('title', 'default');
+      formData.append('type', this.type.toString());
+    }
+    this.postsService.addPost(this.resource, formData);
     setTimeout(() => {
       this.body = '';
     }, 2000);

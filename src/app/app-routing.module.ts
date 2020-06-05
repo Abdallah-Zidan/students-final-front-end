@@ -14,6 +14,7 @@ import { GroupComponent } from './education/groups/group.component';
 import { EventsComponent } from './events/events.component';
 import { SingleEventComponent } from './events/single-event/single-event.component';
 import { AnnouncementsComponent } from './education/announcements/announcements.component';
+import { CompaniesComponent } from './companies/companies.component';
 
 const routes: Routes = [
   {
@@ -55,39 +56,49 @@ const routes: Routes = [
     component: SettingsComponent,
   },
   {
-    path: 'groups/:id',
+    path: 'groups/:scope/:id',
     component: GroupComponent,
     canActivate: [AuthGuard],
   },
   {
     path: 'groups',
     component: GroupComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'events',
     component: EventsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'events/:id',
     component: SingleEventComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'announcements',
     component: AnnouncementsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'announcements/:id',
+    path: 'announcements/:scope/:id',
     component: AnnouncementsComponent,
-    canActivate: [AuthGuard]
-  }
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'companies',
+    component: CompaniesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'companies/:type/:scope/:id',
+    component: CompaniesComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

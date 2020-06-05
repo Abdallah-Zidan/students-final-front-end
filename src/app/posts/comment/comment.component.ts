@@ -12,6 +12,7 @@ export class CommentComponent implements OnInit {
   @Input() comments: PostComment[];
   @Input() group: Group;
   @Input() postId;
+  @Input() resource: string;
   constructor() {}
 
   ngOnInit(): void {}

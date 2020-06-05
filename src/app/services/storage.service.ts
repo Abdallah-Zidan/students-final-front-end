@@ -7,7 +7,6 @@ import { Group } from '../shared/models/group.model';
   providedIn: 'root',
 })
 export class StorageService {
-
   constructor(public http: HttpClient) {}
 
   saveItem(key: string, item: any) {
@@ -58,10 +57,12 @@ export class StorageService {
   getDepartmentGroups(key: string) {
     return this.getGroups(key, 0);
   }
-  
+
   getFacultyGroups(key: string) {
     return this.getGroups(key, 1);
   }
+  getUniversityGroups(key: string) {
+    return this.getGroups(key, 2);
+  }
   //#endregion
-
 }

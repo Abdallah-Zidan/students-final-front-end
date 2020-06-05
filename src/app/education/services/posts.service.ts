@@ -27,97 +27,117 @@ export class PostsService {
     private storage: StorageService
   ) {}
 
-  getPosts(resource, scope, scopeId, page) {
-    this.httpService.requestPosts(resource, scope, scopeId, page).subscribe(
-      (res: any) => {
-        console.log(res.data);
-        const resPosts = res.data.posts;
-        this.postsArr = [];
-        resPosts.forEach((post) => {
-          this.postsArr.push(
-            new Post(
-              post.id,
-              post.body,
-              getAttachments(post),
-              post.reported,
-              getCreator(post),
-              getComments(post),
-              post.created_at_human,
-              post.department_faculty && post.department_faculty.department,
-              post.department_faculty && post.department_faculty.faculty,
-              post.type
-            )
-          );
-        });
-        this.posts.next(this.postsArr);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  addPost(body, files, scope, scopeId) {
+  getPosts(resource, scope, scopeId, type, page) {
     this.httpService
-      .requestAddPost(body, files, scope, scopeId)
-      .subscribe((res: any) => {
-        const resPost = res.data.post;
-        const currUser = this.storage.getUser('user');
+      .requestPosts(resource, scope, scopeId, type, page)
+      .subscribe(
+        (res: any) => {
+          console.log(res.data);
+          let resPosts;
+          if (res.data.posts) {
+            resPosts = res.data.posts;
+          } else if (res.data.events) {
+            resPosts = res.data.events;
+          } else {
+            console.log('unknown');
+          }
 
-        const newPost = new Post(
-          resPost.id,
-          body,
-          getAttachments(resPost),
-          false,
-          new ElementCreator(
-            currUser.id,
-            currUser.personalData.name,
-            currUser.personalData.avatar
-          ),
-          [],
-          'now',
-        );
-        this.postsArr.unshift(newPost);
-        this.posts.next(this.postsArr);
-      });
-  }
-  updatePost(body, scope, scopeId, postId) {
-    return this.httpService.requestUpdatePost(body, scope, scopeId, postId);
-  }
-  deletePost(scope, scopeId, postId) {
-    this.httpService
-      .requestDeletePost(scope, scopeId, postId)
-      .subscribe((res) => {
-        console.log(res);
-        const { index } = findInArray(postId, this.postsArr);
-        this.postsArr.splice(index, 1);
-        this.posts.next(this.postsArr);
-      });
-  }
-  addComment(body, postId) {
-    const { element, index } = findInArray(postId, this.postsArr);
-    this.httpService.requestAddComment(body, postId).subscribe((res: any) => {
-      const resComment = res.data.comment;
-      const currUser = this.storage.getUser('user');
-      const creator = new ElementCreator(
-        currUser.id,
-        currUser.personalData.name,
-        currUser.personalData.avatar
+          this.postsArr = [];
+          resPosts.forEach((post) => {
+            this.postsArr.push(
+              new Post(
+                post.id,
+                post.body,
+                getAttachments(post),
+                post.reported,
+                getCreator(post),
+                getComments(post),
+                post.created_at_human,
+                post.department_faculty && post.department_faculty.department,
+                post.department_faculty && post.department_faculty.faculty,
+                post.type,
+                post.title && post.title
+              )
+            );
+          });
+          this.posts.next(this.postsArr);
+          console.log(this.postsArr);
+        },
+        (error) => {
+          console.log(error);
+        }
       );
-      const newComment = new PostComment(resComment.id, body, creator, []);
-      element.comments.push(newComment);
-      this.postsArr[index] = element;
+  }
+
+  addPost(resource, data) {
+    this.httpService.requestAddPost(resource, data).subscribe((res: any) => {
+      const resPost = res.data.post;
+      const currUser = this.storage.getUser('user');
+
+      const newPost = new Post(
+        resPost.id,
+        data.get('body'),
+        getAttachments(resPost),
+        false,
+        new ElementCreator(
+          currUser.id,
+          currUser.personalData.name,
+          currUser.personalData.avatar
+        ),
+        [],
+        'now'
+      );
+      this.postsArr.unshift(newPost);
       this.posts.next(this.postsArr);
     });
   }
-  updateComment(body, postId, commentId) {
-    return this.httpService.requestEditComment(body, postId, commentId);
+  updatePost(resource, data, postId) {
+    return this.httpService.requestUpdatePost(resource, data, postId);
   }
-  deleteComment(postId, commentId) {
+  deletePost(resource, postId) {
+    this.httpService.requestDeletePost(resource, postId).subscribe((res) => {
+      console.log(res);
+      const { index } = findInArray(postId, this.postsArr);
+      this.postsArr.splice(index, 1);
+      this.posts.next(this.postsArr);
+    });
+  }
+  reportPost(postId) {
+    this.httpService.requestReportPost(postId).subscribe((res) => {
+      console.log(res);
+    });
+  }
+  addComment(resource, body, postId) {
+    const { element, index } = findInArray(postId, this.postsArr);
+    this.httpService
+      .requestAddComment(resource, body, postId)
+      .subscribe((res: any) => {
+        const resComment = res.data.comment;
+        const currUser = this.storage.getUser('user');
+        const creator = new ElementCreator(
+          currUser.id,
+          currUser.personalData.name,
+          currUser.personalData.avatar
+        );
+        const newComment = new PostComment(resComment.id, body, creator, []);
+        element.comments.push(newComment);
+        this.postsArr[index] = element;
+        this.posts.next(this.postsArr);
+      });
+  }
+  updateComment(resource, body, postId, commentId) {
+    return this.httpService.requestEditComment(
+      resource,
+      body,
+      postId,
+      commentId
+    );
+  }
+  deleteComment(resource, postId, commentId) {
     const { element, index } = findInArray(postId, this.postsArr);
     const commentIndex = findInArray(commentId, element.comments);
     this.httpService
-      .requestDeleteComment(postId, commentId)
+      .requestDeleteComment(resource, postId, commentId)
       .subscribe((res) => {
         console.log(res);
         element.comments.splice(commentIndex, 1);
