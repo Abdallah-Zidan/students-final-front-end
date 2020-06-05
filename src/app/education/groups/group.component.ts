@@ -27,7 +27,7 @@ export class GroupComponent implements OnInit, OnDestroy {
     if (this.departmentGroups.length < 0) {
       this.groupsService.getGroups();
     }
-    this.subscription = this.postsService.posts.subscribe((posts) => { 
+    this.subscription = this.postsService.posts.subscribe((posts) => {
       this.posts = posts;
     });
     this.activatedRoute.params.subscribe((map) => {
@@ -40,14 +40,19 @@ export class GroupComponent implements OnInit, OnDestroy {
         this.router.navigate(['/groups', tmp]);
       }
       if (this.currentGroup) {
-        this.getPosts(this.currentGroup.scope, this.currentGroup.id, 1);
+        this.getPosts(
+          'posts',
+          this.currentGroup.scope,
+          this.currentGroup.id,
+          1
+        );
       } else {
         this.router.navigate(['/groups', tmp]);
       }
     });
   }
-  getPosts(scope, id, page) {
-    this.postsService.getPosts(scope, id, page);
+  getPosts(resource, scope, id, page) {
+    this.postsService.getPosts(resource, scope, id, page);
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

@@ -33,9 +33,6 @@ export class SingleReplyComponent implements OnInit {
     this.postsService
       .updateReply(
         this.replyBody,
-        this.group.scope,
-        this.group.id,
-        this.postId,
         this.commentId,
         this.reply.id
       )
@@ -47,8 +44,6 @@ export class SingleReplyComponent implements OnInit {
   }
   onDeleteReply() {
     this.postsService.deleteReply(
-      this.group.scope,
-      this.group.id,
       this.postId,
       this.commentId,
       this.reply.id

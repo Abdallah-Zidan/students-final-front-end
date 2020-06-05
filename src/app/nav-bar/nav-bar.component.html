@@ -19,19 +19,9 @@
                     <a class=" nav-link" href="#">Home</a>
                 </li>
                 <li class=" nav-item">
-                    <a class=" nav-link" routerLink="/groups">Groups</a>
+                    <a class=" nav-link" routerLink="/register" *ngIf="!signUp">Signup</a>
+                    <a class=" nav-link" routerLink="/login" *ngIf="signUp">Login</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sharing Tools</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Donations</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sharing Habitations</a>
-                </li>
-                <button class="btn btn-light my-2 my-sm-0 rounded-button" *ngIf="!isAuthenticated" routerLink="/login">Login</button>
-                <button class="btn btn-light my-2 my-sm-0 rounded-button" (click)="onLogout()" *ngIf="isAuthenticated">Logout</button>
             </ul>
         </div>
     </div>

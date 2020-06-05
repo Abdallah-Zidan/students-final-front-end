@@ -22,8 +22,10 @@ import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostsComponent } from './posts/posts.component';
-import { LeftSidebarComponent } from './posts/left-sidebar/left-sidebar.component';
-import { MainPostComponent } from './posts/main-post/main-post.component';
+import {
+  MainPostComponent,
+  DeleteDialogComponent,
+} from './posts/main-post/main-post.component';
 import { GroupComponent } from './education/groups/group.component';
 import { AddPostComponent } from './posts/add-post/add-post.component';
 import { EmailVerificationComponent } from './auth/register/email-verification/email-verification.component';
@@ -60,10 +62,14 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { AnnouncementsComponent } from './education/announcements/announcements.component';
+import { MatVideoModule } from 'mat-video';
+import { SafePipe } from './shared/helpers/external-url.pipe';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
+  suppressScrollX: true,
 };
 
 @NgModule({
@@ -77,7 +83,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CompanyComponent,
     HomeComponent,
     PostsComponent,
-    LeftSidebarComponent,
     MainPostComponent,
     GroupComponent,
     AddPostComponent,
@@ -95,6 +100,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SingleEventComponent,
     SingleReplyComponent,
     SidebarComponent,
+    AnnouncementsComponent,
+    SafePipe,
+    DeleteDialogComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -127,6 +136,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatCardModule,
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
+    MatVideoModule,
+    MatDialogModule,
   ],
 
   providers: [
@@ -138,4 +149,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

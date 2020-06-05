@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav style="width: 260px;" #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === true">
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>
 
     </mat-toolbar>
@@ -24,7 +24,7 @@
 
       <!-- Home -->
       <div [hidden]="isHandset$ | async">
-        <button mat-button>
+        <button mat-button routerLink="/">
           <h3>Home</h3>
         </button>
       </div>
@@ -45,6 +45,10 @@
           <button mat-menu-item routerLink="/groups">
             <mat-icon>group</mat-icon>
             <span>Groups</span>
+          </button>
+          <button mat-menu-item routerLink="/announcements/1">
+            <mat-icon>info</mat-icon>
+            <span>Announcements</span>
           </button>
           <button mat-menu-item>
             <mat-icon>build</mat-icon>

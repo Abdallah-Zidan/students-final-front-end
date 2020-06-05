@@ -6,7 +6,12 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { replacePostsUrl } from './url.helper';
+import {
+  getResourceUrlGet,
+  getCommentsUrl,
+  getResourcesUrl,
+  getRepliesUrl,
+} from './url.helper';
 
 const endPoints = {
   csrf: 'http://localhost:8000/sanctum/csrf-cookie',
@@ -25,6 +30,11 @@ const endPoints = {
   departmentPosts:
     'http://localhost:8000/api/v1/departments/{department_faculty}/posts',
   facultyPosts: 'http://localhost:8000/api/v1/faculties/{faculty}/posts',
+  getResources:
+    'http://localhost:8000/api/v1/{resource}?group={scope}&group_id={scope_id}&type={type}',
+  resources: 'http://localhost:8000/api/v1/{resource}',
+  comments: 'http://localhost:8000/api/v1/{resource}/{resource_id}/comments',
+  replies: 'http://localhost:8000/api/v1/comments/{comment_id}/replies',
 };
 
 @Injectable({
@@ -78,84 +88,87 @@ export class HttpService {
   }
 
   updateProfile(user) {
-    return this.http.post<any>(endPoints.userData, user)
+    return this.http.post<any>(endPoints.userData, user);
   }
 
   requestGroups() {
     return this.http.get(endPoints.groups);
   }
-  requestPosts(scope, scopeId, page) {
-    return this.http.get(replacePostsUrl(endPoints, scope, scopeId));
+  requestPosts(resource,scope, scopeId, page) {
+    return this.http.get(
+      getResourceUrlGet(endPoints.getResources, resource, scope, scopeId)
+    );
   }
   requestAddPost(postBody, postFiles, scope, scopeId) {
     const formData = new FormData();
     formData.append('body', postBody);
-    formData.append('files', postFiles);
+    formData.append('group', scope);
+    formData.append('group_id', scopeId);
+    for (const file of postFiles) {
+      formData.append('files[]', file);
+    }
+
     console.log(formData.getAll('files'));
 
-    return this.http.post(replacePostsUrl(endPoints, scope, scopeId), formData);
+    return this.http.post(
+      getResourcesUrl(endPoints.resources, 'posts'),
+      formData
+    );
   }
-  requestUpdatePost(postBody, scope, scopeId, postId) {
+  requestUpdatePost(resourceBody, scope, scopeId, resourceId) {
     return this.http.put(
-      replacePostsUrl(endPoints, scope, scopeId) + `/${postId}`,
+      getResourcesUrl(endPoints.resources, 'posts', resourceId),
       {
-        body: postBody,
+        body: resourceBody,
       }
     );
   }
-  requestDeletePost(scope, scopeId, postId) {
+  requestDeletePost(scope, scopeId, resourceId) {
     return this.http.delete(
-      replacePostsUrl(endPoints, scope, scopeId) + `/${postId}`
+      getResourcesUrl(endPoints.resources, 'posts', resourceId)
     );
   }
   requestAddComment(
     commentBody: string,
-    scope: string,
-    scopeId: string,
-    postId: string
+    resourceId: string
   ) {
+    console.log(
+      getCommentsUrl(endPoints.comments, 'posts', resourceId) +
+        `/${resourceId}/comments`
+    );
     return this.http.post(
-      replacePostsUrl(endPoints, scope, scopeId) + `/${postId}/comments`,
+      getCommentsUrl(endPoints.comments, 'posts', resourceId),
       {
         body: commentBody,
       }
     );
   }
-  requestEditComment(commentBody, scope, scopeId, postId, commentId) {
+  requestEditComment(commentBody, resourceId, commentId) {
     return this.http.put(
-      replacePostsUrl(endPoints, scope, scopeId) +
-        `/${postId}/comments/${commentId}`,
+      getCommentsUrl(endPoints.comments, 'posts', resourceId, commentId),
       {
         body: commentBody,
       }
     );
   }
-  requestDeleteComment(scope, scopeId, postId, commentId) {
+  requestDeleteComment( resourceId, commentId) {
     return this.http.delete(
-      replacePostsUrl(endPoints, scope, scopeId) +
-        `/${postId}/comments/${commentId}`
+      getCommentsUrl(endPoints.comments, 'posts', resourceId, commentId)
     );
   }
-  requestAddReply(replyBody, scope, scopeId, postId, commentId) {
-    return this.http.post(
-      replacePostsUrl(endPoints, scope, scopeId) +
-        `/${postId}/comments/${commentId}/replies`,
-      {
-        body: replyBody,
-      }
-    );
+  requestAddReply(replyBody, commentId) {
+    return this.http.post(getRepliesUrl(endPoints.replies, commentId), {
+      body: replyBody,
+    });
   }
-  requestEditReply(replyBody, scope, scopeId, postId, commentId, replyId) {
-    return this.http.put(
-      replacePostsUrl(endPoints, scope, scopeId) +
-        `/${postId}/comments/${commentId}/replies/${replyId}`,
-      { body: replyBody }
-    );
+  requestEditReply(replyBody,  commentId, replyId) {
+    return this.http.put(getRepliesUrl(endPoints.replies, commentId, replyId), {
+      body: replyBody,
+    });
   }
-  requestDeleteReply(scope, scopeId, postId, commentId, replyId) {
+  requestDeleteReply( commentId, replyId) {
     return this.http.delete(
-      replacePostsUrl(endPoints, scope, scopeId) +
-        `/${postId}/comments/${commentId}/replies/${replyId}`
+      getRepliesUrl(endPoints.replies, commentId, replyId)
     );
   }
 }

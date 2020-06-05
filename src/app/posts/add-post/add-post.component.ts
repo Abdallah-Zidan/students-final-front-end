@@ -11,7 +11,7 @@ import { Group } from 'src/app/shared/models/group.model';
 })
 export class AddPostComponent implements OnInit {
   user: User;
-  body: string;
+  body = '';
   @Input() group: Group;
   isEmpty = true;
   selectedFiles: File[] = [];
@@ -22,7 +22,6 @@ export class AddPostComponent implements OnInit {
     } else {
       this.isEmpty = true;
     }
-    this.body = $event.target.value;
   }
 
   constructor(
@@ -34,26 +33,15 @@ export class AddPostComponent implements OnInit {
     this.user = this.storage.getUser('user');
   }
   onAddPost() {
-    //const fd = new FormData();
-
-    //fd.append('files', JSON.stringify(this.selectedFiles));
-
-    // this.selectedFiles.forEach((file) => {
-    //   fd.append('file', file, file.name);
-    // });
-    // console.log(fd.getAll('file'));
-    const postFiles = [];
-    for (let i = 0; i < this.selectedFiles.length; i++) {
-      postFiles.push(this.selectedFiles[i]);
-    }
-    console.log(postFiles);
-
     this.postsService.addPost(
       this.body,
-      postFiles,
+      this.selectedFiles,
       this.group.scope,
       this.group.id
     );
+    setTimeout(() => {
+      this.body = '';
+    }, 2000);
   }
   onFilesSelected(event) {
     this.selectedFiles = event.target.files;

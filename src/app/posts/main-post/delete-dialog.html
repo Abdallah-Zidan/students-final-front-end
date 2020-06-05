@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Delete post </h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Are you sure you want to delete that post?</h3>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>delete</button>
+</mat-dialog-actions>

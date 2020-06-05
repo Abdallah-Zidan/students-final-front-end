@@ -1,16 +1,28 @@
 body,
 html,
 * {
-    outline: none !important;
-    box-sizing: border-box;
+    outline   : none !important;
+    box-sizing: border-box !important;
 }
-span
-{
+
+span {
     cursor: pointer;
 }
-p{
-    padding: 1vw;
-    padding-top: 1.7vw ;
+
+video {
+    width: 100%;
+    height: auto;
+  }
+.ava {
+    padding      : 3px;
+    border       : 1px solid blue;
+    border-radius: 50%;
+    min-width    : 50px;
+}
+
+p {
+    padding    : 1vw;
+    padding-top: 1.7vw;
 }
 
 body {
@@ -19,40 +31,35 @@ body {
 
 .example-full-width {
     width: 100%;
-  }
-  
+}
+
 :host {
     width: 100%;
 }
 
 .post {
-    width     : 80%;
-    padding   : 1em 3em;
+    width           : 70%;
+    min-width       : 420px;
+    padding         : 1em 3em;
     background-color: #fff;
-    margin    : 0 auto;
-    margin-bottom: 3vw;
-    border-radius: 12px;
-    box-shadow: 1px 1px 2px grey;
+    margin          : 0 auto;
+    margin-bottom   : 3vw;
+    border-radius   : 12px;
+    box-shadow      : 1px 1px 4px grey , -1px -1px 4px grey;
 }
 
-.report{
+.report {
     font-size: 40px;
-    color: red;
-    cursor: pointer;
-    margin: 15px;
+    color    : red;
+    cursor   : pointer;
+    margin   : 15px;
 }
 
-.contact
-{
+.contact {
     font-size: 40px;
-    color: green;
-    cursor: pointer; 
-    margin: 15px;
-}
-img {
-
-    border-radius: 50%;
-    min-width    : 50px;
+    color    : green;
+    cursor   : pointer;
+    margin   : 15px;
 }
 
 h4 {

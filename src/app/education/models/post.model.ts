@@ -9,7 +9,11 @@ export class Post {
     public files: Attachment[],
     private reported: boolean,
     public creator: ElementCreator,
-    public comments: PostComment[]
+    public comments: PostComment[],
+    public createdHuman: string = '',
+    public department: any = '',
+    public faculty: any = '',
+    public type: string = ''
   ) {}
 
   public get isReported(): boolean {

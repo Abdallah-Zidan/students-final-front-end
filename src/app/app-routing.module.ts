@@ -13,6 +13,8 @@ import { SettingsComponent } from './profile/settings/settings.component';
 import { GroupComponent } from './education/groups/group.component';
 import { EventsComponent } from './events/events.component';
 import { SingleEventComponent } from './events/single-event/single-event.component';
+import { AnnouncementsComponent } from './education/announcements/announcements.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -40,11 +42,13 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
   },
 
   {
     path: 'profile/update',
     component: UpdateComponent,
+    canActivate: [AuthGuard],
   },
 
   {
@@ -70,6 +74,20 @@ const routes: Routes = [
     path: 'events/:id',
     component: SingleEventComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'announcements',
+    component: AnnouncementsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'announcements/:id',
+    component: AnnouncementsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   }
 ];
 
