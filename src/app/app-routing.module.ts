@@ -15,6 +15,7 @@ import { EventsComponent } from './events/events.component';
 import { SingleEventComponent } from './events/single-event/single-event.component';
 import { AnnouncementsComponent } from './education/announcements/announcements.component';
 import { CompaniesComponent } from './companies/companies.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -94,6 +95,10 @@ const routes: Routes = [
     path: 'companies/:type/:scope/:id',
     component: CompaniesComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 

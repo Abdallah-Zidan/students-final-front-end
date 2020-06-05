@@ -22,7 +22,6 @@ import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PostsComponent } from './posts/posts.component';
-//import { LeftSidebarComponent } from './posts/left-sidebar/left-sidebar.component';
 import {
   MainPostComponent,
   DeleteDialogComponent,
@@ -68,6 +67,7 @@ import { MatVideoModule } from 'mat-video';
 import { SafePipe } from './shared/helpers/external-url.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CompaniesComponent } from './companies/companies.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -105,6 +105,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SafePipe,
     DeleteDialogComponent,
     CompaniesComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
