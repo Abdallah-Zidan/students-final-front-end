@@ -68,6 +68,9 @@ import { SafePipe } from './shared/helpers/external-url.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CompaniesComponent } from './companies/companies.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { FileUploadModule } from '@iplab/ngx-file-upload';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -140,6 +143,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BsDropdownModule.forRoot(),
     MatVideoModule,
     MatDialogModule,
+    FileUploadModule,
+    InputTextareaModule,
+    SimpleNotificationsModule.forRoot()
   ],
 
   providers: [
@@ -151,4 +157,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

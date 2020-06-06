@@ -3,6 +3,9 @@ import { User } from 'src/app/auth/user.model';
 import { StorageService } from 'src/app/services/storage.service';
 import { PostsService } from 'src/app/education/services/posts.service';
 import { Group } from 'src/app/shared/models/group.model';
+import { FileUploadControl, FileUploadValidators } from '@iplab/ngx-file-upload';
+import { NotificationsService } from 'angular2-notifications';
+
 
 @Component({
   selector: 'app-add-post',
@@ -18,6 +21,13 @@ export class AddPostComponent implements OnInit {
   isEmpty = true;
   selectedFiles: File[] = [];
 
+  addFile = false;
+  addOrRemove = 'Add File(s)';
+
+
+  public fileUploadControl = new FileUploadControl(FileUploadValidators.filesLimit(2));
+
+
   onCommenting($event) {
     if ($event.target.value) {
       this.isEmpty = false;
@@ -28,8 +38,9 @@ export class AddPostComponent implements OnInit {
 
   constructor(
     private storage: StorageService,
-    private postsService: PostsService
-  ) {}
+    private postsService: PostsService,
+    private service: NotificationsService
+  ) { }
 
   ngOnInit(): void {
     this.user = this.storage.getUser('user');
@@ -54,8 +65,35 @@ export class AddPostComponent implements OnInit {
     setTimeout(() => {
       this.body = '';
     }, 2000);
+    this.onSuccess();
   }
   onFilesSelected(event) {
     this.selectedFiles = event.target.files;
+  }
+
+  add() {
+    if (this.addFile) {
+      this.addFile = false;
+      this.addOrRemove = 'Add File(s)';
+    } else {
+      this.addFile = true;
+      this.addOrRemove = 'Cancel';
+    }
+  }
+
+
+  onSuccess() {
+    this.service.info(
+      'Posted',
+      'your post has been submitted successfully',
+      {
+        timeOut: 5000,
+        showProgressBar: true,
+        pauseOnHover: false,
+        clickToClose: false,
+        maxLength: 10
+      }
+    );
+
   }
 }
