@@ -30,7 +30,6 @@ import { Group } from '../shared/models/group.model';
 export class SidebarComponent implements OnInit {
   user: User;
   menus = [];
-  
   constructor(
     public sidebarservice: SidebarService,
     private storage: StorageService,
@@ -46,28 +45,39 @@ export class SidebarComponent implements OnInit {
     this.menus = this.getMenuList();
   }
   getDepartmentgroups(groupRoute) {
-    return this.groupsService.departmentGroups.map((group) => {
-      return { title: group.name, scope: 0, id: group.id, route: groupRoute };
-    });
+    if (this.groupsService.departmentGroups) {
+      return this.groupsService.departmentGroups.map((group) => {
+        return { title: group.name, scope: 0, id: group.id, route: groupRoute };
+      });
+    }
+    return null;
   }
   getFacultygroups(groupRoute) {
-    return this.groupsService.facultyGroups.map((group) => {
-      return { title: group.name, scope: 1, id: group.id, route: groupRoute };
-    });
+    if (this.groupsService.facultyGroups) {
+      return this.groupsService.facultyGroups.map((group) => {
+        return { title: group.name, scope: 1, id: group.id, route: groupRoute };
+      });
+    }
+    return null;
   }
   getUniversitygroups(groupRoute) {
-    console.log(this.groupsService.universityGroups);
-    
-    return this.groupsService.universityGroups.map((group) => {
-      return { title: group.name, scope: 2, id: group.id, route: groupRoute };
-    });
+    if (this.groupsService.universityGroups) {
+      return this.groupsService.universityGroups.map((group) => {
+        return { title: group.name, scope: 2, id: group.id, route: groupRoute };
+      });
+    }
+    return null;
   }
-  onLogout() {
-    this.authService.logout();
+  getFacUniGroups(groupRoute) {
+    return this.getFacultygroups(groupRoute).concat(
+      this.getUniversitygroups(groupRoute)
+    ).concat(this.getAllSystemGroup(groupRoute));
   }
-
   getSideBarState() {
     return this.sidebarservice.getSidebarState();
+  }
+  getAllSystemGroup(groupRoute) {
+    return [{ title: 'All system', scope: 3, id: null, route: groupRoute }];
   }
 
   toggle(currentMenu) {
@@ -112,51 +122,48 @@ export class SidebarComponent implements OnInit {
       },
       {
         title: 'Faculty Announcement',
-        icon: 'far fa-gem',
+        icon: 'fa fa-university',
         active: false,
         type: 'dropdown',
-        submenus: this.getFacultygroups('announcements')
+        submenus: this.getFacultygroups('announcements'),
       },
       {
-        title: 'University Announcement',
-        icon: 'far fa-gem',
+        title: 'Uni. Announcement',
+        icon: 'fa fa-university',
         active: false,
         type: 'dropdown',
-        submenus: this.getUniversitygroups('announcements')
+        submenus: this.getUniversitygroups('announcements'),
       },
       {
         title: 'Events',
-        icon: 'fa fa-chart-line',
+        icon: 'fa fa-calendar',
         active: false,
         type: 'dropdown',
-        submenus: [
-          {
-            title: 'Faculty',
-          },
-          {
-            title: 'University',
-          },
-          {
-            title: 'All Universities',
-          },
-        ],
+        submenus: this.getFacUniGroups('events'),
       },
       {
-        title: 'Companies',
+        title: 'Trainings',
         icon: 'fa fa-globe',
         active: false,
         type: 'dropdown',
-        submenus: [
-          {
-            title: 'Events',
-          },
-          {
-            title: 'Job offers',
-          },
-          {
-            title: 'Trainings',
-          },
-        ],
+        submenus: this.getFacUniGroups('companies'),
+        typo: 1,
+      },
+      {
+        title: 'Internships',
+        icon: 'fa fa-globe',
+        active: false,
+        type: 'dropdown',
+        submenus: this.getFacUniGroups('companies'),
+        typo: 4,
+      },
+      {
+        title: 'Job Offers',
+        icon: 'fa fa-globe',
+        active: false,
+        type: 'dropdown',
+        submenus: this.getFacUniGroups('companies'),
+        typo: 2,
       },
       {
         title: 'Extra',

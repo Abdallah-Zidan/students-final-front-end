@@ -8,10 +8,10 @@ const getResourceUrlGet = (
   const url: string = baseUrl
     .replace('{resource}', resource)
     .replace('{scope}', scope)
-    .replace('{scope_id}', scopeId)
+    .replace('{scope_id}', scopeId ? scopeId : '-1')
     .replace('{type}', type);
-    console.log(url);
-    
+  console.log(url);
+
   return url;
 };
 const getResourcesUrl = (
@@ -37,14 +37,12 @@ const getCommentsUrl = (
 };
 const getRepliesUrl = (
   baseUrl: string,
-  commentId: string ,
-  replyId: string =null
+  commentId: string,
+  replyId: string = null
 ) => {
-  const url: string = baseUrl
-    .replace('{comment_id}', commentId);
-    
+  const url: string = baseUrl.replace('{comment_id}', commentId);
 
   return replyId ? url + `/${replyId}` : url;
 };
 
-export { getResourcesUrl, getCommentsUrl ,getResourceUrlGet , getRepliesUrl };
+export { getResourcesUrl, getCommentsUrl, getResourceUrlGet, getRepliesUrl };

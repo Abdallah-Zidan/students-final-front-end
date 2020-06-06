@@ -56,7 +56,7 @@
         <span class="material-icons text-primary mr-2">
           school
         </span>
-        <span class="text-secondary my-auto mr-3">{{ group.name}}</span>
+        <span class="text-secondary my-auto mr-3">{{ post.department && post.department.name}}</span>
       </div>
     </div>
 
@@ -65,7 +65,7 @@
         <span class="material-icons text-primary mr-2">
           account_balance
         </span>
-        <span class="text-secondary">{{  post.faculty.name }}</span>
+        <span class="text-secondary">{{ post.faculty && post.faculty.name }}</span>
       </div>
     </div>
   </div>

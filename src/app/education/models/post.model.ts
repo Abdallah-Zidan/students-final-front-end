@@ -10,10 +10,10 @@ export class Post {
     private reported: boolean,
     public creator: ElementCreator,
     public comments: PostComment[],
-    public createdHuman: string = '',
-    public department: any = '',
-    public faculty: any = '',
-    public type: string = '',
+    public createdHuman: string = null,
+    public department: any = null,
+    public faculty: any = null,
+    public type: string = null,
     public title: string = null
   ) {}
 

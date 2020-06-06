@@ -40,20 +40,25 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       const scope = map[key2];
       this.type = map[key3];
       const tmp = this.groupsService.facultyGroups[0].id;
-      if (id && scope && this.type) {
-        this.currentGroup = this.groupsService.getGroup(id, scope);
+      if (id === 'all' && +scope === 3 && this.type) {
+        this.currentGroup = null;
+        this.getPosts(this.resource, '2', null, 1);
       } else {
-        this.router.navigate(['/companies', 1, 1, tmp]);
-      }
-      if (this.currentGroup && ['1', '2', '4'].includes(this.type)) {
-        this.getPosts(
-          'events',
-          (+this.currentGroup.scope - 1).toString(),
-          this.currentGroup.id,
-          1
-        );
-      } else {
-        this.router.navigate(['/companies', 1, 1, tmp]);
+        if (id && scope && this.type) {
+          this.currentGroup = this.groupsService.getGroup(id, scope);
+        } else {
+          this.router.navigate(['/companies', 1, 1, tmp]);
+        }
+        if (this.currentGroup && ['1', '2', '4'].includes(this.type)) {
+          this.getPosts(
+            'events',
+            (+this.currentGroup.scope - 1).toString(),
+            this.currentGroup.id,
+            1
+          );
+        } else {
+          this.router.navigate(['/companies', 1, 1, tmp]);
+        }
       }
     });
   }

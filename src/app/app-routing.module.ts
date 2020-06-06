@@ -72,8 +72,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'events/:id',
-    component: SingleEventComponent,
+    path: 'events/:scope/:id',
+    component: EventsComponent,
     canActivate: [AuthGuard],
   },
   {

@@ -37,12 +37,16 @@ export class AddPostComponent implements OnInit {
   onAddPost() {
     const formData = new FormData();
     formData.append('body', this.body);
-    formData.append('group', this.group.scope);
-    formData.append('group_id', this.group.id);
+    if (this.group) {
+      formData.append('group', this.group.scope);
+      formData.append('group_id', this.group.id);
+    } else {
+      formData.append('group', '2');
+    }
     for (const file of this.selectedFiles) {
       formData.append('files[]', file);
     }
-    if (this.resource != 'posts') {
+    if (this.resource !== 'posts') {
       formData.append('title', 'default');
       formData.append('type', this.type.toString());
     }
