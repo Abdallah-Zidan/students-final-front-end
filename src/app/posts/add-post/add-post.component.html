@@ -3,8 +3,8 @@
     <div class="col-2 text-center">
       <img class="w-75 ava" src="{{user.personalData.avatar}}" alt="">
     </div>
-    <div class="col-10 w-100 my-auto">
-      <div class="row h-100">
+    <div class="col-10 w-75 my-auto mx-auto">
+      <div class="row w-100 h-100">
         <div class="col-10">
           <textarea placeholder="add post" class="w-100" [(ngModel)]="body" (input)="onCommenting($event)" [rows]="3" [cols]="50"
             pInputTextarea autoResize="autoResize"></textarea>
@@ -12,8 +12,8 @@
             <button class="btn btn-block btn-primary" (click)="add()"> {{addOrRemove}}</button>
           </div>
         </div>
-        <div class="col-2 mt-auto">
-          <button mat-button [hidden]="isEmpty" class="btn btn-secondary btn-block" (click)="onAddPost()">Post</button>
+        <div class="col-2 mr-auto mt-auto">
+          <button class="w-auto" mat-button [hidden]="isEmpty" class="btn btn-secondary btn-block" (click)="onAddPost()">Post</button>
         </div>
       </div>
     </div>
