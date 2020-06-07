@@ -45,6 +45,8 @@ export class AddPostComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.storage.getUser('user');
   }
+
+
   onAddPost() {
     const formData = new FormData();
     formData.append('body', this.body);
@@ -66,6 +68,10 @@ export class AddPostComponent implements OnInit {
       this.body = '';
     }, 2000);
     this.onSuccess();
+    this.addFile = false;
+    this.addOrRemove = 'Add File(s)';
+    this.isEmpty = true;
+
   }
   onFilesSelected(event) {
     this.selectedFiles = event.target.files;

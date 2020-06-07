@@ -8,7 +8,7 @@
     <div class="col-8 px-3 my-auto">
       <div class="row">
         <div class="col-12">
-          <h5 class="text-primary text">{{post.creator.name}}</h5>
+          <h5 class="text">{{post.creator.name}}</h5>
         </div>
       </div>
 
@@ -53,7 +53,7 @@
   <div class="row h-100  mx-5">
     <div class="col-lg-4 col-xs-12 col-sm-12 p-3 align-self-center my-auto">
       <div class="row h-100">
-        <span class="material-icons text-primary mr-2">
+        <span class="material-icons text mr-2">
           school
         </span>
         <span class="text-secondary my-auto mr-3">{{ post.department && post.department.name}}</span>
@@ -62,7 +62,7 @@
 
     <div class="col-lg-4 col-xs-12 col-sm-12 my-auto" *ngIf="post.faculty">
       <div class="row h-100">
-        <span class="material-icons text-primary mr-2">
+        <span class="material-icons mr-2 text">
           account_balance
         </span>
         <span class="text-secondary">{{ post.faculty && post.faculty.name }}</span>
@@ -73,12 +73,12 @@
 
   <div class="row h-100 mx-5">
     <div class="col-8">
-      <mat-label class="text-primary" [hidden]="!editing">Edit Your Post</mat-label>
+      <mat-label class="text" [hidden]="!editing">Edit Your Post</mat-label>
       <textarea class="mx-5" matInput [hidden]="!editing" [(ngModel)]="postBody"></textarea>
     </div>
     <div class="col-2"></div>
     <div class="col-2 my-auto" [hidden]="!editing">
-      <span class="text-primary material-icons" (click)="onUpdatePost()">
+      <span class="text material-icons" (click)="onUpdatePost()">
         send
       </span>
     </div>
@@ -132,7 +132,7 @@
       </mat-form-field>
     </div>
     <div class="col-2 my-auto">
-      <span class="text-primary material-icons" [hidden]="isEmpty" (click)="onAddComment(post.id)">
+      <span class="text material-icons" [hidden]="isEmpty" (click)="onAddComment(post.id)">
         send
       </span>
     </div>

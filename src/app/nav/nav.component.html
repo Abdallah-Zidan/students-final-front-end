@@ -1,21 +1,21 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container {{color}}">
   <mat-sidenav style="width: 260px;" #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>
+  [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+  <mat-toolbar>
+    
+  </mat-toolbar>
+  
+  <!-- Side Bar -->
+  <mat-nav-list class="sidelist">
+    <app-sidebar></app-sidebar>
+  </mat-nav-list>
+</mat-sidenav>
+<!-- End Side Bar -->
 
-    </mat-toolbar>
-
-    <!-- Side Bar -->
-
-    <mat-nav-list class="sidelist">
-          <app-sidebar></app-sidebar>
-    </mat-nav-list>
-  </mat-sidenav>
-  <!-- End Side Bar -->
-
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+<mat-sidenav-content>
+  
+  <mat-toolbar color="primary">
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <img src="../../assets/images/logo-white.png">
@@ -31,7 +31,8 @@
       <!-- End Of Home -->
 
       <!-- Website Sections Part -->
-      <button mat-button [matMenuTriggerFor]="sectionMenu">
+
+      <button mat-button [hidden]="isHandset$ | async" [matMenuTriggerFor]="sectionMenu">
         <h3>Sections</h3>
         <span class="material-icons">
           keyboard_arrow_down
@@ -77,6 +78,42 @@
 
         </button>
       </mat-menu>
+
+
+<!-- colors -->
+      <button mat-button [matMenuTriggerFor]="colorMenu">
+        <span class="material-icons">
+          format_paint
+          </span>
+        <span class="material-icons">
+          keyboard_arrow_down
+        </span>
+      </button>
+
+      <mat-menu #colorMenu="matMenu" >
+        <button class="sections w-100" style="background-color: white;" mat-sectionMenu-item>
+
+     
+          <button mat-menu-item (click) = "changeColor('blue')" class="text-center">
+            <strong><span style="color: #2296F3;">Blue</span></strong>
+          </button>
+          
+          <button mat-menu-item (click) = "changeColor('grey')" class="text-center">
+            <strong><span style="color: #424242;">Grey</span></strong>
+          </button>
+        
+          <button mat-menu-item (click) = "changeColor('pink')" class="text-center">
+            <strong><span style="color: #EA4B64;">pink</span></strong>
+          </button>
+  
+          <button mat-menu-item (click) = "changeColor('purple')" class="text-center">
+            <strong><span style="color: #9E52B0;">purple</span> </strong>
+          </button>
+          
+
+        </button>
+      </mat-menu>
+
       <!-- End Website Sections Part -->
 
       <!-- User Section Start -->
@@ -109,6 +146,8 @@
       <!-- User Section End -->
 
     </mat-toolbar>
+
+   
     <!-- Add Content Here -->
     <ng-content>
 

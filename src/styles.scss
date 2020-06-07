@@ -1,7 +1,14 @@
+@import 'src/theme.scss';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+@mixin my-theme($theme) {
+    @include app-main-post-theme($theme);
+}
+
+
 
 body {
     margin: 0;

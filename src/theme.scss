@@ -2,8 +2,44 @@
 
 @include mat-core();
 
-$my-primary: mat-palette($mat-blue,800);
-$my-accent: mat-palette($mat-grey,800);
-$my-theme: mat-light-theme($my-primary, $my-accent);
-
+$my-primary: mat-palette($mat-blue);
+$my-accent : mat-palette($mat-grey, 800);
+$my-theme  : mat-light-theme($my-primary, $my-accent);
 @include angular-material-theme($my-theme);
+
+
+@mixin app-main-post-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent : map-get($theme, accent);
+    
+    .text {
+        color: mat-color($primary);
+    }
+}
+@include app-main-post-theme($my-theme);
+
+.grey {
+    $my-primary: mat-palette($mat-grey, 800);
+    $my-accent : mat-palette($mat-blue);
+    $my-theme  : mat-light-theme($my-primary, $my-accent);
+    @include angular-material-theme($my-theme);
+    @include app-main-post-theme($my-theme);
+}
+
+.pink {
+    $my-primary: mat-palette($mat-pink);
+    $my-accent : mat-palette($mat-grey, 800);
+    $my-theme  : mat-light-theme($my-primary, $my-accent);
+    @include angular-material-theme($my-theme);
+    @include app-main-post-theme($my-theme);
+
+}
+
+.purple {
+    $my-primary: mat-palette($mat-purple, 500);
+    $my-accent : mat-palette($mat-grey, 800);
+    $my-theme  : mat-light-theme($my-primary, $my-accent);
+    @include angular-material-theme($my-theme);
+    @include app-main-post-theme($my-theme);
+
+}
