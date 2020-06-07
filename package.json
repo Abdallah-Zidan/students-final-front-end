@@ -29,6 +29,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@iplab/ngx-file-upload": "^2.0.6",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
+    "admin-lte": "^3.0.5",
     "angular2-notifications": "^9.0.0",
     "bootstrap": "^4.5.0",
     "font-awesome": "^4.7.0",

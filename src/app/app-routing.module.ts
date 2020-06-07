@@ -16,6 +16,7 @@ import { SingleEventComponent } from './events/single-event/single-event.compone
 import { AnnouncementsComponent } from './education/announcements/announcements.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
@@ -97,6 +98,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: '**',
     component: NotFoundComponent,
   },
@@ -106,4 +112,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

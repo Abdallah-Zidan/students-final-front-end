@@ -71,6 +71,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { AdminComponent } from './admin/admin.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -109,6 +110,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DeleteDialogComponent,
     CompaniesComponent,
     NotFoundComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
