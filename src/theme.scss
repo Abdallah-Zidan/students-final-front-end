@@ -11,12 +11,33 @@ $my-theme  : mat-light-theme($my-primary, $my-accent);
 @mixin app-main-post-theme($theme) {
     $primary: map-get($theme, primary);
     $accent : map-get($theme, accent);
-    
+
     .text {
         color: mat-color($primary);
     }
 }
+
+@mixin app-single-comment-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent : map-get($theme, accent);
+    .text {
+        color: mat-color($primary);
+    }
+}
+
+@mixin app-single-reply-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent : map-get($theme, accent);
+    .text {
+        color: mat-color($primary);
+    }
+}
+
+
 @include app-main-post-theme($my-theme);
+@include app-single-comment-theme($my-theme);
+@include app-single-reply-theme($my-theme);
+
 
 .grey {
     $my-primary: mat-palette($mat-grey, 800);
@@ -24,6 +45,8 @@ $my-theme  : mat-light-theme($my-primary, $my-accent);
     $my-theme  : mat-light-theme($my-primary, $my-accent);
     @include angular-material-theme($my-theme);
     @include app-main-post-theme($my-theme);
+    @include app-single-comment-theme($my-theme);
+    @include app-single-reply-theme($my-theme);
 }
 
 .pink {
@@ -32,6 +55,8 @@ $my-theme  : mat-light-theme($my-primary, $my-accent);
     $my-theme  : mat-light-theme($my-primary, $my-accent);
     @include angular-material-theme($my-theme);
     @include app-main-post-theme($my-theme);
+    @include app-single-comment-theme($my-theme);
+    @include app-single-reply-theme($my-theme);
 
 }
 
@@ -41,5 +66,6 @@ $my-theme  : mat-light-theme($my-primary, $my-accent);
     $my-theme  : mat-light-theme($my-primary, $my-accent);
     @include angular-material-theme($my-theme);
     @include app-main-post-theme($my-theme);
-
+    @include app-single-comment-theme($my-theme);
+    @include app-single-reply-theme($my-theme);
 }

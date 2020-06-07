@@ -1,16 +1,5 @@
 @import '~@angular/material/theming';
 
-@mixin app-main-post-theme($theme) {
-    $primary: map-get($theme, primary);
-    $accent : map-get($theme, accent);
-    .text {
-        color: mat-color($primary);
-    }
-}
-
-
-
-
 body,
 html,
 * {

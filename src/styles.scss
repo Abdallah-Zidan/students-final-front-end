@@ -6,6 +6,8 @@
 
 @mixin my-theme($theme) {
     @include app-main-post-theme($theme);
+    @include app-single-comment-theme($theme);
+    @include app-single-reply-theme($theme);
 }
 
 
