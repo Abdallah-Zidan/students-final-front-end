@@ -13,6 +13,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { ElementCreator } from '../../shared/models/creator.model';
 import { PostComment } from '../../shared/models/comment.model';
 import { CommentReply } from '../../shared/models/reply.model';
+import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -70,7 +71,7 @@ export class PostsService {
   }
 
   addPost(resource, data) {
-    this.httpService.requestAddPost(resource, data).subscribe((res: any) => {
+   return this.httpService.requestAddPost(resource, data).pipe(tap((res: any) => {
       const resPost = res.data.post;
       const currUser = this.storage.getUser('user');
 
@@ -89,7 +90,7 @@ export class PostsService {
       );
       this.postsArr.unshift(newPost);
       this.posts.next(this.postsArr);
-    });
+    }));
   }
   updatePost(resource, data, postId) {
     return this.httpService.requestUpdatePost(resource, data, postId);
