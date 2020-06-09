@@ -4,7 +4,7 @@
   </div>
   <div class="col-8  my-auto">
     <div class="col-12 px-0">
-      <h5 class=" my-auto px-0 text-primary">{{reply.creator.name}}</h5>
+      <h5 class=" my-auto px-0 text">{{reply.creator.name}}</h5>
     </div>
     
     <div class="col-12">
@@ -43,12 +43,12 @@
 
 <div class="row h-100 my-3 mx-5">
   <div class="col-8">
-    <mat-label class="text-primary" [hidden]="!editing">Edit Your Reply</mat-label>
+    <mat-label class="text" [hidden]="!editing">Edit Your Reply</mat-label>
     <textarea class="mx-5" matInput [hidden]="!editing" [(ngModel)]="replyBody"></textarea>
   </div>
   <div class="col-2"></div>
   <div class="col-2 my-auto" [hidden]="!editing">
-    <span class="text-primary curs material-icons" (click)="onUpdateReply()">
+    <span class="text curs material-icons" (click)="onUpdateReply()">
       send
     </span>
   </div>

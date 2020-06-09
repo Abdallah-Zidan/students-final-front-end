@@ -8,7 +8,7 @@
     <div class="col-8 px-3 my-auto">
       <div class="row">
         <div class="col-12">
-          <h5 class="text-primary text">{{post.creator.name}}</h5>
+          <h5 class="text">{{post.creator.name}}</h5>
         </div>
       </div>
 
@@ -49,23 +49,24 @@
   </div>
 
 
-
-  <div class="row h-100  mx-5">
-    <div class="col-lg-4 col-xs-12 col-sm-12 p-3 align-self-center my-auto">
-      <div class="row h-100">
-        <span class="material-icons text-primary mr-2">
-          school
-        </span>
-        <span class="text-secondary my-auto mr-3">{{ post.department && post.department.name}}</span>
+  <div *ngIf="!type">
+    <div class="row h-100  mx-5">
+      <div class="col-lg-4 col-xs-12 col-sm-12 p-3 align-self-center my-auto">
+        <div class="row h-100">
+          <span class="material-icons text mr-2">
+            school
+          </span>
+          <span class="text-secondary my-auto mr-3">{{ post.department && post.department.name}}</span>
+        </div>
       </div>
-    </div>
 
-    <div class="col-lg-4 col-xs-12 col-sm-12 my-auto" *ngIf="post.faculty">
-      <div class="row h-100">
-        <span class="material-icons text-primary mr-2">
-          account_balance
-        </span>
-        <span class="text-secondary">{{ post.faculty && post.faculty.name }}</span>
+      <div class="col-lg-4 col-xs-12 col-sm-12 my-auto" *ngIf="post.faculty">
+        <div class="row h-100">
+          <span class="material-icons mr-2 text">
+            account_balance
+          </span>
+          <span class="text-secondary">{{ post.faculty && post.faculty.name }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -73,12 +74,12 @@
 
   <div class="row h-100 mx-5">
     <div class="col-8">
-      <mat-label class="text-primary" [hidden]="!editing">Edit Your Post</mat-label>
+      <mat-label class="text" [hidden]="!editing">Edit Your Post</mat-label>
       <textarea class="mx-5" matInput [hidden]="!editing" [(ngModel)]="postBody"></textarea>
     </div>
     <div class="col-2"></div>
     <div class="col-2 my-auto" [hidden]="!editing">
-      <span class="text-primary material-icons" (click)="onUpdatePost()">
+      <span class="text material-icons" (click)="onUpdatePost()">
         send
       </span>
     </div>
@@ -93,7 +94,8 @@
         <div *ngIf="file.mime.startsWith('image')">
           <div class="row h-100">
             <div class="col-6">
-              <img class="img-fluid my-3" src="{{file.url}}" alt="image">
+              <!-- <img class="img-fluid my-3" src="{{file.url}}" alt="image"> -->
+              <app-photo [src]="file.url"></app-photo>
             </div>
             <!-- <div class="col-6">
               <img class="img-fluid my-3" src="{{file.url}}" alt="image">
@@ -101,9 +103,9 @@
           </div>
         </div>
 
-        <div *ngIf="file.mime.startsWith('video')">
-          <mat-video src="{{file.url}}" [preload]="true" [fullscreen]="true" [download]="true" color="accent"
-            spinner="spin">
+        <div *ngIf="file.mime.startsWith('video')" class="m-2">
+          <mat-video src="{{file.url}}" [preload]="true" [keyboard]="false" [showFrameByFrame]="true"
+            [fullscreen]="true" [download]="true" color="accent" spinner="spin">
           </mat-video>
         </div>
         <div *ngIf="file.mime.startsWith('audio')">
@@ -113,7 +115,7 @@
           </audio>
         </div>
         <div *ngIf="!(file.mime.startsWith('image') || file.mime.startsWith('video')|| file.mime.startsWith('audio')) ">
-          <a href="{{file.url}}" target="_self">File</a>
+          <a href="{{file.url}}" target="_self">{{file.name}}</a>
         </div>
       </div>
 
@@ -132,7 +134,7 @@
       </mat-form-field>
     </div>
     <div class="col-2 my-auto">
-      <span class="text-primary material-icons" [hidden]="isEmpty" (click)="onAddComment(post.id)">
+      <span class="text material-icons" [hidden]="isEmpty" (click)="onAddComment(post.id)">
         send
       </span>
     </div>

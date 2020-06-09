@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 
 import { GroupsService } from 'src/app/services/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { Group } from 'src/app/shared/models/group.model';
 import { Subscription } from 'rxjs';
 import { Post } from '../education/models/post.model';
 import { PostsService } from '../education/services/posts.service';
+
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
@@ -22,7 +23,8 @@ export class EventsComponent implements OnInit, OnDestroy {
     private postsService: PostsService,
     private groupsService: GroupsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+
   ) {}
 
   ngOnInit(): void {
@@ -68,4 +70,5 @@ export class EventsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+  
 }

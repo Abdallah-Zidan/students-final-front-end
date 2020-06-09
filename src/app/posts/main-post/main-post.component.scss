@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 body,
 html,
 * {
@@ -10,9 +12,10 @@ span {
 }
 
 video {
-    width: 100%;
+    width : 100%;
     height: auto;
-  }
+}
+
 .ava {
     padding      : 3px;
     border       : 1px solid blue;
@@ -45,7 +48,7 @@ body {
     margin          : 0 auto;
     margin-bottom   : 3vw;
     border-radius   : 12px;
-    box-shadow      : 1px 1px 4px grey , -1px -1px 4px grey;
+    box-shadow      : 1px 1px 4px grey, -1px -1px 4px grey;
 }
 
 .report {

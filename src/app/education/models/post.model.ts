@@ -14,7 +14,9 @@ export class Post {
     public department: any = null,
     public faculty: any = null,
     public type: string = null,
-    public title: string = null
+    public title: string = null,
+    public startDate: any = null,
+    public endDate: any = null
   ) {}
 
   public get isReported(): boolean {

@@ -71,7 +71,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-
+import { PhotoComponent } from './posts/photo/photo.component';
+import { AddEventComponent } from './events/add-event/add-event.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ImagesCarouselComponent } from './events/images/images.-carousel.component';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -109,6 +113,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DeleteDialogComponent,
     CompaniesComponent,
     NotFoundComponent,
+    PhotoComponent,
+    AddEventComponent,
+    ImagesCarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -145,7 +152,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatDialogModule,
     FileUploadModule,
     InputTextareaModule,
-    SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot(),
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
 
   providers: [
@@ -157,4 +166,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
