@@ -73,9 +73,11 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { PhotoComponent } from './posts/photo/photo.component';
 import { AddEventComponent } from './events/add-event/add-event.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ImagesCarouselComponent } from './events/images/images.-carousel.component';
+import { AdminComponent } from './admin/admin.component';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -115,7 +117,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NotFoundComponent,
     PhotoComponent,
     AddEventComponent,
-    ImagesCarouselComponent
+    ImagesCarouselComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -154,7 +157,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     InputTextareaModule,
     SimpleNotificationsModule.forRoot(),
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
 
   providers: [
