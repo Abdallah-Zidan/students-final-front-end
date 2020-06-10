@@ -27,10 +27,8 @@ import { PostsComponent } from './admin/posts/posts.component';
 import {AdminEventsComponent} from './admin/admin-events/admin-events.component';
 import { from } from 'rxjs';
 import { QuestionsComponent } from './admin/questions/questions.component';
-import { ToolsComponent } from './admin/tools/tools.component';
-
+import { AdminToolsComponent } from './admin/admin-tools/admin-tools.component';
 import { ToolsComponent } from './tools/tools.component';
-
 
 const routes: Routes = [
   {
@@ -126,7 +124,7 @@ const routes: Routes = [
       { path: 'posts', component: PostsComponent },
       { path: 'events', component: AdminEventsComponent },
       { path: 'questions', component: QuestionsComponent },
-      { path: 'tools', component: ToolsComponent },
+      { path: 'tools', component: AdminToolsComponent },
     ]
   },
 
