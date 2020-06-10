@@ -1,5 +1,5 @@
 <mat-accordion>
-  <mat-expansion-panel class="cont" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel class="cont my-3" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <span class="text-primary material-icons">
@@ -13,7 +13,7 @@
       <div class="col-9  my-auto">
         <mat-form-field class="example-full-width px-5">
           <mat-label>Leave a Reply</mat-label>
-          <textarea [(ngModel)]="body" (input)="onCommenting($event)" rows="3" matInput placeholder="Ex. It makes me feel..."></textarea>
+          <textarea style="height: auto;" [(ngModel)]="body" (input)="onCommenting($event)" rows="3" matInput placeholder="Ex. It makes me feel..."></textarea>
         </mat-form-field>
       </div>
       <div class="col-2 curs my-auto">

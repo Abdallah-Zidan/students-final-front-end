@@ -14,7 +14,9 @@ import { GroupComponent } from './education/groups/group.component';
 import { EventsComponent } from './events/events.component';
 import { SingleEventComponent } from './events/single-event/single-event.component';
 import { AnnouncementsComponent } from './education/announcements/announcements.component';
+import { CompaniesComponent } from './companies/companies.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AdminComponent } from './admin/admin.component';
 
 import { ToolsComponent } from './tools/tools.component';
 
@@ -59,34 +61,49 @@ const routes: Routes = [
     component: SettingsComponent,
   },
   {
-    path: 'groups/:id',
+    path: 'groups/:scope/:id',
     component: GroupComponent,
     canActivate: [AuthGuard],
   },
   {
     path: 'groups',
     component: GroupComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'events',
     component: EventsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'events/:id',
-    component: SingleEventComponent,
-    canActivate: [AuthGuard]
+    path: 'events/:scope/:id',
+    component: EventsComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'announcements',
     component: AnnouncementsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'announcements/:id',
+    path: 'announcements/:scope/:id',
     component: AnnouncementsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'companies',
+    component: CompaniesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'companies/:type/:scope/:id',
+    component: CompaniesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
   },
 
   {
@@ -106,7 +123,7 @@ const routes: Routes = [
   {
     path: '**',
     component: NotFoundComponent,
-  }
+  },
 ];
 
 @NgModule({

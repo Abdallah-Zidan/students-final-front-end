@@ -12,6 +12,7 @@ export class SingleCommentComponent implements OnInit {
   @Input() comment: PostComment;
   @Input() postId;
   @Input() group: Group;
+  @Input() resource: string;
   isEmpty = true;
   user;
   editing = false;
@@ -43,7 +44,12 @@ export class SingleCommentComponent implements OnInit {
   }
   onUpdateComment() {
     this.postsService
-      .updateComment(this.commentBody, this.postId, this.comment.id)
+      .updateComment(
+        this.resource,
+        this.commentBody,
+        this.postId,
+        this.comment.id
+      )
       .subscribe((res) => {
         console.log(res);
         this.comment.body = this.commentBody;
@@ -51,6 +57,10 @@ export class SingleCommentComponent implements OnInit {
     this.editing = false;
   }
   onDeleteComment() {
-    this.postsService.deleteComment(this.postId, this.comment.id);
+    this.postsService.deleteComment(
+      this.resource,
+      this.postId,
+      this.comment.id
+    );
   }
 }

@@ -13,6 +13,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class MainPostComponent implements OnInit {
   @Input() group: Group;
   @Input() post: Post;
+  @Input() resource: string;
+  @Input() type;
   user: User;
   comment = '';
   postBody;
@@ -35,7 +37,7 @@ export class MainPostComponent implements OnInit {
     }
   }
   onAddComment(postId) {
-    this.postsService.addComment(this.comment, postId);
+    this.postsService.addComment(this.resource, this.comment, postId);
     setTimeout(() => {
       this.comment = '';
     }, 1500);
@@ -46,7 +48,11 @@ export class MainPostComponent implements OnInit {
   }
   onUpdatePost() {
     this.postsService
-      .updatePost(this.postBody, this.group.scope, this.group.id, this.post.id)
+      .updatePost(
+        this.resource,
+        { body: this.postBody, title: 'default' },
+        this.post.id
+      )
       .subscribe((res) => {
         console.log(res);
         this.post.body = this.postBody;
@@ -57,13 +63,13 @@ export class MainPostComponent implements OnInit {
     const dialogRef = this.deleteDialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result === true) {
-        this.postsService.deletePost(
-          this.group.scope,
-          this.group.id,
-          this.post.id
-        );
+        this.postsService.deletePost(this.resource, this.post.id);
       }
     });
+  }
+  onReportPost() {
+    this.postsService.reportPost(this.post.id);
+    this.post.setReported(true);
   }
 }
 @Component({

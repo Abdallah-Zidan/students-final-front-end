@@ -68,7 +68,17 @@ import { AnnouncementsComponent } from './education/announcements/announcements.
 import { MatVideoModule } from 'mat-video';
 import { SafePipe } from './shared/helpers/external-url.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CompaniesComponent } from './companies/companies.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { FileUploadModule } from '@iplab/ngx-file-upload';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { PhotoComponent } from './posts/photo/photo.component';
+import { AddEventComponent } from './events/add-event/add-event.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ImagesCarouselComponent } from './events/images/images.-carousel.component';
+import { AdminComponent } from './admin/admin.component';
 
 import { ToolsComponent } from './tools/tools.component';
 import { AddToolComponent } from './tools/add-tool/add-tool.component';
@@ -111,6 +121,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AnnouncementsComponent,
     SafePipe,
     DeleteDialogComponent,
+    CompaniesComponent,
     NotFoundComponent,
     ToolsComponent,
     AddToolComponent,
@@ -118,7 +129,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ToolCommentsComponent,
     SingletoolCommentComponent,
     EditToolDialog,
-    DeleteTool
+    DeleteTool,
+    PhotoComponent,
+    AddEventComponent,
+    ImagesCarouselComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -153,7 +168,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BsDropdownModule.forRoot(),
     MatVideoModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    FileUploadModule,
+    InputTextareaModule,
+    SimpleNotificationsModule.forRoot(),
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 
   providers: [

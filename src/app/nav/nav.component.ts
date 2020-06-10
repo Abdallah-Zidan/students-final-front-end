@@ -13,6 +13,7 @@ import { AuthService } from '../auth/services/auth.service';
 })
 export class NavComponent implements OnInit {
   user: User;
+  color: string;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -24,11 +25,15 @@ export class NavComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private storage: StorageService,
     private authService: AuthService
-  ) {}
+  ) { }
   ngOnInit() {
     this.user = this.storage.getUser('user');
   }
   onLogout() {
     this.authService.logout();
+  }
+
+  changeColor(color) {
+    this.color = color;
   }
 }

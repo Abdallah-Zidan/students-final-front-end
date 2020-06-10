@@ -29,9 +29,8 @@ import { Group } from '../shared/models/group.model';
 })
 export class SidebarComponent implements OnInit {
   user: User;
+  isTrue = false;
   menus = [];
-  departmentGroups;
-  facultyGroups;
   constructor(
     public sidebarservice: SidebarService,
     private storage: StorageService,
@@ -44,21 +43,42 @@ export class SidebarComponent implements OnInit {
     if (this.groupsService.departmentGroups.length < 1) {
       this.groupsService.getGroups();
     }
-    this.departmentGroups = this.groupsService.departmentGroups.map((group) => {
-      return { title: group.name, id: group.id, route: 'groups' };
-    });
-    this.facultyGroups = this.groupsService.facultyGroups.map((group) => {
-      return { title: group.name, id: group.id, route: 'groups' };
-    });
     this.menus = this.getMenuList();
   }
-
-  onLogout() {
-    this.authService.logout();
+  getDepartmentgroups(groupRoute) {
+    if (this.groupsService.departmentGroups) {
+      return this.groupsService.departmentGroups.map((group) => {
+        return { title: group.name, scope: 0, id: group.id, route: groupRoute };
+      });
+    }
+    return null;
   }
-
+  getFacultygroups(groupRoute) {
+    if (this.groupsService.facultyGroups) {
+      return this.groupsService.facultyGroups.map((group) => {
+        return { title: group.name, scope: 1, id: group.id, route: groupRoute };
+      });
+    }
+    return null;
+  }
+  getUniversitygroups(groupRoute) {
+    if (this.groupsService.universityGroups) {
+      return this.groupsService.universityGroups.map((group) => {
+        return { title: group.name, scope: 2, id: group.id, route: groupRoute };
+      });
+    }
+    return null;
+  }
+  getFacUniGroups(groupRoute) {
+    return this.getFacultygroups(groupRoute).concat(
+      this.getUniversitygroups(groupRoute)
+    ).concat(this.getAllSystemGroup(groupRoute));
+  }
   getSideBarState() {
     return this.sidebarservice.getSidebarState();
+  }
+  getAllSystemGroup(groupRoute) {
+    return [{ title: 'All system', scope: 3, id: null, route: groupRoute }];
   }
 
   toggle(currentMenu) {
@@ -88,70 +108,63 @@ export class SidebarComponent implements OnInit {
       },
 
       {
-        title: 'Departments',
+        title: 'Department Groups',
         icon: 'fa fa-users',
         active: false,
         type: 'dropdown',
-        submenus: this.departmentGroups,
+        submenus: this.getDepartmentgroups('groups'),
       },
       {
-        title: 'Faculty',
+        title: 'Faculty Groups',
         icon: 'fa fa-university',
         active: false,
         type: 'dropdown',
-        submenus: this.facultyGroups,
+        submenus: this.getFacultygroups('groups'),
       },
       {
-        title: 'Announcement',
-        icon: 'far fa-gem',
+        title: 'Faculty Announcement',
+        icon: 'fa fa-university',
         active: false,
         type: 'dropdown',
-        submenus: [
-          {
-            title: 'Faculty',
-            route: 'announcements',
-            id: 1,
-          },
-          {
-            title: 'University',
-            route: 'announcements',
-            id: 2,
-          },
-        ],
+        submenus: this.getFacultygroups('announcements'),
+      },
+      {
+        title: 'Uni. Announcement',
+        icon: 'fa fa-university',
+        active: false,
+        type: 'dropdown',
+        submenus: this.getUniversitygroups('announcements'),
       },
       {
         title: 'Events',
-        icon: 'fa fa-chart-line',
+        icon: 'fa fa-calendar',
         active: false,
         type: 'dropdown',
-        submenus: [
-          {
-            title: 'Faculty',
-          },
-          {
-            title: 'University',
-          },
-          {
-            title: 'All Universities',
-          },
-        ],
+        submenus: this.getFacUniGroups('events'),
       },
       {
-        title: 'Companies',
+        title: 'Trainings',
         icon: 'fa fa-globe',
         active: false,
         type: 'dropdown',
-        submenus: [
-          {
-            title: 'Events',
-          },
-          {
-            title: 'Job offers',
-          },
-          {
-            title: 'Trainings',
-          },
-        ],
+        submenus: this.getFacUniGroups('companies'),
+        typo: 1,
+      },
+      {
+        title: 'Internships',
+        icon: 'fa fa-globe',
+        active: false,
+        type: 'dropdown',
+        submenus: this.getFacUniGroups('companies'),
+        typo: 4,
+      },
+      {
+        title: 'Job Offers',
+        icon: 'fa fa-globe',
+        active: false,
+        type: 'dropdown',
+        submenus: this.getFacUniGroups('companies'),
+        typo: 2,
       },
       {
         title: 'Extra',
@@ -180,5 +193,8 @@ export class SidebarComponent implements OnInit {
         type: 'simple',
       },
     ];
+  }
+  changeTheme(){
+    this.isTrue = !this.isTrue;
   }
 }
