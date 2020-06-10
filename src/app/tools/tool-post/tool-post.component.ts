@@ -38,7 +38,7 @@ CommentBody;
       if(typeof result === 'undefined')
         {this.tool=Object.assign({}, OldTool)}
       else
-        { this.httpService.requestUpdateTool(this.tool,this.tool.id).subscribe(
+        { this.httpService.requestUpdatePost("tools",this.tool,this.tool.id).subscribe(
           result=>{console.log(result)},
           error=>{console.log(error)});
         }
@@ -49,7 +49,7 @@ CommentBody;
 
    addComment()
    {
-    this.httpService.requestAddToolComment(this.CommentBody, this.tool.id).subscribe(
+    this.httpService.requestAddComment("tools",this.CommentBody, this.tool.id).subscribe(
       result=>{
         this.toolService.addToolComment(this.tool,result,this.CommentBody,this.user)
         this.CommentBody="";
@@ -62,7 +62,7 @@ CommentBody;
     const dialogRef = this.deleteDialog.open(DeleteTool);
     dialogRef.afterClosed().subscribe((result) => {
     if (result === true) {
-      this.httpService.requestDeleteTool(tool.id).subscribe(
+      this.httpService.requestDeletePost("tools",tool.id).subscribe(
         result=>{console.log(result)},
         error=>{console.log(error)}
         );
@@ -72,9 +72,11 @@ CommentBody;
   }
 
   closeTool(tool){
-    tool.closed=true;
     this.httpService.requestCloseTool(tool.id).subscribe(
-      result=>{console.log(result)},
+      result=>{
+        console.log(result);
+        tool.closed=true;
+      },
       error=>{console.log(error)}
       );
   }

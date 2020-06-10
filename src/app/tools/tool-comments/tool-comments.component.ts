@@ -13,8 +13,6 @@ export class ToolCommentsComponent implements OnInit {
   @Input() comments;
   @Input() tool;
 
-  ngOnInit(): void {
-    console.log(this.tool)
-  }
+  ngOnInit(): void {}
 
 }

@@ -101,7 +101,7 @@ export class AddToolComponent implements OnInit {
       for (const tag of this.tags) {
         formData.append('tags[]', tag);}
      }
-    this.httpService.requestAddTool(formData).subscribe(
+    this.httpService.requestAddPost('tools',formData).subscribe(
       result=>{
         this.toolService.addTool(result,this.user,this.type,this.title,this.body,this.tags)
         this.displayForm();

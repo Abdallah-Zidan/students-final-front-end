@@ -37,9 +37,8 @@ export class SingletoolCommentComponent implements OnInit {
   }
   onUpdateComment() {
     console.log(this.tool)
-    this.httpService.requestEditToolComment(this.commentBody,this.tool.id,this.comment.id).subscribe(
+    this.httpService.requestEditComment("tools",this.commentBody,this.tool.id,this.comment.id).subscribe(
       result=>{
-        console.log(result)
         this.comment.body=this.commentBody;
       },
       error=>{
@@ -50,9 +49,8 @@ export class SingletoolCommentComponent implements OnInit {
 
   }
   onDeleteComment() {
-    this.httpService.requestDeleteToolComment(this.tool.id,this.comment.id).subscribe(
+    this.httpService.requestDeleteComment("tools",this.tool.id,this.comment.id).subscribe(
       result=>{
-        console.log(result)
         this.toolService.deleteToolComment(this.tool,this.comment)
       },
       error=>{

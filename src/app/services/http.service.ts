@@ -39,6 +39,7 @@ const endPoints = {
   tools: 'http://localhost:8000/api/v1/tools',
   tags:  'http://localhost:8000/api/v1/tags',
   CloseTool:'http://localhost:8000/api/v1/tools/close',
+  
   report: 'http://localhost:8000/api/v1/posts/report',
 };
 
@@ -181,49 +182,10 @@ export class HttpService {
     {return this.http.get(endPoints.tools,{ params: {type:type,tags:tags} });}
   }
 
-  requestAddTool(ToolData){
-    return this.http.post(getResourcesUrl(endPoints.resources, 'tools'),ToolData);
-  }
-  requestUpdateTool(resourceBody, resourceId) {
-    return this.http.put(
-      getResourcesUrl(endPoints.resources, 'tools', resourceId),resourceBody);
-  }
-  
-  requestDeleteTool(resourceId) {
-    return this.http.delete(
-      getResourcesUrl(endPoints.resources, 'tools', resourceId)
-    );
-  }
 
   requestCloseTool(resourceId) {
-    console.log(resourceId)
-    return this.http.post(endPoints.CloseTool,resourceId);
+    return this.http.post(endPoints.CloseTool, {data: resourceId});
   }
   
-  requestAddToolComment(commentBody: string,resourceId: string) {
-    console.log(
-      getCommentsUrl(endPoints.comments, 'tools', resourceId) +
-        `/${resourceId}/comments`
-    );
-    return this.http.post(
-      getCommentsUrl(endPoints.comments, 'tools', resourceId),
-      {
-        body: commentBody,
-      }
-    );
-  }
 
-  requestEditToolComment(commentBody, resourceId, commentId) {
-    return this.http.put(
-      getCommentsUrl(endPoints.comments, 'tools', resourceId, commentId),
-      {
-        body: commentBody,
-      }
-    );
-  }
-  requestDeleteToolComment( resourceId, commentId) {
-    return this.http.delete(
-      getCommentsUrl(endPoints.comments, 'tools', resourceId, commentId)
-    );
-  }
 }
