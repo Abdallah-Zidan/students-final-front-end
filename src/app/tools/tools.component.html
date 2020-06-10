@@ -1,0 +1,18 @@
+<app-nav>
+    <div class="wrapper" >
+      <app-add-tool *ngIf="selectedButton==1" [RequestType]="type"></app-add-tool>
+      <div class="o-switch btn-group" style="align-items: center;" data-toggle="buttons" role="group" >
+        <label class="btn btn-outline-primary active">
+          <input type="radio" name="options" id="option1" autocomplete="off" (click)="onItemChange(1)" checked> All
+        </label>
+        <label class="btn btn-outline-primary">
+          <input type="radio" name="options" id="option2" autocomplete="off" (click)="onItemChange(2)"> {{title1}}
+        </label>
+        <label  class="btn btn-outline-primary">
+          <input type="radio" name="options" id="option3" autocomplete="off" (click)="onItemChange(3)"> {{title2}}
+        </label>
+      </div>
+      <app-tool-post *ngFor="let tool of TotalList" [tool]="tool" [user]="user" [ToolTags]="ToolTags"></app-tool-post>
+    </div>
+</app-nav>
+  

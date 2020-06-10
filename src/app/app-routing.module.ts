@@ -29,6 +29,9 @@ import { from } from 'rxjs';
 import { QuestionsComponent } from './admin/questions/questions.component';
 import { ToolsComponent } from './admin/tools/tools.component';
 
+import { ToolsComponent } from './tools/tools.component';
+
+
 const routes: Routes = [
   {
     path: 'login',
@@ -126,6 +129,21 @@ const routes: Routes = [
       { path: 'tools', component: ToolsComponent },
     ]
   },
+
+  {
+    path: 'tools',
+    component: ToolsComponent,
+    data : {type:'0'},
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'transportition',
+    component: ToolsComponent,
+    data : {type:'2'},
+    canActivate: [AuthGuard]
+  },
+
   {
     path: '**',
     component: NotFoundComponent,

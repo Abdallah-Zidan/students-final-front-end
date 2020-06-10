@@ -3,7 +3,8 @@ import { HttpService } from '../../../services/http.service';
 import { AuthService } from '../../services/auth.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterComponent } from '../register.component';
+import { RegisterService } from "../register.service";
+
 
 
 @Component({
@@ -25,7 +26,8 @@ export class StudentComponent implements OnInit {
     private httpService:HttpService,
     private fb: FormBuilder,
     private router:Router,
-    private register:RegisterComponent) 
+    private registerService:RegisterService) 
+
     {
     let studentformControls = {
       name : new FormControl('',[
@@ -183,15 +185,18 @@ export class StudentComponent implements OnInit {
     
     this.authService.register(user).subscribe(
       res=>{
+            this.registerService.changeToken(res.data.token.access_token)
             this.router.navigate(['/email/verify']);
            },
 
       err=>{
-              if(err.error.errors)
+              if(err.error&&err.error.errors)
               {
               window.scroll(0,0);
-              err.error.errors.email?this.errorList.push(err.error.errors.email):null
-              err.error.errors.mobile?this.errorList.push(err.error.errors.mobile):null     
+              err.error.errors.email?this.errorList.push(err.error.errors.email):null;
+              err.error.errors.mobile?this.errorList.push(err.error.errors.mobile):null;
+              this.errorList.push("make sure that Departments have different values");
+
               }  
               console.log(err) 
            }

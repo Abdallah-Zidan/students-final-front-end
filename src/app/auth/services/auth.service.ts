@@ -68,7 +68,7 @@ export class AuthService {
   autoLogin() {
     const user = this.storageService.getUser('user');
     if (user) {
-      if (user.token) {
+      if (user.token&&user.isVerified==true) {
         this.user.next(user);
         this.groupsService.getGroups();
       }
@@ -114,20 +114,7 @@ export class AuthService {
       }) 
       .pipe(
         tap((res: any) => {
-          const { user, token } = res.data;
-          const currentUser = new User(
-            user.id,
-            user.name,
-            user.email,
-            user.type,
-            user.address,
-            user.mobile,
-            user.avatar,
-            user.verified,
-            token
-          );
-          // this.user.next(currentUser);
-          this.storageService.saveItem('user', currentUser);
+          const {token} = res.data;
         })
       );
 }}

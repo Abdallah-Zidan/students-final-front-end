@@ -42,6 +42,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatSelectModule} from '@angular/material/select';
+
 
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
@@ -89,6 +91,12 @@ import { ToolsComponent } from './admin/tools/tools.component';
 import { MatTableModule } from '@angular/material/table';
 
 
+import { ToolsComponent } from './tools/tools.component';
+import { AddToolComponent } from './tools/add-tool/add-tool.component';
+import { ToolPostComponent,EditToolDialog,DeleteTool } from './tools/tool-post/tool-post.component';
+import { ToolCommentsComponent } from './tools/tool-comments/tool-comments.component';
+import { SingletoolCommentComponent } from './tools/tool-comments/singletool-comment/singletool-comment.component';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -126,6 +134,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DeleteDialogComponent,
     CompaniesComponent,
     NotFoundComponent,
+    ToolsComponent,
+    AddToolComponent,
+    ToolPostComponent,
+    ToolCommentsComponent,
+    SingletoolCommentComponent,
+    EditToolDialog,
+    DeleteTool,
     PhotoComponent,
     AddEventComponent,
     ImagesCarouselComponent,
@@ -173,6 +188,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BsDropdownModule.forRoot(),
     MatVideoModule,
     MatDialogModule,
+    MatSelectModule,
     FileUploadModule,
     InputTextareaModule,
     SimpleNotificationsModule.forRoot(),

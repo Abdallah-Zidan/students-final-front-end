@@ -1,0 +1,14 @@
+<mat-accordion>
+    <mat-expansion-panel class="wrapper" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Show Comments
+        </mat-panel-title>
+        <mat-panel-description>
+  
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+     
+  <app-singletool-comment *ngFor="let comment of comments" [comment]="comment" [tool]="tool" ></app-singletool-comment>
+    </mat-expansion-panel>
+  </mat-accordion>
