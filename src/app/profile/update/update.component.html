@@ -126,9 +126,9 @@
                 <div class="form-group"   >
                   <label>BirthDate</label>
                   <input class="form-control" type="date"  id="birthdate" formControlName="birthdate" (change)="date($event)" >
-                  <!-- <div *ngIf="birthdate.touched && birthdate.invalid">
+                  <div *ngIf="birthdate.touched && birthdate.invalid">
                     <small *ngIf="birthdate.errors.required" class="text-danger">birthdate is required<br></small>
-                  </div> -->
+                  </div>
                   <div>
                     <small class="text-danger">{{bodValidation}}</small>
                   </div> 
@@ -138,7 +138,7 @@
                   <label>Scientific Certificates</label>
                   <input type="text" class="form-control" formControlName="scientific_certificates">
                   <div *ngIf="scientific_certificates.touched && scientific_certificates.invalid">
-                    <!-- <small *ngIf="scientific_certificates.errors.required" class="text-danger">scientific_certificates is required<br></small> -->
+                    <small *ngIf="scientific_certificates.errors.required" class="text-danger">scientific_certificates is required<br></small>
                     <small *ngIf="scientific_certificates.errors.pattern" class="text-danger">scientific_certificates contains only letters and spaces<br></small>
                     <small *ngIf="scientific_certificates.errors.minlength" class="text-danger">scientific_certificates must contain 10 characters at least</small>
                   </div>   
