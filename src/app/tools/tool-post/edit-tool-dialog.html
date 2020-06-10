@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>EditTool</h1>
+<div mat-dialog-content>
+<div>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="data.tool.title" class="tool-text">
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field>
+    <mat-label>Details</mat-label>
+    <textarea [(ngModel)]="data.tool.body" class="tool-body-text"  matInput rows="4"></textarea>
+  </mat-form-field>
+</div>
+  <mat-form-field>
+    <mat-label>Tags</mat-label>
+    <mat-select style="background-color: #ecedee;" multiple class="custom-select d-block w-100" id="tags" [(ngModel)]="data.tool.tags">
+        <mat-option value={{tag.name}} *ngFor="let tag of data.ToolTags" >{{tag.name}}</mat-option>
+    </mat-select> 
+ </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-light" mat-button (click)="onNoClick()">cancel</button>
+  <button class="btn btn-primary" mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="!data.tool.body||!data.tool.title">save</button>
+</div>
+

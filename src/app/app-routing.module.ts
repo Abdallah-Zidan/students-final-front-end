@@ -16,6 +16,9 @@ import { SingleEventComponent } from './events/single-event/single-event.compone
 import { AnnouncementsComponent } from './education/announcements/announcements.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { ToolsComponent } from './tools/tools.component';
+
+
 const routes: Routes = [
   {
     path: 'login',
@@ -85,6 +88,21 @@ const routes: Routes = [
     component: AnnouncementsComponent,
     canActivate: [AuthGuard]
   },
+
+  {
+    path: 'tools',
+    component: ToolsComponent,
+    data : {type:'0'},
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'transportition',
+    component: ToolsComponent,
+    data : {type:'2'},
+    canActivate: [AuthGuard]
+  },
+
   {
     path: '**',
     component: NotFoundComponent,
