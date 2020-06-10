@@ -1,10 +1,10 @@
 <div class="mat-elevation-z8">
-    <div class="row mx-2 ">
-        <h3 class="text-secondary my-3"> Faculities section </h3>
-        <button class="btn btn-success ml-auto my-3"> <i class="far fa-plus-square"></i> Add Faculty </button>
+    <div class="row mx-2">
+        <h3 class="text-secondary my-3"> Posts section </h3>
+        <button class="btn btn-success ml-auto my-3"> <i class="far fa-plus-square"></i> Add Event </button>
     </div>
-
     <table mat-table [dataSource]="dataSource">
+
         <!-- Position Column -->
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Id. </th>
@@ -12,9 +12,25 @@
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Faculty Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <ng-container matColumnDef="body">
+            <th mat-header-cell *matHeaderCellDef> Post body </th>
+            <td mat-cell *matCellDef="let element"> {{element.body}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="reported">
+            <th mat-header-cell *matHeaderCellDef> Reported </th>
+            <td mat-cell *matCellDef="let element"> {{element.reported}} </td>
+        </ng-container>
+        
+
+        <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef> Year </th>
+            <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="scopeable_type">
+            <th mat-header-cell *matHeaderCellDef> Scopeable Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.scopeable_type}} </td>
         </ng-container>
 
 

@@ -97,6 +97,7 @@ import { ToolCommentsComponent } from './tools/tool-comments/tool-comments.compo
 import { SingletoolCommentComponent } from './tools/tool-comments/singletool-comment/singletool-comment.component';
 import { AdminToolsComponent } from './admin/admin-tools/admin-tools.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { AdminPostsComponent } from './admin/admin-posts/admin-posts.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -156,6 +157,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     QuestionsComponent,
     ToolsComponent,
     AdminToolsComponent,
+    AdminPostsComponent,
   ],
   imports: [
     BrowserModule,
