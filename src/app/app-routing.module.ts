@@ -17,7 +17,7 @@ import { AnnouncementsComponent } from './education/announcements/announcements.
 import { CompaniesComponent } from './companies/companies.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminComponent } from './admin/admin.component';
-
+import { AuthorizedGuard } from './auth/services/authorized.guard';
 const routes: Routes = [
   {
     path: 'login',
@@ -60,32 +60,38 @@ const routes: Routes = [
   {
     path: 'groups/:scope/:id',
     component: GroupComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'groups',
     component: GroupComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'events',
     component: EventsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'events/:scope/:id',
     component: EventsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'announcements',
     component: AnnouncementsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'announcements/:scope/:id',
     component: AnnouncementsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'companies',
@@ -112,4 +118,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

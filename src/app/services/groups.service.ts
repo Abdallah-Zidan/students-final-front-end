@@ -7,6 +7,7 @@ import {
   getFacultyGroups,
   getUniversityGroups,
 } from '../shared/helpers/shared-helper';
+import { User } from '../auth/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,30 +28,46 @@ export class GroupsService {
    * if they exist just reads them .. if not .. sends a request to the server
    * then save them in localstorage
    */
-  getGroups() {
+  getGroups(user: User) {
     if (this.storageService.getDepartmentGroups('groups').length > 0) {
       this.departmentGroups = this.storageService.getDepartmentGroups('groups');
       this.facultyGroups = this.storageService.getFacultyGroups('groups');
       this.universityGroups = this.storageService.getUniversityGroups('groups');
     } else {
-      this.httpService.requestGroups().subscribe((res: any) => {
-        console.log(res);
-
-        const groups = res.data && res.data.department_faculties;
-        if (groups) {
-          this.universityGroups = getUniversityGroups(groups);
-          this.facultyGroups = getFacultyGroups(groups);
-          this.departmentGroups = getDepartmentGroups(groups);
-          this.storageService.saveItem(
-            'groups',
-            new Array(
-              this.departmentGroups,
-              this.facultyGroups,
-              this.universityGroups
-            )
-          );
-        }
-      });
+      if (user.role === 3) {
+        this.departmentGroups = null;
+        this.facultyGroups = [
+          new Group(user.faculty.id.toString(), user.faculty.name, '1'),
+        ];
+        this.universityGroups = [
+          new Group(user.university.id.toString(), user.university.name, '2'),
+        ];
+        this.storageService.saveItem(
+          'groups',
+          new Array(
+            this.departmentGroups,
+            this.facultyGroups,
+            this.universityGroups
+          )
+        );
+      } else {
+        this.httpService.requestGroups().subscribe((res: any) => {
+          const groups = res.data && res.data.department_faculties;
+          if (groups) {
+            this.universityGroups = getUniversityGroups(groups);
+            this.facultyGroups = getFacultyGroups(groups);
+            this.departmentGroups = getDepartmentGroups(groups);
+            this.storageService.saveItem(
+              'groups',
+              new Array(
+                this.departmentGroups,
+                this.facultyGroups,
+                this.universityGroups
+              )
+            );
+          }
+        });
+      }
     }
   }
   getGroup(id: string, scope) {

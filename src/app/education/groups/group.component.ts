@@ -25,9 +25,6 @@ export class GroupComponent implements OnInit, OnDestroy {
   resource = 'posts';
   private subscription: Subscription;
   ngOnInit(): void {
-    if (this.departmentGroups.length < 0) {
-      this.groupsService.getGroups();
-    }
     this.subscription = this.postsService.posts.subscribe((posts) => {
       this.posts = posts;
     });
@@ -36,7 +33,9 @@ export class GroupComponent implements OnInit, OnDestroy {
       const key2 = 'scope';
       const id = map[key1];
       const scope = map[key2];
-      const tmp = this.groupsService.departmentGroups[0].id;
+      const tmp = this.groupsService.departmentGroups
+        ? this.groupsService.departmentGroups[0].id
+        : this.facultyGroups[0].id;
       if (id && scope) {
         this.currentGroup = this.groupsService.getGroup(id, scope);
       } else {

@@ -52,25 +52,43 @@ export class AuthService {
             user.mobile,
             user.avatar,
             user.verified,
-            token.access_token
+            token.access_token,
+            this.getFaculty(user),
+            this.getUniversity(user)
           );
           if (currentUser.isVerified) {
             this.user.next(currentUser);
             this.storageService.saveItem('user', currentUser);
-            this.groupsService.getGroups();
+            this.groupsService.getGroups(currentUser);
           } else {
             this.router.navigate(['/']);
           }
         })
       );
   }
-
+  getFaculty(user) {
+    if (user.type === 'Moderator') {
+      return { id: user.profile.faculty.id, name: user.profile.faculty.name };
+    } else {
+      return null;
+    }
+  }
+  getUniversity(user) {
+    if (user.type === 'Moderator') {
+      return {
+        id: user.profile.faculty.university.id,
+        name: user.profile.faculty.university.name,
+      };
+    } else {
+      return null;
+    }
+  }
   autoLogin() {
     const user = this.storageService.getUser('user');
     if (user) {
       if (user.token) {
         this.user.next(user);
-        this.groupsService.getGroups();
+        this.groupsService.getGroups(user);
       }
     }
   }
@@ -94,24 +112,24 @@ export class AuthService {
 
   register(user) {
     return this.http
-    .post(authEndPoints.register, {
-      name :user.name,
-      password :user.password,
-      email:user.email,
-      address :user.address,
-      mobile :user.phone,
-      gender : user.gender,
-      birthdate:user.birthdate,
-      year:user.level,
-      departments:user.departments,
-      faculty:user.faculty,
-      fax:user.fax,
-      website:user.website,
-      description:user.description,
-      type:user.type,
-      blocked:user.blocked,
-      device_name: navigator.platform,
-      }) 
+      .post(authEndPoints.register, {
+        name: user.name,
+        password: user.password,
+        email: user.email,
+        address: user.address,
+        mobile: user.phone,
+        gender: user.gender,
+        birthdate: user.birthdate,
+        year: user.level,
+        departments: user.departments,
+        faculty: user.faculty,
+        fax: user.fax,
+        website: user.website,
+        description: user.description,
+        type: user.type,
+        blocked: user.blocked,
+        device_name: navigator.platform,
+      })
       .pipe(
         tap((res: any) => {
           const { user, token } = res.data;
@@ -130,4 +148,5 @@ export class AuthService {
           this.storageService.saveItem('user', currentUser);
         })
       );
-}}
+  }
+}

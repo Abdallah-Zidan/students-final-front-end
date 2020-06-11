@@ -1,4 +1,5 @@
 export class User {
+  role: number;
   constructor(
     public id: string = '',
     private name: string = '',
@@ -8,9 +9,28 @@ export class User {
     private mobile: string = '',
     private avatar: string | null,
     private verified: boolean,
-    private _token: string
-  ) { }
-
+    private _token: string,
+    public faculty: { id: number; name: string } = null,
+    public university: { id: number; name: string } = null
+  ) {
+    this.getRole();
+  }
+  private getRole() {
+    switch (this.type) {
+      case 'Student':
+        this.role = 1;
+        break;
+      case 'TeachingStaff':
+        this.role = 2;
+        break;
+      case 'Moderator':
+        this.role = 3;
+        break;
+      case 'Company':
+        this.role = 4;
+        break;
+    }
+  }
   get token(): string {
     return this._token;
   }
