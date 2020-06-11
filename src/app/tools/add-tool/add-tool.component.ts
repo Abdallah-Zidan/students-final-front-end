@@ -20,7 +20,8 @@ export class AddToolComponent implements OnInit {
     private toolService:ToolService,
     ) { }
   @Input() RequestType;
-  user;ToolTags;data;newTag;
+  @Input() ToolTags;
+  user;data;newTag;
   type;
   tags:Array<string> = [];
   toolFiles: File[] = [];
@@ -28,15 +29,6 @@ export class AddToolComponent implements OnInit {
 
   ngOnInit(): void {
     this.user=this.storageService.getItem('user')
-    this.httpService.requestTags(0).subscribe(
-      result =>{
-        this.data=result;
-        this.ToolTags=this.data.data.tags
-      },
-      error=>{
-        console.log(error);
-      } 
-    );
 
   }
 
