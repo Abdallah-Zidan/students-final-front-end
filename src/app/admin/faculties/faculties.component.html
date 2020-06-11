@@ -1,0 +1,41 @@
+<div class="mat-elevation-z8">
+    <div class="row mx-2 ">
+        <h3 class="text-secondary my-3"> Faculities section </h3>
+        <button class="btn btn-success ml-auto my-3"> <i class="far fa-plus-square"></i> Add Faculty </button>
+    </div>
+
+    <table mat-table [dataSource]="dataSource">
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Faculty Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef> Edit </th>
+            <td mat-cell *matCellDef="let element"> <button class="btn btn-primary"> <i class="fas fa-edit"> </i>
+                </button> </td>
+        </ng-container>
+
+
+        <!-- Delete Column -->
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            <td mat-cell *matCellDef="let element"> <button class="btn btn-danger"> <i class="fas fa-trash-alt"> </i>
+                </button> </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[30, 20, 10]" showFirstLastButtons></mat-paginator>
+</div>

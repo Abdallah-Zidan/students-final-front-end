@@ -79,12 +79,25 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ImagesCarouselComponent } from './events/images/images.-carousel.component';
 import { AdminComponent } from './admin/admin.component';
+import { UniversitiesComponent } from './admin/universities/universities.component';
+import { FacultiesComponent } from './admin/faculties/faculties.component';
+import { DepartmentsComponent } from './admin/departments/departments.component';
+import { CoursesComponent } from './admin/courses/courses.component';
+import { UsersComponent } from './admin/users/users.component';
+import { TagsComponent } from './admin/tags/tags.component';
+import { AdminEventsComponent } from './admin/admin-events/admin-events.component';
+import { QuestionsComponent } from './admin/questions/questions.component';
+import { MatTableModule } from '@angular/material/table';
+
 
 import { ToolsComponent } from './tools/tools.component';
 import { AddToolComponent } from './tools/add-tool/add-tool.component';
 import { ToolPostComponent,EditToolDialog,DeleteTool } from './tools/tool-post/tool-post.component';
 import { ToolCommentsComponent } from './tools/tool-comments/tool-comments.component';
 import { SingletoolCommentComponent } from './tools/tool-comments/singletool-comment/singletool-comment.component';
+import { AdminToolsComponent } from './admin/admin-tools/admin-tools.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { AdminPostsComponent } from './admin/admin-posts/admin-posts.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -134,6 +147,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AddEventComponent,
     ImagesCarouselComponent,
     AdminComponent,
+    UniversitiesComponent,
+    FacultiesComponent,
+    DepartmentsComponent,
+    CoursesComponent,
+    UsersComponent,
+    TagsComponent,
+    AdminEventsComponent,
+    QuestionsComponent,
+    ToolsComponent,
+    AdminToolsComponent,
+    AdminPostsComponent,
   ],
   imports: [
     BrowserModule,
@@ -174,6 +198,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SimpleNotificationsModule.forRoot(),
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTableModule,
+    MatPaginatorModule
+
   ],
 
   providers: [
@@ -185,4 +212,4 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

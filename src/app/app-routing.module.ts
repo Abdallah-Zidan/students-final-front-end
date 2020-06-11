@@ -17,9 +17,18 @@ import { AnnouncementsComponent } from './education/announcements/announcements.
 import { CompaniesComponent } from './companies/companies.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AdminComponent } from './admin/admin.component';
-
+import { UniversitiesComponent } from './admin/universities/universities.component';
+import { FacultiesComponent } from './admin/faculties/faculties.component';
+import { DepartmentsComponent } from './admin/departments/departments.component';
+import { CoursesComponent } from './admin/courses/courses.component';
+import { UsersComponent } from './admin/users/users.component';
+import { TagsComponent } from './admin/tags/tags.component';
+import { AdminPostsComponent } from './admin/admin-posts/admin-posts.component';
+import { AdminEventsComponent } from './admin/admin-events/admin-events.component';
+import { from } from 'rxjs';
+import { QuestionsComponent } from './admin/questions/questions.component';
+import { AdminToolsComponent } from './admin/admin-tools/admin-tools.component';
 import { ToolsComponent } from './tools/tools.component';
-
 
 const routes: Routes = [
   {
@@ -104,19 +113,32 @@ const routes: Routes = [
     path: 'admin',
     component: AdminComponent,
     canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always',
+    children: [
+      { path: 'faculties', component: FacultiesComponent },
+      { path: 'universities', component: UniversitiesComponent },
+      { path: 'departments', component: DepartmentsComponent },
+      { path: 'courses', component: CoursesComponent },
+      { path: 'users', component: UsersComponent },
+      { path: 'tags', component: TagsComponent },
+      { path: 'posts', component: AdminPostsComponent },
+      { path: 'events', component: AdminEventsComponent },
+      { path: 'questions', component: QuestionsComponent },
+      { path: 'tools', component: AdminToolsComponent },
+    ]
   },
 
   {
     path: 'tools',
     component: ToolsComponent,
-    data : {type:'0'},
+    data: { type: '0' },
     canActivate: [AuthGuard]
   },
 
   {
     path: 'transportition',
     component: ToolsComponent,
-    data : {type:'2'},
+    data: { type: '2' },
     canActivate: [AuthGuard]
   },
 
