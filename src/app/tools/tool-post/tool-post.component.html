@@ -20,10 +20,6 @@
 
       </div>
 
-      <div class="row h-100 px-3">
-        <span class=" text-secondary" style="color: blue;">{{tool.type}}</span>
-      </div>
-
     </div>
 
     <div class="col-2 my-auto">
@@ -50,29 +46,16 @@
       </div>
     </div>
   </div>
-
-
-  <div class="row h-100 mx-5">
-    <h3 class="lead py-2">{{tool.title}}</h3>
- </div>
-
-  <div class="row h-100 mx-5">
-     <p class="lead py-2">{{tool.body}}</p>
-  </div>
-
-
-
+  
   <div class="row h-100  mx-5 my-2" *ngIf="tool.files.length > 0">
+    <hr>
     <div class="col-12">
       <div *ngFor="let file of tool.files">
         <div *ngIf="file.mime.startsWith('image')">
           <div class="row h-100">
-            <div class="col-6">
+            <div class="col-md-6">
               <img class="img-fluid my-3" src="{{file.url}}" alt="image">
             </div>
-            <!-- <div class="col-6">
-              <img class="img-fluid my-3" src="{{file.url}}" alt="image">
-            </div> -->
           </div>
         </div>
 
@@ -87,23 +70,35 @@
             Your browser does not support the audio element.
           </audio>
         </div>
-        <div *ngIf="!(file.mime.startsWith('image') || file.mime.startsWith('video')|| file.mime.startsWith('audio')) ">
-          <a href="{{file.url}}" target="_self">File</a>
+        <div class="col-6" *ngIf="!(file.mime.startsWith('image') || file.mime.startsWith('video')|| file.mime.startsWith('audio')) ">
+          <div class="fileList">
+            <img class="file-img" src="assets/images/file.png" alt="">
+            <a href="{{file.url}}" target="_self " class="example-full-width" >{{file.name}}</a>
+          </div>
         </div>
       </div>
 
     </div>
   </div>
 
+  <div class="row h-100 mx-5">
+    <h3>{{tool.title}}</h3>
+ </div>
 
+ <div class="row h-100 mx-5">
+  <p class="lead py-2">{{tool.body}}</p>
+</div>
 
+  <div class="row h-100 mx-5">
+    <p class="text-secondary" style="color: blue;">type: {{tool.type}}</p>
+  </div>
 
   
 
-<!-- <div>{{tool.closed}}</div> -->
 
-<div *ngFor="let tag of tool.tags" style="color: blue;">#{{tag}}</div>
-<div class="row h-100">
+
+<div class="row h-100 mx-5" *ngFor="let tag of tool.tags" style="color: blue;">#{{tag}}</div>
+<div class="row h-100 mx-5">
   <div class="col-10 my-auto">
     <mat-form-field class="example-full-width px-5">
       <mat-label>Leave a comment</mat-label>
@@ -111,9 +106,9 @@
         placeholder="Ex. It makes me feel..."></textarea>
     </mat-form-field>
   </div>
-  <div class="col-2 my-auto">
+  <div *ngIf="!tool.closed" class="col-2 my-auto">
     <button class="text-primary material-icons" [disabled]="!CommentBody" (click)="addComment()">
-      send
+      <span>send</span>
     </button>
   </div>
 </div>

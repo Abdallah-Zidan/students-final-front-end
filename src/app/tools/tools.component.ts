@@ -16,9 +16,10 @@ export class ToolsComponent implements OnInit {
     private route: ActivatedRoute,
     private storageService:StorageService,) { }
     
-  TotalList;Type1List;Type2List;
+  TotalList;Type1List;Type2List;SearchList
   type;type1;type2;title1;title2;selectedButton=1;
   ToolTags;user;result; 
+  SearchTag;response=null;
 
   ngOnInit(): void {
     this.route.data.subscribe(type => {this.type=type.type});
@@ -100,5 +101,80 @@ export class ToolsComponent implements OnInit {
       });
       Tool.tags=TagsNames;
     });
+  }
+
+  search(){
+    if(this.SearchTag==null)
+    {
+      this.response="Please insert tag"
+            setTimeout(() => {
+              this.response = null;
+            }, 4000);
+    }
+    else
+    { 
+      let type;
+      
+      if(this.selectedButton=2)
+          type=this.type1;
+      else
+          type=this.type2
+
+
+      this.httpService.requestTools(this.type,this.SearchTag).subscribe(
+        result =>{
+          this.SearchList=result;
+
+          if(this.SearchList.data.tools.length>0)
+         {  this.TotalList=[]
+            this.getTagsNames(this.SearchList.data.tools);
+
+            if(type==this.type1)
+            {
+               this.Type1List.forEach(e=>
+                  { 
+                    if(e.tags.find(x=>x==this.SearchTag))
+                    {
+                      this.TotalList.push(e)
+                    }
+                  })
+            }
+          
+          else{
+                this.Type2List.forEach(e=>
+                  { 
+                    if(e.tags.find(x=>x==this.SearchTag))
+                    {
+                      this.TotalList.push(e)
+                    }
+                  })
+              }
+
+            if(this.TotalList==[])
+              this.TotalList=this.SearchList
+            
+            else if(this.SearchList.data.tools.length!=this.TotalList.length)
+            {
+              this.SearchList.data.tools.forEach(element => {
+                if(!(this.TotalList.find(x=>x.id==element.id)))
+                    this.TotalList.push(element)
+              });
+            }
+            this.toolService.SearchList(this.TotalList)
+            this.toolService.SearchTools.subscribe(tools => {this.SearchList = tools})     
+          }
+          else{
+            this.response="Not Found"
+            setTimeout(() => {
+              this.response = null;
+            }, 4000);
+          }
+           
+        },
+        error =>{
+          console.log(error);}
+        );
+      this.SearchTag=null;
+    }
   }
 }

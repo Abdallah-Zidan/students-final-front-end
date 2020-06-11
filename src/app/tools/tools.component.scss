@@ -27,3 +27,37 @@
     border: 0px;
     margin-bottom: 2px;
 }
+
+.searchbar{
+    margin: auto;
+    height: 60px;
+    background-color:white;
+    border-radius: 30px;
+    padding: 10px;
+    box-shadow: 1px 1px 4px #0e71c8;
+    width: 50%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    }
+
+    .search_input{
+    color: #0e71c8;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+    
+    }
+
+    .searchbar:hover > .search_input{
+    padding: 0 10px;
+    width: 450px;
+    caret-color:#0e71c8;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_icon{
+    color: #0e71c8;}

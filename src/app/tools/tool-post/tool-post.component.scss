@@ -15,7 +15,7 @@ video {
   }
 .ava {
     padding      : 3px;
-    border       : 1px solid blue;
+    border       : 1px solid #0e71c8;
     border-radius: 50%;
     min-width    : 50px;
 }
@@ -48,12 +48,6 @@ body {
     box-shadow      : 1px 1px 4px grey , -1px -1px 4px grey;
 }
 
-.report {
-    font-size: 40px;
-    color    : red;
-    cursor   : pointer;
-    margin   : 15px;
-}
 
 .contact {
     font-size: 40px;
@@ -116,3 +110,32 @@ i {
     border: 0px;
     margin-bottom: 2px;
 }
+
+.fileList {
+    width           : 95%;
+    padding         : 1vw 3vw;
+    background-color: white;
+    margin          : 2em auto;
+    display         : flex;
+    margin-bottom   : 2vw;
+    border-radius   : 12px;
+    box-shadow      : 1px 1px 4px grey , -1px -1px 4px grey;
+}
+
+.file-img {
+    float: left;
+    width        : 10%;
+    height       : 10%;
+    border       : 1px solid grey;
+    margin       : 1%;
+    min-width    : 50px;
+}
+
+
+.example-full-width {
+    margin-right: auto;
+    margin-top: auto;
+    margin-left: 5px;
+    color: grey;
+ }
+
