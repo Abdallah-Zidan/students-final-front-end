@@ -52,7 +52,7 @@ export class SettingsComponent implements OnInit {
     this.user= this.storagService.getItem('user')
     if(this.user)
     {
-   this.httpService.getUser().subscribe(
+   this.httpService.getUser(null).subscribe(
      result =>{
        this.data=result.data;
      },

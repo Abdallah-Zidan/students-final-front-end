@@ -109,7 +109,10 @@
                 
 
                 <div class="profile-card-ctr">
-                    <button class="profile-card__button button--blue js-message-btn" routerLink="update">Edit Profile</button>
+                    <button *ngIf="(data.id == user.id)" class="profile-card__button button--blue js-message-btn" routerLink="update">Edit Profile</button>
+                    <button *ngIf="(data.id != user.id)" class="profile-card__button button--blue js-message-btn" >
+                        <i class="fa fa-comments" aria-hidden="true"></i>
+                     Message</button>
                 </div>
             </div>
 

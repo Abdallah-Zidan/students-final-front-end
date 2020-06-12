@@ -30,6 +30,9 @@ import { QuestionsComponent } from './admin/questions/questions.component';
 import { AdminToolsComponent } from './admin/admin-tools/admin-tools.component';
 import { ToolsComponent } from './tools/tools.component';
 
+import { QuestionsSectionComponent } from './questions-section/questions-section.component';
+
+
 const routes: Routes = [
   {
     path: 'login',
@@ -62,6 +65,12 @@ const routes: Routes = [
   {
     path: 'profile/update',
     component: UpdateComponent,
+    canActivate: [AuthGuard],
+  },
+  
+  {
+    path: 'profile/:id',
+    component: ProfileComponent,
     canActivate: [AuthGuard],
   },
 
@@ -139,6 +148,12 @@ const routes: Routes = [
     path: 'transportition',
     component: ToolsComponent,
     data: { type: '2' },
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'questions',
+    component: QuestionsSectionComponent,
     canActivate: [AuthGuard]
   },
 
