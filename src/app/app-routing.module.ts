@@ -16,6 +16,7 @@ import { SingleEventComponent } from './events/single-event/single-event.compone
 import { AnnouncementsComponent } from './education/announcements/announcements.component';
 import { CompaniesComponent } from './companies/companies.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ChatComponent } from './chat/chat.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthorizedGuard } from './auth/services/authorized.guard';
 import { UniversitiesComponent } from './admin/universities/universities.component';
@@ -117,6 +118,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'messages/:id',
+    component:ChatComponent
+  },
+  {
     path: 'admin',
     component: AdminComponent,
     canActivate: [AuthGuard , AuthorizedGuard],
@@ -154,6 +159,7 @@ const routes: Routes = [
     path: '**',
     component: NotFoundComponent,
   },
+  
 ];
 
 @NgModule({

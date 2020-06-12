@@ -25,6 +25,7 @@ const authEndPoints = {
 })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
+  private tokenTimer: any;
   constructor(
     private httpService: HttpService,
     private router: Router,
@@ -54,7 +55,8 @@ export class AuthService {
             user.verified,
             token.access_token,
             this.getFaculty(user),
-            this.getUniversity(user)
+            this.getUniversity(user),
+            new Date(token.expired_at)
           );
           if (currentUser.isVerified) {
             this.user.next(currentUser);
@@ -86,11 +88,12 @@ export class AuthService {
   autoLogin() {
     const user = this.storageService.getUser('user');
     if (user) {
-      if (user.token&&user.isVerified==true) {
+      if (user.token && user.isVerified == true) {
         this.user.next(user);
         this.groupsService.getGroups(user);
       }
     }
+    this.autoLogout(user.tokenExpDate);
   }
 
   logout() {
@@ -101,6 +104,10 @@ export class AuthService {
           this.user.next(null);
           this.storageService.removeItem('user');
           this.storageService.removeItem('groups');
+          if (this.tokenTimer) {
+            clearTimeout(this.tokenTimer);
+          }
+          this.tokenTimer = null;
           this.router.navigate(['/login']);
         }
       },
@@ -132,8 +139,19 @@ export class AuthService {
       })
       .pipe(
         tap((res: any) => {
-          const {token} = res.data;
+          const { token } = res.data;
         })
       );
+  }
+  autoLogout(expirationDate: Date) {
+    const nowDate = new Date();
+    console.log(nowDate);
+    if (nowDate.getTime() > expirationDate.getTime()) {
+      this.logout();
+    } else {
+      this.tokenTimer = setTimeout(() => {
+        this.logout();
+      }, expirationDate.getTime() - nowDate.getTime());
+    }
   }
 }

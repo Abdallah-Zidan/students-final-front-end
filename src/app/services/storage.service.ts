@@ -35,7 +35,10 @@ export class StorageService {
         user.mobile,
         user.avatar,
         user.verified,
-        user._token
+        user._token,
+        user.faculty,
+        user.university,
+        new Date(user.tokenExpiration)
       );
     } else {
       return null;

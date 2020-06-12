@@ -11,7 +11,8 @@ export class User {
     private verified: boolean,
     private _token: string,
     public faculty: { id: number; name: string } = null,
-    public university: { id: number; name: string } = null
+    public university: { id: number; name: string } = null,
+    private tokenExpiration: Date
   ) {
     this.getRole();
   }
@@ -57,5 +58,9 @@ export class User {
   }
   get isVerified(): boolean {
     return this.verified;
+  }
+
+  public get tokenExpDate(): Date {
+    return this.tokenExpiration;
   }
 }

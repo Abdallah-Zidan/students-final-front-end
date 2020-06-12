@@ -1,0 +1,21 @@
+<div class="channels" >
+  <div class="chat_list">
+    <div class="chat_people"
+    [ngClass]="{'chat-active': activated}">
+      <div class="chat_ib">
+        <div class="row receiver">
+          <div class="col-md-3 col-sm-6">
+            <img src={{receiver.avatar}} alt="" width="50px">
+          </div>
+          <div class="col-md-6">
+            <h5 class=" mt-2" [ngClass]="{'blinking':blinking}">
+              {{receiver.name}}
+              </h5>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
