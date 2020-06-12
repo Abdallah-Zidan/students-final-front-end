@@ -12,7 +12,7 @@
 </mat-sidenav>
 <!-- End Side Bar -->
 
-<mat-sidenav-content>
+<mat-sidenav-content class="wrapper">
   
   <mat-toolbar color="primary">
     <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
@@ -49,10 +49,10 @@
           </button>
           <button mat-menu-item routerLink="/announcements/1">
             <mat-icon>info</mat-icon>
-            <span>Announcements</span>
-          </button>
-
-          <button mat-menu-item routerLink="/events">
+            <span>Announcements</span> width: auto;
+            height: auto;
+            display: block;
+            position: relative;="/events">
             <mat-icon>today</mat-icon>
             <span>Events</span>
           </button>
@@ -74,9 +74,7 @@
             <mat-icon>house</mat-icon>
             <span> Sharing Habitations </span>
           </button>
-
           
-
         </button>
       </mat-menu>
 
@@ -116,6 +114,7 @@
       </mat-menu>
 
       <!-- End Website Sections Part -->
+
 
       <!-- User Section Start -->
       <div [hidden]="isHandset$ | async">

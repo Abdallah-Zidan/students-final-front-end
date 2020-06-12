@@ -17,13 +17,14 @@ export class CompaniesComponent implements OnInit, OnDestroy {
   currentGroup: Group;
   resource = 'events';
   type;
+  image: string;
   private subscription: Subscription;
   constructor(
     private postsService: PostsService,
     private groupsService: GroupsService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.facultyGroups.length < 0) {
@@ -61,10 +62,18 @@ export class CompaniesComponent implements OnInit, OnDestroy {
         }
       }
     });
+
   }
 
   getPosts(resource, scope, id, page) {
     this.postsService.getPosts(resource, scope, id, this.type, page);
+    if (+this.currentGroup.scope === 1) {
+      this.image = 'trainings';
+    } else if (+this.currentGroup.scope === 2) {
+      this.image = 'job offers';
+    } else if (+this.currentGroup.scope === 3) {
+      this.image = 'companies';
+    }
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

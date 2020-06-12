@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
 import { PostsService } from '../services/posts.service';
 import { Post } from '../models/post.model';
 import { GroupsService } from 'src/app/services/groups.service';
@@ -11,26 +11,30 @@ import { Subscription } from 'rxjs';
   templateUrl: './group.component.html',
   styleUrls: ['./group.component.scss'],
 })
-export class GroupComponent implements OnInit, OnDestroy {
+export class GroupComponent implements OnInit, OnDestroy, DoCheck {
   constructor(
     private postsService: PostsService,
     private groupsService: GroupsService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
   facultyGroups = this.postsService.facultyGroups;
   departmentGroups = this.postsService.departmentGroups;
   posts: Post[] = [];
   currentGroup: Group;
   resource = 'posts';
+  image: string;
   private subscription: Subscription;
   ngOnInit(): void {
+
     if (this.departmentGroups.length < 0) {
       this.groupsService.getGroups();
     }
     this.subscription = this.postsService.posts.subscribe((posts) => {
       this.posts = posts;
     });
+
+
     this.activatedRoute.params.subscribe((map) => {
       const key1 = 'id';
       const key2 = 'scope';
@@ -54,9 +58,21 @@ export class GroupComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   getPosts(resource, scope, id, page) {
     this.postsService.getPosts(resource, scope, id, '', page);
   }
+
+  ngDoCheck() {
+    if (+this.currentGroup.scope === 0) {
+      this.image = 'groups';
+    } else if (+this.currentGroup.scope === 1) {
+      this.image = 'faculty';
+    } else if (+this.currentGroup.scope === 2) {
+      this.image = 'univeristy';
+    }
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
