@@ -71,6 +71,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { ChatComponent } from './chat/chat.component';
+import { SendFormComponent } from './chat/send-form/send-form.component';
+import { FeedService } from './chat/services/feed.service';
+import { ReceiversListComponent } from './chat/receivers-list/receivers-list.component';
+import { ReceiverItemComponent } from './chat/receivers-list/receiver-item/receiver-item.component';
+import { SendService } from './chat/services/send-service.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -109,6 +115,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DeleteDialogComponent,
     CompaniesComponent,
     NotFoundComponent,
+    ChatComponent,
+    SendFormComponent,
+    ReceiversListComponent,
+    ReceiverItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -154,6 +164,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       useClass: AuthInterceptorService,
       multi: true,
     },
+    FeedService,
+    SendService
   ],
   bootstrap: [AppComponent],
 })

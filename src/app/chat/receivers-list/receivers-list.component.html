@@ -1,0 +1,20 @@
+<ng-container
+  *ngIf="receivers?.length; then hasReceivers; else noReceivers"
+>
+</ng-container>
+
+<ng-template #hasReceivers>
+  <app-receiver-item
+    *ngFor="let receiver of receivers"
+    [receiver]="receiver"
+    (click)="onClick(receiver.id)"
+    [routerLink]="['/messages', receiver.id]"
+    [activated]="activeChat==receiver.id"
+    [ngClass]="{'newMsg':newMessageId == receiver.id}"
+    [blinking]="blinkingId==receiver.id"
+  ></app-receiver-item>
+</ng-template>
+
+<ng-template #noReceivers>
+  <h5 class="no-receivers text-center">No Receivers Yet ...</h5>
+</ng-template>
