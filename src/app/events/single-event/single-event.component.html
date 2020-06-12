@@ -1,14 +1,14 @@
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 p-3">
   <mat-card class="example-card">
     <mat-card-header>
-      <mat-card-title class="text-primary">All system</mat-card-title>
+      <mat-card-title class="text-primary">{{group ? group.name : 'All system'}}</mat-card-title>
     </mat-card-header>
     <img mat-card-image (click)="showModal(mymodal)" style="cursor: pointer;"
-      src="https://material.angular.io/assets/img/examples/shiba2.jpg" class="p-4">
+      src="{{post.files ? post.files[0] && post.files[0].url :''}}" class="p-4">
     <mat-card-content>
       <div class="row d-100">
         <div class="row  ml-auto">
-          <h6 class="text-primary my-auto d-inline">25 jan. 2020</h6>
+          <h6 class="text-primary my-auto d-inline">{{post.startDate}}</h6>
           <span class="text-secondary   my-auto material-icons">
             {{post.body}}
           </span>
@@ -34,7 +34,7 @@
   </div>
 
   <div class="modal-body">
-    <app-images-carousel></app-images-carousel>
+    <app-images-carousel [files]="post.files"></app-images-carousel>
     <div>
       {{post.body}}
     </div>

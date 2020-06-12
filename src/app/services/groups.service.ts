@@ -29,7 +29,7 @@ export class GroupsService {
    * then save them in localstorage
    */
   getGroups(user: User) {
-    if (this.storageService.getDepartmentGroups('groups').length > 0) {
+    if (this.storageService.getFacultyGroups('groups').length > 0) {
       this.departmentGroups = this.storageService.getDepartmentGroups('groups');
       this.facultyGroups = this.storageService.getFacultyGroups('groups');
       this.universityGroups = this.storageService.getUniversityGroups('groups');

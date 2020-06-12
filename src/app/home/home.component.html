@@ -13,18 +13,27 @@
       <li class=" nav-item">
         <a class=" nav-link" routerLink="/">Home</a>
       </li>
-      <li class=" nav-item">
-        <a class=" nav-link" routerLink="/groups">Groups</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/tools">Sharing Tools</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Donations</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/transportition">Sharing Habitations</a>
-      </li>
+      <ng-container *ngIf="isAuthenticated">
+        <li class=" nav-item">
+          <a class=" nav-link" routerLink="/groups">Groups</a>
+        </li>
+        <li class=" nav-item">
+          <a class=" nav-link" routerLink="/announcements">Announcements</a>
+        </li>
+        <li class=" nav-item">
+          <a class=" nav-link" routerLink="/events">Events</a>
+        </li>
+        <li class=" nav-item">
+          <a class=" nav-link" routerLink="/companies">Companies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/tools">Sharing Tools</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/transportition">Sharing Habitations</a>
+        </li>
+      </ng-container>
+
       <li class="nav-item">
 
       </li>
@@ -41,7 +50,7 @@
 
 <header>
   <img class="img-fluid image" src="../assets/images/hero.png">
-  <div class="button-res">
+  <div class="button-res" *ngIf="!isAuthenticated">
     <button class="btn-block responsive-width blue-button" [routerLink]="['/register']"> SignUp </button>
   </div>
 </header>

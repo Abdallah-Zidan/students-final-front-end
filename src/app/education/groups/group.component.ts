@@ -33,13 +33,16 @@ export class GroupComponent implements OnInit, OnDestroy {
       const key2 = 'scope';
       const id = map[key1];
       const scope = map[key2];
-      const tmp = this.groupsService.departmentGroups
-        ? this.groupsService.departmentGroups[0].id
-        : this.facultyGroups[0].id;
+      let tmp: Group;
+      if (this.groupsService.departmentGroups[0]) {
+        tmp = this.groupsService.departmentGroups[0];
+      } else {
+        tmp = this.groupsService.facultyGroups[0];
+      }
       if (id && scope) {
         this.currentGroup = this.groupsService.getGroup(id, scope);
       } else {
-        this.router.navigate(['/groups', 0, tmp]);
+        this.router.navigate(['/groups', tmp.scope, tmp.id]);
       }
       if (this.currentGroup) {
         this.getPosts(
@@ -49,7 +52,7 @@ export class GroupComponent implements OnInit, OnDestroy {
           1
         );
       } else {
-        this.router.navigate(['/groups', 0, tmp]);
+        this.router.navigate(['/groups', tmp.scope, tmp.id]);
       }
     });
   }

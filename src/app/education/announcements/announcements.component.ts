@@ -5,6 +5,8 @@ import { GroupsService } from 'src/app/services/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from 'src/app/shared/models/group.model';
 import { Subscription } from 'rxjs';
+import { StorageService } from 'src/app/services/storage.service';
+import { User } from 'src/app/auth/user.model';
 @Component({
   selector: 'app-announcements',
   templateUrl: './announcements.component.html',
@@ -12,7 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class AnnouncementsComponent implements OnInit, OnDestroy {
   facultyGroups = this.postsService.facultyGroups;
-  // departmentGroups = this.postsService.departmentGroups;
+  user: User;
   posts: Post[] = [];
   currentGroup: Group;
   resource = 'events';
@@ -22,12 +24,14 @@ export class AnnouncementsComponent implements OnInit, OnDestroy {
     private postsService: PostsService,
     private groupsService: GroupsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private storage: StorageService
   ) {}
 
   ngOnInit(): void {
+    this.user = this.storage.getUser('user');
     if (this.facultyGroups.length < 0) {
-      this.groupsService.getGroups();
+      this.groupsService.getGroups(this.storage.getUser('user'));
     }
     this.subscription = this.postsService.posts.subscribe((posts) => {
       this.posts = posts;

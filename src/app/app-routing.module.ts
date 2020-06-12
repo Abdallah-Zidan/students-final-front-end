@@ -119,10 +119,11 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard , AuthorizedGuard],
     runGuardsAndResolvers: 'always',
+    data: { roles: ['Moderator', 'Admin'] },
     children: [
-      { path: 'faculties', component: FacultiesComponent },
+      { path: 'faculties', component: FacultiesComponent , canActivate:[AuthorizedGuard],data: { roles: [ 'Admin'] },},
       { path: 'universities', component: UniversitiesComponent },
       { path: 'departments', component: DepartmentsComponent },
       { path: 'courses', component: CoursesComponent },
