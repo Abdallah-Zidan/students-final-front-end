@@ -27,7 +27,14 @@ const getAttachments = (post) => {
   const files = post.files;
   const filesArr: Attachment[] = [];
   files.forEach((file) => {
-    filesArr.push(new Attachment(file.id, file.url, file.mime));
+    filesArr.push(
+      new Attachment(
+        file.id,
+        file.url,
+        file.mime,
+        file.name ? file.name : 'download file'
+      )
+    );
   });
   return filesArr;
 };

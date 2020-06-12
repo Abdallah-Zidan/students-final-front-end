@@ -1,0 +1,73 @@
+
+
+<div class="m-3 fixed-btn">
+  <button class="floating-btn" (click)="showModal(mymodal)" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+    <mat-icon>add</mat-icon> 
+  </button>
+ 
+</div>
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Launch new event</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="text" name="title" [(ngModel)]="title" class="form-control" placeholder="title" value="" />
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="start" [(ngModel)]="startDate" ngbDatepicker
+              #d="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i
+                  class="fa fa-calendar"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="end" [(ngModel)]="endDate" ngbDatepicker
+              #d2="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"><i
+                  class="fa fa-calendar"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="row w-100 mx-auto">
+          <button mat-raised-button color="primary" class="btn-block" (click)="add()"> {{addOrRemove}}</button>
+        </div>
+
+
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <textarea name="body" [(ngModel)]="body" class="form-control" placeholder="info"
+            style="width: 100%; height: 150px;"></textarea>
+        </div>
+        <div class="form-group">
+          <button name="btnSubmit" class="btn btn-success" (click)="onAddPost()">Start Event</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row w-100" *ngIf="addFile">
+      <file-upload class="w-100" [(ngModel)]="selectedFiles"> </file-upload>`
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+
+<simple-notifications></simple-notifications>

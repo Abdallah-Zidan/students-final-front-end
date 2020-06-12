@@ -1,0 +1,73 @@
+    <div class="post" id="add_button" role="button" (click)="displayForm()">
+        <img class="avatar" src="{{user.avatar}}" alt="">
+        <div class="example-full-width">Share something with your colleagues…</div>
+    </div>
+
+    <div class="post" id="add_form" style="display:none">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label>Type</label>
+                    <select style="background-color: #ecedee;"  class="custom-select d-block w-100" id="type" [(ngModel)]="type" >
+                        <option *ngIf="RequestType==0" value="0" >request</option>
+                        <option *ngIf="RequestType==0" value="1" >offer</option>
+                        <option *ngIf="RequestType==2" value="2" >Habitation</option>
+                        <option *ngIf="RequestType==2" value="3" >transportation</option>
+                    </select>
+            </div>
+            <div class="col-md-6 mb-3" >
+
+                <label for="Tag">Tags</label>
+                <button class="tag-btn" (click)="displayTagInput()"><i class="fa fa-plus"></i></button>
+
+                <mat-select style="background-color: #ecedee;" multiple name="Tags[]" class="custom-select d-block w-100" id="tags" [(ngModel)]="tags">
+                  <mat-option value={{tag.name}} *ngFor="let tag of ToolTags" >{{tag.name}}</mat-option>
+                </mat-select>
+
+                <div id="TagInput" style="display:none">
+                  <input type="text" [(ngModel)]="newTag" placeholder="write your tag">
+                  <button class="btn btn-light" (click)="addNewTag()"><i class="fa fa-check" style="color:#1565c0;" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="RequestType==2">
+          <label for="location">Location</label>
+          <div>
+            <input  [(ngModel)]="location" type="text" class="tool-text"  >
+          </div>
+        </div>
+
+        <label for="Title">Title</label>
+        <div >
+            <input  [(ngModel)]="title" type="text" class="tool-text"  >
+        </div>
+
+        <mat-form-field class="tool-body">
+            <textarea [(ngModel)]="body" class="tool-body-text"  matInput placeholder=" Details " rows="4"></textarea>
+        </mat-form-field>
+
+        <div *ngIf="toolFiles.length>0">
+          <div *ngFor="let FileList of toolFiles">
+            <div class="fileList" *ngFor="let file of FileList">
+              <img class="file-img" src="assets/images/file.png" alt="">
+              <div class="example-full-width" >{{file.name}}<p style="color: black;">{{file.type}}</p></div>
+              <button class="btn btn-link" style="float: right;" (click)="removeFile(FileList)">x</button>
+            </div>
+          </div>
+        </div>
+          
+        
+        <div> 
+              <div class="btn btn-light" >
+                <i class="fa fa-file-text-o	"> File</i>
+                <input class="myinput" type="file" name="file" (change)="onChangeFile($event)" /> 
+              </div>
+
+              <div style="float: right;">
+                 <button class="btn btn-light" (click)="displayForm()" >Cancel</button>
+                 <button class="btn btn-primary" [disabled]="!title || !body ||!type ||!location" (click)="addPost()" *ngIf="RequestType==2">Post</button>  
+                 <button class="btn btn-primary" [disabled]="!title || !body ||!type" (click)="addPost()" *ngIf="RequestType==0">Post</button>  
+              </div>
+        </div>
+
+        
+    </div>

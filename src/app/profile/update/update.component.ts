@@ -85,7 +85,7 @@ export class UpdateComponent implements OnInit {
       birthdate : new FormControl(''),
 
       scientific_certificates : new FormControl('',[
-        // Validators.required,
+        Validators.required,
         Validators.pattern("[A-Za-z0-9 .'-]+"),
         Validators.minLength(10)
       ]),
@@ -233,32 +233,36 @@ export class UpdateComponent implements OnInit {
      user.append('description', this.companyForm.get('description').value);
     }
 
-    // if(this.storageData.type=="TeachingStaff")
-    // {
-    //  user.append('birthdate', this.TeachingStaffForm.get('birthdate').value);
-    //  user.append('scientific_certificates', this.TeachingStaffForm.get('scientific_certificates').value);
-    // }
+    if(this.storageData.type=="TeachingStaff")
+    {
+     user.append('birthdate', this.TeachingStaffForm.get('birthdate').value);
+     user.append('scientific_certificates', this.TeachingStaffForm.get('scientific_certificates').value);
+    }
     user.append('_method', 'PUT');  
 
     let token=this.storagService.getItem('user')._token
     this.httpService.updateProfile(user).subscribe(
-      res=>{
-          const currentUser = new User(
-            res.data.id,
-            res.data.name,
-            res.data.email,
-            res.data.type,
-            res.data.address,
-            res.data.mobile,
-            res.data.avatar,
-            res.data.verified,
-            token
-          );
-            this.storagService.removeItem('user')
-            this.storagService.saveItem('user', currentUser);
-            this.router.navigate(['/profile']);
-           },
 
+      res=>{
+        this.httpService.getUser().subscribe(
+          result =>
+            {const currentUser = new User(
+              result.data.id,
+              result.data.name,
+              result.data.email,
+              result.data.type,
+              result.data.address,
+              result.data.mobile,
+              result.data.avatar,
+              result.data.verified,
+              token
+            );
+              this.storagService.removeItem('user')
+              this.storagService.saveItem('user', currentUser);
+              this.router.navigate(['/profile']);},
+           error=>{console.log(error)}
+               );
+             },
       err=>{
               console.log(err) 
            }

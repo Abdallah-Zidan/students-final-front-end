@@ -29,6 +29,7 @@ import { Group } from '../shared/models/group.model';
 })
 export class SidebarComponent implements OnInit {
   user: User;
+  isTrue = false;
   menus = [];
   constructor(
     public sidebarservice: SidebarService,
@@ -192,5 +193,8 @@ export class SidebarComponent implements OnInit {
         type: 'simple',
       },
     ];
+  }
+  changeTheme(){
+    this.isTrue = !this.isTrue;
   }
 }

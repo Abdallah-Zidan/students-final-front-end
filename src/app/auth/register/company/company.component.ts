@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from '../../../services/storage.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { RegisterComponent } from '../register.component';
 import { AuthService } from '../../services/auth.service';
+import { RegisterService } from "../register.service";
 import { Router } from '@angular/router';
 
 
@@ -19,10 +18,9 @@ export class CompanyComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private storageService:StorageService,
     private fb: FormBuilder,
-    private register:RegisterComponent,
     private router:Router,
+    private registerService:RegisterService
     )
   { 
     let companyformControls = {
@@ -98,12 +96,13 @@ export class CompanyComponent implements OnInit {
     
     this.authService.register(user).subscribe(
       res=>{
+        this.registerService.changeToken(res.data.token.access_token)
         this.router.navigate(['/email/verify']);
       },
         err=>{
           window.scroll(0,0);
          
-            if(err.error.errors)
+            if(err.error&&err.error.errors)
               {
               err.error.errors.email?this.errorList.push(err.error.errors.email):null
               err.error.errors.mobile?this.errorList.push(err.error.errors.mobile):null

@@ -1,0 +1,32 @@
+<app-nav>
+    <div class="wrapper" >
+      <app-add-tool *ngIf="selectedButton==1" [RequestType]="type"></app-add-tool>
+
+                                           <!-- Search form -->
+      <div class="container h-100" *ngIf="selectedButton!=1">
+        <div class=" justify-content-center h-100">
+              <div class="searchbar">
+                  <input class="search_input" type="text" name="" placeholder="Search..." [(ngModel)]="SearchTag">
+                  <a class="search_icon" (click)="search()"><i class="fas fa-search"></i></a>
+                  <div class="text-center" *ngIf="response!=null" style="margin-top: 25px;"><strong class="alert alert-danger" >{{response}}</strong></div>
+              </div>
+        </div>
+      </div>
+
+      <div class="o-switch btn-group" style="align-items: center;" data-toggle="buttons" role="group" >
+        <label class="btn btn-outline-primary active">
+          <input type="radio" name="options" id="option1" autocomplete="off" (click)="onItemChange(1)" checked> All
+        </label>
+        <label class="btn btn-outline-primary">
+          <input type="radio" name="options" id="option2" autocomplete="off" (click)="onItemChange(2)"> {{title1}}
+        </label>
+        <label  class="btn btn-outline-primary">
+          <input type="radio" name="options" id="option3" autocomplete="off" (click)="onItemChange(3)"> {{title2}}
+        </label>
+      </div>
+                                            
+
+      <app-tool-post *ngFor="let tool of TotalList" [tool]="tool" [user]="user" [ToolTags]="ToolTags"></app-tool-post>
+    </div>
+</app-nav>
+  

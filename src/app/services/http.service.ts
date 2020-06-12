@@ -35,6 +35,11 @@ const endPoints = {
   resources: 'http://localhost:8000/api/v1/{resource}',
   comments: 'http://localhost:8000/api/v1/{resource}/{resource_id}/comments',
   replies: 'http://localhost:8000/api/v1/comments/{comment_id}/replies',
+
+  tools: 'http://localhost:8000/api/v1/tools',
+  tags:  'http://localhost:8000/api/v1/tags',
+  CloseTool:'http://localhost:8000/api/v1/tools/close',
+  
   report: 'http://localhost:8000/api/v1/posts/report',
 };
 
@@ -69,10 +74,10 @@ export class HttpService {
     return this.http.get<any>(endPoints.universites);
   }
 
-  verifyEmail(user): Observable<HttpResponse<any>> {
+  verifyEmail(token): Observable<HttpResponse<any>> {
     let headers_object = new HttpHeaders().set(
       'Authorization',
-      'Bearer ' + user._token.access_token
+      'Bearer ' + token
     );
     return this.http.get<any>(endPoints.verificationResend, {
       headers: headers_object,
@@ -100,6 +105,8 @@ export class HttpService {
       getResourceUrlGet(endPoints.getResources, resource, scope, scopeId, type)
     );
   }
+
+  
   requestAddPost(resource, data: FormData) {
     console.log(resource);
     console.log(data.get('body'));
@@ -162,4 +169,23 @@ export class HttpService {
       getRepliesUrl(endPoints.replies, commentId, replyId)
     );
   }
+
+  requestTags(scope){
+    return this.http.get(endPoints.tags,{params:{scope:scope}});
+  }
+
+  
+  requestTools(type,tags){
+    if(!tags)
+    {return this.http.get(endPoints.tools,{ params: {type:type} });}
+    else
+    {return this.http.get(endPoints.tools,{ params: {type:type,tags:tags} });}
+  }
+
+
+  requestCloseTool(resourceId) {
+    return this.http.post(endPoints.CloseTool, {data: resourceId});
+  }
+  
+
 }

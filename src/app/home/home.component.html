@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mx-5 mb-3">
-  <a class="navbar-brand" [routerLink]="'.'"><img class="logo" src="../../assets/images/logo-dark.png"></a>
+<nav class="navbar navbar-expand-lg   mx-5 mb-3">
+  <a class="navbar-brand" [routerLink]="'.'"><img class="logo" src="../../assets/images/logo-home.jpg"> </a>
 
   <h1 class="navbar-brand text-primary">STUDENT'S</h1>
   <!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
@@ -17,13 +17,13 @@
         <a class=" nav-link" routerLink="/groups">Groups</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Sharing Tools</a>
+        <a class="nav-link" routerLink="/tools">Sharing Tools</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Donations</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Sharing Habitations</a>
+        <a class="nav-link" routerLink="/transportition">Sharing Habitations</a>
       </li>
       <li class="nav-item">
 
@@ -39,22 +39,8 @@
 </nav>
 
 
-
-
 <header>
-  <img class="img-fluid image" src="../assets/images/herobanner.png">
-  <div class="text">
-    <h1>STUDENT'S</h1>
-    <h2>CONNECTING US</h2>
-    <p class="banner-text">
-      Student's is a Website Connecting Students from all
-      of Egypt .... which facilitates communications
-      between them, helps exchanging tools or books or
-      any studying instruments and improves Student's
-      relationships which makes a helpful and healthy
-      studying Environment.
-    </p>
-  </div>
+  <img class="img-fluid image" src="../assets/images/hero.png">
   <div class="button-res">
     <button class="btn-block responsive-width blue-button" [routerLink]="['/register']"> SignUp </button>
   </div>

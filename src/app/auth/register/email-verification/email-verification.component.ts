@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../../../services/storage.service';
 import { HttpService } from '../../../services/http.service';
 import { AuthService } from '../../services/auth.service';
+import { RegisterService } from "../register.service";
 import { Router } from '@angular/router';
 
 
@@ -12,26 +13,28 @@ import { Router } from '@angular/router';
 })
 export class EmailVerificationComponent implements OnInit {
 response;
+token;
   constructor(
     private storagService:StorageService,
     private httpService:HttpService,
     private authService: AuthService,
     private router:Router,
+    private registerService:RegisterService
     ) { }
 
   ngOnInit(): void {
+    this.registerService.currentToken.subscribe(
+      res => {this.token = res})
   }
 
   resendVerification()
   {
-    let user= this.storagService.getItem('user')
-    this.httpService.verifyEmail(user).subscribe(
+    this.httpService.verifyEmail(this.token).subscribe(
       result =>{
         if(result.status==200)
         {this.response="Already verified you need to login"
          setTimeout(() => {
           this.response = null;
-          this.storagService.removeItem("user")
           this.router.navigate(['/login']);
         }, 4000);
        

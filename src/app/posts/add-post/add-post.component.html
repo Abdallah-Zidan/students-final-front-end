@@ -4,26 +4,29 @@
       <img class="w-75 ava" src="{{user.personalData.avatar}}" alt="">
     </div>
     <div class="col-10 w-75 my-auto mx-auto">
+      <div class="row w-100 h-100" *ngIf="type !=null">
+        <div class="col-10">
+          <textarea placeholder="title" class="w-100" [(ngModel)]="title" [rows]="2" [cols]="50" pInputTextarea
+            autoResize="autoResize"></textarea>
+        </div>
+      </div>
       <div class="row w-100 h-100">
         <div class="col-10">
-          <textarea placeholder="add post" class="w-100" [(ngModel)]="body" (input)="onCommenting($event)" [rows]="3" [cols]="50"
-            pInputTextarea autoResize="autoResize"></textarea>
+          <textarea placeholder="add post" class="w-100" [(ngModel)]="body" (input)="onCommenting($event)" [rows]="3"
+            [cols]="50" pInputTextarea autoResize="autoResize"></textarea>
           <div class="row w-100 mx-auto">
-            <button class="btn btn-block btn-primary" (click)="add()"> {{addOrRemove}}</button>
+            <button mat-raised-button color="primary" class="btn-block" (click)="add()"> {{addOrRemove}}</button>
           </div>
         </div>
         <div class="col-2 mr-auto mt-auto">
-          <button class="w-auto" mat-button [hidden]="isEmpty" class="btn btn-secondary btn-block" (click)="onAddPost()">Post</button>
+          <button mat-raised-button color="accent" [hidden]="isEmpty" class="btn btn-block" (click)="onAddPost()">Post</button>
         </div>
       </div>
     </div>
   </div>
 
   <div class="row w-100" *ngIf="addFile">
-    <file-upload class="w-100" [control]="fileUploadControl"> </file-upload>`
+    <file-upload class="w-100" [(ngModel)]="selectedFiles"> </file-upload>`
   </div>
-  <!-- <label class="btn btn-primary my-auto"> -->
-  <!-- Add File <input type="file" multiple hidden (change)="onFilesSelected($event)"> -->
-  <!-- </label> -->
 </div>
 <simple-notifications></simple-notifications>

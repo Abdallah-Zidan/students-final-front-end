@@ -13,6 +13,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { ElementCreator } from '../../shared/models/creator.model';
 import { PostComment } from '../../shared/models/comment.model';
 import { CommentReply } from '../../shared/models/reply.model';
+import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -70,26 +71,43 @@ export class PostsService {
   }
 
   addPost(resource, data) {
-    this.httpService.requestAddPost(resource, data).subscribe((res: any) => {
-      const resPost = res.data.post;
-      const currUser = this.storage.getUser('user');
+    let type;
+    switch (resource) {
+      case 'events':
+        type = 'event';
+        break;
+      case 'posts':
+        type = 'post';
+        break;
+      case 'tools':
+        type = 'tool';
+        break;
+      case 'questions':
+        type = 'questions';
+        break;
+    }
 
-      const newPost = new Post(
-        resPost.id,
-        data.get('body'),
-        getAttachments(resPost),
-        false,
-        new ElementCreator(
-          currUser.id,
-          currUser.personalData.name,
-          currUser.personalData.avatar
-        ),
-        [],
-        'now'
-      );
-      this.postsArr.unshift(newPost);
-      this.posts.next(this.postsArr);
-    });
+    return this.httpService.requestAddPost(resource, data).pipe(
+      tap((res: any) => {
+        const resPost = res.data[type];
+        const currUser = this.storage.getUser('user');
+        const newPost = new Post(
+          resPost.id,
+          data.get('body'),
+          getAttachments(resPost),
+          false,
+          new ElementCreator(
+            currUser.id,
+            currUser.personalData.name,
+            currUser.personalData.avatar
+          ),
+          [],
+          'now'
+        );
+        this.postsArr.unshift(newPost);
+        this.posts.next(this.postsArr);
+      })
+    );
   }
   updatePost(resource, data, postId) {
     return this.httpService.requestUpdatePost(resource, data, postId);
