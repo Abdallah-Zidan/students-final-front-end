@@ -1,17 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from 'src/app/auth/user.model';
-import { StorageService } from 'src/app/services/storage.service';
-import { PostsService } from 'src/app/education/services/posts.service';
-import { Group } from 'src/app/shared/models/group.model';
-
 import { NotificationsService } from 'angular2-notifications';
-
+import { User } from 'src/app/auth/user.model';
+import { Group } from 'src/app/shared/models/group.model';
+import { StorageService } from 'src/app/services/storage.service';
+import { PostsService } from '../../services/posts.service';
 @Component({
-  selector: 'app-add-post',
-  templateUrl: './add-post.component.html',
-  styleUrls: ['./add-post.component.scss'],
+  selector: 'app-add-announcement',
+  templateUrl: './add-announcement.component.html',
+  styleUrls: ['./add-announcement.component.scss'],
 })
-export class AddPostComponent implements OnInit {
+export class AddAnnouncementComponent implements OnInit {
   user: User;
   body = '';
   title: string;

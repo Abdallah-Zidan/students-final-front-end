@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
 import { GroupsService } from '../services/groups.service';
+import { StorageService } from '../services/storage.service';
 
 interface Node {
   name: string;
@@ -33,7 +34,8 @@ export class NestedTreeComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private groupsService: GroupsService
+    private groupsService: GroupsService,
+    private storage: StorageService
   ) {}
 
   ngOnInit() {
@@ -43,7 +45,7 @@ export class NestedTreeComponent implements OnInit {
     );
     this.dataChange.subscribe((data) => (this.nestedDataSource.data = data));
     if (this.groupsService.departmentGroups.length < 1) {
-      this.groupsService.getGroups();
+      this.groupsService.getGroups(this.storage.getUser('user'));
     }
     const departmentGroups = this.groupsService.departmentGroups;
 

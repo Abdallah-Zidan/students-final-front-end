@@ -1,0 +1,40 @@
+body,
+html , *{
+    box-sizing: border-box;
+    outline: none;
+}
+
+textarea{
+    border-radius: 5px;
+}
+
+.post {
+    width           : 70%;
+    padding         : 1vw 3vw;
+    box-shadow      : 5px 5px 3px grey;
+    background-color: white;
+    margin          : 2em auto;
+}
+
+.ava{
+    border-radius: 50%;
+    padding: 3%;
+    border: 1px solid blue;
+    min-width: 30px;
+}
+
+.block{
+    display: block;
+    width: 100%;
+}
+
+
+
+button {
+    outline: none;
+}
+
+.example-full-width {
+    width : 70%;
+    height: 7%;
+}

@@ -26,10 +26,6 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
   image: string;
   private subscription: Subscription;
   ngOnInit(): void {
-
-    if (this.departmentGroups.length < 0) {
-      this.groupsService.getGroups();
-    }
     this.subscription = this.postsService.posts.subscribe((posts) => {
       this.posts = posts;
     });
@@ -40,11 +36,16 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
       const key2 = 'scope';
       const id = map[key1];
       const scope = map[key2];
-      const tmp = this.groupsService.departmentGroups[0].id;
+      let tmp: Group;
+      if (this.groupsService.departmentGroups[0]) {
+        tmp = this.groupsService.departmentGroups[0];
+      } else {
+        tmp = this.groupsService.facultyGroups[0];
+      }
       if (id && scope) {
         this.currentGroup = this.groupsService.getGroup(id, scope);
       } else {
-        this.router.navigate(['/groups', 0, tmp]);
+        this.router.navigate(['/groups', tmp.scope, tmp.id]);
       }
       if (this.currentGroup) {
         this.getPosts(
@@ -54,7 +55,7 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
           1
         );
       } else {
-        this.router.navigate(['/groups', 0, tmp]);
+        this.router.navigate(['/groups', tmp.scope, tmp.id]);
       }
     });
   }

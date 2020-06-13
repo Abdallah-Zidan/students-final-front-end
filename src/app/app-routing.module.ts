@@ -18,6 +18,7 @@ import { CompaniesComponent } from './companies/companies.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ChatComponent } from './chat/chat.component';
 import { AdminComponent } from './admin/admin.component';
+import { AuthorizedGuard } from './auth/services/authorized.guard';
 import { UniversitiesComponent } from './admin/universities/universities.component';
 import { FacultiesComponent } from './admin/faculties/faculties.component';
 import { DepartmentsComponent } from './admin/departments/departments.component';
@@ -73,32 +74,38 @@ const routes: Routes = [
   {
     path: 'groups/:scope/:id',
     component: GroupComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'groups',
     component: GroupComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'events',
     component: EventsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'events/:scope/:id',
     component: EventsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'announcements',
     component: AnnouncementsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'announcements/:scope/:id',
     component: AnnouncementsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'companies',
@@ -117,10 +124,11 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard , AuthorizedGuard],
     runGuardsAndResolvers: 'always',
+    data: { roles: ['Moderator', 'Admin'] },
     children: [
-      { path: 'faculties', component: FacultiesComponent },
+      { path: 'faculties', component: FacultiesComponent , canActivate:[AuthorizedGuard],data: { roles: [ 'Admin'] },},
       { path: 'universities', component: UniversitiesComponent },
       { path: 'departments', component: DepartmentsComponent },
       { path: 'courses', component: CoursesComponent },
@@ -158,4 +166,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
