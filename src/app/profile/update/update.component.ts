@@ -256,8 +256,8 @@ export class UpdateComponent implements OnInit {
               result.data.avatar,
               result.data.verified,
               token,
-              this.authService.getFaculty(res.data),
-              this.authService.getUniversity(res.data),
+              this.authService.getFaculty(result.data),
+              this.authService.getUniversity(result.data),
               null,
 
             );
