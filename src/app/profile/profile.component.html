@@ -110,7 +110,7 @@
 
                 <div class="profile-card-ctr">
                     <button *ngIf="(data.id == user.id)" class="profile-card__button button--blue js-message-btn" routerLink="update">Edit Profile</button>
-                    <button *ngIf="(data.id != user.id)" class="profile-card__button button--blue js-message-btn" >
+                    <button *ngIf="(data.id != user.id)" class="profile-card__button button--blue js-message-btn" [routerLink]="['/messages', data.id]">
                         <i class="fa fa-comments" aria-hidden="true"></i>
                      Message</button>
                 </div>
