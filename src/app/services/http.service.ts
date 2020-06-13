@@ -200,4 +200,8 @@ export class HttpService {
     {return this.http.get(endPoints.questions,{ params: {tags:tags} });}
   }
 
+  requestQuestion(id){
+    {return this.http.get(endPoints.questions,{ params: {id:id} });}
+  }
+
 }

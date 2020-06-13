@@ -31,6 +31,7 @@ import { AdminToolsComponent } from './admin/admin-tools/admin-tools.component';
 import { ToolsComponent } from './tools/tools.component';
 
 import { QuestionsSectionComponent } from './questions-section/questions-section.component';
+import { QuestionDetailsComponent } from './questions-section/question-details/question-details.component';
 
 
 const routes: Routes = [
@@ -155,6 +156,12 @@ const routes: Routes = [
     path: 'questions',
     component: QuestionsSectionComponent,
     canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'questions/:question',
+    component: QuestionDetailsComponent,
+    canActivate: [AuthGuard],
   },
 
   {
