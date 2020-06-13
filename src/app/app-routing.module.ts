@@ -122,6 +122,10 @@ const routes: Routes = [
     component: ChatComponent
   },
   {
+    path: 'messages',
+    component: ChatComponent
+  },
+  {
     path: 'admin',
     component: AdminComponent,
     canActivate: [AuthGuard , AuthorizedGuard],

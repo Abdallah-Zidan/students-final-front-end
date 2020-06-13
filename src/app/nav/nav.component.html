@@ -39,7 +39,6 @@
         </span>
       </button>
 
-
       <mat-menu #sectionMenu="matMenu">
         <button class="sections" mat-sectionMenu-item>
 
@@ -87,6 +86,11 @@
         <span class="material-icons">
           keyboard_arrow_down
         </span>
+      </button>
+
+
+      <button mat-button [routerLink]="['/messages']"  [matMenuTriggerFor]="messages">
+        <i class="fas fa-2x fa-comments"></i>
       </button>
 
       <mat-menu #colorMenu="matMenu" >
