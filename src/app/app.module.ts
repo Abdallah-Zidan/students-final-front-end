@@ -106,6 +106,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AdminPostsComponent } from './admin/admin-posts/admin-posts.component';
 import { AddAnnouncementComponent } from './education/announcements/add-announcement/add-announcement.component';
 
+import { ToolReplyComponent } from './tools/tool-comments/singletool-comment/tool-reply/tool-reply.component';
+import { ToolSingleReplyComponent } from './tools/tool-comments/singletool-comment/tool-reply/tool-single-reply/tool-single-reply.component';
+import { QuestionsSectionComponent } from './questions-section/questions-section.component';
+import { SingleQuestionComponent } from './questions-section/single-question/single-question.component';
+import { QuestionDetailsComponent } from './questions-section/question-details/question-details.component';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -169,6 +175,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ToolsComponent,
     AdminToolsComponent,
     AdminPostsComponent,
+    ToolReplyComponent,
+    ToolSingleReplyComponent,
+    QuestionsSectionComponent,
+    SingleQuestionComponent,
+    QuestionDetailsComponent,
     AddAnnouncementComponent,
   ],
   imports: [

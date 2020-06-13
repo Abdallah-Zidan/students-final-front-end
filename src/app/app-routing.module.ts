@@ -32,6 +32,10 @@ import { QuestionsComponent } from './admin/questions/questions.component';
 import { AdminToolsComponent } from './admin/admin-tools/admin-tools.component';
 import { ToolsComponent } from './tools/tools.component';
 
+import { QuestionsSectionComponent } from './questions-section/questions-section.component';
+import { QuestionDetailsComponent } from './questions-section/question-details/question-details.component';
+
+
 const routes: Routes = [
   {
     path: 'login',
@@ -64,6 +68,12 @@ const routes: Routes = [
   {
     path: 'profile/update',
     component: UpdateComponent,
+    canActivate: [AuthGuard],
+  },
+  
+  {
+    path: 'profile/:id',
+    component: ProfileComponent,
     canActivate: [AuthGuard],
   },
 
@@ -119,11 +129,13 @@ const routes: Routes = [
   },
   {
     path: 'messages/:id',
-    component: ChatComponent
+    component: ChatComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'messages',
-    component: ChatComponent
+    component: ChatComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'admin',
@@ -157,6 +169,18 @@ const routes: Routes = [
     component: ToolsComponent,
     data: { type: '2' },
     canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'questions',
+    component: QuestionsSectionComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path: 'questions/:question',
+    component: QuestionDetailsComponent,
+    canActivate: [AuthGuard],
   },
 
   {

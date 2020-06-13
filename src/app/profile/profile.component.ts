@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../services/storage.service';
 import { HttpService } from '../services/http.service';
-
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -10,34 +10,42 @@ import { HttpService } from '../services/http.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  data;
-  studyData;
-  constructor(private storagService:StorageService,private httpService:HttpService) {}
+  data;user;
+  studyData;profileId;
+  constructor(
+    private storagService:StorageService,
+    private httpService:HttpService,
+    private activatedRoute:ActivatedRoute) {}
   
 
   ngOnInit(): void {
-    let user= this.storagService.getItem('user')
-    if(user)
-    {this.httpService.getUser().subscribe(
-      result =>{
-        this.data=result.data;
-      },
-      error =>{
-        console.log(error);}
-     ) }
-      if(user.type=="Student")
-      {      
-        this.httpService.getuserDepartment().subscribe(
-          result=>{
-           this.studyData=result.data.department_faculties
-          },
-          error=>{console.log(error)}
-        )
-      
-        if(this.data&&this.data.profile.year==0)
-        {this.data.profile.year="Preparatory"}
-      
-      }
-    
-  }}
 
+       this.activatedRoute.paramMap.subscribe(params => { 
+         this.profileId = params.get('id'); 
+       });
+      
+       this.user=this.storagService.getItem('user')
+       
+       this.httpService.getUser(this.profileId).subscribe(
+        result =>{
+          this.data=result.data;
+          if(this.data.type=="Student")
+          {      
+            this.httpService.getuserDepartment().subscribe(
+              result=>{
+               this.studyData=result.data.department_faculties
+              },
+              error=>{console.log(error)}
+            );
+          
+            if(this.data&&this.data.profile.year==0)
+            {this.data.profile.year="Preparatory"}
+          
+          }
+        },
+        error =>{
+          console.log(error);}
+        );
+}
+
+}

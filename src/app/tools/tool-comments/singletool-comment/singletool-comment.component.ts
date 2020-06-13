@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {StorageService} from '../../../services/storage.service'
 import {HttpService} from '../../../services/http.service'
-import { Router } from '@angular/router';
 import { ToolService } from 'src/app/tools/services/tool.service';
 
 @Component({
@@ -21,7 +20,6 @@ export class SingletoolCommentComponent implements OnInit {
   constructor(
     private storageService:StorageService,
     private httpService:HttpService,
-    private router:Router,
     private toolService:ToolService,
   ) {}
 
@@ -36,7 +34,6 @@ export class SingletoolCommentComponent implements OnInit {
 
   }
   onUpdateComment() {
-    console.log(this.tool)
     this.httpService.requestEditComment("tools",this.commentBody,this.tool.id,this.comment.id).subscribe(
       result=>{
         this.comment.body=this.commentBody;

@@ -112,7 +112,7 @@ export class UpdateComponent implements OnInit {
     this.storageData= this.storagService.getItem('user')
     if(this.storageData)
      {
-    this.httpService.getUser().subscribe(
+    this.httpService.getUser(null).subscribe(
       result =>{
         this.data=result.data;
 
@@ -244,7 +244,7 @@ export class UpdateComponent implements OnInit {
     this.httpService.updateProfile(user).subscribe(
 
       res=>{
-        this.httpService.getUser().subscribe(
+        this.httpService.getUser(null).subscribe(
           result =>
             {const currentUser = new User(
               result.data.id,

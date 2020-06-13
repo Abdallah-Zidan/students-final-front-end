@@ -20,7 +20,8 @@ const endPoints = {
   register: 'http://localhost:8000/api/v1/register',
   universites: 'http://localhost:8000/api/v1/universities',
   verificationResend: 'http://localhost:8000/api/v1/email/resend',
-  userData: 'http://localhost:8000/api/v1/user/profile',
+  currentUserData: 'http://localhost:8000/api/v1/user/profile',
+  userData: 'http://localhost:8000/api/v1/user/profile/{id}',
   userDepartment: 'http://localhost:8000/api/v1/user/departments',
   studentDepartmentGroup: '',
   studentFacultyGroup: '',
@@ -41,6 +42,8 @@ const endPoints = {
   CloseTool:'http://localhost:8000/api/v1/tools/close',
   
   report: 'http://localhost:8000/api/v1/posts/report',
+  questions: 'http://localhost:8000/api/v1/questions',
+
 };
 
 @Injectable({
@@ -85,8 +88,11 @@ export class HttpService {
     });
   }
 
-  getUser() {
-    return this.http.get<any>(endPoints.userData);
+  getUser(profileId) {
+    if(profileId)
+      return this.http.get<any>(endPoints.userData.replace('{id}', profileId));
+    else
+      return this.http.get<any>(endPoints.currentUserData);     
   }
 
   getuserDepartment() {
@@ -94,7 +100,7 @@ export class HttpService {
   }
 
   updateProfile(user) {
-    return this.http.post<any>(endPoints.userData, user);
+    return this.http.post<any>(endPoints.currentUserData, user);
   }
 
   requestGroups() {
@@ -187,5 +193,15 @@ export class HttpService {
     return this.http.post(endPoints.CloseTool, {data: resourceId});
   }
   
+  requestQuestions(tags){
+    if(!tags)
+    {return this.http.get(endPoints.questions);}
+    else
+    {return this.http.get(endPoints.questions,{ params: {tags:tags} });}
+  }
+
+  requestQuestion(id){
+    {return this.http.get(endPoints.questions,{ params: {id:id} });}
+  }
 
 }

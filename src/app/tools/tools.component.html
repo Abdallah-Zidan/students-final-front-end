@@ -1,6 +1,6 @@
 <app-nav>
     <div class="wrapper" >
-      <app-add-tool *ngIf="selectedButton==1" [RequestType]="type"></app-add-tool>
+      <app-add-tool *ngIf="selectedButton==1" [RequestType]="type" [ToolTags]="ToolTags"></app-add-tool>
 
                                            <!-- Search form -->
       <div class="container h-100" *ngIf="selectedButton!=1">

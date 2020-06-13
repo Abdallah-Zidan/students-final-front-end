@@ -18,7 +18,7 @@
             ></app-receivers-list>
           </div>
         </div>
-        <div class="mesgs" (scroll)="onMouseWheel($event)"#ref>
+        <div class="mesgs" (scroll)="onMouseWheel($event)" #ref>
           <div class="msg_history">
             <div *ngIf="more" (click)="onMore()" class="more mb-1">
               <h5 class="text-center text-dark">More</h5>
@@ -31,7 +31,7 @@
                   message.from.id == receiverId
                 "
               >
-                <div class="incoming_msg"  >
+                <div class="incoming_msg">
                   <div class="incoming_msg_img">
                     <img
                       src="{{ currentUser.personalData.avatar }}"
@@ -73,7 +73,7 @@
               </ng-template>
             </li>
           </div>
-          <section class="send-form-container">
+          <section class="send-form-container" *ngIf="receiverId">
             <send-form
               [messages]="messages"
               [currentUser]="currentUser"

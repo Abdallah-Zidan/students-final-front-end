@@ -8,7 +8,7 @@
     <div class="col-8 px-3 my-auto">
       <div class="row">
         <div class="col-12">
-          <h5 class="text-primary text">{{tool.user.name}}</h5>
+          <a [routerLink]="['/profile', tool.user.id]"><h5 class="text-primary text">{{tool.user.name}}</h5></a>
         </div>
       </div>
 
@@ -107,7 +107,7 @@
     </mat-form-field>
   </div>
   <div *ngIf="!tool.closed" class="col-2 my-auto">
-    <button class="text-primary material-icons" [disabled]="!CommentBody" (click)="addComment()">
+    <button class="btn btn-primary material-icons" [disabled]="!CommentBody" (click)="addComment()">
       <span>send</span>
     </button>
   </div>
