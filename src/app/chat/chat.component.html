@@ -1,8 +1,7 @@
-<app-nav-bar></app-nav-bar>
-
-<div class="content" role="main">
+<app-nav>
+<div class="content " role="main">
   <div class="container">
-    <div class="messaging">
+    <div class="messaging bg-light" >
       <div class="inbox_msg">
         <div class="inbox_people">
           <div class="headind_srch">
@@ -59,8 +58,8 @@
                 [ngIf]="message.from.id === currentUser.id"
               >
                 <div class="outgoing_msg" #msgRef>
-                  <div class="sent_msg">
-                    <p>{{ message.text }}</p>
+                  <div class="sent_msg ">
+                    <p class="background">{{ message.text }}</p>
                     <span
                       class="msg-date"
                       data-toggle="tooltip"
@@ -87,3 +86,4 @@
     </div>
   </div>
 </div>
+</app-nav>

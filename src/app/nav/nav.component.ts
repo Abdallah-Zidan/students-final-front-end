@@ -5,6 +5,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { User } from '../auth/user.model';
 import { StorageService } from '../services/storage.service';
 import { AuthService } from '../auth/services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -14,6 +15,7 @@ import { AuthService } from '../auth/services/auth.service';
 export class NavComponent implements OnInit {
   user: User;
   color: string;
+  isOpened  = false;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -24,10 +26,15 @@ export class NavComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private storage: StorageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
   ngOnInit() {
     this.user = this.storage.getUser('user');
+
+    if (this.router.url.includes('/messages')) {
+      this.isOpened = true;
+    }
   }
   onLogout() {
     this.authService.logout();
