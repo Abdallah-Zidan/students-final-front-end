@@ -112,7 +112,7 @@ const routes: Routes = [
   },
   {
     path: 'messages/:id',
-    component:ChatComponent
+    component: ChatComponent
   },
   {
     path: 'admin',
@@ -151,7 +151,7 @@ const routes: Routes = [
     path: '**',
     component: NotFoundComponent,
   },
-  
+
 ];
 
 @NgModule({

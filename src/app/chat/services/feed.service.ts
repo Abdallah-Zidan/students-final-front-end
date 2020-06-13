@@ -12,7 +12,7 @@ export class FeedService {
   private event = 'message.sent';
   private channel: string;
   private user: User;
-  private pusherAppId = 'c6908de3c6904b8babfb';
+  private pusherAppId = '1018482';
 
   constructor(private storage: StorageService) {
     this.user = this.storage.getUser('user');
