@@ -255,7 +255,11 @@ export class UpdateComponent implements OnInit {
               result.data.mobile,
               result.data.avatar,
               result.data.verified,
-              token
+              token,
+              this.authService.getFaculty(res.data),
+              this.authService.getUniversity(res.data),
+              null,
+
             );
               this.storagService.removeItem('user')
               this.storagService.saveItem('user', currentUser);

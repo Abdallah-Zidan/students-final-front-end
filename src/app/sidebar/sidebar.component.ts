@@ -40,9 +40,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.storage.getUser('user');
-    if (this.groupsService.departmentGroups.length < 1) {
-      this.groupsService.getGroups();
-    }
+    this.groupsService.getGroups(this.storage.getUser('user'));
     this.menus = this.getMenuList();
   }
   getDepartmentgroups(groupRoute) {
@@ -70,9 +68,9 @@ export class SidebarComponent implements OnInit {
     return null;
   }
   getFacUniGroups(groupRoute) {
-    return this.getFacultygroups(groupRoute).concat(
-      this.getUniversitygroups(groupRoute)
-    ).concat(this.getAllSystemGroup(groupRoute));
+    return this.getFacultygroups(groupRoute)
+      .concat(this.getUniversitygroups(groupRoute))
+      .concat(this.getAllSystemGroup(groupRoute));
   }
   getSideBarState() {
     return this.sidebarservice.getSidebarState();
@@ -84,10 +82,12 @@ export class SidebarComponent implements OnInit {
   toggle(currentMenu) {
     if (currentMenu.type === 'dropdown') {
       this.menus.forEach((element) => {
-        if (element === currentMenu) {
-          currentMenu.active = !currentMenu.active;
-        } else {
-          element.active = false;
+        if (element) {
+          if (element === currentMenu) {
+            currentMenu.active = !currentMenu.active;
+          } else {
+            element.active = false;
+          }
         }
       });
     }
@@ -106,14 +106,15 @@ export class SidebarComponent implements OnInit {
         title: 'Navigate to',
         type: 'header',
       },
-
-      {
-        title: 'Department Groups',
-        icon: 'fa fa-users',
-        active: false,
-        type: 'dropdown',
-        submenus: this.getDepartmentgroups('groups'),
-      },
+      [1, 2].includes(this.user.role)
+        ? {
+            title: 'Department Groups',
+            icon: 'fa fa-users',
+            active: false,
+            type: 'dropdown',
+            submenus: this.getDepartmentgroups('groups'),
+          }
+        : null,
       {
         title: 'Faculty Groups',
         icon: 'fa fa-university',
@@ -194,7 +195,7 @@ export class SidebarComponent implements OnInit {
       },
     ];
   }
-  changeTheme(){
+  changeTheme() {
     this.isTrue = !this.isTrue;
   }
 }

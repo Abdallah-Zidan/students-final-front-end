@@ -40,6 +40,9 @@ export class AddPostComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.storage.getUser('user');
+    if (this.group && this.type) {
+      this.group.scope = (+this.group.scope - 1).toString();
+    }
   }
 
   onAddPost() {

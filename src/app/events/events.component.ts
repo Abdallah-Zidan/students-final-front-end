@@ -6,6 +6,7 @@ import { Group } from 'src/app/shared/models/group.model';
 import { Subscription } from 'rxjs';
 import { Post } from '../education/models/post.model';
 import { PostsService } from '../education/services/posts.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-events',
@@ -24,12 +25,13 @@ export class EventsComponent implements OnInit, OnDestroy {
     private groupsService: GroupsService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private storage: StorageService
 
   ) {}
 
   ngOnInit(): void {
     if (this.facultyGroups.length < 0) {
-      this.groupsService.getGroups();
+      this.groupsService.getGroups(this.storage.getUser('user'));
     }
     this.subscription = this.postsService.posts.subscribe((posts) => {
       this.posts = posts;

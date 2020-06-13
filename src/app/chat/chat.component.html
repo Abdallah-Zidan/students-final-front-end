@@ -1,0 +1,89 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="content" role="main">
+  <div class="container">
+    <div class="messaging">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div class="headind_srch">
+            <div class="channel_heading">
+              <h4 class="text-center">Chats</h4>
+            </div>
+          </div>
+          <div class="inbox_chat">
+            <app-receivers-list
+              [currentUser]="currentUser"
+              [activeChat]="receiverId"
+              [receivers]="receivers"
+              [blinkingId]="blinkingId"
+            ></app-receivers-list>
+          </div>
+        </div>
+        <div class="mesgs" (scroll)="onMouseWheel($event)" #ref>
+          <div class="msg_history">
+            <div *ngIf="more" (click)="onMore()" class="more mb-1">
+              <h5 class="text-center text-dark">More</h5>
+            </div>
+            <li class="message" *ngFor="let message of messages">
+              <ng-template
+                #incoming_msg
+                [ngIf]="
+                  message.from.id !== currentUser.id &&
+                  message.from.id == receiverId
+                "
+              >
+                <div class="incoming_msg">
+                  <div class="incoming_msg_img">
+                    <img
+                      src="{{ currentUser.personalData.avatar }}"
+                      alt="User avatar"
+                    />
+                  </div>
+                  <div class="received_msg" #msgRef>
+                    <div class="received_withd_msg">
+                      <p>{{ message.text }}</p>
+                      <span
+                        class="msg-date"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="{{ message.created_at | date: 'medium' }}"
+                      >
+                        {{ message.created_at_human }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template
+                #outgoing_msg
+                [ngIf]="message.from.id === currentUser.id"
+              >
+                <div class="outgoing_msg" #msgRef>
+                  <div class="sent_msg">
+                    <p>{{ message.text }}</p>
+                    <span
+                      class="msg-date"
+                      data-toggle="tooltip"
+                      data-placement="bottom"
+                      title="{{ message.created_at | date: 'medium' }}"
+                    >
+                      {{ message.created_at_human }}
+                    </span>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+          </div>
+          <section class="send-form-container" *ngIf="receiverId">
+            <send-form
+              [messages]="messages"
+              [currentUser]="currentUser"
+              [receiverId]="receiverId"
+              (receiversChanged)="onReceiversChanged($event)"
+            ></send-form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

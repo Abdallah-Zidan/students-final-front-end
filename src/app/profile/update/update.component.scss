@@ -3,6 +3,13 @@
     height: 150px;
 }
 
+.container {
+    background-color: white;
+    padding         : 50px;
+    border-radius   : 50px;
+    min-width       : 420px;
+}
+
 div {
     position: relative;
     overflow: hidden;

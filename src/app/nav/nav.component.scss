@@ -1,24 +1,38 @@
-body{
-  margin: 0;
+body,
+html {
+  margin    : 0;
 }
-body,html,*{
+.img-fluid{
+  margin-top: -5px;
+}
+
+body,
+html,
+* {
   outline: none !important;
 }
 
-.ava{
-  padding: 1%;
-  border: 2px solid blue;
+.wrapper {
+  background-image: url(../../assets/images/pattern.jpg);
+  position: relative;
+  min-height: 100vh;
 }
 
-h3{
-  display: inline-block;
-  padding-left: 1vw;
-  }
+.ava {
+  padding: 1%;
+  border : 2px solid blue;
+}
 
-  i{
-    padding: 0;
-    margin: 0;
-  }
+h3 {
+  display     : inline-block;
+  padding-left: 1vw;
+}
+
+i {
+  padding: 0;
+  margin : 0;
+}
+
 .sidenav {
   width: 200px;
 }
@@ -29,37 +43,37 @@ h3{
 
 .mat-toolbar.mat-primary {
   position: sticky;
-  top: 0;
-  z-index: 1;
+  top     : 0;
+  z-index : 1;
 }
 
-.spacer{
+.spacer {
   flex: 1 1 auto;
 }
 
 
 
-.avatar{
-  width: 45px;
-  border-radius:50% ;
+.avatar {
+  width        : 45px;
+  border-radius: 50%;
 }
 
-.sections{
+.sections {
   border: none;
 }
 
-.slogan{
+.slogan {
   padding: 15px;
 }
-.sidebar-avatar{
-  width: 100px;
-  display: block;
-  margin: 0 auto;
+
+.sidebar-avatar {
+  width      : 100px;
+  display    : block;
+  margin     : 0 auto;
   margin-left: -1px;
 }
 
-.sidebar-info
-{
-padding: 0;
-margin: 0;
+.sidebar-info {
+  padding: 0;
+  margin : 0;
 }
