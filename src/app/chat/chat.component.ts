@@ -71,6 +71,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.activeRoute.params.subscribe((map) => {
       this.receiverId = map['id'];
       this.firstMessage = true;
+      if(this.receiverId)
       this.chatService.getAllMessages(this.receiverId).subscribe(
         (res) => {
           this.messages = res.data.messages;
@@ -96,8 +97,9 @@ export class ChatComponent implements OnInit, OnDestroy {
       );
     });
 
-    this.sendSerivce.getSubject().subscribe((res) => {
+    this.sendSerivce.getSubject().subscribe((res:string) => {
       this.inMore = false;
+      this.receiverId = res;
     });
   }
 
