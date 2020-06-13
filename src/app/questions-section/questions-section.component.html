@@ -7,7 +7,7 @@
             <h2>Welcome to Qustions Section</h2>
             <h5>Ask a qustion<br> and you will be sure <br>to find an answer</h5>
             <div data-aos="fade-up" data-aos-delay="800">
-                <button class="btn btn-primary askbtn">Ask Now</button>
+                <button class="btn btn-primary askbtn" (click)="addQuestion()">Ask Now</button>
             </div>
             </div>
 
@@ -46,6 +46,6 @@
         </div>
     </section>
 
-    <app-single-question *ngFor="let question of QuestionsList" [question]="question" [user]="user" [QuestionTags]="QuestionTags"></app-single-question>
+    <app-single-question *ngFor="let question of QuestionsList" [question]="question"></app-single-question>
 
 </app-nav>

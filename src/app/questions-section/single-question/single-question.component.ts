@@ -18,14 +18,9 @@ export class SingleQuestionComponent implements OnInit {
     private questionService:QuestionService,
   ) { }
   @Input() question;
-  @Input() user;
-  @Input() QuestionTags;
 
   ngOnInit(): void {
-
-    this.questionService.setUser(this.question);
     console.log(this.question)
-
   }
   
 }

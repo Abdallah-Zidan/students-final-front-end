@@ -1,20 +1,83 @@
 <app-nav>
-    <section id="header" class="d-flex align-items-center">
-
-        <div class="container">
-        <div class="row">
-            <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h2>Welcome to Qustions Section</h2>
-            <h5>Ask a qustion<br> and you will be sure <br>to find an answer</h5>
             <div data-aos="fade-up" data-aos-delay="800">
                 <button [routerLink]="['/questions']" class="btn btn-primary askbtn">Questions</button>
             </div>
+            <div class="container post">
+
+                <div class="row h-100 mx-3 pt-3">
+                  <div class="col-2 my-auto text-center">
+                    <img class="w-75 ava" src="{{question.user.avatar}}" alt="">
+                    <div class="row">
+                        <div class="col-12">
+                          <a [routerLink]="['/profile', question.user.id]"><h5 class="text-primary text">{{question.user.name}}</h5></a>
+                        </div>
+                    </div>
+                  </div>
+            
+                  <div class="col-10 px-3 my-auto">
+                    <div class="row h-100 mx-5">
+            
+                            <div class="col-10 ">
+                                <h3>{{question.title}}</h3>
+                            </div>
+            
+                            <div class="col-2">
+                                <div class="col-4" *ngIf="(question.user.id == user.id)">
+                                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu="matMenu" xPosition="before">
+                                    <div>
+                                    <button mat-menu-item (click)="editQuestion(question)">
+                                        <mat-icon>create</mat-icon>
+                                        <span>Edit Question</span>
+                                    </button>
+                                    <button  mat-menu-item (click)="deleteQuestion(question)" >
+                                        <mat-icon>delete_sweep</mat-icon>
+                                        <span>Delete Question</span>
+                                    </button>
+                        
+                                    </div>
+                                </mat-menu>
+                                </div>
+                            </div>
+                    </div>
+            
+                    <div class="row h-100 mx-5">
+                        <span class="my-auto text-secondary material-icons">
+                            schedule
+                          </span>
+                          <span class=" text-secondary">{{question.created_at_human}}</span>
+                    </div>
+                    
+                    <div class="row h-100 mx-5">
+                    <p class="lead py-2">{{question.body}}</p>
+                    </div>
+            
+                    <div class="row h-100 mx-5">
+                        <button class="btn btn-primary" *ngFor="let tag of question.tags">{{tag}}</button>
+                    </div>
+                 </div>
+              
+                </div>
+             
+                
+              </div>
+            <div class="container post"> 
+                <div style="align-items: center;">
+                    <h2>Answers</h2>
+                    <hr>
+                </div> 
+              <app-answer *ngFor="let comment of question.comments" [comment]="comment" [question]="question"></app-answer> 
             </div>
 
-            <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left" data-aos-delay="200">
-            <img src="assets/images/questions.png" class="img-fluid animated" alt="">
+            <div class="container post">
+                <h4>Your Answer</h4>
+                <hr>
+                <textarea class="w-100" [rows]="8" [cols]="50" pInputTextarea autoResize="autoResize" [(ngModel)]="CommentBody"></textarea>
+                
+                <button class="btn btn-primary" [disabled]="!CommentBody" (click)="addComment()">
+                   Post Your Answer
+                </button>
             </div>
-        </div>
-        </div>
-    </section>
 </app-nav>
