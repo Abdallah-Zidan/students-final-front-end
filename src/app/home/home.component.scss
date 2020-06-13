@@ -51,93 +51,23 @@ ul li button  {
     margin: 7px;
 }
 
-
 // end of navbar styling
 
-//header styling
-header {
-    position: relative;
-    overflow: hidden;
-}
 
-header::after {
-    content: "";
-    display: block;
-    clear  : both;
-}
 
-.text
+.carousel-control-next-icon:after
 {
-    position: absolute;
-    top      : 20%;
-    left     : 12.6%;
-    width: 26%;
-    word-wrap: break-word;
-
-}
-header h1 {
-
-    font-size: 4.44vw;
+  content: '>';
+  font-size: 55px;
+  color: #3A82F6;
 }
 
-header h2 {
-    color    : #3762F0;
-    font-size: 3vw;
-    margin-bottom: 10%;
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: #3A82F6;
 }
 
-header p 
-{
-    font-size: 1vw;
-    margin-bottom: 20%;    
-}
-
-header button {
-    width: 10vw;
-}
-.btn-container
-{
-
-    width: 33%;
-  position: relative;
-  word-wrap: normal;
-}
-
-.responsive-width
-{
-    font-size: 2vw;
-}
-
-.button-res
-{
-    position: absolute;
-    top      : 65%;
-    left     : 12.6%;
-    width: 15%;
-}
-//end of header styling
-
-
-//hero banner
-
-.banner
-{
-    position: relative;
-}
-.banner .img-fluid
-{
-    width: 100%;
-    background-size: cover;
-}
-
-.banner-logo
-{
-    position: absolute;
-    top: 45%;
-    left: 45%;
-    width: 15%;
-}
-//end of hero banner
 
 // upcoming events section
 .upcoming-events
