@@ -83,15 +83,6 @@ import { AddEventComponent } from './events/add-event/add-event.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ImagesCarouselComponent } from './events/images/images.-carousel.component';
-import { AdminComponent } from './admin/admin.component';
-import { UniversitiesComponent } from './admin/universities/universities.component';
-import { FacultiesComponent } from './admin/faculties/faculties.component';
-import { DepartmentsComponent } from './admin/departments/departments.component';
-import { CoursesComponent } from './admin/courses/courses.component';
-import { UsersComponent } from './admin/users/users.component';
-import { TagsComponent } from './admin/tags/tags.component';
-import { AdminEventsComponent } from './admin/admin-events/admin-events.component';
-import { QuestionsComponent } from './admin/questions/questions.component';
 import { MatTableModule } from '@angular/material/table';
 
 import { ToolsComponent } from './tools/tools.component';
@@ -103,9 +94,7 @@ import {
 } from './tools/tool-post/tool-post.component';
 import { ToolCommentsComponent } from './tools/tool-comments/tool-comments.component';
 import { SingletoolCommentComponent } from './tools/tool-comments/singletool-comment/singletool-comment.component';
-import { AdminToolsComponent } from './admin/admin-tools/admin-tools.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { AdminPostsComponent } from './admin/admin-posts/admin-posts.component';
 import { AddAnnouncementComponent } from './education/announcements/add-announcement/add-announcement.component';
 
 import { ToolReplyComponent } from './tools/tool-comments/singletool-comment/tool-reply/tool-reply.component';
@@ -124,6 +113,7 @@ import {
 import { AnswerComponent } from './questions-section/question-details/answer/answer.component';
 import { QuestionTagsComponent } from './questions-section/question-tags/question-tags.component';
 import { SingleCompanyComponent } from './companies/single-company/single-company.component';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -176,18 +166,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PhotoComponent,
     AddEventComponent,
     ImagesCarouselComponent,
-    AdminComponent,
-    UniversitiesComponent,
-    FacultiesComponent,
-    DepartmentsComponent,
-    CoursesComponent,
-    UsersComponent,
-    TagsComponent,
-    AdminEventsComponent,
-    QuestionsComponent,
     ToolsComponent,
-    AdminToolsComponent,
-    AdminPostsComponent,
     ToolReplyComponent,
     ToolSingleReplyComponent,
     QuestionsSectionComponent,
@@ -243,6 +222,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatNativeDateModule,
     MatTableModule,
     MatPaginatorModule,
+    DashboardModule,
   ],
 
   providers: [
