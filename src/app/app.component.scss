@@ -1,0 +1,10 @@
+router-outlet{
+    display: none;
+}
+
+main{
+    position: relative;
+}
+main > *{
+    display: block;
+}

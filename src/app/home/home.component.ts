@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/services/auth.service';
 import { Subscription } from 'rxjs';
+import AOS from 'aos';
+
 
 @Component({
   selector: 'app-home',
@@ -40,6 +42,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userSubcription = this.authService.user.subscribe((user) => {
+      AOS.init();
       this.isAuthenticated = !!user;
     });
   }

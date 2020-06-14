@@ -76,7 +76,7 @@
   </div>
 
 
-  <div class="row h-100 mx-5">
+  <div class="row h-100 mx-auto">
     <div class="col-8">
       <mat-label class="text" [hidden]="!editing">Edit Your Post</mat-label>
       <textarea class="mx-5" matInput [hidden]="!editing" [(ngModel)]="postBody"></textarea>
@@ -87,19 +87,19 @@
         send
       </span>
     </div>
-    <p class="lead py-2" [hidden]="editing">{{post.body}}</p>
+    <p class="lead  mx-5" [hidden]="editing">{{post.body}}</p>
   </div>
 
 
 
-  <div class="row h-100  mx-5 my-2" *ngIf="post.files.length > 0">
-    <div class="col-12">
+  <div class="row h-100  mx-auto my-2" *ngIf="post.files.length > 0">
+    <div class="col-12 mx-auto">
       <div *ngFor="let file of post.files">
         <div *ngIf="file.mime.startsWith('image')">
           <div class="row h-100">
-            <div class="col-6">
+            <div class="col-6 ">
               <!-- <img class="img-fluid my-3" src="{{file.url}}" alt="image"> -->
-              <app-photo [src]="file.url"></app-photo>
+              <app-photo class="mx-5" [src]="file.url"></app-photo>
             </div>
             <!-- <div class="col-6">
               <img class="img-fluid my-3" src="{{file.url}}" alt="image">
@@ -107,18 +107,18 @@
           </div>
         </div>
 
-        <div *ngIf="file.mime.startsWith('video')" class="m-2">
+        <div class="mx-5" *ngIf="file.mime.startsWith('video')" class="mx-5">
           <mat-video src="{{file.url}}" [preload]="true" [keyboard]="false" [showFrameByFrame]="true"
             [fullscreen]="true" [download]="true" color="accent" spinner="spin">
           </mat-video>
         </div>
-        <div *ngIf="file.mime.startsWith('audio')">
+        <div class="mx-5" *ngIf="file.mime.startsWith('audio')">
           <audio controls>
             <source src="{{file.url}}" type="{{file.mime}}">
             Your browser does not support the audio element.
           </audio>
         </div>
-        <div *ngIf="!(file.mime.startsWith('image') || file.mime.startsWith('video')|| file.mime.startsWith('audio')) ">
+        <div class="mx-5" *ngIf="!(file.mime.startsWith('image') || file.mime.startsWith('video')|| file.mime.startsWith('audio')) ">
           <a href="{{file.url}}" target="_self">{{file.name}}</a>
         </div>
       </div>

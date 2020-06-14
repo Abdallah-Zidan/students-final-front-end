@@ -7,8 +7,9 @@
     <div class="row h-100 m-3 justify-content-center">
       <h1 class="text-secondary"> Upcoming Events</h1>
     </div>
-      <app-single-event *ngFor="let post of posts" [post]="post" [group]="currentGroup" [resource]="resource"
-        [type]="0">
-      </app-single-event>
+    <div class="row">
+        <app-single-event class="col-xs-12 col-sm-12 col-md-6 col-lg-4 p-3" *ngFor="let post of posts" [post]="post" [group]="currentGroup" [resource]="resource" [type]="0">
+        </app-single-event>
+        </div>
   </div>
 </app-nav>

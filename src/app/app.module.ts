@@ -42,7 +42,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 
 import { MatMenuModule } from '@angular/material/menu';
@@ -98,7 +98,7 @@ import { MatTableModule } from '@angular/material/table';
 
 import { ToolsComponent } from './tools/tools.component';
 import { AddToolComponent } from './tools/add-tool/add-tool.component';
-import { ToolPostComponent,EditToolDialog,DeleteTool } from './tools/tool-post/tool-post.component';
+import { ToolPostComponent, EditToolDialog, DeleteTool } from './tools/tool-post/tool-post.component';
 import { ToolCommentsComponent } from './tools/tool-comments/tool-comments.component';
 import { SingletoolCommentComponent } from './tools/tool-comments/singletool-comment/singletool-comment.component';
 import { AdminToolsComponent } from './admin/admin-tools/admin-tools.component';
@@ -113,6 +113,8 @@ import { SingleQuestionComponent } from './questions-section/single-question/sin
 import { QuestionDetailsComponent,EditQuestionDialog,DeleteQuestion } from './questions-section/question-details/question-details.component';
 import { AnswerComponent } from './questions-section/question-details/answer/answer.component';
 import { QuestionTagsComponent } from './questions-section/question-tags/question-tags.component';
+import { SingleCompanyComponent } from './companies/single-company/single-company.component';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -188,6 +190,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DeleteQuestion,
     AddQuestionDialog,
     QuestionTagsComponent,
+    SingleCompanyComponent,
   ],
   imports: [
     BrowserModule,
@@ -229,8 +232,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
-    MatPaginatorModule
-
+    MatPaginatorModule,
   ],
 
   providers: [
