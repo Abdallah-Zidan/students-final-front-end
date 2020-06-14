@@ -96,13 +96,13 @@ const routes: Routes = [
     path: 'groups/:scope/:id',
     component: GroupComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: ['Student', 'Moderator', 'TeachingStaff'], depth: 9 },
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff']},
   },
   {
     path: 'groups',
     component: GroupComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: ['Student', 'Moderator', 'TeachingStaff'], depth: 10 },
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'events',
