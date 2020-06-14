@@ -27,4 +27,8 @@ export class AppComponent implements OnInit {
   hideSidebar() {
     this.sidebarservice.setSidebarState(true);
   }
+  getDepth(outlet){
+    // tslint:disable-next-line:no-string-literal
+    return outlet.activatedRouteData['depth'];
+  }
 }

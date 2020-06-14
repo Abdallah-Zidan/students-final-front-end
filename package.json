@@ -31,6 +31,7 @@
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
     "admin-lte": "^3.0.5",
     "angular2-notifications": "^9.0.0",
+    "aos": "^2.3.4",
     "bootstrap": "^4.5.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
@@ -46,6 +47,7 @@
     "pusher-js": "^6.0.3",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
+    "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
@@ -64,7 +66,7 @@
     "karma-jasmine": "~3.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "ngx-perfect-scrollbar": "^9.0.0",
-    "protractor": "~5.4.3",
+    "protractor": "^7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"

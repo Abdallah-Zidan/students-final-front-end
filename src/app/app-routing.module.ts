@@ -34,6 +34,7 @@ import { ToolsComponent } from './tools/tools.component';
 
 import { QuestionsSectionComponent } from './questions-section/questions-section.component';
 import { QuestionDetailsComponent } from './questions-section/question-details/question-details.component';
+import { SingleCompanyComponent } from './companies/single-company/single-company.component';
 
 
 const routes: Routes = [
@@ -182,7 +183,11 @@ const routes: Routes = [
     component: QuestionDetailsComponent,
     canActivate: [AuthGuard],
   },
-
+  {
+    path: 'company',
+    component: SingleCompanyComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: '**',
     component: NotFoundComponent,
