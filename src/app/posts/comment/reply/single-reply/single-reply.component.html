@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-2 my-auto text-center">
-    <img class="w-75 ava" src="../../../assets/images/avatar-exemple.jpg" alt="">
+    <img class="w-75 ava" src={{reply.creator.avatar}} alt="">
   </div>
   <div class="col-8  my-auto">
     <div class="col-12 px-0">
       <h5 class=" my-auto px-0 text">{{reply.creator.name}}</h5>
     </div>
-    
+
     <div class="col-12">
       <div class="row h-100">
         <span class="my-auto text-secondary material-icons">
@@ -16,8 +16,6 @@
       </div>
     </div>
   </div>
-  
-  
   <div class="col-2 my-auto" *ngIf="reply.creator.id == user.id">
     <div class="col-4 ml-auto">
 

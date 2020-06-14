@@ -69,6 +69,9 @@ export class SidebarComponent implements OnInit {
     return null;
   }
   getFacUniGroups(groupRoute) {
+    if (this.user.role === 4) {
+      return this.getAllSystemGroup(groupRoute);
+    }
     return this.getFacultygroups(groupRoute)
       .concat(this.getUniversitygroups(groupRoute))
       .concat(this.getAllSystemGroup(groupRoute));
@@ -116,27 +119,24 @@ export class SidebarComponent implements OnInit {
             submenus: this.getDepartmentgroups('groups'),
           }
         : null,
-      {
-        title: 'Faculty Groups',
-        icon: 'fa fa-university',
-        active: false,
-        type: 'dropdown',
-        submenus: this.getFacultygroups('groups'),
-      },
-      {
-        title: 'Faculty Announcement',
-        icon: 'fa fa-university',
-        active: false,
-        type: 'dropdown',
-        submenus: this.getFacultygroups('announcements'),
-      },
-      {
-        title: 'Uni. Announcement',
-        icon: 'fa fa-university',
-        active: false,
-        type: 'dropdown',
-        submenus: this.getUniversitygroups('announcements'),
-      },
+      [1, 2, 3].includes(this.user.role)
+        ? {
+            title: 'Faculty Groups',
+            icon: 'fa fa-university',
+            active: false,
+            type: 'dropdown',
+            submenus: this.getFacultygroups('groups'),
+          }
+        : null,
+      [1, 2, 3].includes(this.user.role)
+        ? {
+            title: 'Announcements',
+            icon: 'fa fa-university',
+            active: false,
+            type: 'dropdown',
+            submenus: this.getFacUniGroups('announcements'),
+          }
+        : null,
       {
         title: 'Events',
         icon: 'fa fa-calendar',
@@ -158,7 +158,7 @@ export class SidebarComponent implements OnInit {
         active: false,
         type: 'dropdown',
         submenus: this.getFacUniGroups('companies'),
-        typo: 4,
+        typo: 2,
       },
       {
         title: 'Job Offers',
@@ -166,7 +166,7 @@ export class SidebarComponent implements OnInit {
         active: false,
         type: 'dropdown',
         submenus: this.getFacUniGroups('companies'),
-        typo: 2,
+        typo: 4,
       },
       {
         title: 'Extra',

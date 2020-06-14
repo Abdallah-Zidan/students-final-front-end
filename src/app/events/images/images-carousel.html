@@ -1,8 +1,15 @@
-<ngb-carousel *ngIf="images">
-
+<ngb-carousel [interval]="2000" [pauseOnHover]="true" [showNavigationArrows]="showNavigationArrows"
+  [showNavigationIndicators]="showNavigationIndicators">
+  <ng-container *ngIf="images.length>0">
     <ng-template ngbSlide *ngFor="let image of images">
       <div class="picsum-img-wrapper">
         <img [src]="image" class="img-fluid">
       </div>
     </ng-template>
-  </ngb-carousel>
+  </ng-container>
+  <ng-template *ngIf="images.length<1" ngbSlide #default>
+    <div class="picsum-img-wrapper">
+      <img [src]="defaultImageUrl" class="img-fluid">
+    </div>
+  </ng-template>
+</ngb-carousel>

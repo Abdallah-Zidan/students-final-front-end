@@ -1,26 +1,25 @@
-
-  <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-title class="text-primary">{{group ? group.name : 'All system'}}</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image (click)="showModal(mymodal)" style="cursor: pointer;"
-      src="{{post.files ? post.files[0] && post.files[0].url :''}}" class="p-4">
-    <mat-card-content>
-      <div class="row d-100">
-        <div class="row  ml-auto">
-          <h6 class="text-primary my-auto d-inline">{{post.startDate}}</h6>
-          <span class="text-secondary   my-auto material-icons">
-            {{post.body}}
-          </span>
-        </div>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title class="text-primary">{{group ? group.name : 'All system'}}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image (click)="showModal(mymodal)" style="cursor: pointer;"
+    src="{{post.files ? post.files[0] ? post.files[0].url :defaultImageUrl:defaultImageUrl}}" class="p-4">
+  <mat-card-content>
+    <div class="row d-100">
+      <div class="row  ml-auto">
+        <h6 class="text-primary my-auto d-inline">{{post.startDate}}</h6>
+        <span class="text-secondary   my-auto material-icons">
+          {{post.body}}
+        </span>
       </div>
-      <h3 class="text-primary">{{post.title}}</h3>
-      <p class="text-secondary lead">
-        {{post.body}}
-      </p>
-      <button class="btn btn-primary my-2" (click)="showModal(mymodal)"> More info </button>
-    </mat-card-content>
-  </mat-card>
+    </div>
+    <h3 class="text-primary">{{post.title}}</h3>
+    <p class="text-secondary lead">
+      {{post.body.split(' ').splice(0,15).join(' ')+'...'}}
+    </p>
+    <button class="btn btn-primary my-2" (click)="showModal(mymodal)"> More info </button>
+  </mat-card-content>
+</mat-card>
 
 <!-- <button class="btn btn-lg btn-outline-primary" (click)="showModal(mymodal)">Open; My; Modal</button> -->
 
@@ -33,7 +32,7 @@
   </div>
 
   <div class="modal-body">
-    <app-images-carousel [files]="post.files"></app-images-carousel>
+    <app-images-carousel [files]="post.files" [defaultImageUrl]="defaultImageUrl"></app-images-carousel>
     <div>
       {{post.body}}
     </div>
@@ -57,19 +56,3 @@
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
   </div>
 </ng-template>
-
-<!-- 
-    <div; class="row w-75 h-100 mx-auto my-5">
-        <div class;="col-12">
-            <img class;="img-fluid"; src="{{post.files[0]}}"; alt="">
-                <h2 class;="text-primary my-3">{;{post.title;}}</h2>
-                <h4 class="lead text-secondary"> {;{post.body;}}</h4>
-        </div>
-    </div>
-    
-    
-    <div class="row w-75 h-100 mx-auto my-5">
-        <div class;="col-12">
-            <app-comment></app-comment>
-        </div>
-    </div> -->;

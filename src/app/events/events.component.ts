@@ -26,7 +26,6 @@ export class EventsComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private storage: StorageService
-
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +52,8 @@ export class EventsComponent implements OnInit, OnDestroy {
           this.router.navigate(['/events', 1, tmp]);
         }
         if (this.currentGroup) {
+          console.log(this.currentGroup);
+
           this.getPosts(
             'events',
             (+this.currentGroup.scope - 1).toString(),
@@ -72,5 +73,4 @@ export class EventsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  
 }

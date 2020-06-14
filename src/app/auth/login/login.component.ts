@@ -19,8 +19,12 @@ export class LoginComponent {
       this.authService.login(form.value.email, form.value.password).subscribe(
         (res) => {
           if (res) {
-            console.log(res);
-            this.router.navigate(['/']);
+            if (res.data.user.type === 'Admin') {
+              this.router.navigate(['admin']);
+            } else {
+              this.router.navigate(['/']);
+            }
+
             this.isLoading = false;
           }
         },

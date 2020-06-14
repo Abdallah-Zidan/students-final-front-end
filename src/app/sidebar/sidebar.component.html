@@ -35,7 +35,7 @@
 
         <ul>
           <ng-container *ngFor="let menu of menus">
-            <li *ngIf="menu != null"
+            <li *ngIf="(menu != null)"
               [ngClass]="{'active':  menu.active , 'sidebar-dropdown': menu.type === 'dropdown' , 'header-menu':menu.type === 'header'}">
               <span *ngIf="  menu.type === 'header'">{{menu.title}}</span>
               <a [routerLink]="menu.link" *ngIf="menu.type !== 'header'" (click)='toggle(menu)'  style="cursor: pointer;">
