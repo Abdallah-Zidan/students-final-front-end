@@ -108,25 +108,25 @@ const routes: Routes = [
     path: 'events',
     component: EventsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] , depth: 11 },
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff']},
   },
   {
     path: 'events/:scope/:id',
     component: EventsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] , depth: 12},
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff']},
   },
   {
     path: 'announcements',
     component: AnnouncementsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] , depth: 13},
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff']},
   },
   {
     path: 'announcements/:scope/:id',
     component: AnnouncementsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: ['Student', 'Moderator', 'TeachingStaff'], depth: 14 },
+    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] },
   },
   {
     path: 'companies',
@@ -138,7 +138,7 @@ const routes: Routes = [
     path: 'companies/:type/:scope/:id',
     component: CompaniesComponent,
     canActivate: [AuthGuard],
-    data: { depth: 16 }
+
   },
   {
     path: 'messages/:id',
@@ -183,7 +183,7 @@ const routes: Routes = [
     path: 'transportition',
     component: ToolsComponent,
     data: { type: '2', depth: 21 },
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
 
   {
