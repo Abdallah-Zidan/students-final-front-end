@@ -35,6 +35,7 @@ import { ToolsComponent } from './tools/tools.component';
 import { QuestionsSectionComponent } from './questions-section/questions-section.component';
 import { QuestionDetailsComponent } from './questions-section/question-details/question-details.component';
 import { SingleCompanyComponent } from './companies/single-company/single-company.component';
+import { VerificationSuccessComponent } from './auth/register/verification-success/verification-success.component';
 
 
 const routes: Routes = [
@@ -62,6 +63,13 @@ const routes: Routes = [
   {
     path: 'email/verify',
     component: EmailVerificationComponent,
+    canActivate: [RedirectGuard],
+    data: { depth: 4 }
+  },
+
+  {
+    path: 'email/verify/success',
+    component: VerificationSuccessComponent,
     canActivate: [RedirectGuard],
     data: { depth: 4 }
   },

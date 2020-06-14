@@ -114,6 +114,7 @@ import { QuestionDetailsComponent,EditQuestionDialog,DeleteQuestion } from './qu
 import { AnswerComponent } from './questions-section/question-details/answer/answer.component';
 import { QuestionTagsComponent } from './questions-section/question-tags/question-tags.component';
 import { SingleCompanyComponent } from './companies/single-company/single-company.component';
+import { VerificationSuccessComponent } from './auth/register/verification-success/verification-success.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -191,6 +192,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AddQuestionDialog,
     QuestionTagsComponent,
     SingleCompanyComponent,
+    VerificationSuccessComponent,
   ],
   imports: [
     BrowserModule,
