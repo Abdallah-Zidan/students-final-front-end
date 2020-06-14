@@ -12,6 +12,7 @@ import { StorageService } from '../services/storage.service';
 import { AuthService } from '../auth/services/auth.service';
 import { GroupsService } from '../services/groups.service';
 import { Group } from '../shared/models/group.model';
+import { ToolsComponent } from '../tools/tools.component';
 
 // import { MenusService } from './menus.service';
 
@@ -173,13 +174,36 @@ export class SidebarComponent implements OnInit {
       },
       {
         title: 'Tools Sharing',
-        icon: 'fa fa-book',
+        icon: 'fa fa-handshake-o',
         active: false,
         type: 'simple',
         badge: {
           text: 'Beta',
           class: 'badge-primary',
         },
+        link:'/tools',
+      },
+      {
+        title: 'Sharing Habitations',
+        icon: 'fa fa-home',
+        active: false,
+        type: 'simple',
+        badge: {
+          text: 'Beta',
+          class: 'badge-primary',
+        },
+        link:'/transportition',
+      },
+      {
+        title: 'Questions',
+        icon: 'fa fa-question',
+        active: false,
+        type: 'simple',
+        badge: {
+          text: 'Beta',
+          class: 'badge-primary',
+        },
+        link:'/questions',
       },
       {
         title: 'Calendar',
