@@ -6484,6 +6484,13 @@ ng2-modal-module@^1.0.1:
     tslib "^1.9.0"
     xdom-util ">=0.0.1"
 
+ngx-audio-player@^9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/ngx-audio-player/-/ngx-audio-player-9.1.0.tgz#685c470da7d594803015183f2172cb70e380a872"
+  integrity sha512-Q4jMCejzSqUxqzZe9EJpacf6cZz1FP57RELuXceEeIczRBjWGuK5aHyk2EysesaTfu4h+m+4lcMNLdTPRk+ljg==
+  dependencies:
+    tslib "^1.10.0"
+
 ngx-bootstrap@^5.6.1:
   version "5.6.1"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-5.6.1.tgz#c37643247441f9d421bca2cd7d7de1d0445e903f"

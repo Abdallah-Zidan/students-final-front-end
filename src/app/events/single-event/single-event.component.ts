@@ -19,6 +19,7 @@ export class SingleEventComponent implements OnInit {
   comment = '';
   postBody;
   closeResult: string;
+  defaultImageUrl = '../../../assets/images/default-event.jpg';
   constructor(
     private postsService: PostsService,
     private storage: StorageService,
@@ -63,7 +64,12 @@ export class SingleEventComponent implements OnInit {
 
   showModal(myModal) {
     this.modalService
-      .open(myModal, { ariaLabelledBy: 'modal-basic-title', centered: true ,  size: 'lg' ,scrollable:true })
+      .open(myModal, {
+        ariaLabelledBy: 'modal-basic-title',
+        centered: true,
+        size: 'lg',
+        scrollable: true,
+      })
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;

@@ -7,7 +7,7 @@
 </div>
 <ng-template #mymodal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Launch new event</h4>
+    <h4 class="modal-title" id="modal-basic-title">New {{tipo[type]}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">×</span>
     </button>
@@ -22,26 +22,16 @@
           <input type="text" name="title" [(ngModel)]="title" class="form-control" placeholder="title" value="" />
         </div>
 
-        <div class="form-group">
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" name="start" [(ngModel)]="startDate" ngbDatepicker
-              #d="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"><i
-                  class="fa fa-calendar"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" name="end" [(ngModel)]="endDate" ngbDatepicker
-              #d2="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"><i
-                  class="fa fa-calendar"></i></button>
-            </div>
-          </div>
-        </div>
+        <select class="custom-select mb-3" (change)="onChangeUniversity($event)">
+          <option selected value="-1">Select University </option>
+          <option *ngFor="let university of universities ; let i =index" value="{{i}}">{{university.name}}</option>
+
+        </select>
+        <select class="custom-select mb-3" (change)="onChangeFaculty($event)">
+          <option selected value="-1">Select Faculy </option>
+          <option *ngFor="let faculty of faculties ; let i = index" value="{{i}}">{{faculty.name}}</option>
+        </select>
+
         <div class="row w-100 mx-auto">
           <button mat-raised-button color="primary" class="btn-block" (click)="add()"> {{addOrRemove}}</button>
         </div>
@@ -54,8 +44,7 @@
             style="width: 100%; height: 150px;"></textarea>
         </div>
         <div class="form-group">
-          <button [disabled]="!(title && body)" mat-raised-button color="accent" (click)="onAddPost()">Start
-            Event</button>
+          <button [disabled]="!(body && title)" mat-raised-button color="accent" (click)="onAddPost()">Publish</button>
         </div>
       </div>
     </div>

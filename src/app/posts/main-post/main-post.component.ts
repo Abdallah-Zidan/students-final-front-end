@@ -1,4 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+} from '@angular/core';
 import { Post } from 'src/app/education/models/post.model';
 import { Group } from 'src/app/shared/models/group.model';
 import { PostsService } from 'src/app/education/services/posts.service';
@@ -18,6 +22,10 @@ export class MainPostComponent implements OnInit {
   user: User;
   comment = '';
   postBody;
+  msbapTitle = 'Audio Title';
+  msbapAudioUrl = 'Link to audio URL';
+  msbapDisplayTitle = false;
+  msbapDisplayVolumeControls = true;
   constructor(
     private postsService: PostsService,
     private storage: StorageService,

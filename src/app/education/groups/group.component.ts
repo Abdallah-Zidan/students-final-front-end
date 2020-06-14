@@ -17,7 +17,7 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
     private groupsService: GroupsService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
   facultyGroups = this.postsService.facultyGroups;
   departmentGroups = this.postsService.departmentGroups;
   posts: Post[] = [];
@@ -29,7 +29,6 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
     this.subscription = this.postsService.posts.subscribe((posts) => {
       this.posts = posts;
     });
-
 
     this.activatedRoute.params.subscribe((map) => {
       const key1 = 'id';
@@ -45,6 +44,7 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
       if (id && scope) {
         this.currentGroup = this.groupsService.getGroup(id, scope);
       } else {
+        this.currentGroup = tmp;
         this.router.navigate(['/groups', tmp.scope, tmp.id]);
       }
       if (this.currentGroup) {
@@ -55,6 +55,7 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
           1
         );
       } else {
+        this.currentGroup = tmp;
         this.router.navigate(['/groups', tmp.scope, tmp.id]);
       }
     });

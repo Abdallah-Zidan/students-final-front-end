@@ -1,22 +1,22 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Group } from 'src/app/shared/models/group.model';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
 import { User } from 'src/app/auth/user.model';
+import { Group } from 'src/app/shared/models/group.model';
 import { StorageService } from 'src/app/services/storage.service';
 import { PostsService } from 'src/app/education/services/posts.service';
 import { NotificationsService } from 'angular2-notifications';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { HttpService } from 'src/app/services/http.service';
+import { Subscription } from 'rxjs';
+
 @Component({
-  selector: 'app-add-event',
-  templateUrl: './add-event.component.html',
-  styleUrls: ['./add-event.component.scss'],
+  selector: 'app-add-company-event',
+  templateUrl: './add-company-event.component.html',
+  styleUrls: ['./add-company-event.component.scss'],
 })
-export class AddEventComponent implements OnInit {
+export class AddCompanyEventComponent implements OnInit, OnDestroy {
   user: User;
   body: string;
   title: string;
-  startDate: string;
-  endDate: string;
-  @Input() group: Group;
   @Input() resource: string;
   @Input() type: number;
   isEmpty = true;
@@ -25,6 +25,16 @@ export class AddEventComponent implements OnInit {
   addOrRemove = 'Add File(s)';
   closeResult: string;
   @ViewChild('form') formModal;
+  universities: any[] = [];
+  currentUniversity = null;
+  currentFaculty = null;
+  faculties: any[] = [];
+  subscription: Subscription;
+  tipo = {
+    1: 'training',
+    2: 'internship',
+    4: 'job offer',
+  };
   onCommenting($event) {
     if ($event.target.value) {
       this.isEmpty = false;
@@ -37,24 +47,34 @@ export class AddEventComponent implements OnInit {
     private storage: StorageService,
     private postsService: PostsService,
     private service: NotificationsService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private httpService: HttpService
   ) {}
 
   ngOnInit(): void {
     this.user = this.storage.getUser('user');
-    if (this.group) {
-      this.group.scope = (+this.group.scope - 1).toString();
-    }
+    this.subscription = this.httpService.getUniversites().subscribe((res) => {
+      this.universities = res.data.universities;
+    });
   }
   onAddPost() {
+    let scope;
+    let id;
     const formData = new FormData();
     formData.append('body', this.body);
     if (this.title) {
       formData.append('title', this.title);
     }
-    if (this.group) {
-      formData.append('group', this.group.scope);
-      formData.append('group_id', this.group.id);
+    if (this.currentUniversity) {
+      if (this.currentFaculty) {
+        scope = '0';
+        id = this.currentFaculty.id;
+      } else {
+        scope = '1';
+        id = this.currentUniversity.id;
+      }
+      formData.append('group', scope);
+      formData.append('group_id', id);
     } else {
       formData.append('group', '2');
     }
@@ -66,8 +86,6 @@ export class AddEventComponent implements OnInit {
 
     this.postsService.addPost(this.resource, formData).subscribe((res) => {
       if (res.data) {
-        console.log(res);
-
         this.body = '';
         this.title = '';
         this.selectedFiles = [];
@@ -122,5 +140,26 @@ export class AddEventComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+  onChangeUniversity(event) {
+    const index = +event.target.value;
+    if (index !== -1) {
+      this.currentUniversity = this.universities[index];
+      this.faculties = this.currentUniversity.faculties;
+    } else {
+      this.currentUniversity = null;
+      this.faculties = [];
+    }
+  }
+  onChangeFaculty(event) {
+    const index = event.target.value;
+    if (index !== -1) {
+      if (this.currentUniversity) {
+        this.currentFaculty = this.currentUniversity.faculties[index];
+      }
+    }
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
