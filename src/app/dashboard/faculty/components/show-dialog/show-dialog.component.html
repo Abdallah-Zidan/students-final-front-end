@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Show faculty</h2>
+<mat-dialog-content class="mat-typography">
+	<form>
+		<mat-form-field class="w-100">
+			<mat-label>Id</mat-label>
+			<input matInput value="{{ faculty.id }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Name</mat-label>
+			<input matInput value="{{ faculty.name }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>University</mat-label>
+			<input matInput value="{{ faculty.university.name }}" readonly>
+		</mat-form-field>
+
+		<mat-expansion-panel class="mb-1" *ngIf="faculty.departments && faculty.departments.length > 0">
+			<mat-expansion-panel-header>
+				<mat-panel-title>Departments</mat-panel-title>
+			</mat-expansion-panel-header>
+			<mat-nav-list>
+				<h4 class="m-0" mat-list-item *ngFor="let department of faculty.departments">{{ department.name }}</h4>
+			</mat-nav-list>
+		</mat-expansion-panel>
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>

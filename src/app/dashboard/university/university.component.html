@@ -1,0 +1,28 @@
+<div class="mat-elevation-z8">
+	<div class="row mx-2">
+		<h3 class="text-secondary my-3">Universities Section</h3>
+		<button class="ml-auto my-3" mat-raised-button color="primary" (click)="openAddDialog()">Add University</button>
+	</div>
+
+	<table mat-table [dataSource]="dataSource">
+		<ng-container matColumnDef="id">
+			<th mat-header-cell *matHeaderCellDef>No.</th>
+			<td mat-cell *matCellDef="let element">{{ element.id }}</td>
+		</ng-container>
+		<ng-container matColumnDef="name">
+			<th mat-header-cell *matHeaderCellDef>Name</th>
+			<td mat-cell *matCellDef="let element"><a href="" (click)="$event.preventDefault(); openShowDialog(element)">{{ element.name }}</a></td>
+		</ng-container>
+		<ng-container matColumnDef="options">
+			<th mat-header-cell *matHeaderCellDef>Options</th>
+			<td mat-cell *matCellDef="let element">
+				<button class="mr-1" mat-raised-button color="accent" (click)="openEditDialog(element)">Edit</button>
+				<button mat-raised-button color="warn" (click)="openDeleteDialog(element)">Delete</button>
+			</td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+	</table>
+	<mat-paginator showFirstLastButtons [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)"></mat-paginator>
+</div>

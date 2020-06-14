@@ -17,19 +17,8 @@ import { AnnouncementsComponent } from './education/announcements/announcements.
 import { CompaniesComponent } from './companies/companies.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ChatComponent } from './chat/chat.component';
-import { AdminComponent } from './admin/admin.component';
 import { AuthorizedGuard } from './auth/services/authorized.guard';
-import { UniversitiesComponent } from './admin/universities/universities.component';
-import { FacultiesComponent } from './admin/faculties/faculties.component';
-import { DepartmentsComponent } from './admin/departments/departments.component';
-import { CoursesComponent } from './admin/courses/courses.component';
-import { UsersComponent } from './admin/users/users.component';
-import { TagsComponent } from './admin/tags/tags.component';
-import { AdminPostsComponent } from './admin/admin-posts/admin-posts.component';
-import { AdminEventsComponent } from './admin/admin-events/admin-events.component';
 import { from } from 'rxjs';
-import { QuestionsComponent } from './admin/questions/questions.component';
-import { AdminToolsComponent } from './admin/admin-tools/admin-tools.component';
 import { ToolsComponent } from './tools/tools.component';
 
 import { QuestionsSectionComponent } from './questions-section/questions-section.component';
@@ -161,8 +150,8 @@ const routes: Routes = [
     data: { depth: 18 }
   },
   {
-    path: 'admin',
-    component: AdminComponent,
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AuthGuard, AuthorizedGuard],
     runGuardsAndResolvers: 'always',
     data: { roles: [0, 3] , depth: 19 },
