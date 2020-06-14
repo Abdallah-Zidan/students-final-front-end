@@ -24,20 +24,20 @@
           <div class="row">
   
             <div class="col-lg-4 col-md-4 col-4">
-                <button  class="active btn btn-link"><strong>Recent</strong></button>
+                <button  class="btn btn-link" (click)="showRecent()" [ngClass]="{ 'active ': recent}"><strong>Recent</strong></button>
             </div>
   
             <div class="col-lg-4 col-md-4 col-4">
-                <button  class="btn btn-link"><strong>Tags</strong></button>
+                <button  class="btn btn-link" (click)="showTags()" [ngClass]="{ 'active ': !recent}"><strong>Tags</strong></button>
             </div>
   
-            <div class="col-lg-4 col-md-4 col-4">
+            <div class="col-lg-4 col-md-4 col-4" *ngIf="recent">
                 <div class="container h-100">
                     <div class=" justify-content-center h-100">
                           <div class="searchbar">
-                              <input class="search_input" type="text" name="" placeholder="Search..." >
-                              <a class="search_icon"><i class="fas fa-search"></i></a>
-                              <!-- <div class="text-center" style="margin-top: 25px;"><strong class="alert alert-danger" ></strong></div> -->
+                              <input class="search_input" type="text" name="" placeholder="Search..." [(ngModel)]="SearchTag">
+                              <a class="search_icon" (click)="search()"><i class="fas fa-search"></i></a>
+                              <div class="text-center" *ngIf="response!=null" style="margin-top: 25px;"><strong class="alert alert-danger" >{{response}}</strong></div>
                           </div>
                     </div>
                 </div>
@@ -45,7 +45,11 @@
           </div>
         </div>
     </section>
-
+    <div *ngIf="recent">
     <app-single-question *ngFor="let question of QuestionsList" [question]="question"></app-single-question>
-
+    </div>
+    <div *ngIf="!recent">
+    <app-question-tags [choosing]="false" [questionTags]="questionTags"></app-question-tags>
+</div>
+   
 </app-nav>

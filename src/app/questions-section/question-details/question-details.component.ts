@@ -64,7 +64,6 @@ this.httpService.requestTags(1).subscribe(
       result =>{
           this.result=result;
           this.questionTags=this.result.data.tags
-          console.log(this.questionTags)
         },
       error=>{
           console.log(error);

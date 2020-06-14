@@ -22,10 +22,11 @@ export class QuestionsSectionComponent implements OnInit {
   ) { }
 
   QuestionsList;questionTags;TempQuestions;
-  SearchList;SearchTag;response=null;
+  SearchTag;response=null;
   user;result;
   tags:Array<string> = [];
   title;body;
+  recent=true;
 
   ngOnInit(): void {
     this.httpService.requestQuestions(null).subscribe(
@@ -96,27 +97,42 @@ export class QuestionsSectionComponent implements OnInit {
 
 
 search(){
-  if(this.SearchTag==null)
-  {
-    this.response="Please insert tag"
-          setTimeout(() => {
-            this.response = null;
-          }, 4000);
+    if(this.SearchTag==null)
+    {
+      this.response="Please insert tag"
+            setTimeout(() => {
+              this.response = null;
+            }, 3000);
+    }
+    else
+    { 
+      this.httpService.requestQuestions(this.SearchTag).subscribe(
+        res=>{
+              this.TempQuestions=res;
+              if(this.TempQuestions.data.questions.length>0)
+              {
+                this.getTagsNames(this.TempQuestions.data.questions);
+                this.QuestionsList=this.TempQuestions.data.questions;
+              }
+              else{
+                this.response="Not Found"
+                setTimeout(() => {
+                  this.response = null;
+                }, 4000);
+              }
+             },
+             err=>{console.log(err)}
+            )
+    }
+      this.SearchTag=null;
   }
-  else
-  { 
-        if(this.SearchList.data.tools.length>0)
-        {   
-        }
-        else{
-          this.response="Not Found"
-          setTimeout(() => {
-            this.response = null;
-          }, 4000);
-        }
-         
+
+  showRecent(){
+    this.questionService.QuestionsList.subscribe(res=>this.QuestionsList=res);
+    this.recent=true;
   }
-    this.SearchTag=null;
+  showTags(){
+    this.recent=false;
   }
 }
 

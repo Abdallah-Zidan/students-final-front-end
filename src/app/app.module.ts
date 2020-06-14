@@ -112,6 +112,7 @@ import { QuestionsSectionComponent,AddQuestionDialog } from './questions-section
 import { SingleQuestionComponent } from './questions-section/single-question/single-question.component';
 import { QuestionDetailsComponent,EditQuestionDialog,DeleteQuestion } from './questions-section/question-details/question-details.component';
 import { AnswerComponent } from './questions-section/question-details/answer/answer.component';
+import { QuestionTagsComponent } from './questions-section/question-tags/question-tags.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -186,6 +187,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EditQuestionDialog,
     DeleteQuestion,
     AddQuestionDialog,
+    QuestionTagsComponent,
   ],
   imports: [
     BrowserModule,

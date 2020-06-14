@@ -8,13 +8,20 @@ import { BehaviorSubject } from 'rxjs';
 export class QuestionService {
 
   private questionSub = new BehaviorSubject<any>(null);
+  private questionSearch = new BehaviorSubject<any>(null);
+
   QuestionsList = this.questionSub.asObservable();
+  SearchList = this.questionSearch.asObservable();
 
 
   constructor() { }
   question;
   setQuestions(questions) {
     this.questionSub.next(questions)
+  }
+
+  setSearchQuestions(questions) {
+    this.questionSearch.next(questions)
   }
 
   addQuestion(result,user,title,body,tags){

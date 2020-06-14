@@ -20,7 +20,6 @@ export class SingleQuestionComponent implements OnInit {
   @Input() question;
 
   ngOnInit(): void {
-    console.log(this.question)
   }
   
 }
