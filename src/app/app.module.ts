@@ -110,12 +110,20 @@ import { AddAnnouncementComponent } from './education/announcements/add-announce
 
 import { ToolReplyComponent } from './tools/tool-comments/singletool-comment/tool-reply/tool-reply.component';
 import { ToolSingleReplyComponent } from './tools/tool-comments/singletool-comment/tool-reply/tool-single-reply/tool-single-reply.component';
-import { QuestionsSectionComponent } from './questions-section/questions-section.component';
+import {
+  QuestionsSectionComponent,
+  AddQuestionDialog,
+} from './questions-section/questions-section.component';
 import { SingleQuestionComponent } from './questions-section/single-question/single-question.component';
-import { QuestionDetailsComponent } from './questions-section/question-details/question-details.component';
 import { AddCompanyEventComponent } from './companies/add-company-event/add-company-event.component';
+import {
+  QuestionDetailsComponent,
+  EditQuestionDialog,
+  DeleteQuestion,
+} from './questions-section/question-details/question-details.component';
+import { AnswerComponent } from './questions-section/question-details/answer/answer.component';
+import { QuestionTagsComponent } from './questions-section/question-tags/question-tags.component';
 import { SingleCompanyComponent } from './companies/single-company/single-company.component';
-
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -187,6 +195,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     QuestionDetailsComponent,
     AddAnnouncementComponent,
     AddCompanyEventComponent,
+    AnswerComponent,
+    EditQuestionDialog,
+    DeleteQuestion,
+    AddQuestionDialog,
+    QuestionTagsComponent,
     SingleCompanyComponent,
   ],
   imports: [

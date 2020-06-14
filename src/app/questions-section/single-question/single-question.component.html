@@ -13,30 +13,10 @@
       <div class="col-10 px-3 my-auto">
         <div class="row h-100 mx-5">
 
-                <div class="col-10 ">
+                <div class="col-12 ">
                     <a [routerLink]="['/questions', question.id]"><h3>{{question.title}}</h3></a>
                 </div>
 
-                <div class="col-2">
-                    <div class="col-4" *ngIf="(question.user.id != user.id)">
-                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                        <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #menu="matMenu" xPosition="before">
-                        <div>
-                        <button mat-menu-item >
-                            <mat-icon>create</mat-icon>
-                            <span>Edit Question</span>
-                        </button>
-                        <button  mat-menu-item >
-                            <mat-icon>delete_sweep</mat-icon>
-                            <span>Delete Question</span>
-                        </button>
-            
-                        </div>
-                    </mat-menu>
-                    </div>
-                </div>
         </div>
 
         <div class="row h-100 mx-5">
@@ -57,26 +37,5 @@
   
     </div>
  
-    
-    
   
-  
-  
-  <!-- <div class="row h-100 mx-5">
-    <div class="col-10 my-auto">
-      <mat-form-field class="example-full-width px-5">
-        <mat-label>Leave a comment</mat-label>
-        <textarea [(ngModel)]="CommentBody" rows="3" matInput 
-          placeholder="Ex. It makes me feel..."></textarea>
-      </mat-form-field>
-    </div>
-    <div *ngIf="!question.closed" class="col-2 my-auto">
-      <button class="btn btn-primary material-icons" [disabled]="!CommentBody" (click)="addComment()">
-        <span>send</span>
-      </button>
-    </div>
-  </div>
-  
-  
-    <app-question-comments [comments]="question.comments" [question]="question"></app-question-comments> -->
   </div>
