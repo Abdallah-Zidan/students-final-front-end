@@ -155,20 +155,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, AuthorizedGuard],
     runGuardsAndResolvers: 'always',
     data: { roles: [0, 3] , depth: 19 },
-    children: [
-      { path: 'faculties', component: FacultiesComponent, canActivate: [AuthorizedGuard], data: { roles: ['Admin'] }, },
-      { path: 'universities', component: UniversitiesComponent },
-      { path: 'departments', component: DepartmentsComponent },
-      { path: 'courses', component: CoursesComponent },
-      { path: 'users', component: UsersComponent },
-      { path: 'tags', component: TagsComponent },
-      { path: 'posts', component: AdminPostsComponent },
-      { path: 'events', component: AdminEventsComponent },
-      { path: 'questions', component: QuestionsComponent },
-      { path: 'tools', component: AdminToolsComponent },
-    ],
   },
-
   {
     path: 'tools',
     component: ToolsComponent,
