@@ -5,6 +5,7 @@ import { GroupsService } from 'src/app/services/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from 'src/app/shared/models/group.model';
 import { Subscription } from 'rxjs';
+import { trigger, transition, state, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-group',

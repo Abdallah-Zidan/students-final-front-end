@@ -114,6 +114,9 @@ import { QuestionsSectionComponent } from './questions-section/questions-section
 import { SingleQuestionComponent } from './questions-section/single-question/single-question.component';
 import { QuestionDetailsComponent } from './questions-section/question-details/question-details.component';
 import { AddCompanyEventComponent } from './companies/add-company-event/add-company-event.component';
+import { SingleCompanyComponent } from './companies/single-company/single-company.component';
+
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -184,6 +187,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     QuestionDetailsComponent,
     AddAnnouncementComponent,
     AddCompanyEventComponent,
+    SingleCompanyComponent,
   ],
   imports: [
     BrowserModule,
