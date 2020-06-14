@@ -96,37 +96,37 @@ const routes: Routes = [
     path: 'groups/:scope/:id',
     component: GroupComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: ['Student', 'Moderator', 'TeachingStaff'], depth: 9 },
+    data: { roles: [1, 2, 3]},
   },
   {
     path: 'groups',
     component: GroupComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: ['Student', 'Moderator', 'TeachingStaff'], depth: 10 },
+    data: { roles: [1,2,3] },
   },
   {
     path: 'events',
     component: EventsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] , depth: 11 },
+    data: { roles: [1,2,3]},
   },
   {
     path: 'events/:scope/:id',
     component: EventsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] , depth: 12},
+    data: { roles: [1,2,3]},
   },
   {
     path: 'announcements',
     component: AnnouncementsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: ['Student', 'Moderator', 'TeachingStaff'] , depth: 13},
+    data: { roles: [1,2,3]},
   },
   {
     path: 'announcements/:scope/:id',
     component: AnnouncementsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: ['Student', 'Moderator', 'TeachingStaff'], depth: 14 },
+    data: { roles: [1,2,3] },
   },
   {
     path: 'companies',
@@ -138,7 +138,7 @@ const routes: Routes = [
     path: 'companies/:type/:scope/:id',
     component: CompaniesComponent,
     canActivate: [AuthGuard],
-    data: { depth: 16 }
+
   },
   {
     path: 'messages/:id',
@@ -157,7 +157,7 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
     runGuardsAndResolvers: 'always',
-    data: { roles: ['Moderator', 'Admin'] , depth: 19 },
+    data: { roles: [0, 3] , depth: 19 },
     children: [
       { path: 'faculties', component: FacultiesComponent, canActivate: [AuthorizedGuard], data: { roles: ['Admin'] }, },
       { path: 'universities', component: UniversitiesComponent },
@@ -183,7 +183,7 @@ const routes: Routes = [
     path: 'transportition',
     component: ToolsComponent,
     data: { type: '2', depth: 21 },
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
 
   {

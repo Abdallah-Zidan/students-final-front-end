@@ -29,8 +29,11 @@ export class AuthorizedGuard implements CanActivate {
     return this.authService.user.pipe(
       take(1),
       map((user) => {
-        if (route.data.roles.includes(user.personalData.type)) {
+        if (route.data.roles.includes(user.role)) {
           return true;
+        }
+        if (user.role === 0) {
+          return this.router.createUrlTree(['admin']);
         }
         return this.router.createUrlTree(['/']);
       })

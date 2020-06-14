@@ -129,20 +129,11 @@ export class SidebarComponent implements OnInit {
         : null,
       [1, 2, 3].includes(this.user.role)
         ? {
-            title: 'Faculty Announcement',
+            title: 'Announcements',
             icon: 'fa fa-university',
             active: false,
             type: 'dropdown',
-            submenus: this.getFacultygroups('announcements'),
-          }
-        : null,
-      [1, 2, 3].includes(this.user.role)
-        ? {
-            title: 'Uni. Announcement',
-            icon: 'fa fa-university',
-            active: false,
-            type: 'dropdown',
-            submenus: this.getUniversitygroups('announcements'),
+            submenus: this.getFacUniGroups('announcements'),
           }
         : null,
       {

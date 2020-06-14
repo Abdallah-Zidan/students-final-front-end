@@ -13,7 +13,7 @@
       <li class=" nav-item">
         <a class=" nav-link" routerLink="/">Home</a>
       </li>
-      <ng-container *ngIf="isAuthenticated">
+      <ng-container *ngIf="(isAuthenticated && user.role!=0); else admin">
         <li class=" nav-item">
           <a class=" nav-link" routerLink="/groups">Groups</a>
         </li>
@@ -33,6 +33,11 @@
           <a class="nav-link" routerLink="/transportition">Sharing Habitations</a>
         </li>
       </ng-container>
+      <ng-template #admin>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin">Dashboard</a>
+        </li>
+      </ng-template>
 
       <li class="nav-item">
 
@@ -71,20 +76,10 @@
 </div>
 
 <div class="mx-auto my-5 text-center">
-  <h1 
-  data-aos="fade-up" data-aos-delay="50"
-  data-aos-duration="1000"
-  data-aos-easing="ease-in-out"
-  data-aos-mirror="true"
-  data-aos-once="false"
-  class="txt text-primary">Student's</h1>
-  <h2 data-aos="fade-right"
-  data-aos-delay="50"
-    data-aos-duration="1000"
-    data-aos-easing="ease-in-out"
-    data-aos-mirror="true"
-    data-aos-once="false"
-     class="txt text-secondary">Features</h2>
+  <h1 data-aos="fade-up" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out"
+    data-aos-mirror="true" data-aos-once="false" class="txt text-primary">Student's</h1>
+  <h2 data-aos="fade-right" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out"
+    data-aos-mirror="true" data-aos-once="false" class="txt text-secondary">Features</h2>
 </div>
 
 <ngb-carousel interval="2000">
@@ -121,34 +116,19 @@
 
 
 <div class="mx-auto my-5 text-center">
-  <h1 data-aos="fade-up" 
-  data-aos-delay="50"
-    data-aos-duration="1000"
-    data-aos-easing="ease-in-out"
-    data-aos-mirror="true"
-    data-aos-once="false"
-    data-aos-anchor-placement="top-center"
-    class="txt text-primary">Student's</h1>
+  <h1 data-aos="fade-up" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out"
+    data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center" class="txt text-primary">
+    Student's</h1>
 
-  <h2 data-aos="fade-right"
-  data-aos-delay="50"
-    data-aos-duration="1000"
-    data-aos-easing="ease-in-out"
-    data-aos-mirror="true"
-    data-aos-once="false"
-    data-aos-anchor-placement="top-center"
-     class="txt text-secondary">Connecting Us</h2>
+  <h2 data-aos="fade-right" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out"
+    data-aos-mirror="true" data-aos-once="false" data-aos-anchor-placement="top-center" class="txt text-secondary">
+    Connecting Us</h2>
 </div>
 
-<section >
-    <img 
-    data-aos="flip-left"
-    data-aos-delay="50"
-    data-aos-duration="1000"
-    data-aos-easing="ease-in-out"
-    data-aos-mirror="true"
-    data-aos-once="false"
-    class="mt-5 img-fluid w-100" src="../../assets/images/assets/hero.jpg" alt="">
+<section>
+  <img data-aos="flip-left" data-aos-delay="50" data-aos-duration="1000" data-aos-easing="ease-in-out"
+    data-aos-mirror="true" data-aos-once="false" class="mt-5 img-fluid w-100" src="../../assets/images/assets/hero.jpg"
+    alt="">
 </section>
 
 

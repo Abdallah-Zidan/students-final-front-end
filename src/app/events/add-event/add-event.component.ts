@@ -49,9 +49,7 @@ export class AddEventComponent implements OnInit {
   onAddPost() {
     const formData = new FormData();
     formData.append('body', this.body);
-    if (this.title) {
-      formData.append('title', this.title);
-    }
+    formData.append('title', this.title);
     if (this.group) {
       formData.append('group', this.group.scope);
       formData.append('group_id', this.group.id);

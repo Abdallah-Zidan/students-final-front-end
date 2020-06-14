@@ -24,6 +24,8 @@ const getResourceUrlGet = (
       ? url.replace('&type={type}', '')
       : url.replace('?type={type}', '');
   }
+  console.log(url);
+
   return url;
 };
 const getResourcesUrl = (
