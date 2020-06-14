@@ -5,3 +5,6 @@ router-outlet{
 main{
     position: relative;
 }
+main > *{
+    display: block;
+}

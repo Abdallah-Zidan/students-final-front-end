@@ -1,4 +1,6 @@
-
-<router-outlet></router-outlet>
+<!-- <app-posts></app-posts> -->
+<div [@routeAnimation] = "getDepth(myoutlet)">
+    <router-outlet #myoutlet = "outlet" ></router-outlet>
+</div>
    
 
