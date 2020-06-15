@@ -14,6 +14,7 @@ import { ElementCreator } from '../../shared/models/creator.model';
 import { PostComment } from '../../shared/models/comment.model';
 import { CommentReply } from '../../shared/models/reply.model';
 import { tap } from 'rxjs/operators';
+import { CoursesService } from 'src/app/courses-section/services/courses.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -25,7 +26,7 @@ export class PostsService {
 
   constructor(
     private httpService: HttpService,
-    private storage: StorageService
+    private storage: StorageService,
   ) {}
 
   getPosts(resource, scope, scopeId, type, page) {
@@ -160,6 +161,7 @@ export class PostsService {
         console.log(res);
         element.comments.splice(commentIndex, 1);
         this.postsArr[index] = element;
+        console.log("here");
         this.posts.next(this.postsArr);
       });
   }
@@ -194,4 +196,6 @@ export class PostsService {
       this.posts.next(this.postsArr);
     });
   }
+
+  
 }

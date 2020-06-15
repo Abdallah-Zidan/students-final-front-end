@@ -112,8 +112,14 @@ import { QuestionsSectionComponent } from './questions-section/questions-section
 import { SingleQuestionComponent } from './questions-section/single-question/single-question.component';
 import { QuestionDetailsComponent } from './questions-section/question-details/question-details.component';
 import { SingleCompanyComponent } from './companies/single-company/single-company.component';
-
-
+import { CoursesSectionComponent } from './courses-section/courses-section.component';
+import { AddCourseComponent } from './courses-section/add-course/add-course.component';
+import { MainCourseComponent } from './courses-section/main-course/main-course.component';
+import { CourseCommentsComponent } from './courses-section/course-comments/course-comments.component';
+import { CourseSinglecommentComponent } from './courses-section/course-comments/course-singlecomment/course-singlecomment.component';
+import { CourseRepliesComponent } from './courses-section/course-comments/course-singlecomment/course-replies/course-replies.component';
+import { CourseSinglereplyComponent } from './courses-section/course-comments/course-singlecomment/course-replies/course-singlereply/course-singlereply.component';
+import { CoursePickerComponent } from './courses-section/course-picker/course-picker.component';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
@@ -184,6 +190,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     QuestionDetailsComponent,
     AddAnnouncementComponent,
     SingleCompanyComponent,
+    CoursesSectionComponent,
+    AddCourseComponent,
+    MainCourseComponent,
+    CourseCommentsComponent,
+    CourseSinglecommentComponent,
+    CourseRepliesComponent,
+    CourseSinglereplyComponent,
+    CoursePickerComponent
   ],
   imports: [
     BrowserModule,

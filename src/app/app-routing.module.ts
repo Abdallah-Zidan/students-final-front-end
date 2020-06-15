@@ -35,7 +35,7 @@ import { ToolsComponent } from './tools/tools.component';
 import { QuestionsSectionComponent } from './questions-section/questions-section.component';
 import { QuestionDetailsComponent } from './questions-section/question-details/question-details.component';
 import { SingleCompanyComponent } from './companies/single-company/single-company.component';
-
+import { CoursesSectionComponent} from './courses-section/courses-section.component'
 
 const routes: Routes = [
   {
@@ -204,6 +204,16 @@ const routes: Routes = [
     component: SingleCompanyComponent,
     canActivate: [AuthGuard],
     data: { depth: 24 }
+  },
+   {
+    path: 'courses',
+    component: CoursesSectionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'courses/:id',
+    component: CoursesSectionComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '**',
