@@ -1,0 +1,66 @@
+<div class="container">
+	<div class="row">
+	  <div class="col-2 my-auto text-center">
+		<img class="w-100 ava" src="{{comment.creator.avatar}}" alt="">
+	  </div>
+	  <div class="col-8  my-auto">
+		<div class="col-12 px-0">
+		  <h5 class=" my-auto px-0 text">{{comment.creator.name}}</h5>
+		</div>
+  
+		<div class="col-12">
+		  <div class="row h-100">
+			<span class="my-auto text-secondary material-icons">
+			  schedule
+			</span>
+			<span class="my-auto text-secondary">3 min. ago</span>
+		  </div>
+		</div>
+	  </div>
+  
+	  <div class="col-2 my-auto" *ngIf="(user.id == comment.creator.id)">
+		<div class="col-4 ml-auto">
+  
+		  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+			<mat-icon>more_vert</mat-icon>
+		  </button>
+		  <mat-menu #menu="matMenu" xPosition="before">
+			<button mat-menu-item>
+			  <mat-icon>create</mat-icon>
+			  <span (click)="onEditComment()">Edit Comment</span>
+			</button>
+			<button mat-menu-item>
+			  <mat-icon>delete_sweep</mat-icon>
+			  <span (click)="onDeleteComment()">Delete Comment</span>
+			</button>
+		  </mat-menu>
+		</div>
+	  </div>
+	</div>
+  
+	<div class="row h-100 my-3 mx-5">
+	  <div class="col-8">
+		<mat-label class="text" [hidden]="!editing">Edit Your Post</mat-label>
+		<textarea class="mx-5" matInput [hidden]="!editing" [(ngModel)]="commentBody"></textarea>
+	  </div>
+	  <div class="col-2"></div>
+	  <div class="col-2 my-auto" [hidden]="!editing">
+		<span class="text curs material-icons" (click)="onUpdateComment()">
+		  send
+		</span>
+	  </div>
+	  <div [hidden]="editing">
+		<div *ngIf="comment.body.startsWith('https://www.loom.com/')"
+		  style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe [src]="comment.body | safe"
+			frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen
+			style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+  
+		<p>{{comment.body}}</p>
+  
+  
+	  </div>
+	</div>
+  
+	<app-course-replies [replies]="comment.replies" [postId]="postId" [group]="group" [commentId]="comment.id"></app-course-replies>
+  </div>
+  

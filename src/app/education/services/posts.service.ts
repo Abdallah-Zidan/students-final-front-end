@@ -27,7 +27,7 @@ export class PostsService {
 
   constructor(
     private httpService: HttpService,
-    private storage: StorageService
+    private storage: StorageService,
   ) {}
 
   getPosts(resource, scope, scopeId, type, page) {
@@ -207,6 +207,7 @@ export class PostsService {
         console.log(res);
         element.comments.splice(commentIndex, 1);
         this.postsArr[index] = element;
+        console.log("here");
         this.posts.next(this.postsArr);
       });
   }
@@ -241,4 +242,6 @@ export class PostsService {
       this.posts.next(this.postsArr);
     });
   }
+
+  
 }
