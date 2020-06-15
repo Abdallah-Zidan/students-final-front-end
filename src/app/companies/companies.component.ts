@@ -44,11 +44,6 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.type = map[key3];
       let tmp: Group;
       if (
-        this.groupsService.departmentGroups &&
-        this.groupsService.departmentGroups[0]
-      ) {
-        tmp = this.groupsService.departmentGroups[0];
-      } else if (
         this.groupsService.facultyGroups &&
         this.groupsService.facultyGroups[0]
       ) {
@@ -68,7 +63,12 @@ export class CompaniesComponent implements OnInit, OnDestroy {
           this.currentGroup = this.groupsService.getGroup(id, scope);
         } else {
           this.currentGroup = tmp;
-          this.router.navigate(['/companies', 1, 1, tmp.id ? tmp.id : 'all']);
+          this.router.navigate([
+            '/companies',
+            1,
+            tmp.id ? 1 : 3,
+            tmp.id ? tmp.id : 'all',
+          ]);
         }
         if (this.currentGroup && ['1', '2', '4'].includes(this.type)) {
           this.getPosts(
@@ -79,7 +79,12 @@ export class CompaniesComponent implements OnInit, OnDestroy {
           );
         } else {
           this.currentGroup = tmp;
-          this.router.navigate(['/companies', 1, 1, tmp.id ? tmp.id : 'all']);
+          this.router.navigate([
+            '/companies',
+            1,
+            tmp.id ? 1 : 3,
+            tmp.id ? tmp.id : 'all',
+          ]);
         }
       }
     });
@@ -93,6 +98,22 @@ export class CompaniesComponent implements OnInit, OnDestroy {
       this.image = 'job offers';
     } else if (+this.type === 2) {
       this.image = 'companies';
+    }
+  }
+  onLoadMore() {
+    if (this.currentGroup) {
+      this.postsService.loadMore(
+        'events',
+        (+this.currentGroup.scope - 1).toString(),
+        this.currentGroup.id,
+        this.type
+      );
+    } else {
+      if (this.user.role === 4) {
+        this.postsService.loadMore(this.resource, null, null, this.type);
+      } else {
+        this.postsService.loadMore(this.resource, '2', null, this.type);
+      }
     }
   }
   ngOnDestroy() {

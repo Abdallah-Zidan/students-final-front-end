@@ -63,12 +63,15 @@
             </div> 
           </div>
           <hr class="mb-4">
-          <div *ngIf="Student==true">
-            <app-student></app-student>
+          <div class="mb-4">
+            <div *ngIf="Student==true">
+              <app-student></app-student>
+            </div>
+            <div *ngIf="Student==false">
+              <app-company></app-company>
+            </div>
           </div>
-          <div *ngIf="Student==false">
-            <app-company></app-company>
-          </div>
+         
       </div>
     </div>
 

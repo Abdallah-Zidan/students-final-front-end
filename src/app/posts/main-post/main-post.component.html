@@ -1,13 +1,15 @@
 <div class="container post">
   <div class="row h-100 mx-3 pt-3">
     <div class="col-2 my-auto text-center">
-      <img class="w-75 ava" src="{{ post.creator.avatar }}" alt="" />
+      <img class="w-75 ava" src="{{ post.creator.avatar }}" style="cursor: pointer;"
+        [routerLink]="['/profile',post.creator.id]" alt="" />
     </div>
     <!-- {{post.creator.avatar}} -->
     <div class="col-6 px-3 my-auto">
       <div class="row">
         <div class="col-12">
-          <h5 class="text">{{ post.creator.name }}</h5>
+          <h5 class="text" style="cursor: pointer;" [routerLink]="['/profile',post.creator.id]">{{ post.creator.name }}
+          </h5>
         </div>
       </div>
 
@@ -27,11 +29,8 @@
 
     <div class="col-2 my-auto">
       <div class="col-4 ml-auto">
-        <button
-          mat-icon-button
-          [matMenuTriggerFor]="menu"
-          aria-label="Example icon-button with a menu"
-        >
+        <button mat-icon-button *ngIf="(post.creator.id == user.id) || !post.type" [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
@@ -45,11 +44,18 @@
               <span>Delete Post</span>
             </button>
           </div>
+          <ng-container *ngIf="post.creator.id !== user.id">
+            <button mat-menu-item *ngIf="(!post.type && !post.isReported); else reported" (click)="onReportPost()">
+              <mat-icon>delete_sweep</mat-icon>
+              <span>Report Post</span>
+            </button>
+          </ng-container>
 
-          <button mat-menu-item *ngIf="!post.type" (click)="onReportPost()">
-            <mat-icon>delete_sweep</mat-icon>
-            <span>Report Post</span>
-          </button>
+          <ng-template #reported>
+            <button mat-menu-item [disabled]="true">
+              <span>Already reported</span>
+            </button>
+          </ng-template>
         </mat-menu>
       </div>
     </div>
@@ -85,12 +91,7 @@
   <div class="row h-100 mx-auto">
     <div class="col-8">
       <mat-label class="text" [hidden]="!editing">Edit Your Post</mat-label>
-      <textarea
-        class="mx-5"
-        matInput
-        [hidden]="!editing"
-        [(ngModel)]="postBody"
-      ></textarea>
+      <textarea class="mx-5" matInput [hidden]="!editing" [(ngModel)]="postBody"></textarea>
     </div>
     <div class="col-2"></div>
     <div class="col-2 my-auto" [hidden]="!editing">
@@ -98,7 +99,12 @@
         send
       </span>
     </div>
-    <p class="lead  mx-5" [hidden]="editing">{{post.body}}</p>
+    <div class="row mx-5 my-2">
+      <h5 class="lead" *ngIf="post.title" style="text-decoration: underline;  font-weight: bold;">
+        {{post.title}}</h5>
+    </div>
+
+    <h5 class="lead  mx-5" [hidden]="editing">{{post.body}}</h5>
   </div>
 
 
@@ -129,16 +135,17 @@
             Your browser does not support the audio element.
           </audio>
         </div>
-        <div
-          *ngIf="
+        <div *ngIf="
             !(
               file.mime.startsWith('image') ||
               file.mime.startsWith('video') ||
               file.mime.startsWith('audio')
             )
-          "
-        >
-          <a href="{{ file.url }}" target="_self">{{ file.name }}</a>
+          ">
+          <div class="mx-5">
+            <a href="{{ file.url }}" target="_self">{{ file.name }}</a>
+          </div>
+
         </div>
       </div>
     </div>
@@ -148,30 +155,16 @@
     <div class="col-10 my-auto">
       <mat-form-field class="example-full-width px-5">
         <mat-label>Leave a comment</mat-label>
-        <textarea
-          [(ngModel)]="comment"
-          (input)="onCommenting($event)"
-          rows="3"
-          matInput
-          placeholder="Ex. It makes me feel..."
-        ></textarea>
+        <textarea [(ngModel)]="comment" (input)="onCommenting($event)" rows="3" matInput
+          placeholder="Ex. It makes me feel..."></textarea>
       </mat-form-field>
     </div>
     <div class="col-2 my-auto">
-      <span
-        class="text material-icons"
-        [hidden]="isEmpty"
-        (click)="onAddComment(post.id)"
-      >
+      <span class="text material-icons" [hidden]="isEmpty" (click)="onAddComment(post.id)">
         send
       </span>
     </div>
   </div>
 
-  <app-comment
-    [comments]="post.comments"
-    [group]="group"
-    [postId]="post.id"
-    [resource]="resource"
-  ></app-comment>
+  <app-comment [comments]="post.comments" [group]="group" [postId]="post.id" [resource]="resource"></app-comment>
 </div>

@@ -3,7 +3,8 @@ const getResourceUrlGet = (
   resource: string,
   scope: string,
   scopeId: string,
-  type: string = ''
+  type: string = '',
+  page
 ) => {
   let url: string = baseUrl.replace('{resource}', resource);
   if (scope) {
@@ -24,8 +25,9 @@ const getResourceUrlGet = (
       ? url.replace('&type={type}', '')
       : url.replace('?type={type}', '');
   }
-  console.log(url);
-
+  if (page) {
+    url = url + `&page=${page}`;
+  }
   return url;
 };
 const getResourcesUrl = (

@@ -41,27 +41,47 @@ export class AnnouncementsComponent implements OnInit, OnDestroy {
       const key2 = 'scope';
       const id = map[key];
       const scope = map[key2];
-      const tmp = this.groupsService.facultyGroups[0].id;
-      if (id && scope) {
-        this.currentGroup = this.groupsService.getGroup(id, scope);
-      } else {
-        this.router.navigate(['/announcements', 1, tmp]);
+      let tmp;
+      if (this.user.role !== 4) {
+        tmp = this.groupsService.facultyGroups[0].id;
       }
-      if (this.currentGroup) {
-        this.getPosts(
-          'events',
-          (+this.currentGroup.scope - 1).toString(),
-          this.currentGroup.id,
-          1
-        );
+      if (id === 'all' && +scope === 3) {
+        this.currentGroup = null;
+        this.getPosts(this.resource, '2', null, 1);
       } else {
-        this.router.navigate(['/announcements', 1, tmp]);
+        if (id && scope) {
+          this.currentGroup = this.groupsService.getGroup(id, scope);
+        } else {
+          this.router.navigate(['/announcements', 1, tmp]);
+        }
+        if (this.currentGroup) {
+          this.getPosts(
+            'events',
+            (+this.currentGroup.scope - 1).toString(),
+            this.currentGroup.id,
+            1
+          );
+        } else {
+          this.router.navigate(['/announcements', 1, tmp]);
+        }
       }
     });
   }
 
   getPosts(resource, scope, id, page) {
     this.postsService.getPosts(resource, scope, id, this.type, page);
+  }
+  onLoadMore() {
+    if (this.currentGroup) {
+      this.postsService.loadMore(
+        'events',
+        (+this.currentGroup.scope - 1).toString(),
+        this.currentGroup.id,
+        this.type
+      );
+    } else {
+      this.postsService.loadMore(this.resource, '2', null, this.type);
+    }
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

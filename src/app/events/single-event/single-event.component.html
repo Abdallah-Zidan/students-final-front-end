@@ -1,6 +1,10 @@
 <mat-card class="example-card">
   <mat-card-header>
     <mat-card-title class="text-primary">{{group ? group.name : 'All system'}}</mat-card-title>
+    <button *ngIf="user.id === post.creator.id" (click)="onDeletePost()" style="position: absolute; right: 15px; max-width: 70px; max-height: 70px;" mat-fab color="warn"
+      aria-label="delete">
+      <mat-icon>delete</mat-icon>
+    </button>
   </mat-card-header>
   <img mat-card-image (click)="showModal(mymodal)" style="cursor: pointer;"
     src="{{post.files ? post.files[0] ? post.files[0].url :defaultImageUrl:defaultImageUrl}}" class="p-4">
@@ -32,6 +36,11 @@
   </div>
 
   <div class="modal-body">
+    <div class="avatar-photo">
+      <img class="w-75 ava m-3" [routerLink]="['/profile',post.creator.id]" src="{{post.creator.avatar}}" alt="">
+      <span style="cursor: pointer;" [routerLink]="['/profile',post.creator.id]">{{post.creator.name}}</span>
+    </div>
+
     <app-images-carousel [files]="post.files" [defaultImageUrl]="defaultImageUrl"></app-images-carousel>
     <div>
       {{post.body}}
@@ -53,6 +62,6 @@
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
   </div>
 </ng-template>

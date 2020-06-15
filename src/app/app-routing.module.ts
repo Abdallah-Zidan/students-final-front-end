@@ -114,7 +114,7 @@ const routes: Routes = [
     path: 'events/:scope/:id',
     component: EventsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: [1,2,3]},
+    data: { roles: [1,2,3,4]},
   },
   {
     path: 'announcements',

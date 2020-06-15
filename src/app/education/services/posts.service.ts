@@ -14,6 +14,7 @@ import { ElementCreator } from '../../shared/models/creator.model';
 import { PostComment } from '../../shared/models/comment.model';
 import { CommentReply } from '../../shared/models/reply.model';
 import { tap } from 'rxjs/operators';
+import { title } from 'process';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,6 +23,7 @@ export class PostsService {
   postsArr: Post[] = [];
   departmentGroups: Group[] = [];
   facultyGroups: Group[] = [];
+  page = 1;
 
   constructor(
     private httpService: HttpService,
@@ -29,8 +31,10 @@ export class PostsService {
   ) {}
 
   getPosts(resource, scope, scopeId, type, page) {
+    console.log(type);
+
     this.httpService
-      .requestPosts(resource, scope, scopeId, type, page)
+      .requestPosts(resource, scope, scopeId, type, this.page)
       .subscribe(
         (res: any) => {
           console.log(res.data);
@@ -69,7 +73,46 @@ export class PostsService {
         }
       );
   }
-
+  loadMore(resource, scope, scopeId, type) {
+    this.page++;
+    this.httpService
+      .requestPosts(resource, scope, scopeId, type, this.page)
+      .subscribe(
+        (res: any) => {
+          console.log(res.data);
+          let resPosts;
+          if (res.data.posts) {
+            resPosts = res.data.posts;
+          } else if (res.data.events) {
+            resPosts = res.data.events;
+          } else {
+            console.log('unknown');
+          }
+          resPosts.forEach((post) => {
+            this.postsArr.push(
+              new Post(
+                post.id,
+                post.body,
+                getAttachments(post),
+                post.reported,
+                getCreator(post),
+                getComments(post),
+                post.created_at_human,
+                post.department_faculty && post.department_faculty.department,
+                post.department_faculty && post.department_faculty.faculty,
+                post.type,
+                post.title && post.title
+              )
+            );
+          });
+          this.posts.next(this.postsArr);
+          console.log(this.postsArr);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
   addPost(resource, data) {
     let type;
     switch (resource) {
@@ -102,7 +145,11 @@ export class PostsService {
             currUser.personalData.avatar
           ),
           [],
-          'now'
+          'now',
+          null,
+          null,
+          null,
+          data.get('title')
         );
         this.postsArr.unshift(newPost);
         this.posts.next(this.postsArr);

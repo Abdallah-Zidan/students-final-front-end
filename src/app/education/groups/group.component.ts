@@ -5,7 +5,13 @@ import { GroupsService } from 'src/app/services/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from 'src/app/shared/models/group.model';
 import { Subscription } from 'rxjs';
-import { trigger, transition, state, style, animate } from '@angular/animations';
+import {
+  trigger,
+  transition,
+  state,
+  style,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-group',
@@ -65,7 +71,16 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
   getPosts(resource, scope, id, page) {
     this.postsService.getPosts(resource, scope, id, '', page);
   }
-
+  onLoadMore() {
+    if (this.currentGroup) {
+      this.postsService.loadMore(
+        'posts',
+        this.currentGroup.scope,
+        this.currentGroup.id,
+        ''
+      );
+    }
+  }
   ngDoCheck() {
     if (+this.currentGroup.scope === 0) {
       this.image = 'groups';

@@ -4,10 +4,13 @@
     <app-add-company-event [resource]="resource" [type]="type" *ngIf="user.role === 4"></app-add-company-event>
     <div class="container">
       <div class="row mx-auto">
-        <app-single-company class="col-xs-12 col-sm-12 col-md-6 col-lg-4 p-3" *ngFor="let post of posts" [post]="post" [group]="currentGroup" [resource]="resource"
+        <app-single-company class="col-xs-12 col-sm-12 col-md-6 col-lg-6 p-3" *ngFor="let post of posts" [post]="post" [group]="currentGroup" [resource]="resource"
           [type]="type">
         </app-single-company>
       </div>
     </div>
+  </div>
+  <div style="margin: auto; text-align: center;" *ngIf="posts.length > 9">
+    <button class="btn btn-info" (click)="onLoadMore()">load more...</button>
   </div>
 </app-nav>
