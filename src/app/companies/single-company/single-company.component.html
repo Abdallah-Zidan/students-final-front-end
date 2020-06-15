@@ -1,69 +1,72 @@
-   <div>
-     <div class="card">
-       <div class="card__image-container">
-         <img class="card__image" src="{{post.creator.avatar}}" alt="" (click)="showModal(mymodal)"
-           style="cursor: pointer;">
-         <button class="mt-2" *ngIf="user.id === post.creator.id" (click)="onDeletePost()"
-           style="position: absolute; right: 15px; border-radius: 50%; width: 60px; height: 60px;" mat-fab color="warn"
-           aria-label="delete">
-           <i class="fa fa-university"></i>
-         </button>
-       </div>
+<div>
+  <div class="card">
+    <div class="card__image-container">
+      <img class="card__image" src="{{post.creator.avatar}}" alt="" (click)="showModal(mymodal)"
+        style="cursor: pointer;">
+      <button class="mt-2" *ngIf="user.id === post.creator.id" (click)="onDeletePost()"
+        style="position: absolute; right: 15px; border-radius: 50%; width: 60px; height: 60px;" mat-fab color="warn"
+        aria-label="delete">
+        <i class="fa fa-university"></i>
+      </button>
+    </div>
 
-       <svg class="card__svg" viewBox="0 0 800 500">
+    <svg class="card__svg" viewBox="0 0 800 500">
 
-         <path
-           d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400 L 800 500 L 0 500"
-           stroke="transparent" fill="#333" />
-         <path class="card__line"
-           d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400" stroke="pink"
-           stroke-width="3" fill="transparent" />
-       </svg>
+      <path d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400 L 800 500 L 0 500"
+        stroke="transparent" fill="#333" />
+      <path class="card__line"
+        d="M 0 100 Q 50 200 100 250 Q 250 400 350 300 C 400 250 550 150 650 300 Q 750 450 800 400" stroke="pink"
+        stroke-width="3" fill="transparent" />
+    </svg>
 
-       <div class="card__content">
-         <h1 class="card__title">{{post.creator.name}}</h1>
-         <h4 style="font-style: italic; color: aqua;">{{post.title}}</h4>
-         <p id="post-body">{{post.body.split(' ').splice(0,15).join(' ')+'...'}}
-         </p>
-         <button mat-raised-button color="primary" class="my-2" (click)="showModal(mymodal)"> More info </button>
-       </div>
-     </div>
-   </div>
+    <div class="card__content">
+      <h1 class="card__title">{{post.creator.name}}</h1>
+      <h4 style="font-style: italic; color: aqua;">{{post.title}}</h4>
+      <p id="post-body">{{post.body.split(' ').splice(0,15).join(' ')+'...'}}
+      </p>
+      <button class="btn btn-primary my-2" (click)="showModal(mymodal)"> More info </button>
+    </div>
+  </div>
+</div>
 
-   <ng-template #mymodal let-modal>
-     <div class="modal-header">
-       <h4 class="modal-title" id="modal-basic-title">{{post.title}}</h4>
-       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-         <span aria-hidden="true">×</span>
-       </button>
-     </div>
+<ng-template  #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{post.title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
 
-     <div class="modal-body">
-       <div class="avatar-photo">
-         <img class="w-75 ava m-3" [routerLink]="['/profile',post.creator.id]" src="{{post.creator.avatar}}" alt="">
-         <span style="cursor: pointer;" [routerLink]="['/profile',post.creator.id]">{{post.creator.name}}</span>
-       </div>
-       <app-images-carousel [files]="post.files" [defaultImageUrl]="post.creator.avatar"></app-images-carousel>
-       <div>
-         {{post.body}}
-       </div>
+  <div class="modal-body">
+    <div class="avatar-photo">
+      <img class="mx-5 w-75 ava my-3" [routerLink]="['/profile',post.creator.id]" src="{{post.creator.avatar}}" alt="">
+      <span style="cursor: pointer;" [routerLink]="['/profile',post.creator.id]">{{post.creator.name}}</span>
+    </div>
+    <app-images-carousel [files]="post.files" [defaultImageUrl]="post.creator.avatar"></app-images-carousel>
+    <div class="mx-5">
+      {{post.body}}
+    </div>
 
-       <div class=" mt-2">
-         <mat-form-field class="example-full-width px-5">
-           <mat-label>Leave a comment</mat-label>
-           <textarea [(ngModel)]="comment" (input)="onCommenting($event)" rows="3" matInput
-             placeholder="comment"></textarea>
-         </mat-form-field>
-       </div>
-       <div>
-         <span class="text material-icons" [hidden]="isEmpty" (click)="onAddComment(post.id)">
-           send
-         </span>
-       </div>
-       <app-comment [comments]="post.comments" [group]="group" [postId]="post.id" [resource]="resource"></app-comment>
-     </div>
+    <div class="row mt-2">
+      <div class="col-10">
 
-     <div class="modal-footer">
-       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
-     </div>
-   </ng-template>
+        <mat-form-field class="example-full-width px-5">
+          <mat-label>Leave a comment</mat-label>
+          <textarea [(ngModel)]="comment" (input)="onCommenting($event)" rows="3" matInput
+            placeholder="comment"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="col-2 mt-auto" style="width: 65px;height: 50px;">
+          <span class="text material-icons" [hidden]="isEmpty" (click)="onAddComment(post.id)">
+            send
+          </span>
+      </div>
+    </div>
+    <app-comment [comments]="post.comments" [group]="group" [postId]="post.id" [resource]="resource"></app-comment>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
