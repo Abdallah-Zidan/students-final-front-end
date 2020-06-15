@@ -19,7 +19,7 @@ import { User as AuthUser } from '../../auth/user.model';
 })
 export class DepartmentComponent implements OnInit {
 	user: AuthUser;
-	displayedColumns = ['id', 'name', 'options'];
+	displayedColumns = ['name', 'options'];
 	length: number;
 	pageSize: number;
 	pageSizeOptions = [5, 10, 25, 100];
