@@ -1,11 +1,11 @@
 <div class="container">
 	<div class="row">
 	  <div class="col-2 my-auto text-center">
-		<img class="w-100 ava" src="{{comment.creator.avatar}}" alt="">
+		<img class="w-100 ava" src="{{comment.creator.avatar}}" alt="" [routerLink]="['/profile',comment.creator.id]">
 	  </div>
 	  <div class="col-8  my-auto">
 		<div class="col-12 px-0">
-		  <h5 class=" my-auto px-0 text">{{comment.creator.name}}</h5>
+		  <h5 class=" my-auto px-0 text" [routerLink]="['/profile',comment.creator.id]">{{comment.creator.name}}</h5>
 		</div>
   
 		<div class="col-12">
