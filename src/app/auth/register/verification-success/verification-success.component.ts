@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import AOS from 'aos'
 
 @Component({
   selector: 'app-verification-success',
@@ -10,6 +11,7 @@ export class VerificationSuccessComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    AOS.init();
   }
 
 }

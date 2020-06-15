@@ -42,10 +42,11 @@ export class QuestionsSectionComponent implements OnInit {
 
     this.user=this.storageService.getItem('user');
 
-    this.httpService.requestTags(1).subscribe(
+    this.httpService.requestTags(0).subscribe(
       result =>{
         this.result=result;
         this.questionTags=this.result.data.tags
+        console.log(result)
       },
       error=>{
         console.log(error);
