@@ -123,6 +123,7 @@ import { CourseSinglereplyComponent } from './courses-section/course-comments/co
 import { CoursePickerComponent } from './courses-section/course-picker/course-picker.component';
 import { VerificationSuccessComponent } from './auth/register/verification-success/verification-success.component';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { UnderConstructionComponent } from './under-construction/under-construction.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -198,6 +199,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CourseSinglereplyComponent,
     CoursePickerComponent,
     VerificationSuccessComponent,
+    UnderConstructionComponent,
   ],
   imports: [
     BrowserModule,

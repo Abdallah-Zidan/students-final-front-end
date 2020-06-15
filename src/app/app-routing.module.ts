@@ -24,8 +24,9 @@ import { ToolsComponent } from './tools/tools.component';
 import { QuestionsSectionComponent } from './questions-section/questions-section.component';
 import { QuestionDetailsComponent } from './questions-section/question-details/question-details.component';
 import { SingleCompanyComponent } from './companies/single-company/single-company.component';
-import { CoursesSectionComponent} from './courses-section/courses-section.component'
+import { CoursesSectionComponent } from './courses-section/courses-section.component'
 import { VerificationSuccessComponent } from './auth/register/verification-success/verification-success.component';
+import { UnderConstructionComponent } from './under-construction/under-construction.component';
 
 
 const routes: Routes = [
@@ -94,37 +95,37 @@ const routes: Routes = [
     path: 'groups/:scope/:id',
     component: GroupComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: [1, 2, 3]},
+    data: { roles: [1, 2, 3] },
   },
   {
     path: 'groups',
     component: GroupComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: [1,2,3] },
+    data: { roles: [1, 2, 3] },
   },
   {
     path: 'events',
     component: EventsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: [1,2,3]},
+    data: { roles: [1, 2, 3] },
   },
   {
     path: 'events/:scope/:id',
     component: EventsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: [1,2,3,4]},
+    data: { roles: [1, 2, 3, 4] },
   },
   {
     path: 'announcements',
     component: AnnouncementsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: [1,2,3]},
+    data: { roles: [1, 2, 3] },
   },
   {
     path: 'announcements/:scope/:id',
     component: AnnouncementsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: [1,2,3] },
+    data: { roles: [1, 2, 3] },
   },
   {
     path: 'companies',
@@ -155,12 +156,12 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AuthGuard, AuthorizedGuard],
     runGuardsAndResolvers: 'always',
-    data: { roles: [0, 3] , depth: 19 },
+    data: { roles: [0, 3], depth: 19 },
   },
   {
     path: 'tools',
     component: ToolsComponent,
-    data: { type: '0' , depth: 20 },
+    data: { type: '0', depth: 20 },
     canActivate: [AuthGuard],
   },
 
@@ -190,7 +191,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { depth: 24 }
   },
-   {
+  {
     path: 'courses',
     component: CoursesSectionComponent,
     canActivate: [AuthGuard],
@@ -198,6 +199,11 @@ const routes: Routes = [
   {
     path: 'courses/:id',
     component: CoursesSectionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'under-construction',
+    component: UnderConstructionComponent,
     canActivate: [AuthGuard],
   },
   {
