@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>{{ data.formName }} user</h2>
+
+<mat-form-field class="w-100">
+	<mat-label>Name</mat-label>
+	<input matInput value="{{ user.name }}" readonly>
+</mat-form-field>
+
+<mat-dialog-content class="mat-typography">
+	<form [formGroup]="form">
+		<mat-form-field class="w-100" *ngIf="authUser.personalData.type === 'Admin'">
+			<mat-label>Faculty</mat-label>
+			<mat-select formControlName="faculty" (selectionChange)="onFacultyChange($event)">
+				<mat-option *ngFor="let faculty of faculties" [value]="faculty.id">{{ faculty.name }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Department</mat-label>
+			<mat-select formControlName="department" (selectionChange)="onDepartmentChange($event)">
+				<mat-option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions class="mb-3" align="end">
+	<button mat-raised-button color="{{ data.submitColor }}" (click)="onDepartmentSubmit($event)" [disabled]="!form.valid || isBusy">{{ data.formName }} department</button>
+</mat-dialog-actions>
+
+<mat-dialog-content class="mat-typography">
+	<form [formGroup]="form2">
+		<mat-form-field class="w-100">
+			<mat-label>Course</mat-label>
+			<mat-select formControlName="course">
+				<mat-option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+	<button mat-raised-button color="{{ data.submitColor }}" (click)="onCourseSubmit($event)" [disabled]="(!form.valid || !form2.valid) || isBusy">{{ data.formName }} course</button>
+</mat-dialog-actions>

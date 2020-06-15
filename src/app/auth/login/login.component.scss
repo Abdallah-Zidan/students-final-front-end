@@ -2,6 +2,7 @@ body,
 html {
   height  : 100vh;
   overflow: hidden;
+  background-color: #E9ECEF;
 }
 
 .login-page {
@@ -109,20 +110,6 @@ html {
   margin-top: 2px;
 }
 
-// .login-form .btn {
-//   font-size    : 16px;
-//   font-weight  : bold;
-//   background   : #2296F3;
-//   border       : none;
-//   margin-bottom: 20px;
-//   margin-top   : 25px;
-// }
-
-// .login-form .btn:hover,
-// .login-form .btn:focus {
-//   background: #2296F3;
-//   outline   : none !important;
-// }
 
 .login-form a {
   color          : #fff;

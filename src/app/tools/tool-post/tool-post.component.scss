@@ -5,6 +5,57 @@ html,
     box-sizing: border-box !important;
 }
 
+
+$shadow     : white;
+$ribbonColor: red;
+
+/* The ribbon */
+i {
+    width: 10%;
+    float: right;
+}
+
+
+.icon{
+    font-size: 35px;
+    margin-left:10px;
+    margin-top: 20px;
+    color: white;
+}
+
+
+.ribbon {
+    width           : 60px;
+    height          : 70px;
+    background-color: $ribbonColor;
+    position        : absolute;
+    right           : 0px;
+    top             : -32px;
+
+    &:before {
+        content      : '';
+        position     : absolute;
+        z-index      : 2;
+        left         : 0;
+        bottom       : -30px;
+        border-left  : 30px solid $ribbonColor;
+        border-right : 30px solid $ribbonColor;
+        border-bottom: 30px solid transparent;
+    }
+
+    &:after {
+        content         : '';
+        width           : 200px;
+        height          : 270px;
+        position        : absolute;
+        z-index         : -1;
+        left            : 0;
+        bottom          : -120px;
+        background-color: $shadow;
+        transform       : skewY(35deg) skewX(0);
+    }
+}
+
 span {
     cursor: pointer;
 }

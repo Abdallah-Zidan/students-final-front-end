@@ -6,10 +6,37 @@
     display: table;
 }
 
+
 .tool-body {
     width : 100%;
     height: 40%;
     margin: auto;
+}
+
+.anim {
+    box-shadow        : 5px 5px 5px grey;
+    animation-name    : move;
+    position          : relative;
+    animation-duration: 3s;
+    margin-top        : -5px;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes move {
+    0% {
+        right  : -100%;
+        opacity: 0%;
+    }
+
+    75% {
+        right  : 30px;
+        opacity: 90%;
+    }
+
+    100%{
+        right: 0px;
+        opacity: 100px;
+    }
 }
 
 .tool-body-text {

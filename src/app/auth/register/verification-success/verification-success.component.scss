@@ -1,0 +1,43 @@
+.anim {
+    animation-name    : move;
+    position          : relative;
+    animation-duration: 2s;
+    margin-top        : 10px;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes move {
+    0% {
+        bottom  : -100%;
+        opacity: 0%;
+    }
+
+    90% {
+        bottom  : 10px;
+        opacity: 90%;
+    }
+
+    100%{
+        bottom: 0px;
+        opacity: 100px;
+    }
+}
+
+.anim2 {
+    animation-name    : move2;
+    position          : relative;
+    animation-duration: 2s;
+    margin-top        : 10px;
+    animation-timing-function: ease-in-out;
+    // z-index: -1;
+}
+
+@keyframes move2 {
+    0% {
+        opacity: 0%;
+    }
+
+    100%{
+        opacity: 100px;
+    }
+}

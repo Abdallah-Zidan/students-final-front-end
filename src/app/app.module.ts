@@ -131,6 +131,7 @@ import { TutorialRepliesComponent } from './tutorials/tutorial-comments/tutorial
 import { TutorialSinglereplyComponent } from './tutorials/tutorial-comments/tutorial-singlecomment/tutorial-replies/tutorial-singlereply/tutorial-singlereply.component';
 import { AddTutorialComponent } from './tutorials/add-tutorial/add-tutorial.component';
 import { TagsPickerComponent } from './tutorials/tags-picker/tags-picker.component';
+import { UnderConstructionComponent } from './under-construction/under-construction.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -214,6 +215,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TutorialSinglereplyComponent,
     AddTutorialComponent,
     TagsPickerComponent,
+    UnderConstructionComponent,
   ],
   imports: [
     BrowserModule,
