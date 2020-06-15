@@ -15,4 +15,8 @@ export class DashboardComponent implements OnInit {
 	ngOnInit(): void {
 		this.authService.user.subscribe((user: AuthUser) => this.user = user);
 	}
+
+	onLogout() {
+		this.authService.logout();
+	}
 }

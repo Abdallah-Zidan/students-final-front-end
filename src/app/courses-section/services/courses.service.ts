@@ -31,7 +31,6 @@ export class CoursesService {
     private httpClient: HttpClient,
     private storage: StorageService,
     private httpService: HttpService,
-    private postService :PostsService
   ) {}
 
   addCourse(data) :Observable<any> {

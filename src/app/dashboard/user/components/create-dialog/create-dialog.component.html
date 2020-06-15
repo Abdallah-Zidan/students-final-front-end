@@ -1,0 +1,92 @@
+<h2 mat-dialog-title>{{ data.formName }} user</h2>
+<mat-dialog-content class="mat-typography">
+	<form [formGroup]="form">
+		<mat-form-field class="w-100" *ngIf="data.formName === 'Add'">
+			<mat-label>Type</mat-label>
+			<mat-select formControlName="type">
+				<mat-option value="Student" *ngIf="authUser.personalData.type === 'Admin'">Student</mat-option>
+				<mat-option value="TeachingStaff">Teaching Staff</mat-option>
+				<mat-option value="Company" *ngIf="authUser.personalData.type === 'Admin'">Company</mat-option>
+				<mat-option value="Moderator">Moderator</mat-option>
+				<mat-option value="Admin" *ngIf="authUser.personalData.type === 'Admin'">Admin</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Name</mat-label>
+			<input matInput formControlName="name" placeholder="User name" value="{{ user.name }}">
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Email</mat-label>
+			<input matInput formControlName="email" placeholder="User email" value="{{ user.email }}">
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Password</mat-label>
+			<input matInput type="password" formControlName="password" placeholder="User password">
+		</mat-form-field>
+		<div class="mb-2">
+			<mat-label>Gender</mat-label>
+			<br>
+			<mat-radio-group formControlName="gender">
+				<mat-radio-button class="mr-2" value="Male">Male</mat-radio-button>
+				<mat-radio-button value="Female">Female</mat-radio-button>
+			</mat-radio-group>
+		</div>
+		<mat-form-field class="w-100">
+			<mat-label>Address</mat-label>
+			<textarea matInput cdkTextareaAutosize formControlName="address" placeholder="User address">{{ user.address }}</textarea>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Mobile</mat-label>
+			<input matInput formControlName="mobile" placeholder="User mobile" value="{{ user.mobile }}">
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="form.get('type').value === 'Student' || form.get('type').value === 'TeachingStaff'">
+			<mat-label>Birthdate</mat-label>
+			<input matInput [matDatepicker]="picker" formControlName="birthdate" placeholder="User birthdate">
+			<mat-datepicker-toggle matSuffix [for]="picker"><mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="form.get('type').value === 'Student'">
+			<mat-label>Year</mat-label>
+			<input matInput type="number" formControlName="year" placeholder="User year" value="{{ data.formName === 'Edit' ? user.profile.year : '' }}">
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="form.get('type').value === 'TeachingStaff'">
+			<mat-label>Certificates</mat-label>
+			<textarea matInput cdkTextareaAutosize formControlName="certificates" placeholder="User certificates">{{ data.formName === 'Edit' ? user.profile.certificates : '' }}</textarea>
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="form.get('type').value === 'Company'">
+			<mat-label>Fax</mat-label>
+			<input matInput formControlName="fax" placeholder="User fax" value="{{ data.formName === 'Edit' ? user.profile.fax : '' }}">
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="form.get('type').value === 'Company'">
+			<mat-label>Description</mat-label>
+			<textarea matInput cdkTextareaAutosize formControlName="description" placeholder="User description">{{ data.formName === 'Edit' ? user.profile.description : '' }}</textarea>
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="form.get('type').value === 'Company'">
+			<mat-label>Website</mat-label>
+			<input matInput formControlName="website" placeholder="User website" value="{{ data.formName === 'Edit' ? user.profile.website : '' }}">
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="authUser.personalData.type === 'Admin' && form.get('type').value === 'Moderator'">
+			<mat-label>Faculty</mat-label>
+			<mat-select formControlName="faculty">
+				<mat-option *ngFor="let faculty of faculties" [value]="faculty.id">{{ faculty.name }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="data.formName === 'Add' && authUser.personalData.type === 'Moderator' && form.get('type').value === 'TeachingStaff'">
+			<mat-label>Department</mat-label>
+			<mat-select formControlName="department">
+				<mat-option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<div class="mb-2" *ngIf="data.formName === 'Edit'">
+			<mat-checkbox formControlName="blocked" value="{{ user.blocked }}">Block</mat-checkbox>
+		</div>
+		<div class="mb-1">
+			<button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+			<input type="file" hidden #fileInput accept="image/*" (change)="onFileSelected($event)">
+		</div>
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+	<button mat-raised-button color="{{ data.submitColor }}" (click)="onSubmit($event)" [disabled]="!form.valid || isBusy">{{ data.formName }}</button>
+</mat-dialog-actions>

@@ -1,0 +1,9 @@
+<app-nav>
+  <app-tags-picker></app-tags-picker>
+  <app-add-tutorial></app-add-tutorial>
+  <app-single-tutorial
+    *ngFor="let tutorial of tutorials"
+    [tutorial]="tutorial"
+    [resource]="resource"
+  ></app-single-tutorial>
+</app-nav>

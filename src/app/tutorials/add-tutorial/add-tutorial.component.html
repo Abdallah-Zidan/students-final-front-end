@@ -1,0 +1,50 @@
+<div class="post">
+	<div class="row h-100">
+	  <div class="col-2 text-center">
+		<img class="w-75 ava" src="{{user.personalData.avatar}}" alt="">
+	  </div>
+	  <div class="col-10 w-75 my-auto mx-auto">
+		<div class="row w-100 h-100">
+		  <div class="col-10">
+			<textarea placeholder="add tutorial" class="w-100" [(ngModel)]="body" (input)="onCommenting($event)" [rows]="3"
+			  [cols]="50" pInputTextarea autoResize="autoResize"></textarea>
+			  <div class="row w-100 mx-auto mb-2">
+				
+				<label for="Tag">Tags</label>
+				<button class="tag-btn" (click)="displayTagInput()"><i class="fa fa-plus"></i></button>
+		  
+				<mat-select style="background-color: #ecedee;" multiple name="Tags[]" class="custom-select d-block w-100" (selectionChange)="onCommenting($event)"
+				  id="tags" [(ngModel)]="selectedTags">
+				  <mat-option value={{tag.name}} *ngFor="let tag of tags">{{tag.name}}</mat-option>
+				</mat-select>
+		  
+				<div id="TagInput" style="display:none">
+				  <input type="text" [(ngModel)]="newTag" placeholder="write your tag">
+				  <button class="btn btn-light" (click)="addNewTag()"><i class="fa fa-check" style="color:#1565c0;"
+					  aria-hidden="true"></i></button>
+				</div>		
+					</div>
+			<div class="row w-100 mx-auto">
+			  <button mat-raised-button color="primary" class="btn-block" (click)="add()"> {{addOrRemove}}</button>
+			</div>
+			
+				
+		  </div>
+		  <div class="col-2 mr-auto mt-auto">
+			<button mat-raised-button color="accent" [hidden]="isEmpty" class="btn btn-block" (click)="onAddPost()">Post</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  
+
+
+
+
+
+	<div class="row w-100" *ngIf="addFile">
+	  <file-upload class="w-100" [(ngModel)]="selectedFiles" accept="video/*" > </file-upload>`
+	</div>
+  </div>
+  <simple-notifications></simple-notifications>
+  

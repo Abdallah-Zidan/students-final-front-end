@@ -33,7 +33,7 @@ export class AuthorizedGuard implements CanActivate {
           return true;
         }
         if (user.role === 0) {
-          return this.router.createUrlTree(['admin']);
+          return this.router.createUrlTree(['dashboard']);
         }
         return this.router.createUrlTree(['/']);
       })
