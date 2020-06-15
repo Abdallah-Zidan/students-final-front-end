@@ -1,7 +1,8 @@
 <mat-card class="example-card">
   <mat-card-header>
     <mat-card-title class="text-primary">{{group ? group.name : 'All system'}}</mat-card-title>
-    <button *ngIf="user.id === post.creator.id" (click)="onDeletePost()" style="position: absolute; right: 15px; max-width: 70px; max-height: 70px;" mat-fab color="warn"
+    <button *ngIf="user.id === post.creator.id" (click)="onDeletePost()"
+      style="position: absolute; right: 15px; max-width: 70px; max-height: 70px;" mat-fab color="warn"
       aria-label="delete">
       <mat-icon>delete</mat-icon>
     </button>
@@ -11,17 +12,17 @@
   <mat-card-content>
     <div class="row d-100">
       <div class="row  ml-auto">
-        <h6 class="text-primary my-auto d-inline">{{post.startDate}}</h6>
-        <span class="text-secondary   my-auto material-icons">
-          {{post.body}}
+        <span class="my-auto text-secondary material-icons">
+          schedule
         </span>
+        <h6 class="text-primary my-auto d-inline mx-2">{{post.createdHuman}}</h6>
       </div>
     </div>
     <h3 class="text-primary">{{post.title}}</h3>
     <p class="text-secondary lead">
       {{post.body.split(' ').splice(0,15).join(' ')+'...'}}
     </p>
-    <button class="btn btn-primary my-2" (click)="showModal(mymodal)"> More info </button>
+    <button mat-raised-button color="primary" class="my-2" (click)="showModal(mymodal)"> More info </button>
   </mat-card-content>
 </mat-card>
 

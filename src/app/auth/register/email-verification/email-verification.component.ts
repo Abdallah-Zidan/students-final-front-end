@@ -22,7 +22,13 @@ token;
     this.registerService.currentToken.subscribe(
       res => {this.token = res})
       if(this.token==null)
-      {this.router.navigate(['/']);}
+      {
+        this.token = localStorage.getItem('verifyToken');
+        if(!this.token){
+          this.router.navigate(['/']);
+        }
+        
+      }
   }
 
   resendVerification()

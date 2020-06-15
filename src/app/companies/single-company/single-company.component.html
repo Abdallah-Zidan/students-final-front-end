@@ -4,8 +4,8 @@
          <img class="card__image" src="{{post.creator.avatar}}" alt="" (click)="showModal(mymodal)"
            style="cursor: pointer;">
          <button class="mt-2" *ngIf="user.id === post.creator.id" (click)="onDeletePost()"
-           style="position: absolute; right: 15px; border-radius: 50%; width: 60px; height: 60px;" mat-fab
-           color="warn" aria-label="delete">
+           style="position: absolute; right: 15px; border-radius: 50%; width: 60px; height: 60px;" mat-fab color="warn"
+           aria-label="delete">
            <i class="fa fa-university"></i>
          </button>
        </div>
@@ -25,7 +25,7 @@
          <h4 style="font-style: italic; color: aqua;">{{post.title}}</h4>
          <p id="post-body">{{post.body.split(' ').splice(0,15).join(' ')+'...'}}
          </p>
-         <button class="btn btn-primary my-2" (click)="showModal(mymodal)"> More info </button>
+         <button mat-raised-button color="primary" class="my-2" (click)="showModal(mymodal)"> More info </button>
        </div>
      </div>
    </div>
