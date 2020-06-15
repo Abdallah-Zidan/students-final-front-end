@@ -1,38 +1,22 @@
-    <div class="main">
+<app-nav-bar></app-nav-bar>
 
-        <!-- Sign up form -->
-        <section class="signup">
-            <div class="container">
-                <div class="signup-content">
-                    <div class="signup-form">
-                        <h2 class="form-title" style="color: #3762F0;">Congratulations</h2>
-                            <div class="form-group">
-                            <h5>We're excited to let you get started and join your friends</h5>
-                            </div>
-                            <div class="form-group">
-                                <h5> First check your inbox for a confirmation email,Click the link in the email to confirm your email address</h5>   
-                            </div>
-                            <div class="form-group">
-                               
-                            </div>
-                            <div class="form-group">
-                                <p>Didn't receive the email?</p>
-                                <button type="submit"  (click)="resendVerification()" class="btn btn-primary" >send again</button>
-                            </div>
-                            <div class="form-group alert alert-info  text-center" style="margin-top:10px ;" *ngIf="response != null">
-                                <p>{{response}}</p>
-                            </div>
-                           
-                    </div>
-                    <div class="signup-image">
-                        <figure> <img  src="../../../assets/images/Group Of Young People.jpg" alt=""></figure>
-                    </div>
-                  </div>
-                
-            </div>
-        </section>
-    
+<div class="card mb-3" style="max-width: 100%;">
+    <div class="row no-gutters">
+      <div class="col-md-4"  style="margin-top: auto;margin-bottom: auto;">
+        <div class="card-body">
+          <h4  style="color: #3762F0;">Congratulations</h4>
+          <h5>We are excited to let you get started and join your friends,
+          First check your inbox for a confirmation email</h5>
+          <p class="card-text">Didn't receive the email?</p>
+          <button type="submit"  (click)="resendVerification()" class="btn btn-primary" >send again</button>
+        </div>
+        <div class=" alert alert-info  text-center" style="margin-top:10px ;" *ngIf="response != null">
+            <p>{{response}}</p>
+        </div>
+      </div>
+        <div class="col-md-8">
+            <img src="../../../assets/images/mail.jpg" class="card-img" alt="...">
+          </div>
+    </div>
 </div>
-
-
-  
+ 

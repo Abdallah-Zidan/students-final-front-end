@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { Post } from '../education/models/post.model';
 import { PostsService } from '../education/services/posts.service';
 import { StorageService } from '../services/storage.service';
+import { User } from '../auth/user.model';
 
 @Component({
   selector: 'app-events',
@@ -19,6 +20,7 @@ export class EventsComponent implements OnInit, OnDestroy {
   currentGroup: Group;
   resource = 'events';
   type = '0';
+  user: User;
   private subscription: Subscription;
   constructor(
     private postsService: PostsService,
@@ -29,6 +31,7 @@ export class EventsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.user = this.storage.getUser('user');
     if (this.facultyGroups.length < 0) {
       this.groupsService.getGroups(this.storage.getUser('user'));
     }
@@ -41,7 +44,10 @@ export class EventsComponent implements OnInit, OnDestroy {
       const key2 = 'scope';
       const id = map[key];
       const scope = map[key2];
-      const tmp = this.groupsService.facultyGroups[0].id;
+      let tmp;
+      if (this.user.role !== 4) {
+        tmp = this.groupsService.facultyGroups[0].id;
+      }
       if (id === 'all' && +scope === 3) {
         this.currentGroup = null;
         this.getPosts(this.resource, '2', null, 1);
@@ -69,6 +75,18 @@ export class EventsComponent implements OnInit, OnDestroy {
 
   getPosts(resource, scope, id, page) {
     this.postsService.getPosts(resource, scope, id, this.type, page);
+  }
+  onLoadMore() {
+    if (this.currentGroup) {
+      this.postsService.loadMore(
+        'events',
+        (+this.currentGroup.scope - 1).toString(),
+        this.currentGroup.id,
+        this.type
+      );
+    } else {
+      this.postsService.loadMore(this.resource, '2', null, this.type);
+    }
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

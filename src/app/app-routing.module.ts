@@ -24,6 +24,7 @@ import { ToolsComponent } from './tools/tools.component';
 import { QuestionsSectionComponent } from './questions-section/questions-section.component';
 import { QuestionDetailsComponent } from './questions-section/question-details/question-details.component';
 import { SingleCompanyComponent } from './companies/single-company/single-company.component';
+import { VerificationSuccessComponent } from './auth/register/verification-success/verification-success.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,13 @@ const routes: Routes = [
   {
     path: 'email/verify',
     component: EmailVerificationComponent,
+    canActivate: [RedirectGuard],
+    data: { depth: 4 }
+  },
+
+  {
+    path: 'email/verify/success',
+    component: VerificationSuccessComponent,
     canActivate: [RedirectGuard],
     data: { depth: 4 }
   },
@@ -103,7 +111,7 @@ const routes: Routes = [
     path: 'events/:scope/:id',
     component: EventsComponent,
     canActivate: [AuthGuard, AuthorizedGuard],
-    data: { roles: [1,2,3]},
+    data: { roles: [1,2,3,4]},
   },
   {
     path: 'announcements',
@@ -148,7 +156,6 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     data: { roles: [0, 3] , depth: 19 },
   },
-
   {
     path: 'tools',
     component: ToolsComponent,

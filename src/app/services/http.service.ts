@@ -109,7 +109,7 @@ export class HttpService {
   }
   requestPosts(resource, scope, scopeId, type, page) {
     return this.http.get(
-      getResourceUrlGet(endPoints.getResources, resource, scope, scopeId, type)
+      getResourceUrlGet(endPoints.getResources, resource, scope, scopeId, type,page)
     );
   }
 
@@ -133,7 +133,7 @@ export class HttpService {
   }
   requestReportPost(resourceId) {
     return this.http.post(endPoints.report, {
-      data: resourceId,
+      id: resourceId,
     });
   }
   requestAddComment(resource, commentBody: string, resourceId: string) {

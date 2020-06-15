@@ -93,7 +93,9 @@ export class AuthService {
         this.groupsService.getGroups(user);
       }
     }
-    this.autoLogout(user.tokenExpDate);
+    if (user) {
+      this.autoLogout(user.tokenExpDate);
+    }
   }
 
   logout() {

@@ -1,15 +1,27 @@
-body,html,*{
-    margin:0;
-    box-sizing: border-box;
+body,
+html,
+* {
+  margin: 0;
+  box-sizing: border-box;
 }
-.example-card {
-    max-width: 400px;
-    max-height: 500px;
 
-  }
-  
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
-  
+.example-card {
+  max-width: 400px;
+  max-height: 500px;
+
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.ava {
+  border-radius: 50%;
+  padding: 3%;
+  cursor: pointer;
+  min-width: 30px;
+  max-width: 120px;
+}
+
+

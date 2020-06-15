@@ -28,7 +28,7 @@
             </div>
 
             <div  class=" mb-3">
-              <h6 ><i class="fa fa-exchange"> </i>
+              <h6 ><i class="fa fa-handshake-o"> </i>
 
                 Exchange Instrumnts and Tools</h6>
             </div>
@@ -63,12 +63,15 @@
             </div> 
           </div>
           <hr class="mb-4">
-          <div *ngIf="Student==true">
-            <app-student></app-student>
+          <div class="mb-4">
+            <div *ngIf="Student==true">
+              <app-student></app-student>
+            </div>
+            <div *ngIf="Student==false">
+              <app-company></app-company>
+            </div>
           </div>
-          <div *ngIf="Student==false">
-            <app-company></app-company>
-          </div>
+         
       </div>
     </div>
 
