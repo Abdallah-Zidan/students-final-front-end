@@ -195,12 +195,14 @@ const routes: Routes = [
   {
     path: 'courses',
     component: CoursesSectionComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: [1, 2] },
   },
   {
     path: 'courses/:id',
     component: CoursesSectionComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: [1, 2] },
   },
   {
     path: 'tutorials',
