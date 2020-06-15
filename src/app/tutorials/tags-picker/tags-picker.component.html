@@ -1,0 +1,19 @@
+
+
+<mat-expansion-panel class="mb-2">
+  <mat-expansion-panel-header>
+    <mat-panel-title class="text-center">
+      Tags
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <mat-action-row class="justify-content-start">
+    <button
+  mat-button
+  *ngFor="let tag of tags"
+  (click)="onClick(tag.name)"
+  [ngClass]="{ 'active': tag.active}"
+>
+  {{ tag.name }}
+</button>
+  </mat-action-row>
+</mat-expansion-panel>

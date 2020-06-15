@@ -26,6 +26,7 @@ import { QuestionDetailsComponent } from './questions-section/question-details/q
 import { SingleCompanyComponent } from './companies/single-company/single-company.component';
 import { CoursesSectionComponent} from './courses-section/courses-section.component'
 import { VerificationSuccessComponent } from './auth/register/verification-success/verification-success.component';
+import { TutorialsComponent } from './tutorials/tutorials.component';
 
 
 const routes: Routes = [
@@ -198,6 +199,11 @@ const routes: Routes = [
   {
     path: 'courses/:id',
     component: CoursesSectionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'tutorials',
+    component: TutorialsComponent,
     canActivate: [AuthGuard],
   },
   {

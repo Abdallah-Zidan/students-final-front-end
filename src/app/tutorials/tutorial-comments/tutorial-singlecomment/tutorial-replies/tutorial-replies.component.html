@@ -1,0 +1,32 @@
+<mat-accordion>
+	<mat-expansion-panel class="cont my-3" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+	  <mat-expansion-panel-header>
+		<mat-panel-title>
+		  <span class="text-primary material-icons">
+			reply
+		  </span>
+		  Reply
+		</mat-panel-title>
+	  </mat-expansion-panel-header>
+  
+	  <div class="row h-100">
+		<div class="col-9  my-auto">
+		  <mat-form-field class="example-full-width px-5">
+			<mat-label>Leave a Reply</mat-label>
+			<textarea style="height: auto;" [(ngModel)]="body" (input)="onCommenting($event)" rows="3" matInput placeholder="Ex. It makes me feel..."></textarea>
+		  </mat-form-field>
+		</div>
+		<div class="col-2 curs my-auto">
+		  <span class="text-primary material-icons" [hidden]="isEmpty" (click)="onAddReply()">
+			send
+		  </span>
+		</div>
+	  </div>
+  
+	  <div *ngFor="let reply of replies">
+		<app-tutorial-singlereply [reply]="reply" [group]="group" [postId]="postId" [commentId]="commentId"></app-tutorial-singlereply>
+	  </div>
+	</mat-expansion-panel>
+  
+  </mat-accordion>
+  
