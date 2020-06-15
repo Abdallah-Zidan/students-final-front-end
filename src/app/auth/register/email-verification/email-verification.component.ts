@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from '../../../services/storage.service';
 import { HttpService } from '../../../services/http.service';
-import { AuthService } from '../../services/auth.service';
 import { RegisterService } from "../register.service";
 import { Router } from '@angular/router';
 
@@ -15,9 +13,7 @@ export class EmailVerificationComponent implements OnInit {
 response;
 token;
   constructor(
-    private storagService:StorageService,
     private httpService:HttpService,
-    private authService: AuthService,
     private router:Router,
     private registerService:RegisterService
     ) { }
@@ -25,6 +21,8 @@ token;
   ngOnInit(): void {
     this.registerService.currentToken.subscribe(
       res => {this.token = res})
+      if(this.token==null)
+      {this.router.navigate(['/']);}
   }
 
   resendVerification()

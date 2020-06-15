@@ -17,24 +17,14 @@ import { AnnouncementsComponent } from './education/announcements/announcements.
 import { CompaniesComponent } from './companies/companies.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ChatComponent } from './chat/chat.component';
-import { AdminComponent } from './admin/admin.component';
 import { AuthorizedGuard } from './auth/services/authorized.guard';
-import { UniversitiesComponent } from './admin/universities/universities.component';
-import { FacultiesComponent } from './admin/faculties/faculties.component';
-import { DepartmentsComponent } from './admin/departments/departments.component';
-import { CoursesComponent } from './admin/courses/courses.component';
-import { UsersComponent } from './admin/users/users.component';
-import { TagsComponent } from './admin/tags/tags.component';
-import { AdminPostsComponent } from './admin/admin-posts/admin-posts.component';
-import { AdminEventsComponent } from './admin/admin-events/admin-events.component';
 import { from } from 'rxjs';
-import { QuestionsComponent } from './admin/questions/questions.component';
-import { AdminToolsComponent } from './admin/admin-tools/admin-tools.component';
 import { ToolsComponent } from './tools/tools.component';
 
 import { QuestionsSectionComponent } from './questions-section/questions-section.component';
 import { QuestionDetailsComponent } from './questions-section/question-details/question-details.component';
 import { SingleCompanyComponent } from './companies/single-company/single-company.component';
+import { VerificationSuccessComponent } from './auth/register/verification-success/verification-success.component';
 
 
 const routes: Routes = [
@@ -62,6 +52,13 @@ const routes: Routes = [
   {
     path: 'email/verify',
     component: EmailVerificationComponent,
+    canActivate: [RedirectGuard],
+    data: { depth: 4 }
+  },
+
+  {
+    path: 'email/verify/success',
+    component: VerificationSuccessComponent,
     canActivate: [RedirectGuard],
     data: { depth: 4 }
   },
@@ -153,25 +150,12 @@ const routes: Routes = [
     data: { depth: 18 }
   },
   {
-    path: 'admin',
-    component: AdminComponent,
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AuthGuard, AuthorizedGuard],
     runGuardsAndResolvers: 'always',
     data: { roles: [0, 3] , depth: 19 },
-    children: [
-      { path: 'faculties', component: FacultiesComponent, canActivate: [AuthorizedGuard], data: { roles: ['Admin'] }, },
-      { path: 'universities', component: UniversitiesComponent },
-      { path: 'departments', component: DepartmentsComponent },
-      { path: 'courses', component: CoursesComponent },
-      { path: 'users', component: UsersComponent },
-      { path: 'tags', component: TagsComponent },
-      { path: 'posts', component: AdminPostsComponent },
-      { path: 'events', component: AdminEventsComponent },
-      { path: 'questions', component: QuestionsComponent },
-      { path: 'tools', component: AdminToolsComponent },
-    ],
   },
-
   {
     path: 'tools',
     component: ToolsComponent,

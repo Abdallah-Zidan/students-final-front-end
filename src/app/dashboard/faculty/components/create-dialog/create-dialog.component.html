@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>{{ data.formName }} faculty</h2>
+<mat-dialog-content class="mat-typography">
+	<form [formGroup]="form">
+		<mat-form-field class="w-100">
+			<mat-label>Name</mat-label>
+			<input matInput formControlName="name" placeholder="Faculty name" value="{{ faculty.name }}">
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>University</mat-label>
+			<mat-select formControlName="university">
+				<mat-option *ngFor="let university of universities" [value]="university.id">{{ university.name }}</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+	<button mat-raised-button color="{{ data.submitColor }}" (click)="onSubmit($event)" [disabled]="!form.valid || isBusy">{{ data.formName }}</button>
+</mat-dialog-actions>
