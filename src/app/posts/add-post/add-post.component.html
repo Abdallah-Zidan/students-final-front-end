@@ -1,7 +1,7 @@
 <div class="post">
   <div class="row h-100">
     <div class="col-2 text-center">
-      <img class="w-75 ava" src="{{user.personalData.avatar}}" alt="">
+      <img class="w-75 ava" src="{{user.personalData.avatar}}"  alt="">
     </div>
     <div class="col-10 w-75 my-auto mx-auto">
       <div class="row w-100 h-100" *ngIf="type !=null">
@@ -19,7 +19,8 @@
           </div>
         </div>
         <div class="col-2 mr-auto mt-auto">
-          <button mat-raised-button color="accent" [hidden]="isEmpty" class="btn btn-block" (click)="onAddPost()">Post</button>
+          <button mat-raised-button color="accent" [hidden]="isEmpty" class="btn btn-block"
+            (click)="onAddPost()">Post</button>
         </div>
       </div>
     </div>

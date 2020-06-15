@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row">
+      <div class="col-2 my-auto text-center">
+        <img class="w-75 ava" src="{{comment.user.avatar}}" alt="">
+      </div>
+      <div class="col-8  my-auto">
+        <div class="col-12 px-0">
+         <a [routerLink]="['/profile', comment.user.id]"><h5 class=" my-auto px-0 text-primary">{{comment.user.name}}</h5></a>
+        </div>
+  
+        <div class="col-12">
+          <div class="row h-100">
+            <span class="my-auto text-secondary material-icons">
+              schedule
+            </span>
+            <span class="my-auto text-secondary">{{comment.created_at_human}}</span>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-2 my-auto" *ngIf="(user.id == comment.user.id)">
+        <div class="col-4 ml-auto">
+  
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="before">
+            <button mat-menu-item (click)="onEditComment()">
+              <mat-icon>create</mat-icon>
+              <span>Edit Comment</span>
+            </button>
+            <button mat-menu-item (click)="onDeleteComment()">
+              <mat-icon>delete_sweep</mat-icon>
+              <span>Delete Comment</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row h-100 my-3 mx-5" >
+      <div class="col-10" *ngIf="editing">
+        <mat-label class="text-primary mx-5" >Edit Your Answer</mat-label>
+        <textarea class="mx-5" matInput  [(ngModel)]="commentBody" style="width:85%" rows="5" ></textarea>
+      </div>
+      <div class="col-2 my-auto" *ngIf="editing">
+        <button class="btn btn-primary curs material-icons" (click)="onUpdateComment()" [disabled]="!commentBody">
+          send
+        </button>
+      </div>
+      <div class="col-1" *ngIf="!editing">
+        <div class="row" >
+            <button class="btn btn-link" [disabled]="comment.user.id==user.id || comment.rated==1" (click)="likeComment()">
+                 <i class="fa fa-arrow-circle-up fa-lg" aria-hidden="true" style="color: #007bff;"></i>
+            </button>
+        </div>
+        <div class="row" style="margin-top: 10px;margin-bottom: 10px;margin-left: 6px;">
+             <mat-label >{{comment.rates}}</mat-label>
+        </div>
+        <div class="row" >
+            <button class="btn btn-link" [disabled]="comment.user.id==user.id || comment.rated==-1" (click)="dislikeComment()">
+                <i class="fa fa-arrow-circle-down fa-lg" aria-hidden="true" style="color: #007bff;"></i>
+            </button>
+        </div>
+
+      </div>
+      <div class="col-11" *ngIf="!editing">
+        <p>{{comment.body}}</p>
+      </div>
+    </div>
+    
+  <hr>
+</div>
+ 

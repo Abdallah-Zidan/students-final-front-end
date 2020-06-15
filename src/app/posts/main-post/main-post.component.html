@@ -1,14 +1,15 @@
 <div class="container post">
-
   <div class="row h-100 mx-3 pt-3">
     <div class="col-2 my-auto text-center">
-      <img class="w-75 ava" src="{{post.creator.avatar}}" alt="">
+      <img class="w-75 ava" src="{{ post.creator.avatar }}" style="cursor: pointer;"
+        [routerLink]="['/profile',post.creator.id]" alt="" />
     </div>
     <!-- {{post.creator.avatar}} -->
     <div class="col-6 px-3 my-auto">
       <div class="row">
         <div class="col-12">
-          <h5 class="text">{{post.creator.name}}</h5>
+          <h5 class="text" style="cursor: pointer;" [routerLink]="['/profile',post.creator.id]">{{ post.creator.name }}
+          </h5>
         </div>
       </div>
 
@@ -16,23 +17,24 @@
         <span class="my-auto text-secondary material-icons">
           schedule
         </span>
-        <span class=" text-secondary">{{post.createdHuman}}</span>
+        <span class="text-secondary">{{ post.createdHuman }}</span>
       </div>
     </div>
 
     <div class="col-2">
       <div class="ribbon">
-        <i class=" float-left  fas fa-bullhorn"></i>
+        <i class="float-left fas fa-bullhorn"></i>
       </div>
     </div>
 
     <div class="col-2 my-auto">
       <div class="col-4 ml-auto">
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <button mat-icon-button *ngIf="(post.creator.id == user.id) || !post.type" [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-          <div *ngIf="(post.creator.id == user.id)">
+          <div *ngIf="post.creator.id == user.id">
             <button (click)="onEditPost()" mat-menu-item>
               <mat-icon>create</mat-icon>
               <span>Edit Post</span>
@@ -42,25 +44,33 @@
               <span>Delete Post</span>
             </button>
           </div>
+          <ng-container *ngIf="post.creator.id !== user.id">
+            <button mat-menu-item *ngIf="(!post.type && !post.isReported); else reported" (click)="onReportPost()">
+              <mat-icon>delete_sweep</mat-icon>
+              <span>Report Post</span>
+            </button>
+          </ng-container>
 
-          <button mat-menu-item *ngIf="!post.type" (click)="onReportPost()">
-            <mat-icon>delete_sweep</mat-icon>
-            <span>Report Post</span>
-          </button>
+          <ng-template #reported>
+            <button mat-menu-item [disabled]="true">
+              <span>Already reported</span>
+            </button>
+          </ng-template>
         </mat-menu>
       </div>
     </div>
   </div>
 
-
   <div *ngIf="!type">
-    <div class="row h-100  mx-5">
+    <div class="row h-100 mx-5">
       <div class="col-lg-4 col-xs-12 col-sm-12 p-3 align-self-center my-auto">
         <div class="row h-100">
           <span class="material-icons text mr-2">
             school
           </span>
-          <span class="text-secondary my-auto mr-3">{{ post.department && post.department.name}}</span>
+          <span class="text-secondary my-auto mr-3">{{
+            post.department && post.department.name
+          }}</span>
         </div>
       </div>
 
@@ -69,7 +79,9 @@
           <span class="material-icons mr-2 text">
             account_balance
           </span>
-          <span class="text-secondary">{{ post.faculty && post.faculty.name }}</span>
+          <span class="text-secondary">{{
+            post.faculty && post.faculty.name
+          }}</span>
         </div>
       </div>
     </div>
@@ -87,7 +99,12 @@
         send
       </span>
     </div>
-    <p class="lead  mx-5" [hidden]="editing">{{post.body}}</p>
+    <div class="row mx-5 my-2">
+      <h5 class="lead" *ngIf="post.title" style="text-decoration: underline;  font-weight: bold;">
+        {{post.title}}</h5>
+    </div>
+
+    <h5 class="lead  mx-5" [hidden]="editing">{{post.body}}</h5>
   </div>
 
 
@@ -114,20 +131,25 @@
         </div>
         <div class="mx-5" *ngIf="file.mime.startsWith('audio')">
           <audio controls>
-            <source src="{{file.url}}" type="{{file.mime}}">
+            <source src="{{ file.url }}" type="{{ file.mime }}" />
             Your browser does not support the audio element.
           </audio>
         </div>
-        <div class="mx-5" *ngIf="!(file.mime.startsWith('image') || file.mime.startsWith('video')|| file.mime.startsWith('audio')) ">
-          <a href="{{file.url}}" target="_self">{{file.name}}</a>
+        <div *ngIf="
+            !(
+              file.mime.startsWith('image') ||
+              file.mime.startsWith('video') ||
+              file.mime.startsWith('audio')
+            )
+          ">
+          <div class="mx-5">
+            <a href="{{ file.url }}" target="_self">{{ file.name }}</a>
+          </div>
+
         </div>
       </div>
-
     </div>
   </div>
-
-
-
 
   <div class="row h-100">
     <div class="col-10 my-auto">
@@ -143,8 +165,6 @@
       </span>
     </div>
   </div>
-
-
 
   <app-comment [comments]="post.comments" [group]="group" [postId]="post.id" [resource]="resource"></app-comment>
 </div>

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/services/auth.service';
 import { Subscription } from 'rxjs';
 import AOS from 'aos';
-
+import { User } from '../auth/user.model';
 
 @Component({
   selector: 'app-home',
@@ -38,12 +38,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) {}
   title = 'test-project';
   isAuthenticated = false;
+  user;
   private userSubcription: Subscription;
 
   ngOnInit() {
-    this.userSubcription = this.authService.user.subscribe((user) => {
+    this.userSubcription = this.authService.user.subscribe((user: User) => {
       AOS.init();
       this.isAuthenticated = !!user;
+      if (user) {
+        this.user = user;
+      }
     });
   }
   onLogout() {

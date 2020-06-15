@@ -34,11 +34,11 @@ export class AuthService {
     private groupsService: GroupsService
   ) {}
 
-  login(email: string, password: string) {
+  login(userEmail: string, userPassword: string) {
     return this.httpService
       .requestLogin({
-        email: email,
-        password: password,
+        email: userEmail,
+        password: userPassword,
         device_name: navigator.platform,
       })
       .pipe(
@@ -88,12 +88,14 @@ export class AuthService {
   autoLogin() {
     const user = this.storageService.getUser('user');
     if (user) {
-      if (user.token && user.isVerified == true) {
+      if (user.token && user.isVerified === true) {
         this.user.next(user);
         this.groupsService.getGroups(user);
       }
     }
-    this.autoLogout(user.tokenExpDate);
+    if (user) {
+      this.autoLogout(user.tokenExpDate);
+    }
   }
 
   logout() {

@@ -8,17 +8,16 @@ import { Attachment } from 'src/app/shared/models/attachment.model';
   providers: [NgbCarouselConfig], // add NgbCarouselConfig to the component providers
 })
 export class ImagesCarouselComponent implements OnInit {
-  showNavigationArrows = false;
-  showNavigationIndicators = false;
+  showNavigationArrows = true;
+  showNavigationIndicators = true;
   @Input() files: Attachment[];
+  @Input() defaultImageUrl: string;
   images: string[];
   constructor(config: NgbCarouselConfig) {
     config.showNavigationArrows = true;
     config.showNavigationIndicators = true;
   }
   ngOnInit() {
-    console.log(this.files);
-
     this.images = this.files.map((file) => file.url);
   }
 }

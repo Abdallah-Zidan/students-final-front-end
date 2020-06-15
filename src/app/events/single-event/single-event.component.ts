@@ -5,6 +5,8 @@ import { StorageService } from 'src/app/services/storage.service';
 import { Group } from 'src/app/shared/models/group.model';
 import { Post } from 'src/app/education/models/post.model';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from 'src/app/posts/main-post/main-post.component';
 @Component({
   selector: 'app-single-event',
   templateUrl: './single-event.component.html',
@@ -19,10 +21,12 @@ export class SingleEventComponent implements OnInit {
   comment = '';
   postBody;
   closeResult: string;
+  defaultImageUrl = '../../../assets/images/default-event.jpg';
   constructor(
     private postsService: PostsService,
     private storage: StorageService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    public deleteDialog: MatDialog,
   ) {}
   isEmpty = true;
   editing = false;
@@ -60,10 +64,22 @@ export class SingleEventComponent implements OnInit {
         this.editing = false;
       });
   }
-
+  onDeletePost() {
+    const dialogRef = this.deleteDialog.open(DeleteDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.postsService.deletePost(this.resource, this.post.id);
+      }
+    });
+  }
   showModal(myModal) {
     this.modalService
-      .open(myModal, { ariaLabelledBy: 'modal-basic-title', centered: true ,  size: 'lg' ,scrollable:true })
+      .open(myModal, {
+        ariaLabelledBy: 'modal-basic-title',
+        centered: true,
+        size: 'lg',
+        scrollable: true,
+      })
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;

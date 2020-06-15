@@ -1,0 +1,11 @@
+form {
+	min-width: 400px;
+	max-width: 800px;
+}
+
+@media (max-width: 575.98px) {
+	form {
+		min-width: initial;
+		max-width: initial;
+	}
+}

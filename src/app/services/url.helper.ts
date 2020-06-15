@@ -3,15 +3,31 @@ const getResourceUrlGet = (
   resource: string,
   scope: string,
   scopeId: string,
-  type: string = ''
+  type: string = '',
+  page
 ) => {
-  const url: string = baseUrl
-    .replace('{resource}', resource)
-    .replace('{scope}', scope)
-    .replace('{scope_id}', scopeId ? scopeId : '-1')
-    .replace('{type}', type);
-  console.log(url);
-
+  let url: string = baseUrl.replace('{resource}', resource);
+  if (scope) {
+    url = url.replace('{scope}', scope);
+  } else {
+    url = url.replace('?group={scope}', '');
+    url = url.replace('&type', '?type');
+  }
+  if (scopeId) {
+    url = url.replace('{scope_id}', scopeId);
+  } else {
+    url = url.replace('&group_id={scope_id}', '');
+  }
+  if (type) {
+    url = url.replace('{type}', type);
+  } else {
+    url = scope
+      ? url.replace('&type={type}', '')
+      : url.replace('?type={type}', '');
+  }
+  if (page) {
+    url = url + `&page=${page}`;
+  }
   return url;
 };
 const getResourcesUrl = (

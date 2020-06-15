@@ -5,7 +5,13 @@ import { GroupsService } from 'src/app/services/groups.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from 'src/app/shared/models/group.model';
 import { Subscription } from 'rxjs';
-import { trigger, transition, state, style, animate } from '@angular/animations';
+import {
+  trigger,
+  transition,
+  state,
+  style,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-group',
@@ -18,7 +24,7 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
     private groupsService: GroupsService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
   facultyGroups = this.postsService.facultyGroups;
   departmentGroups = this.postsService.departmentGroups;
   posts: Post[] = [];
@@ -30,7 +36,6 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
     this.subscription = this.postsService.posts.subscribe((posts) => {
       this.posts = posts;
     });
-
 
     this.activatedRoute.params.subscribe((map) => {
       const key1 = 'id';
@@ -46,6 +51,7 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
       if (id && scope) {
         this.currentGroup = this.groupsService.getGroup(id, scope);
       } else {
+        this.currentGroup = tmp;
         this.router.navigate(['/groups', tmp.scope, tmp.id]);
       }
       if (this.currentGroup) {
@@ -56,6 +62,7 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
           1
         );
       } else {
+        this.currentGroup = tmp;
         this.router.navigate(['/groups', tmp.scope, tmp.id]);
       }
     });
@@ -64,7 +71,16 @@ export class GroupComponent implements OnInit, OnDestroy, DoCheck {
   getPosts(resource, scope, id, page) {
     this.postsService.getPosts(resource, scope, id, '', page);
   }
-
+  onLoadMore() {
+    if (this.currentGroup) {
+      this.postsService.loadMore(
+        'posts',
+        this.currentGroup.scope,
+        this.currentGroup.id,
+        ''
+      );
+    }
+  }
   ngDoCheck() {
     if (+this.currentGroup.scope === 0) {
       this.image = 'groups';

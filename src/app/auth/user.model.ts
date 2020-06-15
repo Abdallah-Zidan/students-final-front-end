@@ -18,6 +18,9 @@ export class User {
   }
   private getRole() {
     switch (this.type) {
+      case 'Admin':
+        this.role = 0;
+        break;
       case 'Student':
         this.role = 1;
         break;

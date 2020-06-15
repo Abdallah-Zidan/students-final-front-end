@@ -4,5 +4,9 @@
     <app-add-post [group]="currentGroup" [resource]="resource" [type]="null"></app-add-post>
     <app-main-post *ngFor="let post of posts" [post]="post" [group]="currentGroup" [resource]="resource" type="null">
     </app-main-post>
+    <div style="margin: auto; text-align: center;" *ngIf="posts.length > 9">
+      <button class="btn btn-info" (click)="onLoadMore()">load more ...</button>
+    </div>
   </div>
+
 </app-nav>

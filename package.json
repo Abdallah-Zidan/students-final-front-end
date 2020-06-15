@@ -38,6 +38,7 @@
     "mat-video": "^2.8.1",
     "ng-sidebar": "^9.3.0",
     "ng2-modal-module": "^1.0.1",
+    "ngx-audio-player": "^9.1.0",
     "ngx-bootstrap": "^5.6.1",
     "ngx-owl-carousel-o": "^3.0.1",
     "perfect-scrollbar": "^1.5.0",

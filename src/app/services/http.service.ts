@@ -43,6 +43,7 @@ const endPoints = {
   
   report: 'http://localhost:8000/api/v1/posts/report',
   questions: 'http://localhost:8000/api/v1/questions',
+  rates: 'http://localhost:8000/api/v1/comments/{comment_id}/rates'
 
 };
 
@@ -108,7 +109,7 @@ export class HttpService {
   }
   requestPosts(resource, scope, scopeId, type, page) {
     return this.http.get(
-      getResourceUrlGet(endPoints.getResources, resource, scope, scopeId, type)
+      getResourceUrlGet(endPoints.getResources, resource, scope, scopeId, type,page)
     );
   }
 
@@ -132,7 +133,7 @@ export class HttpService {
   }
   requestReportPost(resourceId) {
     return this.http.post(endPoints.report, {
-      data: resourceId,
+      id: resourceId,
     });
   }
   requestAddComment(resource, commentBody: string, resourceId: string) {
@@ -200,8 +201,12 @@ export class HttpService {
     {return this.http.get(endPoints.questions,{ params: {tags:tags} });}
   }
 
-  requestQuestion(id){
-    {return this.http.get(endPoints.questions,{ params: {id:id} });}
-  }
+ requsetEditRates(rate, commentId,comment){
+  return this.http.post(endPoints.rates.replace('{comment_id}', commentId), {
+    rate: rate,
+    comment:comment,
+  });
+ }
+ 
 
 }

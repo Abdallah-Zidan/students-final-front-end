@@ -12,7 +12,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AddEventComponent implements OnInit {
   user: User;
-  body = '';
+  body: string;
   title: string;
   startDate: string;
   endDate: string;
@@ -47,13 +47,9 @@ export class AddEventComponent implements OnInit {
     }
   }
   onAddPost() {
-    console.log(this.startDate);
-
     const formData = new FormData();
     formData.append('body', this.body);
-    if (this.title) {
-      formData.append('title', this.title);
-    }
+    formData.append('title', this.title);
     if (this.group) {
       formData.append('group', this.group.scope);
       formData.append('group_id', this.group.id);
@@ -68,6 +64,8 @@ export class AddEventComponent implements OnInit {
 
     this.postsService.addPost(this.resource, formData).subscribe((res) => {
       if (res.data) {
+        console.log(res);
+
         this.body = '';
         this.title = '';
         this.selectedFiles = [];
@@ -77,7 +75,6 @@ export class AddEventComponent implements OnInit {
         this.isEmpty = true;
       }
     });
- 
   }
   add() {
     if (this.addFile) {
