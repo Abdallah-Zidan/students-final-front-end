@@ -203,6 +203,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'tutorials',
+    component: TutorialsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'under-construction',
     component: UnderConstructionComponent,
     canActivate: [AuthGuard],
