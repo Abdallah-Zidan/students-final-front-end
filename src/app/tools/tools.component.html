@@ -1,8 +1,9 @@
 <app-nav>
+
+  <img class="anim w-100 img-fluid" src="../../assets/images/assets/tools.jpg" alt="">
     <div class="wrapper" >
       <app-add-tool *ngIf="selectedButton==1" [RequestType]="type" [ToolTags]="ToolTags"></app-add-tool>
 
-                                           <!-- Search form -->
       <div class="container h-100" *ngIf="selectedButton!=1">
         <div class=" justify-content-center h-100">
               <div class="searchbar">
@@ -13,8 +14,8 @@
         </div>
       </div>
 
-      <div class="o-switch btn-group" style="align-items: center;" data-toggle="buttons" role="group" >
-        <label class="btn btn-outline-primary active">
+      <div class="o-switch bg-light btn-group" style="align-items: center;" data-toggle="buttons" role="group" >
+        <label class="btn  btn-outline-primary active">
           <input type="radio" name="options" id="option1" autocomplete="off" (click)="onItemChange(1)" checked> All
         </label>
         <label class="btn btn-outline-primary">

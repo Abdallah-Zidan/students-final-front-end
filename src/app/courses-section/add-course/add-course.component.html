@@ -1,0 +1,33 @@
+<div class="post">
+	<div class="row h-100">
+	  <div class="col-2 text-center">
+		<img class="w-75 ava" src="{{user.personalData.avatar}}" alt="">
+	  </div>
+	  <div class="col-10 w-75 my-auto mx-auto">
+		<div class="row w-100 h-100" *ngIf="type !=null">
+		  <div class="col-10">
+			<textarea placeholder="title" class="w-100" [(ngModel)]="title" [rows]="2" [cols]="50" pInputTextarea
+			  autoResize="autoResize"></textarea>
+		  </div>
+		</div>
+		<div class="row w-100 h-100">
+		  <div class="col-10">
+			<textarea placeholder="add post" class="w-100" [(ngModel)]="body" (input)="onCommenting($event)" [rows]="3"
+			  [cols]="50" pInputTextarea autoResize="autoResize"></textarea>
+			<div class="row w-100 mx-auto">
+			  <button mat-raised-button color="primary" class="btn-block" (click)="add()"> {{addOrRemove}}</button>
+			</div>
+		  </div>
+		  <div class="col-2 mr-auto mt-auto">
+			<button mat-raised-button color="accent" [hidden]="isEmpty" class="btn btn-block" (click)="onAddPost()">Post</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  
+	<div class="row w-100" *ngIf="addFile">
+	  <file-upload class="w-100" [(ngModel)]="selectedFiles"> </file-upload>`
+	</div>
+  </div>
+  <simple-notifications></simple-notifications>
+  

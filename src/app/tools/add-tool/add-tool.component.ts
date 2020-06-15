@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {StorageService} from '../../services/storage.service'
-import {HttpService} from '../../services/http.service'
+import { StorageService } from '../../services/storage.service'
+import { HttpService } from '../../services/http.service'
 import { Router } from '@angular/router';
 import { ToolService } from 'src/app/tools/services/tool.service';
 
@@ -13,27 +13,30 @@ import { ToolService } from 'src/app/tools/services/tool.service';
 })
 export class AddToolComponent implements OnInit {
 
+  addOrRemove = 'Add File(s)';
+  addFile = false;
+
   constructor(
-    private storageService:StorageService,
-    private httpService:HttpService,
-    private router:Router,
-    private toolService:ToolService,
-    ) { }
+    private storageService: StorageService,
+    private httpService: HttpService,
+    private router: Router,
+    private toolService: ToolService,
+  ) { }
   @Input() RequestType;
   @Input() ToolTags;
-  user;data;newTag;
+  user; data; newTag;
   type;
-  tags:Array<string> = [];
+  tags: Array<string> = [];
   toolFiles: File[] = [];
-  title;body;location
+  title; body; location
 
   ngOnInit(): void {
-    this.user=this.storageService.getItem('user')
+    this.user = this.storageService.getItem('user')
 
   }
 
- 
-   displayForm() {
+
+  displayForm() {
     let add_form = document.getElementById("add_form");
     let add_button = document.getElementById("add_button");
 
@@ -41,10 +44,9 @@ export class AddToolComponent implements OnInit {
       add_button.style.display = "none";
       add_form.style.display = "block";
     }
-    else
-    {
-      this.title=this.body=this.newTag=this.type=this.location=null
-      this.toolFiles=this.tags=[]
+    else {
+      this.title = this.body = this.newTag = this.type = this.location = null
+      this.toolFiles = this.tags = []
 
       add_button.style.display = "flex";
       add_form.style.display = "none";
@@ -58,63 +60,72 @@ export class AddToolComponent implements OnInit {
     if (add_input.style.display === "none") {
       add_input.style.display = "block";
     }
-    else
-    {
-      this.newTag=null
+    else {
+      this.newTag = null
       add_input.style.display = "none";
     }
   }
 
 
-  addNewTag(){
+  addNewTag() {
     let found;
-    if(this.newTag){
-      found =  this.ToolTags.find(x=>x.name == this.newTag);
-      if(!found)
-        { this.ToolTags.push({name:this.newTag});}
+    if (this.newTag) {
+      found = this.ToolTags.find(x => x.name == this.newTag);
+      if (!found) { this.ToolTags.push({ name: this.newTag }); }
       this.tags = this.tags || [];
       this.tags.push(this.newTag);
-      }
-      this.displayTagInput()
+    }
+    this.displayTagInput()
   }
 
 
-  addPost(){
+  addPost() {
     const formData = new FormData();
     formData.append('type', this.type);
     formData.append('title', this.title);
     formData.append('body', this.body);
-    if(this.toolFiles!=null){
+    if (this.toolFiles != null) {
       for (const file of this.toolFiles) {
-        formData.append('files[]', file[0]);}
-     }
-     this.location?this.tags.push(this.location):"";
-    if(this.tags!=null){
+        formData.append('files[]', file[0]);
+      }
+    }
+    this.location ? this.tags.push(this.location) : "";
+    if (this.tags != null) {
       for (const tag of this.tags) {
-        formData.append('tags[]', tag);}
-     }
-    this.httpService.requestAddPost('tools',formData).subscribe(
-      result=>{
-        this.toolService.addTool(result,this.user,this.type,this.title,this.body,this.tags)
+        formData.append('tags[]', tag);
+      }
+    }
+    this.httpService.requestAddPost('tools', formData).subscribe(
+      result => {
+        this.toolService.addTool(result, this.user, this.type, this.title, this.body, this.tags)
         this.displayForm();
       },
-      error=>{
+      error => {
         console.log(error)
       }
     );
   }
 
-  
+
 
   onChangeFile(event) {
     this.toolFiles.push(event.target.files);
+    this.addOrRemove = 'Add File(s)';
   }
 
-  removeFile(event)
-  {
-  let removeIndex= this.toolFiles.indexOf(event)
-  this.toolFiles.splice(removeIndex, 1);  
+  removeFile(event) {
+    let removeIndex = this.toolFiles.indexOf(event)
+    this.toolFiles.splice(removeIndex, 1);
   }
 
+  add() {
+    if (this.addFile) {
+      this.addFile = false;
+      this.addOrRemove = 'Add File(s)';
+    } else {
+      this.addFile = true;
+      this.addOrRemove = 'Cancel';
+    }
+  }
 
 }

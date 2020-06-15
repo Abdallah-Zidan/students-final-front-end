@@ -4,7 +4,7 @@
       <img class="w-75 ava" src="{{ post.creator.avatar }}" style="cursor: pointer;"
         [routerLink]="['/profile',post.creator.id]" alt="" />
     </div>
-    <!-- {{post.creator.avatar}} -->
+  
     <div class="col-6 px-3 my-auto">
       <div class="row">
         <div class="col-12">
@@ -23,7 +23,7 @@
 
     <div class="col-2">
       <div class="ribbon">
-        <i class="float-left fas fa-bullhorn"></i>
+        <i class="float-left icon fas fa-bullhorn"></i>
       </div>
     </div>
 
@@ -46,7 +46,7 @@
           </div>
           <ng-container *ngIf="post.creator.id !== user.id">
             <button mat-menu-item *ngIf="(!post.type && !post.isReported); else reported" (click)="onReportPost()">
-              <mat-icon>delete_sweep</mat-icon>
+              <mat-icon>report</mat-icon>
               <span>Report Post</span>
             </button>
           </ng-container>
