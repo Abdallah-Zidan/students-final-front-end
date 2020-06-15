@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Show post</h2>
+<mat-dialog-content class="mat-typography">
+	<form>
+		<mat-form-field class="w-100">
+			<mat-label>Id</mat-label>
+			<input matInput value="{{ post.id }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Body</mat-label>
+			<textarea matInput cdkTextareaAutosize readonly>{{ post.body }}</textarea>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Reported</mat-label>
+			<input matInput value="{{ post.reported.toString() | titlecase }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Year</mat-label>
+			<input matInput value="{{ post.year }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>User</mat-label>
+			<input matInput value="{{ post.user.name }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Scope</mat-label>
+			<input matInput value="{{ post.scope }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Created from</mat-label>
+			<input matInput value="{{ post.created_at }}" readonly>
+		</mat-form-field>
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>

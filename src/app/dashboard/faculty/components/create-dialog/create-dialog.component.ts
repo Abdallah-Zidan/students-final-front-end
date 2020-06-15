@@ -13,7 +13,7 @@ import { University } from '../../../university/models/university.model';
 export class CreateDialogComponent implements OnInit {
 	form: FormGroup;
 	faculty: Faculty;
-	universities: Array<University>
+	universities: Array<University>;
 	onSubmitd = new EventEmitter<Faculty>();
 	isBusy: boolean = false;
 
