@@ -1,9 +1,9 @@
 <div class="row">
-    <div class="col-2 my-auto text-center">
+    <div [routerLink]="['/profile', reply.user.id]" class="col-2 my-auto text-center">
       <img class="w-75 ava" src="{{user.avatar}}" alt="">
     </div>
     <div class="col-8  my-auto">
-      <div class="col-12 px-0">
+      <div [routerLink]="['/profile', reply.user.id]" class="col-12 px-0">
         <h5 class=" my-auto px-0 text">{{reply.user.name}}</h5>
       </div>
       
@@ -12,20 +12,20 @@
           <span class="my-auto text-secondary material-icons">
             schedule
           </span>
-          <span class="my-auto text-secondary">3 min. ago</span>
+          <span class="my-auto text-secondary">now</span>
         </div>
       </div>
     </div>
     
     
-    <div class="col-2 my-auto" *ngIf="reply.user.id == user.id">
+    <div class="col-2 my-auto" *ngIf="reply.user.id == user.id||tool.user.id==user.id">
       <div class="col-4 ml-auto">
   
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-          <button mat-menu-item (click)="onEditReply()">
+          <button mat-menu-item (click)="onEditReply()"  *ngIf="reply.user.id == user.id">
             <mat-icon>create</mat-icon>
             <span >Edit Reply</span>
           </button>

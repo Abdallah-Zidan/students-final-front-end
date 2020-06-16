@@ -31,6 +31,6 @@
 </div>
 <div mat-dialog-actions style="align-items: center;">
   <button class="btn btn-light" mat-button (click)="onNoClick()">cancel</button>
-  <button class="btn btn-primary" mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="!data.body||!data.title||!data.tags">save</button>
+  <button class="btn btn-primary" mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="!data.body||!data.title||data.tags==null">save</button>
 </div>
 

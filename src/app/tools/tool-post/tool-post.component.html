@@ -1,7 +1,7 @@
 <div class="container post">
   <div class="row h-100 mx-3 pt-3">
     <div class="col-2 my-auto text-center">
-      <img class="w-75 ava" src="{{tool.user.avatar}}" alt="">
+      <img [routerLink]="['/profile', tool.user.id]" class="w-75 ava" src="{{tool.user.avatar}}" alt="">
     </div>
 
     <div class="col-6 px-3 my-auto">
@@ -63,75 +63,57 @@
     </div>
   </div>
 
-  <div class="row h-100 mx-auto" *ngIf="tool.files.length > 0">
-    <hr>
-    <div class="col-8">
-      <div *ngFor="let file of tool.files">
-        <div *ngIf="file.mime.startsWith('image')">
-          <div class="row h-100">
-            <div class="col-md-6">
-              <img class="img-fluid my-3" src="{{file.url}}" alt="image">
+  <div class="card mb-3">
+    <div class="row h-100 mx-auto" *ngIf="tool.files.length > 0">
+      <hr>
+        <div *ngFor="let file of tool.files">
+          <div *ngIf="file.mime.startsWith('image')">
+                <a  href="{{file.url}}"><img class="img-fluid my-3" src="{{file.url}}" alt="image"></a>
+          </div>
+          <div *ngIf="file.mime.startsWith('video')">
+            <mat-video src="{{file.url}}" [preload]="true" [fullscreen]="true" [download]="true" color="accent"
+              spinner="spin">
+            </mat-video>
+          </div>
+          <div *ngIf="file.mime.startsWith('audio')">
+            <audio controls>
+              <source src="{{file.url}}" type="{{file.mime}}">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div
+            *ngIf="!(file.mime.startsWith('image') || file.mime.startsWith('video')|| file.mime.startsWith('audio')) ">
+            <div class="fileList">
+              <img class="file-img" src="assets/images/file.png" alt="">
+              <a href="{{file.url}}" target="_self " class="example-full-width">{{file.name}}</a>
             </div>
           </div>
         </div>
-
-        <div *ngIf="file.mime.startsWith('video')">
-          <mat-video src="{{file.url}}" [preload]="true" [fullscreen]="true" [download]="true" color="accent"
-            spinner="spin">
-          </mat-video>
+    </div>  
+    <div class="card-body">
+      <h5>{{tool.title}}</h5>
+      <p class="card-text">{{tool.body}}</p>
+      <p *ngFor="let tag of tool.tags" class="btn btn-primary" style="margin-right: 10px;">#{{tag}}</p>
+      <div class="row h-100 mx-5">
+        <div class="col-10 my-auto" *ngIf="!tool.closed">
+          <mat-form-field class="example-full-width px-5">
+            <mat-label>Leave a comment</mat-label>
+            <textarea [(ngModel)]="CommentBody" rows="3" matInput placeholder="Ex. It makes me feel..."></textarea>
+          </mat-form-field>
         </div>
-        <div *ngIf="file.mime.startsWith('audio')">
-          <audio controls>
-            <source src="{{file.url}}" type="{{file.mime}}">
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-        <div class="col-6"
-          *ngIf="!(file.mime.startsWith('image') || file.mime.startsWith('video')|| file.mime.startsWith('audio')) ">
-          <div class="fileList">
-            <img class="file-img" src="assets/images/file.png" alt="">
-            <a href="{{file.url}}" target="_self " class="example-full-width">{{file.name}}</a>
-          </div>
+        <div *ngIf="!tool.closed" class="col-2 my-auto">
+          <button class="btn btn-primary material-icons" [disabled]="!CommentBody" (click)="addComment()">
+            <span>send</span>
+          </button>
         </div>
       </div>
-
-    </div>
-    <div class="col-2"></div>
-  </div>
-
-  <div class="mx-5">
-
-    <div class="row h-100 mx-5">
-      <h3>{{tool.title}}</h3>
-    </div>
-
-    <div class="row h-100 mx-5">
-      <p class="lead px-0 py-2">{{tool.body}}</p>
-    </div>
-
-    <!-- <div class="row h-100 mx-5">
-      <p class="text-secondary px-0" style="color: blue;">type: {{tool.type}}</p>
-    </div> -->
-  </div>
-
-
-
-
-  <div class="row h-100 mx-5" *ngFor="let tag of tool.tags" style="color: blue;">#{{tag}}</div>
-  <div class="row h-100 mx-5">
-    <div class="col-10 my-auto" *ngIf="!tool.closed">
-      <mat-form-field class="example-full-width px-5">
-        <mat-label>Leave a comment</mat-label>
-        <textarea [(ngModel)]="CommentBody" rows="3" matInput placeholder="Ex. It makes me feel..."></textarea>
-      </mat-form-field>
-    </div>
-    <div *ngIf="!tool.closed" class="col-2 my-auto">
-      <button class="btn btn-primary material-icons" [disabled]="!CommentBody" (click)="addComment()">
-        <span>send</span>
-      </button>
+    
+    
+      <app-tool-comments  [comments]="tool.comments" [tool]="tool"></app-tool-comments>
     </div>
   </div>
 
+  
 
-  <app-tool-comments  [comments]="tool.comments" [tool]="tool"></app-tool-comments>
-</div>
+    </div>
+   

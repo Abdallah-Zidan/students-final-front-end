@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
-      <div class="col-2 my-auto text-center">
+      <div [routerLink]="['/profile', comment.user.id]" class="col-2 my-auto text-center">
         <img class="w-100 ava" src="{{comment.user.avatar}}" alt="">
       </div>
       <div class="col-8  my-auto">
         <div class="col-12 px-0">
-          <h5 class=" my-auto px-0 text-primary">{{comment.user.name}}</h5>
+          <h5 [routerLink]="['/profile', comment.user.id]" class=" my-auto px-0 text-primary">{{comment.user.name}}</h5>
         </div>
   
         <div class="col-12">
@@ -18,14 +18,14 @@
         </div>
       </div>
   
-      <div class="col-2 my-auto" *ngIf="(user.id == comment.user.id)">
+      <div class="col-2 my-auto" *ngIf="(user.id == comment.user.id)||(user.id == tool.user.id)">
         <div class="col-4 ml-auto">
   
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu" xPosition="before">
-            <button mat-menu-item  (click)="onEditComment()">
+            <button mat-menu-item  (click)="onEditComment()" *ngIf="(user.id == comment.user.id)">
               <mat-icon>create</mat-icon>
               <span>Edit Comment</span>
             </button>
@@ -54,6 +54,6 @@
       </div>
     </div>
   
-    <!-- <app-tool-reply [replies]="comment.replies" [tool]="tool" [comment]="comment"></app-tool-reply> -->
+    <app-tool-reply [replies]="comment.replies" [tool]="tool" [comment]="comment"></app-tool-reply>
   </div>
  
