@@ -182,16 +182,16 @@ export class HttpService {
   }
 
   
-  requestTools(type,tags){
+  requestTools(type,tags,page){
     if(!tags)
-    {return this.http.get(endPoints.tools,{ params: {type:type} });}
+    {return this.http.get(endPoints.tools,{ params: {type:type,page:page} });}
     else
-    {return this.http.get(endPoints.tools,{ params: {type:type,tags:tags} });}
+    {return this.http.get(endPoints.tools,{ params: {type:type,tags:tags,page:page} });}
   }
 
 
   requestCloseTool(resourceId) {
-    return this.http.post(endPoints.CloseTool, {data: resourceId});
+    return this.http.post(endPoints.CloseTool, {id: resourceId});
   }
   
   requestQuestions(tags){

@@ -17,6 +17,11 @@ CommentBody;
 @Input() tool;
 @Input() user;
 @Input() ToolTags;
+@Input() type1;
+@Input() type2;
+@Input() button;
+
+
   constructor(
     public dialog: MatDialog,
     public deleteDialog:MatDialog,

@@ -10,7 +10,7 @@
 
     .askbtn {
         border-radius: 25px;
-        margin-top   : 50px;
+        // margin-top   : 50px;
     }
 
     h5 {
@@ -18,7 +18,7 @@
     }
 
     .bar {
-        background   : #f3f9fd;
+        background   : #f0f1f1;
         padding      : 10px 0;
         text-align   : center;
         margin-bottom: 20px;
@@ -121,3 +121,27 @@
 
     .searchbar:hover > .search_icon{
     color: #0e71c8;}
+
+    
+.tag-btn {
+    background-color: #1565c0; 
+    border: none; 
+    color: white; 
+    border-radius: 50%;
+    font-size: 8px; 
+    cursor: pointer; 
+    margin-left: 5px;
+  }
+  
+  .tag-btn:hover {
+    background-color: RoyalBlue;
+  }
+
+.myinput {
+    position : absolute;
+    font-size: 50px;
+    opacity  : 0;
+    right    : 0;
+    top      : 0;
+}
+

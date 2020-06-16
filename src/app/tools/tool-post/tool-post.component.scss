@@ -24,11 +24,43 @@ i {
 }
 
 
-.ribbon {
+.ribbon1 {
     width           : 60px;
     height          : 70px;
-    background-color: $ribbonColor;
     position        : absolute;
+    right           : 0px;
+    top             : -32px;
+    background-color: rgb(243, 243, 81);
+
+    &:before {
+        content      : '';
+        position     : absolute;
+        z-index      : 2;
+        left         : 0;
+        bottom       : -30px;
+        border-left  : 30px solid rgb(243, 243, 81);
+        border-right : 30px solid rgb(243, 243, 81);
+        border-bottom: 30px solid transparent;
+    }
+
+    &:after {
+        content         : '';
+        width           : 200px;
+        height          : 270px;
+        position        : absolute;
+        z-index         : -1;
+        left            : 0;
+        bottom          : -120px;
+        background-color: $shadow;
+        transform       : skewY(35deg) skewX(0);
+    }
+}
+
+.ribbon2 {
+    width           : 60px;
+    height          : 70px;
+    position        : absolute;
+    background-color: #0e71c8;
     right           : 0px;
     top             : -32px;
 
@@ -38,8 +70,8 @@ i {
         z-index      : 2;
         left         : 0;
         bottom       : -30px;
-        border-left  : 30px solid $ribbonColor;
-        border-right : 30px solid $ribbonColor;
+        border-left  : 30px solid #0e71c8;
+        border-right : 30px solid #0e71c8;
         border-bottom: 30px solid transparent;
     }
 

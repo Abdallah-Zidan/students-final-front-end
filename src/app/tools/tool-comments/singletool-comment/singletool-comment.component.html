@@ -25,7 +25,7 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu" xPosition="before">
-            <button mat-menu-item (click)="onEditComment()">
+            <button mat-menu-item  (click)="onEditComment()">
               <mat-icon>create</mat-icon>
               <span>Edit Comment</span>
             </button>
@@ -40,12 +40,12 @@
   
     <div class="row h-100 my-3 mx-5" >
       <div class="col-8" *ngIf="editing">
-        <mat-label class="text-primary" >Edit Your Post</mat-label>
+        <mat-label class="text-primary" >Edit Your Comment</mat-label>
         <textarea class="mx-5" matInput  [(ngModel)]="commentBody"></textarea>
       </div>
       <div class="col-2" *ngIf="editing"></div>
       <div class="col-2 my-auto" *ngIf="editing">
-        <button class="text-primary curs material-icons" (click)="onUpdateComment()">
+        <button class="btn btn-primary material-icons" [disabled]="!commentBody" (click)="onUpdateComment()">
           send
         </button>
       </div>

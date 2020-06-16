@@ -105,119 +105,213 @@ export class SidebarComponent implements OnInit {
     }
   }
   getMenuList() {
-    return [
-      {
-        title: 'Navigate to',
-        type: 'header',
-      },
-      [1, 2].includes(this.user.role)
-        ? {
-            title: 'Department Groups',
-            icon: 'fa fa-users',
+    if(this.user.personalData.type=="Student")
+          return [
+            {
+              title: 'Navigate to',
+              type: 'header',
+            },
+            [1, 2].includes(this.user.role)
+              ? {
+                  title: 'Department Groups',
+                  icon: 'fa fa-users',
+                  active: false,
+                  type: 'dropdown',
+                  submenus: this.getDepartmentgroups('groups'),
+                }
+              : null,
+            [1, 2, 3].includes(this.user.role)
+              ? {
+                  title: 'Faculty Groups',
+                  icon: 'fa fa-university',
+                  active: false,
+                  type: 'dropdown',
+                  submenus: this.getFacultygroups('groups'),
+                }
+              : null,
+            [1, 2, 3].includes(this.user.role)
+              ? {
+                  title: 'Announcements',
+                  icon: 'fa fa-university',
+                  active: false,
+                  type: 'dropdown',
+                  submenus: this.getFacUniGroups('announcements'),
+                }
+              : null,
+            {
+              title: 'Events',
+              icon: 'fa fa-calendar',
+              active: false,
+              type: 'dropdown',
+              submenus: this.getFacUniGroups('events'),
+            },
+            {
+              title: 'Trainings',
+              icon: 'fa fa-globe',
+              active: false,
+              type: 'dropdown',
+              submenus: this.getFacUniGroups('companies'),
+              typo: 1,
+            },
+            {
+              title: 'Internships',
+              icon: 'fa fa-globe',
+              active: false,
+              type: 'dropdown',
+              submenus: this.getFacUniGroups('companies'),
+              typo: 2,
+            },
+            {
+              title: 'Job Offers',
+              icon: 'fa fa-globe',
+              active: false,
+              type: 'dropdown',
+              submenus: this.getFacUniGroups('companies'),
+              typo: 4,
+            },
+            {
+              title: 'Extra',
+              type: 'header',
+            },
+            {
+              title: 'Tools Sharing',
+              icon: 'fa fa-handshake-o',
+              active: false,
+              type: 'simple',
+              badge: {
+                text: 'Beta',
+                class: 'badge-primary',
+              },
+              link:'/tools',
+            },
+            {
+              title: 'Sharing Habitations',
+              icon: 'fa fa-home',
+              active: false,
+              type: 'simple',
+              badge: {
+                text: 'Beta',
+                class: 'badge-primary',
+              },
+              link:'/transportition',
+            },
+            {
+              title: 'Questions',
+              icon: 'fa fa-question',
+              active: false,
+              type: 'simple',
+              badge: {
+                text: 'Beta',
+                class: 'badge-primary',
+              },
+              link:'/questions',
+            },
+            // {
+            //   title: 'Calendar',
+            //   icon: 'fa fa-calendar',
+            //   active: false,
+            //   type: 'simple',
+            // },
+            // {
+            //   title: 'Examples',
+            //   icon: 'fa fa-folder',
+            //   active: false,
+            //   type: 'simple',
+            // },
+          ];
+    else
+        return [
+          {
+            title: 'Navigate to',
+            type: 'header',
+          },
+          [1, 2].includes(this.user.role)
+            ? {
+                title: 'Department Groups',
+                icon: 'fa fa-users',
+                active: false,
+                type: 'dropdown',
+                submenus: this.getDepartmentgroups('groups'),
+              }
+            : null,
+          [1, 2, 3].includes(this.user.role)
+            ? {
+                title: 'Faculty Groups',
+                icon: 'fa fa-university',
+                active: false,
+                type: 'dropdown',
+                submenus: this.getFacultygroups('groups'),
+              }
+            : null,
+          [1, 2, 3].includes(this.user.role)
+            ? {
+                title: 'Announcements',
+                icon: 'fa fa-university',
+                active: false,
+                type: 'dropdown',
+                submenus: this.getFacUniGroups('announcements'),
+              }
+            : null,
+          {
+            title: 'Events',
+            icon: 'fa fa-calendar',
             active: false,
             type: 'dropdown',
-            submenus: this.getDepartmentgroups('groups'),
-          }
-        : null,
-      [1, 2, 3].includes(this.user.role)
-        ? {
-            title: 'Faculty Groups',
-            icon: 'fa fa-university',
+            submenus: this.getFacUniGroups('events'),
+          },
+          {
+            title: 'Trainings',
+            icon: 'fa fa-globe',
             active: false,
             type: 'dropdown',
-            submenus: this.getFacultygroups('groups'),
-          }
-        : null,
-      [1, 2, 3].includes(this.user.role)
-        ? {
-            title: 'Announcements',
-            icon: 'fa fa-university',
+            submenus: this.getFacUniGroups('companies'),
+            typo: 1,
+          },
+          {
+            title: 'Internships',
+            icon: 'fa fa-globe',
             active: false,
             type: 'dropdown',
-            submenus: this.getFacUniGroups('announcements'),
-          }
-        : null,
-      {
-        title: 'Events',
-        icon: 'fa fa-calendar',
-        active: false,
-        type: 'dropdown',
-        submenus: this.getFacUniGroups('events'),
-      },
-      {
-        title: 'Trainings',
-        icon: 'fa fa-globe',
-        active: false,
-        type: 'dropdown',
-        submenus: this.getFacUniGroups('companies'),
-        typo: 1,
-      },
-      {
-        title: 'Internships',
-        icon: 'fa fa-globe',
-        active: false,
-        type: 'dropdown',
-        submenus: this.getFacUniGroups('companies'),
-        typo: 2,
-      },
-      {
-        title: 'Job Offers',
-        icon: 'fa fa-globe',
-        active: false,
-        type: 'dropdown',
-        submenus: this.getFacUniGroups('companies'),
-        typo: 4,
-      },
-      {
-        title: 'Extra',
-        type: 'header',
-      },
-      {
-        title: 'Tools Sharing',
-        icon: 'fa fa-handshake-o',
-        active: false,
-        type: 'simple',
-        badge: {
-          text: 'Beta',
-          class: 'badge-primary',
-        },
-        link:'/tools',
-      },
-      {
-        title: 'Sharing Habitations',
-        icon: 'fa fa-home',
-        active: false,
-        type: 'simple',
-        badge: {
-          text: 'Beta',
-          class: 'badge-primary',
-        },
-        link:'/transportition',
-      },
-      {
-        title: 'Questions',
-        icon: 'fa fa-question',
-        active: false,
-        type: 'simple',
-        badge: {
-          text: 'Beta',
-          class: 'badge-primary',
-        },
-        link:'/questions',
-      },
-      {
-        title: 'Calendar',
-        icon: 'fa fa-calendar',
-        active: false,
-        type: 'simple',
-      },
-      {
-        title: 'Examples',
-        icon: 'fa fa-folder',
-        active: false,
-        type: 'simple',
-      },
-    ];
+            submenus: this.getFacUniGroups('companies'),
+            typo: 2,
+          },
+          {
+            title: 'Job Offers',
+            icon: 'fa fa-globe',
+            active: false,
+            type: 'dropdown',
+            submenus: this.getFacUniGroups('companies'),
+            typo: 4,
+          },
+          {
+            title: 'Extra',
+            type: 'header',
+          },
+          
+          {
+            title: 'Questions',
+            icon: 'fa fa-question',
+            active: false,
+            type: 'simple',
+            badge: {
+              text: 'Beta',
+              class: 'badge-primary',
+            },
+            link:'/questions',
+          },
+          // {
+          //   title: 'Calendar',
+          //   icon: 'fa fa-calendar',
+          //   active: false,
+          //   type: 'simple',
+          // },
+          // {
+          //   title: 'Examples',
+          //   icon: 'fa fa-folder',
+          //   active: false,
+          //   type: 'simple',
+          // },
+        ];
   }
   changeTheme() {
     this.isTrue = !this.isTrue;

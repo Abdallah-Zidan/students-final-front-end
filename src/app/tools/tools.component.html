@@ -1,6 +1,7 @@
 <app-nav>
+  <img *ngIf="type=='0'" class="anim w-100 img-fluid" src="../../assets/images/assets/tools.jpg" alt="">
+  <img *ngIf="type=='2'" class="anim w-100 img-fluid" src="../../assets/images/habitations-38.png" alt="">
 
-  <img class="anim w-100 img-fluid" src="../../assets/images/assets/tools.jpg" alt="">
     <div class="wrapper" >
       <app-add-tool *ngIf="selectedButton==1" [RequestType]="type" [ToolTags]="ToolTags"></app-add-tool>
 
@@ -27,7 +28,10 @@
       </div>
                                             
 
-      <app-tool-post *ngFor="let tool of TotalList" [tool]="tool" [user]="user" [ToolTags]="ToolTags"></app-tool-post>
+      <app-tool-post *ngFor="let tool of TotalList" [tool]="tool" [user]="user" [ToolTags]="ToolTags" [type1]="type1" [type2]="type2" [button]="selectedButton"></app-tool-post>
     </div>
+    <!-- <div style="margin: auto; text-align: center;" *ngIf="TotalList.length > 2">
+      <button class="btn btn-info" (click)="onLoadMore()">load more ...</button>
+    </div> -->
 </app-nav>
   
