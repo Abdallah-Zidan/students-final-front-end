@@ -47,7 +47,7 @@ const getReplies = (comment) => {
       new CommentReply(
         reply.id,
         reply.body,
-        getCreator(comment),
+        getCreator(reply),
         reply.created_at_human
       )
     );

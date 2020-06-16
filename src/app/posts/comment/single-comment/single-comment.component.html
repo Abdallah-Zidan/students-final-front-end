@@ -41,6 +41,7 @@
   </div>
 
   <div class="row h-100 my-3 mx-5">
+    <p [hidden]="editing">{{comment.body}}</p>
     <div class="col-8">
       <mat-label class="text" [hidden]="!editing">Edit Your Post</mat-label>
       <textarea class="mx-5" matInput [hidden]="!editing" [(ngModel)]="commentBody"></textarea>
@@ -57,7 +58,6 @@
           frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen
           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
 
-      <p>{{comment.body}}</p>
 
 
     </div>

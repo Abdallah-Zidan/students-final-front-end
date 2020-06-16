@@ -42,6 +42,7 @@
 
 
 <div class="row h-100 my-3 mx-5">
+  <p [hidden]="editing">{{reply.body}}</p>
   <div class="col-8">
     <mat-label class="text" [hidden]="!editing">Edit Your Reply</mat-label>
     <textarea class="mx-5" matInput [hidden]="!editing" [(ngModel)]="replyBody"></textarea>
@@ -52,5 +53,4 @@
       send
     </span>
   </div>
-  <p [hidden]="editing">{{reply.body}}</p>
 </div>
