@@ -72,6 +72,10 @@
                 </div>
               </ng-template>
             </li>
+            <div *ngIf="!messages?.length " class="text-center mx-auto">
+              <img src="{{receiver?.avatar}}" alt="" width="50px">
+              {{receiver?.name}}
+            </div>
           </div>
           <section class="send-form-container" *ngIf="receiverId">
             <send-form

@@ -16,6 +16,7 @@ import { Message } from './models/message';
 import { SendService } from './services/send-service.service';
 import { ChatService } from './services/chat.service';
 import { ActivatedRoute } from '@angular/router';
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'chat',
@@ -33,6 +34,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   private currentPage;
   private nextPage;
   public receivers;
+  public receiver;
   firstMessage;
   blinkingId;
   inMore = false;
@@ -52,7 +54,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     private feedService: FeedService,
     private chatService: ChatService,
     private activeRoute: ActivatedRoute,
-    private sendSerivce: SendService
+    private sendSerivce: SendService,
+    private httpService:HttpService
   ) {
     this.currentUser = this.storage.getUser('user');
     this.feedSubscription = feedService.getFeedItems().subscribe((message) => {
@@ -70,6 +73,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.activeRoute.params.subscribe((map) => {
       this.receiverId = map['id'];
+      this.getReceiver();
       this.firstMessage = true;
       if(this.receiverId)
       this.chatService.getAllMessages(this.receiverId).subscribe(
@@ -132,6 +136,12 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.feedSubscription.unsubscribe();
+  }
+  getReceiver()
+  {
+    this.httpService.getUser(this.receiverId).subscribe(res => {
+      this.receiver = res.data;
+    })
   }
 
 }
