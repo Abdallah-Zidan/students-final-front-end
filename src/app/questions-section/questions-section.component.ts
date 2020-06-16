@@ -35,7 +35,6 @@ export class QuestionsSectionComponent implements OnInit {
         this.TempQuestions = res;
         this.getTagsNames(this.TempQuestions.data.questions);
         this.QuestionsList = this.TempQuestions.data.questions;
-
         this.questionService.setQuestions(this.QuestionsList);
       },
       err => { console.log(err) }

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
       <div class="col-2 my-auto text-center">
-        <img class="w-75 ava" src="{{comment.user.avatar}}" alt="">
+        <img [routerLink]="['/profile', comment.user.id]" class="w-75 ava" src="{{comment.user.avatar}}" alt="">
       </div>
       <div class="col-8  my-auto">
         <div class="col-12 px-0">
@@ -18,14 +18,14 @@
         </div>
       </div>
   
-      <div class="col-2 my-auto" *ngIf="(user.id == comment.user.id)">
+      <div class="col-2 my-auto" *ngIf="(user.id == comment.user.id || question.user.id==user.id)">
         <div class="col-4 ml-auto">
   
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu" xPosition="before">
-            <button mat-menu-item (click)="onEditComment()">
+            <button mat-menu-item (click)="onEditComment()" *ngIf="(user.id == comment.user.id)">
               <mat-icon>create</mat-icon>
               <span>Edit Comment</span>
             </button>

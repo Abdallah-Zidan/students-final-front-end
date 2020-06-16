@@ -1,11 +1,11 @@
 <div class="container post">
 
     <div class="row h-100 mx-3 pt-3">
-      <div class="col-2 my-auto text-center">
+      <div [routerLink]="['/profile', question.user.id]" class="col-2 my-auto text-center">
         <img class="w-75 ava" src="{{question.user.avatar}}" alt="">
         <div class="row">
             <div class="col-12">
-              <a [routerLink]="['/profile', question.user.id]"><h5 class="text-primary text">{{question.user.name}}</h5></a>
+              <a><h5 class="text-primary text">{{question.user.name}}</h5></a>
             </div>
         </div>
       </div>
