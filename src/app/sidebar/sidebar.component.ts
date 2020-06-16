@@ -170,6 +170,17 @@ export class SidebarComponent implements OnInit {
               typo: 4,
             },
             {
+              title: 'Courses',
+              icon: 'fa fa-book-reader',
+              active: false,
+              type: 'simple',
+              badge: {
+                text: 'Beta',
+                class: 'badge-primary',
+              },
+              link:'/courses',
+            },
+            {
               title: 'Extra',
               type: 'header',
             },
@@ -206,6 +217,21 @@ export class SidebarComponent implements OnInit {
               },
               link:'/questions',
             },
+            {
+              title: 'Tutorials',
+              icon: 'fa fa-chalkboard-teacher',
+              active: false,
+              type: 'simple',
+              badge: {
+                text: 'Beta',
+                class: 'badge-primary',
+              },
+              link:'/tutorials',
+            },  
+
+
+
+
             // {
             //   title: 'Calendar',
             //   icon: 'fa fa-calendar',
@@ -298,6 +324,17 @@ export class SidebarComponent implements OnInit {
               class: 'badge-primary',
             },
             link:'/questions',
+          },
+          {
+            title: 'Tutorials',
+            icon: 'fa fa-chalkboard-teacher',
+            active: false,
+            type: 'simple',
+            badge: {
+              text: 'Beta',
+              class: 'badge-primary',
+            },
+            link:'/tutorials',
           },
           // {
           //   title: 'Calendar',
