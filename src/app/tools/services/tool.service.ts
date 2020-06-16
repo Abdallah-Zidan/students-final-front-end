@@ -17,7 +17,7 @@ export class ToolService {
   Type2Tools = this.Type2Array.asObservable();
   SearchTools = this.SearchArray.asObservable();
   tool;comment;
-  // reply;
+  reply;
 
   constructor() { }
 
@@ -112,7 +112,7 @@ export class ToolService {
       body:commentBody,
       user:user,
       created_at_human: "now",
-      // "replies": [],
+      "replies": [],
     })
   }
 
@@ -141,21 +141,21 @@ export class ToolService {
 
   addReplay(comment,reply,replyBody,user)
   {    
-    // comment.replies.push(this.reply={
-    //   id:reply.data.reply.id,
-    //   body:replyBody,
-    //   user:user,
-    //   created_at_human: "now",
-    // })
+    comment.replies.push(this.reply={
+      id:reply.data.reply.id,
+      body:replyBody,
+      user:user,
+      created_at_human: "now",
+    })
   }
 
   
   deleteReplay(comment,reply)
   { 
-    // let removeIndex;
-    // removeIndex=comment.replies.indexOf(reply)
-    // comment.replies.splice(removeIndex, 1); 
-    // console.log(removeIndex)
+    let removeIndex;
+    removeIndex=comment.replies.indexOf(reply)
+    comment.replies.splice(removeIndex, 1); 
+    console.log(removeIndex)
   }
  
 }
