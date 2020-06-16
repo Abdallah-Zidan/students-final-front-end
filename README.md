@@ -15,6 +15,7 @@ These instructions will get you a copy of the project up and running on your loc
 * Backend:
 	* php: 7.2
 	* Laravel framework 7.x
+	* MySQL database
 * Frontend:
 	* Angular framework 9
 	* Angular material 9
@@ -47,6 +48,8 @@ npm install
 ```
 
 After installing the project, you can try dummy data using Laravel seeder
+
+**Make sure MySQL database is running**
 
 ```
 php artisan db:seed
