@@ -25,13 +25,13 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item *ngIf="(user.id == reply.creator.id)">
+        <button mat-menu-item *ngIf="(user.id == reply.creator.id)"  (click)="onEditReply()">
           <mat-icon>create</mat-icon>
-          <span (click)="onEditReply()">Edit Reply</span>
+          <span>Edit Reply</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="onDeleteReply()">
           <mat-icon>delete_sweep</mat-icon>
-          <span (click)="onDeleteReply()">Delete Reply</span>
+          <span >Delete Reply</span>
         </button>
       </mat-menu>
     </div>
