@@ -57,10 +57,6 @@ php artisan db:seed
 * [Laravel](https://laravel.com/) - The backend web framework used
 * [Angular](https://angular.io/) - The frontend web framework used
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
 ## Authors
 
 * **Abd Allah Zidan** - [GitHub](https://github.com/Abdallah-Zidan)
