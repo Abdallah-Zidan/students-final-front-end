@@ -13,6 +13,7 @@ export class SingleCommentComponent implements OnInit {
   @Input() postId;
   @Input() group: Group;
   @Input() resource: string;
+  @Input() postUserId;
   isEmpty = true;
   user;
   editing = false;

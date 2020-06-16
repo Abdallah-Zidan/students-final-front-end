@@ -13,6 +13,7 @@ export class SingleReplyComponent implements OnInit {
   @Input() reply: CommentReply;
   @Input() group: Group;
   @Input() postId;
+  @Input() postUserId;
   @Input() commentId;
   user;
   replyBody;

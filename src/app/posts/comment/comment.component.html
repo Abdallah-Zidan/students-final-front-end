@@ -8,7 +8,8 @@
 
       </mat-panel-description>
     </mat-expansion-panel-header>
-   
-<app-single-comment *ngFor="let comment of comments" [comment]="comment" [group]="group" [postId]="postId" [resource]="resource"></app-single-comment>
+
+    <app-single-comment *ngFor="let comment of comments" [comment]="comment" [group]="group" [postId]="postId"
+      [resource]="resource" [postUserId]="postUserId"></app-single-comment>
   </mat-expansion-panel>
 </mat-accordion>

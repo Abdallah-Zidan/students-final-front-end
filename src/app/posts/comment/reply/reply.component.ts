@@ -12,6 +12,7 @@ export class ReplyComponent implements OnInit {
   panelOpenState = false;
   @Input() replies: CommentReply[];
   @Input() postId;
+  @Input() postUserId;
   @Input() group: Group;
   @Input() commentId;
   body = '';
@@ -29,11 +30,7 @@ export class ReplyComponent implements OnInit {
   ngOnInit(): void {}
 
   onAddReply() {
-    this.postsService.addReply(
-      this.body,
-      this.postId,
-      this.commentId
-    );
+    this.postsService.addReply(this.body, this.postId, this.commentId);
     setTimeout(() => {
       this.body = '';
     }, 1500);

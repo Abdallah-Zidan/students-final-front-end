@@ -1,11 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-2 my-auto text-center">
-      <img class="w-100 ava" src="{{comment.creator.avatar}}" alt=""  style="cursor: pointer;" [routerLink]="['/profile',comment.creator.id]">
+      <img class="w-100 ava" src="{{comment.creator.avatar}}" alt="" style="cursor: pointer;"
+        [routerLink]="['/profile',comment.creator.id]">
     </div>
     <div class="col-8  my-auto">
       <div class="col-12 px-0">
-        <h5 class=" my-auto px-0 text" style="cursor: pointer;" [routerLink]="['/profile',comment.creator.id]">{{comment.creator.name}}</h5>
+        <h5 class=" my-auto px-0 text" style="cursor: pointer;" [routerLink]="['/profile',comment.creator.id]">
+          {{comment.creator.name}}</h5>
       </div>
 
       <div class="col-12">
@@ -18,14 +20,14 @@
       </div>
     </div>
 
-    <div class="col-2 my-auto" *ngIf="(user.id == comment.creator.id)">
+    <div class="col-2 my-auto" *ngIf="(user.id == comment.creator.id) || (postUserId== user.id)">
       <div class="col-4 ml-auto">
 
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">
-          <button mat-menu-item>
+          <button mat-menu-item   *ngIf="(user.id == comment.creator.id)" >
             <mat-icon>create</mat-icon>
             <span (click)="onEditComment()">Edit Comment</span>
           </button>
@@ -61,5 +63,5 @@
     </div>
   </div>
 
-  <app-reply [replies]="comment.replies" [postId]="postId" [group]="group" [commentId]="comment.id"></app-reply>
+  <app-reply [replies]="comment.replies" [postId]="postId" [group]="group" [commentId]="comment.id" [postUserId]="postUserId"></app-reply>
 </div>

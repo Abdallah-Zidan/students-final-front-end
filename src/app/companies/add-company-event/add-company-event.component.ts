@@ -58,6 +58,7 @@ export class AddCompanyEventComponent implements OnInit, OnDestroy {
     });
   }
   onAddPost() {
+    this.filterFiles();
     let scope;
     let id;
     const formData = new FormData();
@@ -158,6 +159,11 @@ export class AddCompanyEventComponent implements OnInit, OnDestroy {
         this.currentFaculty = this.currentUniversity.faculties[index];
       }
     }
+  }
+  filterFiles() {
+    this.selectedFiles = this.selectedFiles.filter((file) => {
+      return file.type.startsWith('image');
+    });
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

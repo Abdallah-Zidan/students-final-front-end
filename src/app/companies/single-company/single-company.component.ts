@@ -7,6 +7,7 @@ import { PostsService } from 'src/app/education/services/posts.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from 'src/app/posts/main-post/main-post.component';
 import { StorageService } from 'src/app/services/storage.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-single-company',
   templateUrl: './single-company.component.html',
@@ -27,7 +28,8 @@ export class SingleCompanyComponent implements OnInit {
     private modalService: NgbModal,
     private storage: StorageService,
     private postsService: PostsService,
-    private deleteDialog: MatDialog
+    private deleteDialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -70,6 +72,10 @@ export class SingleCompanyComponent implements OnInit {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
       );
+  }
+  onProfileClick(modal: any) {
+    modal.close('');
+    this.router.navigate(['/profile', this.post.creator.id]);
   }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

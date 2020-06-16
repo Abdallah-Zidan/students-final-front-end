@@ -47,8 +47,7 @@ export class AddEventComponent implements OnInit {
     }
   }
   onAddPost() {
-    console.log(this.startDate);
-    
+    this.filterFiles();
     const formData = new FormData();
     formData.append('body', this.body);
     formData.append('title', this.title);
@@ -121,5 +120,10 @@ export class AddEventComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+  filterFiles() {
+    this.selectedFiles = this.selectedFiles.filter((file) => {
+      return file.type.startsWith('image');
+    });
   }
 }
