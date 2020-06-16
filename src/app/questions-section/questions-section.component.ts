@@ -4,7 +4,7 @@ import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 import { QuestionService } from './question.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import AOS from 'aos';
+// import AOS from 'aos';
 
 @Component({
   selector: 'app-questions-section',
@@ -29,7 +29,7 @@ export class QuestionsSectionComponent implements OnInit {
   recent = true;
 
   ngOnInit(): void {
-    AOS.init();
+    // AOS.init();
     this.httpService.requestQuestions(null).subscribe(
       res => {
         this.TempQuestions = res;
@@ -92,6 +92,8 @@ export class QuestionsSectionComponent implements OnInit {
         }
       );
 
+      this.tags = [];
+
     },
       error => { console.log(error) }
     );
@@ -142,13 +144,37 @@ export class QuestionsSectionComponent implements OnInit {
   styleUrls: ['./questions-section.component.scss']
 })
 export class AddQuestionDialog {
-
+  newTag;
   constructor(
     public dialogRef: MatDialogRef<AddQuestionDialog>,
     @Inject(MAT_DIALOG_DATA) public data, public dialog: MatDialog) { }
 
   onNoClick(): void {
+    this.data.tags = [];
     this.dialogRef.close();
+  }
+
+  displayTagInput() {
+    let add_input = document.getElementById("TagInput");
+
+    if (add_input.style.display === "none") {
+      add_input.style.display = "block";
+    }
+    else {
+      this.newTag = null
+      add_input.style.display = "none";
+    }
+  }
+  
+  addNewTag() {
+    let found;
+    if (this.newTag) {
+      found = this.data.questionTags.find(x => x.name == this.newTag);
+      if (!found) { this.data.questionTags.push({ name: this.newTag }); }
+      this.data.tags = this.data.tags|| [];
+      this.data.tags.push(this.newTag);
+    }
+    this.displayTagInput()
   }
 
 

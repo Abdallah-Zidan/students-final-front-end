@@ -24,10 +24,19 @@
     </div>
 
     <div class="col-2">
-      <div class="ribbon">
-        <i class="float-left icon fas fa-bullhorn"></i>
+      <div class="ribbon1" *ngIf="tool.type=='Offer'" >
+        <i class="float-left icon fa fa-gift" aria-hidden="true"></i>
       </div>
-    </div>
+      <div class="ribbon2" *ngIf="tool.type=='Need'"> 
+        <i class="float-left icon fa fa-hand-paper-o" aria-hidden="true"></i>
+      </div>
+      <div class="ribbon1" *ngIf="tool.type=='Car'" >
+        <i class="float-left icon fa fa-car" aria-hidden="true"></i>
+      </div>
+      <div class="ribbon2" *ngIf="tool.type=='Living'">
+        <i class="float-left icon fa fa-home" aria-hidden="true"></i>
+      </div>
+      </div>
 
     <div class="col-2 my-auto">
       <div class="col-4 ml-auto" *ngIf="(tool.user.id == user.id)">
@@ -100,9 +109,9 @@
       <p class="lead px-0 py-2">{{tool.body}}</p>
     </div>
 
-    <div class="row h-100 mx-5">
+    <!-- <div class="row h-100 mx-5">
       <p class="text-secondary px-0" style="color: blue;">type: {{tool.type}}</p>
-    </div>
+    </div> -->
   </div>
 
 
@@ -110,7 +119,7 @@
 
   <div class="row h-100 mx-5" *ngFor="let tag of tool.tags" style="color: blue;">#{{tag}}</div>
   <div class="row h-100 mx-5">
-    <div class="col-10 my-auto">
+    <div class="col-10 my-auto" *ngIf="!tool.closed">
       <mat-form-field class="example-full-width px-5">
         <mat-label>Leave a comment</mat-label>
         <textarea [(ngModel)]="CommentBody" rows="3" matInput placeholder="Ex. It makes me feel..."></textarea>

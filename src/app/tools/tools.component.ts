@@ -20,6 +20,7 @@ export class ToolsComponent implements OnInit {
   type;type1;type2;title1;title2;selectedButton=1;
   ToolTags;user;result; 
   SearchTag;response=null;
+  page = 1;moreTools;
 
   ngOnInit(): void {
     this.route.data.subscribe(type => {this.type=type.type});
@@ -31,7 +32,7 @@ export class ToolsComponent implements OnInit {
       this.type1=2; this.title1="Habitation";
       this.type2=3; this.title2="Transportation";}
 
-    this.httpService.requestTools(this.type1,null).subscribe(
+    this.httpService.requestTools(this.type1,null,this.page).subscribe(
       result =>{
         this.Type1List=result;
         this.getTagsNames(this.Type1List.data.tools);
@@ -42,7 +43,7 @@ export class ToolsComponent implements OnInit {
       error =>{
         console.log(error);}
       );
-    this.httpService.requestTools(this.type2,null).subscribe(
+    this.httpService.requestTools(this.type2,null,this.page).subscribe(
         result =>{
           this.Type2List=result;
           this.getTagsNames(this.Type2List.data.tools);
@@ -115,13 +116,13 @@ export class ToolsComponent implements OnInit {
     { 
       let type;
       
-      if(this.selectedButton=2)
+      if(this.selectedButton==2)
           type=this.type1;
       else
           type=this.type2
 
 
-      this.httpService.requestTools(this.type,this.SearchTag).subscribe(
+      this.httpService.requestTools(this.type,this.SearchTag,this.page).subscribe(
         result =>{
           this.SearchList=result;
 
@@ -176,5 +177,41 @@ export class ToolsComponent implements OnInit {
         );
       this.SearchTag=null;
     }
+  }
+  onLoadMore(){
+      this.page++;
+      let type;
+      console.log(this.TotalList)
+
+      if(this.selectedButton==2)
+          type=this.type1;
+      else
+          type=this.type2
+      
+          console.log(type)
+      this.httpService.requestTools(type,null,this.page).subscribe(
+        result =>{
+          this.moreTools=result;
+          if(this.moreTools.data.tools.length>0)
+         {  
+            this.getTagsNames(this.moreTools.data.tools);
+            this.TotalList.concat(this.moreTools);
+
+            if(type==this.type1) 
+            { console.log(this.TotalList)
+            this.toolService.Type1List(this.TotalList)
+            this.toolService.Type1Tools.subscribe(tools => {this.TotalList = tools})
+            }
+            else
+            {console.log(this.TotalList)
+              this.toolService.Type2List(this.TotalList)
+              this.toolService.Type2Tools.subscribe(tools => {this.TotalList = tools})
+            }  
+          }},
+          
+          (error) => {
+            console.log(error);
+          }
+        );
   }
 }

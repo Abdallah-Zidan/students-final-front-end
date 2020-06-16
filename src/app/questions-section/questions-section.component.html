@@ -1,4 +1,6 @@
 <app-nav>
+    <div class="wrapper">
+        <img class="w-100 anim img-fluid" src="../../../assets/images/assets/questions.jpg" alt="">
 
     <!-- <div class="col-lg-4 col-md-4 col-4" *ngIf="recent">
         <div class="container h-100">
@@ -12,7 +14,30 @@
         </div>
     </div> -->
 
-    <div class="container h-100 my-2">
+    <section id="bar" class="bar">
+        <div class="container">
+
+            <div class="row my-3">
+                
+                <div class="col-lg-4 col-md-4 col-4">
+                    <button class="btn btn-link" (click)="showRecent()"
+                        [ngClass]="{ 'active ': recent}"><strong>Recent</strong></button>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-4">
+                    <button class="btn btn-link" (click)="showTags()"
+                        [ngClass]="{ 'active ': !recent}"><strong>Tags</strong></button>
+                </div>
+                <div class="col-lg-4 col-md-4 col-4">
+                    <button class="btn btn-primary askbtn" (click)="addQuestion()">Ask Now</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container h-100 my-2"  *ngIf="recent">
         <div class=" justify-content-center h-100">
             <div class="searchbar">
                 <input class="search_input" type="text" name="" placeholder="Search..." [(ngModel)]="SearchTag">
@@ -22,49 +47,11 @@
             </div>
         </div>
     </div>
-
-    <section id="header" class="d-flex align-items-center">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                    <h2>Welcome to Qustions Section</h2>
-                    <h5>Ask a qustion<br> and you will be sure <br>to find an answer</h5>
-                    <div data-aos="fade-up" data-aos-delay="800">
-                        <button class="btn btn-primary askbtn" (click)="addQuestion()">Ask Now</button>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 order-1 order-lg-2 hero-img">
-                    <img src="../../assets/images/assets/questions.jpg" class="img-fluid anim" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="bar" class="bar">
-        <div class="container">
-
-            <div class="row my-3">
-
-                <div class="col-lg-6 col-md-6 col-6">
-                    <button class="btn btn-link" (click)="showRecent()"
-                        [ngClass]="{ 'active ': recent}"><strong>Recent</strong></button>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-6">
-                    <button class="btn btn-link" (click)="showTags()"
-                        [ngClass]="{ 'active ': !recent}"><strong>Tags</strong></button>
-                </div>
-
-            </div>
-        </div>
-    </section>
     <div *ngIf="recent">
         <app-single-question *ngFor="let question of QuestionsList" [question]="question"></app-single-question>
     </div>
     <div *ngIf="!recent">
         <app-question-tags [choosing]="false" [questionTags]="questionTags"></app-question-tags>
     </div>
-
+</div>
 </app-nav>
