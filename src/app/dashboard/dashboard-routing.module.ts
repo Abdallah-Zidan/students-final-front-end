@@ -7,6 +7,7 @@ import { FacultyComponent } from './faculty/faculty.component';
 import { DepartmentComponent } from './department/department.component';
 import { CourseComponent } from './course/course.component';
 import { UserComponent } from './user/user.component';
+import { PostComponent } from './post/post.component';
 
 const routes: Routes = [{
 	path: '', component: DashboardComponent, children: [
@@ -24,7 +25,8 @@ const routes: Routes = [{
 		},
 		{ path: 'departments', component: DepartmentComponent },
 		{ path: 'courses', component: CourseComponent },
-		{ path: 'users', component: UserComponent }
+		{ path: 'users', component: UserComponent },
+		{ path: 'posts', component: PostComponent }
 	]
 }];
 
