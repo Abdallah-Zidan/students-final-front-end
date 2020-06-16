@@ -1,10 +1,12 @@
 <div class="row">
   <div class="col-2 my-auto text-center">
-    <img class="w-75 ava" src={{reply.creator.avatar}} alt="">
+    <img class="w-75 ava" src={{reply.creator.avatar}} alt="" style="cursor: pointer;"
+      [routerLink]="['/profile',reply.creator.id]">
   </div>
   <div class="col-8  my-auto">
     <div class="col-12 px-0">
-      <h5 class=" my-auto px-0 text">{{reply.creator.name}}</h5>
+      <h5 class=" my-auto px-0 text" style="cursor: pointer;" [routerLink]="['/profile',reply.creator.id]">
+        {{reply.creator.name}}</h5>
     </div>
 
     <div class="col-12">
@@ -12,7 +14,7 @@
         <span class="my-auto text-secondary material-icons">
           schedule
         </span>
-        <span class="my-auto text-secondary">3 min. ago</span>
+        <span class="my-auto text-secondary">{{reply.createdHuman ? reply.createdHuman : 'now'}}</span>
       </div>
     </div>
   </div>

@@ -6,6 +6,7 @@ export class PostComment {
     public id: string,
     public body: string,
     public creator: ElementCreator,
-    public replies: CommentReply[]
+    public replies: CommentReply[],
+    public createdHuman: string = null
   ) {}
 }
