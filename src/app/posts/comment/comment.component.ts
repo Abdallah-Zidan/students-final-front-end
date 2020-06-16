@@ -12,6 +12,7 @@ export class CommentComponent implements OnInit {
   @Input() comments: PostComment[];
   @Input() group: Group;
   @Input() postId;
+  @Input() postUserId;
   @Input() resource: string;
   constructor() {}
 

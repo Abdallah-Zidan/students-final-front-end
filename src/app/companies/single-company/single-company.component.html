@@ -30,7 +30,7 @@
 </div>
 
 
-<ng-template  #mymodal let-modal>
+<ng-template #mymodal let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">{{post.title}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -40,8 +40,8 @@
 
   <div class="modal-body">
     <div class="avatar-photo">
-      <img class="mx-5 w-75 ava my-3" [routerLink]="['/profile',post.creator.id]" src="{{post.creator.avatar}}" alt="">
-      <span style="cursor: pointer;" [routerLink]="['/profile',post.creator.id]">{{post.creator.name}}</span>
+      <img class="mx-5 w-75 ava my-3" (click)="onProfileClick(modal)" src="{{post.creator.avatar}}" alt="">
+      <span style="cursor: pointer;" (click)="onProfileClick(modal)">{{post.creator.name}}</span>
     </div>
     <app-images-carousel [files]="post.files" [defaultImageUrl]="post.creator.avatar"></app-images-carousel>
     <div class="mx-5">
@@ -59,12 +59,13 @@
       </div>
 
       <div class="col-2 mt-auto" style="width: 65px;height: 50px;">
-          <span class="text material-icons" [hidden]="isEmpty" (click)="onAddComment(post.id)">
-            send
-          </span>
+        <span class="text material-icons" style="cursor: pointer;" [hidden]="isEmpty" (click)="onAddComment(post.id)">
+          send
+        </span>
       </div>
     </div>
-    <app-comment [comments]="post.comments" [group]="group" [postId]="post.id" [resource]="resource"></app-comment>
+    <app-comment [comments]="post.comments" [group]="group" [postId]="post.id" [resource]="resource"
+      [postUserId]="post.creator.id"></app-comment>
   </div>
 
   <div class="modal-footer">

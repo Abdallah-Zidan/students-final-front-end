@@ -42,20 +42,22 @@
 
       <mat-menu #sectionMenu="matMenu">
         <button class="sections" mat-sectionMenu-item>
+          <ng-container *ngIf="[1,2,3].includes(user.role)">
+            <button mat-menu-item routerLink="/groups">
+              <mat-icon>group</mat-icon>
+              <span>Groups</span>
+            </button>
 
-          <button mat-menu-item routerLink="/groups">
-            <mat-icon>group</mat-icon>
-            <span>Groups</span>
-          </button>
+            <button mat-menu-item routerLink="/announcements/1">
+              <mat-icon>info</mat-icon>
+              <span>Announcements</span>
+            </button>
+            <button mat-menu-item routerLink="/events">
+              <mat-icon>today</mat-icon>
+              <span>events</span>
+            </button>
+          </ng-container>
 
-          <button mat-menu-item routerLink="/announcements/1">
-            <mat-icon>info</mat-icon>
-            <span>Announcements</span>
-          </button>
-          <button mat-menu-item routerLink="/events">
-            <mat-icon>today</mat-icon>
-            <span>events</span>
-          </button>
 
 
           <button mat-menu-item routerLink="/companies">

@@ -13,16 +13,19 @@
       <li class=" nav-item">
         <a class=" nav-link" routerLink="/">Home</a>
       </li>
-      <ng-container *ngIf="(isAuthenticated && user.role!=0); else admin">
-        <li class=" nav-item">
-          <a class=" nav-link" routerLink="/groups">Groups</a>
-        </li>
-        <li class=" nav-item">
-          <a class=" nav-link" routerLink="/announcements">Announcements</a>
-        </li>
-        <li class=" nav-item">
-          <a class=" nav-link" routerLink="/events">Events</a>
-        </li>
+      <ng-container *ngIf="(isAuthenticated && user.role!=0)">
+        <ng-container *ngIf="[1,2,3].includes(user.role)">
+          <li class=" nav-item">
+            <a class=" nav-link" routerLink="/groups">Groups</a>
+          </li>
+          <li class=" nav-item">
+            <a class=" nav-link" routerLink="/announcements">Announcements</a>
+          </li>
+          <li class=" nav-item">
+            <a class=" nav-link" routerLink="/events">Events</a>
+          </li>
+        </ng-container>
+
         <li class=" nav-item">
           <a class=" nav-link" routerLink="/companies">Companies</a>
         </li>
@@ -36,11 +39,11 @@
           <a class="nav-link" routerLink="/questions">Questions</a>
         </li>
       </ng-container>
-      <ng-template #admin>
-        <li class="nav-item" *ngIf="isAuthenticated">
-          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-        </li>
-      </ng-template>
+
+      <li class="nav-item" *ngIf="isAuthenticated && (user.role===0 || user.role ===3)">
+        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+      </li>
+
 
       <li class="nav-item">
 

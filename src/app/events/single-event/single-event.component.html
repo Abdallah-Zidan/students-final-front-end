@@ -43,26 +43,30 @@
     </div>
 
     <app-images-carousel [files]="post.files" [defaultImageUrl]="defaultImageUrl"></app-images-carousel>
-    <div>
+    <div class="mx-5">
       {{post.body}}
     </div>
 
-    <div class=" mt-2">
-      <mat-form-field class="example-full-width px-5">
-        <mat-label>Leave a comment</mat-label>
-        <textarea [(ngModel)]="comment" (input)="onCommenting($event)" rows="3" matInput
-          placeholder="comment"></textarea>
-      </mat-form-field>
+    <div class="row mt-2">
+      <div class="col-10">
+
+        <mat-form-field class="example-full-width px-5">
+          <mat-label>Leave a comment</mat-label>
+          <textarea [(ngModel)]="comment" (input)="onCommenting($event)" rows="3" cols="15" matInput
+            placeholder="comment"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="col-2 mt-auto" style="width: 65px;height: 50px;">
+          <span class="text material-icons" style="cursor: pointer;"  [hidden]="isEmpty" (click)="onAddComment(post.id)">
+            send
+          </span>
+      </div>
     </div>
-    <div>
-      <span class="text material-icons" [hidden]="isEmpty" (click)="onAddComment(post.id)">
-        send
-      </span>
-    </div>
-    <app-comment [comments]="post.comments" [group]="group" [postId]="post.id" [resource]="resource"></app-comment>
+    <app-comment [comments]="post.comments" [group]="group" [postId]="post.id" [resource]="resource" [postUserId]="post.creator.id"></app-comment>
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn btn-outline-danger" (click)="modal.close('Save click')">Close</button>
   </div>
 </ng-template>
