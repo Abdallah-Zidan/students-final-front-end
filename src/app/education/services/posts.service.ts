@@ -27,11 +27,11 @@ export class PostsService {
 
   constructor(
     private httpService: HttpService,
-    private storage: StorageService,
+    private storage: StorageService
   ) {}
 
   getPosts(resource, scope, scopeId, type, page) {
-    this.page =1;
+    this.page = 1;
     this.httpService
       .requestPosts(resource, scope, scopeId, type, this.page)
       .subscribe(
@@ -130,7 +130,7 @@ export class PostsService {
     }
 
     return this.httpService.requestAddPost(resource, data).pipe(
-      tap((res: any) => { 
+      tap((res: any) => {
         const resPost = res.data[type];
         const currUser = this.storage.getUser('user');
         const newPost = new Post(
@@ -199,14 +199,16 @@ export class PostsService {
   }
   deleteComment(resource, postId, commentId) {
     const { element, index } = findInArray(postId, this.postsArr);
-    const commentIndex = findInArray(commentId, element.comments);
+    console.log('idx=', index);
+    console.log('ele=', element);
+    const commentIndex = findInArray(commentId, element.comments).index;
     this.httpService
       .requestDeleteComment(resource, postId, commentId)
       .subscribe((res) => {
         console.log(res);
         element.comments.splice(commentIndex, 1);
         this.postsArr[index] = element;
-        console.log("here");
+        console.log('arr[idx]=', this.postsArr[index]);
         this.posts.next(this.postsArr);
       });
   }
@@ -233,7 +235,7 @@ export class PostsService {
   deleteReply(postId, commentId, replyId) {
     const { element, index } = findInArray(postId, this.postsArr);
     const commentData = findInArray(commentId, element.comments);
-    const replyIndex = findInArray(replyId, commentData.element.replies);
+    const replyIndex = findInArray(replyId, commentData.element.replies).index;
     this.httpService.requestDeleteReply(commentId, replyId).subscribe((res) => {
       console.log(res);
       element.comments[commentData.index].replies.splice(replyIndex, 1);
@@ -241,6 +243,4 @@ export class PostsService {
       this.posts.next(this.postsArr);
     });
   }
-
-  
 }

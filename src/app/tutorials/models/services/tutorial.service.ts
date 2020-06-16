@@ -127,7 +127,7 @@ export class TutorialService {
   }
   deleteComment(resource, tutorialId, commentId) {
     const { element, index } = findInArray(tutorialId, this.tutorialArr);
-    const commentIndex = findInArray(commentId, element.comments);
+    const commentIndex = findInArray(commentId, element.comments).index;
     this.httpService
       .requestDeleteComment(resource, tutorialId, commentId)
       .subscribe((res) => {
@@ -161,7 +161,7 @@ export class TutorialService {
   deleteReply(postId, commentId, replyId) {
     const { element, index } = findInArray(postId, this.tutorialArr);
     const commentData = findInArray(commentId, element.comments);
-    const replyIndex = findInArray(replyId, commentData.element.replies);
+    const replyIndex = findInArray(replyId, commentData.element.replies).index;
     this.httpService.requestDeleteReply(commentId, replyId).subscribe((res) => {
       element.comments[commentData.index].replies.splice(replyIndex, 1);
       this.tutorialArr[index] = element;

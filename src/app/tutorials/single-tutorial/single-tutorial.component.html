@@ -1,12 +1,12 @@
 <div class="container post">
   <div class="row h-100 mx-3 pt-3">
     <div class="col-2 my-auto text-center">
-      <img class="w-75 ava" src="{{ tutorial.creator.avatar }}" alt="" [routerLink]="['/profile',tutorial.creator.id]"/>
+      <img class="w-75 ava" style="cursor: pointer;"  src="{{ tutorial.creator.avatar }}" alt="" [routerLink]="['/profile',tutorial.creator.id]"/>
     </div>
     <div class="col-6 px-3 my-auto">
       <div class="row">
         <div class="col-12">
-          <h5 class="text" [routerLink]="['/profile',tutorial.creator.id]">{{ tutorial.creator.name }}</h5>
+          <h5 class="text" style="cursor: pointer;"  [routerLink]="['/profile',tutorial.creator.id]">{{ tutorial.creator.name }}</h5>
         </div>
       </div>
 
