@@ -12,12 +12,20 @@
     <textarea [(ngModel)]="data.body" class="question-body-text"  matInput rows="6" cols="100"></textarea>
   </mat-form-field>
 </div>
+<label>Tags</label>
+<button class="tag-btn" (click)="displayTagInput()"><i class="fa fa-plus"></i></button>
+
     <mat-form-field class="edit-field">
-      <mat-label>Tags</mat-label>
-    <mat-select style="background-color: #ecedee;" multiple class="custom-select d-block w-100" id="tags" [(ngModel)]="data.tags">
-      <mat-option value={{tag.name}} *ngFor="let tag of data.questionTags" >{{tag.name}}</mat-option>
-    </mat-select>     
- </mat-form-field>
+      <mat-select style="background-color: #ecedee;" multiple class="custom-select d-block w-100" id="tags" [(ngModel)]="data.tags">
+        <mat-option value={{tag.name}} *ngFor="let tag of data.questionTags" >{{tag.name}}</mat-option>
+      </mat-select> 
+    </mat-form-field>
+    <div id="TagInput" style="display:none">
+      <input type="text" [(ngModel)]="newTag" placeholder="write your tag">
+      <button class="btn btn-light" (click)="addNewTag()">
+        <i class="fa fa-check" style="color:#1565c0;"aria-hidden="true"></i>
+      </button>    
+    </div>
 
 
 </div>
