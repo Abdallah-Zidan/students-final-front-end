@@ -7,6 +7,7 @@ import { Post } from 'src/app/education/models/post.model';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from 'src/app/posts/main-post/main-post.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-single-event',
   templateUrl: './single-event.component.html',
@@ -27,6 +28,7 @@ export class SingleEventComponent implements OnInit {
     private storage: StorageService,
     private modalService: NgbModal,
     public deleteDialog: MatDialog,
+    private router: Router
   ) {}
   isEmpty = true;
   editing = false;
@@ -88,6 +90,10 @@ export class SingleEventComponent implements OnInit {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
       );
+  }
+  onProfileClick(modal: any) {
+    modal.close('');
+    this.router.navigate(['/profile', this.post.creator.id]);
   }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

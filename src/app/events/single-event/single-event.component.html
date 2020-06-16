@@ -15,12 +15,12 @@
         <span class="my-auto text-secondary material-icons">
           schedule
         </span>
-        <h6 class="text-primary my-auto d-inline mx-2">{{post.createdHuman}}</h6>
+        <p class="text-primary my-auto d-inline mx-2">{{post.createdHuman}}</p>
       </div>
     </div>
-    <h3 class="text-primary">{{post.title}}</h3>
+    <h3 class="text-primary">{{post.title.split(' ').splice(0,5).join(' ')+'...'}}</h3>
     <p class="text-secondary lead">
-      {{post.body.split(' ').splice(0,15).join(' ')+'...'}}
+      {{post.body.split(' ').splice(0,10).join(' ')+'...'}}
     </p>
     <button mat-raised-button color="primary" class="my-2" (click)="showModal(mymodal)"> More info </button>
   </mat-card-content>
@@ -38,11 +38,18 @@
 
   <div class="modal-body">
     <div class="avatar-photo">
-      <img class="w-75 ava m-3" [routerLink]="['/profile',post.creator.id]" src="{{post.creator.avatar}}" alt="">
-      <span style="cursor: pointer;" [routerLink]="['/profile',post.creator.id]">{{post.creator.name}}</span>
+      <img class="w-75 ava m-3" (click)="onProfileClick(modal)" src="{{post.creator.avatar}}" alt="">
+      <span style="cursor: pointer;" (click)="onProfileClick(modal)">{{post.creator.name}}</span>
     </div>
 
     <app-images-carousel [files]="post.files" [defaultImageUrl]="defaultImageUrl"></app-images-carousel>
+    <div class="mx-5" style="color: blue;">
+      start date : {{post.startDate.split('T')[0]}}
+    </div>
+    <div class="mx-5" style="color: blue;">
+      end date : {{post.endDate.split('T')[0]}}
+    </div>
+
     <div class="mx-5">
       {{post.body}}
     </div>
@@ -58,12 +65,13 @@
       </div>
 
       <div class="col-2 mt-auto" style="width: 65px;height: 50px;">
-          <span class="text material-icons" style="cursor: pointer;"  [hidden]="isEmpty" (click)="onAddComment(post.id)">
-            send
-          </span>
+        <span class="text material-icons" style="cursor: pointer;" [hidden]="isEmpty" (click)="onAddComment(post.id)">
+          send
+        </span>
       </div>
     </div>
-    <app-comment [comments]="post.comments" [group]="group" [postId]="post.id" [resource]="resource" [postUserId]="post.creator.id"></app-comment>
+    <app-comment [comments]="post.comments" [group]="group" [postId]="post.id" [resource]="resource"
+      [postUserId]="post.creator.id"></app-comment>
   </div>
 
   <div class="modal-footer">
