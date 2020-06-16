@@ -52,16 +52,12 @@
         send
       </span>
     </div>
-    <div [hidden]="editing">
-      <div *ngIf="comment.body.startsWith('https://www.loom.com/')"
-        style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe [src]="comment.body | safe"
-          frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
-
-
-
-    </div>
   </div>
-
+  <div [hidden]="editing">
+    <div *ngIf="comment.body.startsWith('https://www.loom.com/')"
+      style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe [src]="comment.body | safe"
+        frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+  </div>
   <app-reply [replies]="comment.replies" [postId]="postId" [group]="group" [commentId]="comment.id" [postUserId]="postUserId"></app-reply>
 </div>

@@ -60,7 +60,10 @@ export class PostsService {
                 post.department_faculty && post.department_faculty.department,
                 post.department_faculty && post.department_faculty.faculty,
                 post.type,
-                post.title && post.title
+                post.title && post.title,
+                post.start_date && post.start_date,
+                post.end_date && post.end_date,
+
               )
             );
           });
@@ -100,7 +103,9 @@ export class PostsService {
                 post.department_faculty && post.department_faculty.department,
                 post.department_faculty && post.department_faculty.faculty,
                 post.type,
-                post.title && post.title
+                post.title && post.title,
+                post.start_date && post.start_date,
+                post.end_date && post.end_date,
               )
             );
           });

@@ -14,8 +14,8 @@ export class AddEventComponent implements OnInit {
   user: User;
   body: string;
   title: string;
-  startDate: string;
-  endDate: string;
+  startDate: any;
+  endDate: any;
   @Input() group: Group;
   @Input() resource: string;
   @Input() type: number;
@@ -62,7 +62,14 @@ export class AddEventComponent implements OnInit {
     }
 
     formData.append('type', this.type.toString());
-
+    formData.append(
+      'start_date',
+      `${this.startDate.year}-${this.startDate.month}-${this.startDate.day}`
+    );
+    formData.append(
+      'end_date',
+      `${this.endDate.year}-${this.endDate.month}-${this.endDate.day}`
+    );
     this.postsService.addPost(this.resource, formData).subscribe((res) => {
       if (res.data) {
         console.log(res);
