@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../../../../auth/services/auth.service';
 import { User as AuthUser } from '../../../../auth/user.model';
-import { CourseService } from '../../services/course.service';
 import { Course } from '../../models/course.model';
 import { Faculty } from '../../../faculty/models/faculty.model';
 import { Department } from '../../../department/models/department.model';
@@ -23,7 +22,7 @@ export class AttachDialogComponent implements OnInit {
 	onSubmitd = new EventEmitter<{ course: Course, department: Department, faculty: Faculty }>();
 	isBusy: boolean = false;
 
-	constructor(@Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private http: HttpClient, private courseService: CourseService) {
+	constructor(@Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private http: HttpClient) {
 		this.course = data.course
 	}
 
@@ -91,8 +90,6 @@ export class AttachDialogComponent implements OnInit {
 						}
 					});
 				});
-
-				console.log(this.departments);
 			}
 		}, (error) => {
 			console.log(error);

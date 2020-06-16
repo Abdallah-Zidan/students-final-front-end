@@ -17,7 +17,8 @@ const getComments = (post) => {
         comment.id,
         comment.body,
         getCreator(comment),
-        getReplies(comment)
+        getReplies(comment),
+        comment.created_at_human
       )
     );
   });
@@ -43,7 +44,12 @@ const getReplies = (comment) => {
   const repliesArr: CommentReply[] = [];
   replies.forEach((reply) => {
     repliesArr.push(
-      new CommentReply(reply.id, reply.body, getCreator(comment))
+      new CommentReply(
+        reply.id,
+        reply.body,
+        getCreator(comment),
+        reply.created_at_human
+      )
     );
   });
   return repliesArr;

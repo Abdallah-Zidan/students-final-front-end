@@ -10,6 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
@@ -17,6 +20,8 @@ import { UniversityComponent } from './university/university.component';
 import { FacultyComponent } from './faculty/faculty.component';
 import { DepartmentComponent } from './department/department.component';
 import { CourseComponent } from './course/course.component';
+import { UserComponent } from './user/user.component';
+import { PostComponent } from './post/post.component';
 import { CreateDialogComponent as CreateUniversityDialogComponent } from './university/components/create-dialog/create-dialog.component';
 import { ShowDialogComponent as ShowUniversityDialogComponent } from './university/components/show-dialog/show-dialog.component';
 import { CreateDialogComponent as CreateFacultyDialogComponent } from './faculty/components/create-dialog/create-dialog.component';
@@ -27,6 +32,10 @@ import { AttachDialogComponent as AttachDepartmentDialogComponent } from './depa
 import { CreateDialogComponent as CreateCourseDialogComponent } from './course/components/create-dialog/create-dialog.component';
 import { ShowDialogComponent as ShowCourseDialogComponent } from './course/components/show-dialog/show-dialog.component';
 import { AttachDialogComponent as AttachCourseDialogComponent } from './course/components/attach-dialog/attach-dialog.component';
+import { CreateDialogComponent as CreateUserDialogComponent } from './user/components/create-dialog/create-dialog.component';
+import { ShowDialogComponent as ShowUserDialogComponent } from './user/components/show-dialog/show-dialog.component';
+import { AttachDialogComponent as AttachUserDialogComponent } from './user/components/attach-dialog/attach-dialog.component';
+import { ShowDialogComponent as ShowPostDialogComponent } from './post/components/show-dialog/show-dialog.component';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 @NgModule({
@@ -36,6 +45,8 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
 		FacultyComponent,
 		DepartmentComponent,
 		CourseComponent,
+		UserComponent,
+		PostComponent,
 		CreateUniversityDialogComponent,
 		ShowUniversityDialogComponent,
 		CreateFacultyDialogComponent,
@@ -46,6 +57,10 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
 		CreateCourseDialogComponent,
 		ShowCourseDialogComponent,
 		AttachCourseDialogComponent,
+		CreateUserDialogComponent,
+		ShowUserDialogComponent,
+		AttachUserDialogComponent,
+		ShowPostDialogComponent,
 		DeleteDialogComponent
 	],
 	imports: [
@@ -61,6 +76,9 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
 		MatIconModule,
 		MatListModule,
 		MatSelectModule,
+		MatRadioModule,
+		MatCheckboxModule,
+		MatDatepickerModule,
 		DashboardRoutingModule
 	]
 })

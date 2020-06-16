@@ -59,11 +59,13 @@ export class AuthService {
             new Date(token.expired_at)
           );
           if (currentUser.isVerified) {
+            localStorage.removeItem('verifyToken');
             this.user.next(currentUser);
             this.storageService.saveItem('user', currentUser);
             this.groupsService.getGroups(currentUser);
           } else {
-            this.router.navigate(['/']);
+            localStorage.setItem('verifyToken', token.access_token);
+            this.router.navigate(['/email/verify']);
           }
         })
       );

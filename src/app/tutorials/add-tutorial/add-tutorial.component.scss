@@ -1,0 +1,55 @@
+body,
+html , *{
+    box-sizing: border-box;
+    outline: none;
+}
+
+textarea{
+    border-radius: 5px;
+}
+
+.post {
+    width           : 70%;
+    padding         : 1vw 3vw;
+    box-shadow      : 5px 5px 3px grey;
+    background-color: white;
+    margin          : 2em auto;
+}
+
+.ava{
+    border-radius: 50%;
+    padding: 3%;
+    border: 1px solid blue;
+    min-width: 30px;
+}
+
+.block{
+    display: block;
+    width: 100%;
+}
+
+
+
+button {
+    outline: none;
+}
+
+.example-full-width {
+    width : 70%;
+    height: 7%;
+}
+.tag-btn {
+    background-color: #1565c0; 
+    border: none; 
+    color: white; 
+    border-radius: 50%;
+    font-size: 8px; 
+    cursor: pointer; 
+    margin-left: 5px;
+    height: 14px;
+    margin-top: 6px;
+  }
+  
+  .tag-btn:hover {
+    background-color: RoyalBlue;
+  }

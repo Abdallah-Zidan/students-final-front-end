@@ -26,6 +26,7 @@ import { QuestionDetailsComponent } from './questions-section/question-details/q
 import { SingleCompanyComponent } from './companies/single-company/single-company.component';
 import { CoursesSectionComponent } from './courses-section/courses-section.component'
 import { VerificationSuccessComponent } from './auth/register/verification-success/verification-success.component';
+import { TutorialsComponent } from './tutorials/tutorials.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 
 
@@ -194,11 +195,18 @@ const routes: Routes = [
   {
     path: 'courses',
     component: CoursesSectionComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: [1, 2] },
   },
   {
     path: 'courses/:id',
     component: CoursesSectionComponent,
+    canActivate: [AuthGuard, AuthorizedGuard],
+    data: { roles: [1, 2] },
+  },
+  {
+    path: 'tutorials',
+    component: TutorialsComponent,
     canActivate: [AuthGuard],
   },
   {

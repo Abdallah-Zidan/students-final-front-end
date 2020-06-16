@@ -47,6 +47,8 @@ export class AddEventComponent implements OnInit {
     }
   }
   onAddPost() {
+    console.log(this.startDate);
+    
     const formData = new FormData();
     formData.append('body', this.body);
     formData.append('title', this.title);
@@ -65,7 +67,6 @@ export class AddEventComponent implements OnInit {
     this.postsService.addPost(this.resource, formData).subscribe((res) => {
       if (res.data) {
         console.log(res);
-
         this.body = '';
         this.title = '';
         this.selectedFiles = [];

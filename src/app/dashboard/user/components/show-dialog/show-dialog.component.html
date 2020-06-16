@@ -1,0 +1,96 @@
+<h2 mat-dialog-title>Show user</h2>
+<mat-dialog-content class="mat-typography">
+	<form>
+		<div align="center">
+			<img class="w-75 ava" src="{{ user.avatar }}" alt="User picture" />
+		</div>
+		<mat-form-field class="w-100">
+			<mat-label>Id</mat-label>
+			<input matInput value="{{ user.id }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Name</mat-label>
+			<input matInput value="{{ user.name }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Email</mat-label>
+			<input matInput value="{{ user.email }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Verified</mat-label>
+			<input matInput value="{{ user.verified.toString() | titlecase }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Gender</mat-label>
+			<input matInput value="{{ user.gender }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Blocked</mat-label>
+			<input matInput value="{{ user.blocked.toString() | titlecase }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Address</mat-label>
+			<textarea matInput cdkTextareaAutosize readonly>{{ user.address }}</textarea>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Mobile</mat-label>
+			<input matInput value="{{ user.mobile }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100">
+			<mat-label>Type</mat-label>
+			<input matInput value="{{ user.type }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="user.type === 'Student'">
+			<mat-label>Year</mat-label>
+			<input matInput value="{{ user.profile.year }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="user.type === 'TeachingStaff'">
+			<mat-label>Certificates</mat-label>
+			<textarea matInput cdkTextareaAutosize readonly>{{ user.profile.certificates }}</textarea>
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="user.type === 'Student' || user.type === 'TeachingStaff'">
+			<mat-label>Birthdate</mat-label>
+			<input matInput value="{{ user.profile.birthdate | date:'fullDate' }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="user.type === 'Company'">
+			<mat-label>Fax</mat-label>
+			<input matInput value="{{ user.profile.fax }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="user.type === 'Company'">
+			<mat-label>Description</mat-label>
+			<textarea matInput cdkTextareaAutosize readonly>{{ user.profile.description }}</textarea>
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="user.type === 'Company'">
+			<mat-label>Website</mat-label>
+			<input matInput value="{{ user.profile.website }}" readonly>
+		</mat-form-field>
+		<mat-form-field class="w-100" *ngIf="user.type === 'Moderator' && user.profile.faculty">
+			<mat-label>Faculty</mat-label>
+			<input matInput value="{{ user.profile.faculty.name }}" readonly>
+		</mat-form-field>
+
+		<mat-accordion>
+			<mat-expansion-panel [ngClass]="{ 'mb-1': !user.courses || user.courses.length === 0 }" *ngIf="user.faculties && user.faculties.length > 0">
+				<mat-expansion-panel-header>
+					<mat-panel-title>Departments</mat-panel-title>
+				</mat-expansion-panel-header>
+				<mat-nav-list>
+					<ng-container *ngFor="let faculty of user.faculties">
+						<h4 class="m-0" mat-list-item *ngFor="let department of faculty.departments"><span class="mat-body-strong mat-body-2">{{ department.name }}</span> - {{ faculty.name }}</h4>
+					</ng-container>
+				</mat-nav-list>
+			</mat-expansion-panel>
+			<mat-expansion-panel class="mb-1" *ngIf="user.courses && user.courses.length > 0">
+				<mat-expansion-panel-header>
+					<mat-panel-title>Courses</mat-panel-title>
+				</mat-expansion-panel-header>
+				<mat-nav-list>
+					<h4 class="m-0" mat-list-item *ngFor="let course of user.courses">{{ course.name }}</h4>
+				</mat-nav-list>
+			</mat-expansion-panel>
+		</mat-accordion>
+	</form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>

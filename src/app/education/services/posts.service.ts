@@ -23,7 +23,7 @@ export class PostsService {
   postsArr: Post[] = [];
   departmentGroups: Group[] = [];
   facultyGroups: Group[] = [];
-  page = 1;
+  page;
 
   constructor(
     private httpService: HttpService,
@@ -31,8 +31,7 @@ export class PostsService {
   ) {}
 
   getPosts(resource, scope, scopeId, type, page) {
-    console.log(type);
-
+    this.page =1;
     this.httpService
       .requestPosts(resource, scope, scopeId, type, this.page)
       .subscribe(
@@ -131,7 +130,7 @@ export class PostsService {
     }
 
     return this.httpService.requestAddPost(resource, data).pipe(
-      tap((res: any) => {
+      tap((res: any) => { 
         const resPost = res.data[type];
         const currUser = this.storage.getUser('user');
         const newPost = new Post(

@@ -11,7 +11,7 @@
 		</mat-form-field>
 		<mat-form-field class="w-100">
 			<mat-label>Description</mat-label>
-			<textarea matInput value="{{ course.description }}" readonly>{{ course.description }}</textarea>
+			<textarea matInput cdkTextareaAutosize value="{{ course.description }}" readonly>{{ course.description }}</textarea>
 		</mat-form-field>
 
 		<mat-expansion-panel class="mb-1" *ngIf="course.departments && course.departments.length > 0">

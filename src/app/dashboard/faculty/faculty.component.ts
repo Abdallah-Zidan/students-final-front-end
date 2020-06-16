@@ -14,7 +14,7 @@ import { DeleteDialogComponent } from '../components/delete-dialog/delete-dialog
 	styleUrls: ['./faculty.component.scss']
 })
 export class FacultyComponent implements OnInit {
-	displayedColumns = ['id', 'name', 'university', 'options'];
+	displayedColumns = ['name', 'university', 'options'];
 	length: number;
 	pageSize: number;
 	pageSizeOptions = [5, 10, 25, 100];

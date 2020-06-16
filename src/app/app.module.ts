@@ -123,6 +123,14 @@ import { CourseSinglereplyComponent } from './courses-section/course-comments/co
 import { CoursePickerComponent } from './courses-section/course-picker/course-picker.component';
 import { VerificationSuccessComponent } from './auth/register/verification-success/verification-success.component';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { TutorialsComponent } from './tutorials/tutorials.component';
+import { SingleTutorialComponent } from './tutorials/single-tutorial/single-tutorial.component';
+import { TutorialCommentsComponent } from './tutorials/tutorial-comments/tutorial-comments.component';
+import { TutorialSinglecommentComponent } from './tutorials/tutorial-comments/tutorial-singlecomment/tutorial-singlecomment.component';
+import { TutorialRepliesComponent } from './tutorials/tutorial-comments/tutorial-singlecomment/tutorial-replies/tutorial-replies.component';
+import { TutorialSinglereplyComponent } from './tutorials/tutorial-comments/tutorial-singlecomment/tutorial-replies/tutorial-singlereply/tutorial-singlereply.component';
+import { AddTutorialComponent } from './tutorials/add-tutorial/add-tutorial.component';
+import { TagsPickerComponent } from './tutorials/tags-picker/tags-picker.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -199,6 +207,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CourseSinglereplyComponent,
     CoursePickerComponent,
     VerificationSuccessComponent,
+    TutorialsComponent,
+    SingleTutorialComponent,
+    TutorialCommentsComponent,
+    TutorialSinglecommentComponent,
+    TutorialRepliesComponent,
+    TutorialSinglereplyComponent,
+    AddTutorialComponent,
+    TagsPickerComponent,
     UnderConstructionComponent,
   ],
   imports: [

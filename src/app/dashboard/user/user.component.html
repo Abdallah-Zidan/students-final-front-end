@@ -1,0 +1,42 @@
+<div class="mat-elevation-z8">
+	<div class="row mx-2">
+		<h3 class="text-secondary my-3">Users Section</h3>
+		<button class="ml-auto my-3" mat-raised-button color="primary" (click)="openAddDialog()">Add User</button>
+	</div>
+
+	<table mat-table [dataSource]="dataSource">
+		<ng-container matColumnDef="name">
+			<th mat-header-cell *matHeaderCellDef>Name</th>
+			<td mat-cell *matCellDef="let element"><a href="" (click)="$event.preventDefault(); openShowDialog(element)">{{ element.name }}</a></td>
+		</ng-container>
+		<ng-container matColumnDef="email">
+			<th mat-header-cell *matHeaderCellDef>Email</th>
+			<td mat-cell *matCellDef="let element">{{ element.email }}</td>
+		</ng-container>
+		<ng-container matColumnDef="verified">
+			<th mat-header-cell *matHeaderCellDef>Verified</th>
+			<td mat-cell *matCellDef="let element">{{ element.verified.toString() | titlecase }}</td>
+		</ng-container>
+		<ng-container matColumnDef="blocked">
+			<th mat-header-cell *matHeaderCellDef>Blocked</th>
+			<td mat-cell *matCellDef="let element">{{ element.blocked.toString() | titlecase }}</td>
+		</ng-container>
+		<ng-container matColumnDef="type">
+			<th mat-header-cell *matHeaderCellDef>Type</th>
+			<td mat-cell *matCellDef="let element">{{ element.type }}</td>
+		</ng-container>
+		<ng-container matColumnDef="options">
+			<th mat-header-cell *matHeaderCellDef>Options</th>
+			<td mat-cell *matCellDef="let element">
+				<button class="mr-1" mat-raised-button color="accent" (click)="openEditDialog(element)">Edit</button>
+				<button class="mr-1" mat-raised-button color="warn" (click)="openDeleteDialog(element)">Delete</button>
+				<button class="mr-1" mat-mini-fab color="primary" *ngIf="element.type === 'Student' || element.type === 'TeachingStaff'" (click)="openAttachDialog(element)"><mat-icon>add</mat-icon></button>
+				<button mat-mini-fab color="warn" *ngIf="element.type === 'Student' || element.type === 'TeachingStaff'" (click)="openDetachDialog(element)"><mat-icon>delete</mat-icon></button>
+			</td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+	</table>
+	<mat-paginator showFirstLastButtons [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)"></mat-paginator>
+</div>
