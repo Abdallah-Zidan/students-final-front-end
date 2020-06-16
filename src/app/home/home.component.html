@@ -26,10 +26,10 @@
         <li class=" nav-item">
           <a class=" nav-link" routerLink="/companies">Companies</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.role==1">
           <a class="nav-link" routerLink="/tools">Sharing Tools</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="user.role==1">
           <a class="nav-link" routerLink="/transportition">Sharing Habitations</a>
         </li>
         <li class="nav-item">

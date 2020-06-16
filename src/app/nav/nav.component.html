@@ -62,7 +62,7 @@
             <mat-icon>info</mat-icon>
             <span>Companies</span>
           </button>
-          <button mat-menu-item routerLink="/tools">
+          <button mat-menu-item routerLink="/tools" *ngIf="user.personalData.type=='Student'">
             <mat-icon>build</mat-icon>
             <span>Sharing Tools </span>
           </button>
@@ -72,7 +72,7 @@
             <span> Donations </span>
           </button>
 
-          <button mat-menu-item routerLink="/transportition">
+          <button mat-menu-item routerLink="/transportition" *ngIf="user.personalData.type=='Student'">
             <mat-icon>house</mat-icon>
             <span> Sharing Habitations </span>
           </button>
