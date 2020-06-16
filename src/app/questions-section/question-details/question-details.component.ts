@@ -36,8 +36,8 @@ export class QuestionDetailsComponent implements OnInit {
     this.user=this.storageService.getItem('user')
     this.activatedRoute.paramMap.subscribe(params => { 
       this.QuestionId = params.get('question'); 
-
-    });
+    }
+    );
 
     this.questionService.QuestionsList.subscribe(
       res => {
@@ -47,6 +47,7 @@ export class QuestionDetailsComponent implements OnInit {
                     res => {
                             this.QuestionsList = res;
                             this.question=this.QuestionsList.data.questions.find(x=>x.id==this.QuestionId);
+                            this.question=this.sortComments(this.question);
                             this.question=this.getTagsNames(this.question);  
                           },
                     err=>{console.log(err);});
@@ -54,6 +55,7 @@ export class QuestionDetailsComponent implements OnInit {
                 else
                 {
                   this.question = res.find(x=>x.id==this.QuestionId);
+                  this.question=this.sortComments(this.question);
                 };
              },
       err => {
@@ -117,6 +119,12 @@ getTagsNames(Question){
     });
     Question.tags=TagsNames;
     return Question
+}
+
+sortComments(Question)
+{
+ Question.comments= Question.comments.sort((a,b) => (a.rates > b.rates) ? -1 : 1); 
+ return Question;
 }
 
 addComment()

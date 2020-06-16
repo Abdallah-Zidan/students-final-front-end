@@ -58,6 +58,7 @@ commentBody;
     this.httpService.requsetEditRates(1,this.comment.id,this.comment).subscribe(
       res=>{
         this.comment.rates-= -1;
+        this.question=this.sortComments(this.question);
         this.comment.rated=1;
       },
       error=>{
@@ -70,6 +71,7 @@ commentBody;
     this.httpService.requsetEditRates(-1,this.comment.id,this.comment).subscribe(
       res=>{
         this.comment.rates-= 1
+        this.question=this.sortComments(this.question);
         this.comment.rated=-1;
       },
       error=>{
@@ -78,6 +80,12 @@ commentBody;
     )
    
   }
+
+  sortComments(Question)
+{
+ Question.comments= Question.comments.sort((a,b) => (a.rates > b.rates) ? -1 : 1); 
+ return Question;
+}
 
 }
 
